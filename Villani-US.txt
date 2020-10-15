@@ -1,0 +1,9 @@
+1.  	As a user, I want to look for an itinerary based on:
+	·         distance from my address
+	·         difficulty level
+	·         path length
+	·         type of landscape
+	·         cycle or pedestrian path
+	so I can choose the perfect mountain path for me.
+2.  	As a logged user, I want to add new itineraries I visited which aren’t on the system yet, so I can help the community grow.
+3.  	As a logged user, I want to save itineraries I visited so I can keep track of them.
