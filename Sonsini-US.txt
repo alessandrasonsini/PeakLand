@@ -1,3 +1,0 @@
-1. As a logged user, I want to rate and review itineraries I have traveled, so that I can help other people choose the best one for them.
-2. As a logged user, I want to upload images I took during my excursion, so other users can see them.
-3. As the managing body of the itinerary, I want to be able to acquire the exclusivity on the management of information regarding that path, so they are as reliable as possible.

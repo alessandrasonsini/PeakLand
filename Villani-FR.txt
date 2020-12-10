@@ -1,3 +1,0 @@
-1.       The system shall provide itineraries search by partial name.
-2.       The system shall provide user authentication by email, google and facebook.
-3.       The system shall provide a list of all visited itineraries for each logged user.

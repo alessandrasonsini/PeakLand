@@ -1,3 +1,0 @@
-1. The system shall provide a feature for logged users to rate itinerary from 1 to 5 stars.
-2. The system shall provide an image upload feature for logged users.
-3. The system shall provide an itinerary share feature between users by sending the link via email.
