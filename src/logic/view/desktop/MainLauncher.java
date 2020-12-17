@@ -1,4 +1,4 @@
-package logic.view;
+package logic.view.desktop;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
