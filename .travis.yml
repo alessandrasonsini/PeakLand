@@ -1,7 +1,8 @@
 language: java
 jdk:
 	- openjdk8
-
+before_install:
+    - sudo apt install -y openjfx
 addons:
     sonarcloud:
         organization: alessandrasonsini
