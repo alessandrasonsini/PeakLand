@@ -12,7 +12,7 @@ public class MainLauncher extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		
 		FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("desktop/ui/mainLayout.fxml"));
+        loader.setLocation(getClass().getResource("ui/mainLayout.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);

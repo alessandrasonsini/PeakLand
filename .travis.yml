@@ -7,11 +7,6 @@ addons:
         organization: alessandrasonsini
         token: 5902fbc08c17a4f42eb0a8c90556f83d9f27ebef
 
-build_task:
-  install_script:
-    - apt-get update 
-    - apt-get install --no-install-recommends -y openjfx
-
 script:
 - ant build
 - sonar-scanner
