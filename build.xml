@@ -61,19 +61,22 @@
         <pathelement location="../../../../.p2/pool/plugins/org.junit_4.13.0.v20200204-1500.jar"/>
         <pathelement location="../../../../.p2/pool/plugins/org.hamcrest.core_1.3.0.v20180420-1519.jar"/>
     </path>
+    <path id="JavaFX SDK.libraryclasspath">
+        <pathelement location="../../../../.p2/pool/plugins/org.eclipse.fx.ide.css.jfx8_2.3.0.201603030809.jar"/>
+    </path>
     <path id="PeakLand_.classpath">
         <pathelement location="build/classes"/>
         <path refid="Apache Tomcat v9.0 [Apache Tomcat v9.0].libraryclasspath"/>
         <path refid="Web App Libraries.libraryclasspath"/>
         <path refid="EAR Libraries.libraryclasspath"/>
         <path refid="JUnit 5.libraryclasspath"/>
+        <path refid="JavaFX SDK.libraryclasspath"/>
     </path>
     <target name="init">
         <mkdir dir="build/classes"/>
         <copy includeemptydirs="false" todir="build/classes">
             <fileset dir="src">
                 <exclude name="**/*.launch"/>
-                <exclude name="**/*.xtend"/>
                 <exclude name="**/*.java"/>
             </fileset>
         </copy>
@@ -106,7 +109,7 @@
         <antcall target="build"/>
     </target>
     <target name="MainLauncher">
-        <java classname="logic.view.MainLauncher" failonerror="true" fork="yes">
+        <java classname="logic.view.desktop.MainLauncher" failonerror="true" fork="yes">
             <classpath refid="PeakLand_.classpath"/>
         </java>
     </target>
