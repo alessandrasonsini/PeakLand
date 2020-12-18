@@ -8,7 +8,13 @@ addons:
     sonarcloud:
         organization: alessandrasonsini
         token: 5902fbc08c17a4f42eb0a8c90556f83d9f27ebef
+    apt:
+    packages:
+      - oracle-java8-installer
 
+before_install:
+  - if [[ "${TRAVIS_OS_NAME}" == linux ]]; then export DISPLAY=:99.0; sh -e /etc/init.d/xvfb start; fi
+install: true
 
 script:
 - ant build
