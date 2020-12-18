@@ -1,6 +1,6 @@
 language: java
 jdk:
-- openjdk11
+- oraclejdk11
 env:
 - _JAVA_OPTIONS="-Dtestfx.robot=awt"
 
@@ -9,8 +9,6 @@ addons:
         organization: alessandrasonsini
         token: 5902fbc08c17a4f42eb0a8c90556f83d9f27ebef
 
-before_install:
-  - if [[ "${TRAVIS_OS_NAME}" == linux ]]; then export DISPLAY=:99.0; sh -e /etc/init.d/xvfb start; fi        
 
 script:
 - ant build
