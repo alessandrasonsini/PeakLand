@@ -17,8 +17,8 @@ public class MainLauncher extends Application {
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setMaximized(true);
-        //primaryStage.setFullScreen(true);
         primaryStage.show();
+
 	}
 	
 	public static void main(String[] args) {
