@@ -21,5 +21,4 @@ public class ViewMountainPathInfoGraphicController {
     private void onSearchInputHandler(ActionEvent event) {
         txtSearch.setText("ok");
     }
-		
 }

@@ -11,14 +11,11 @@ public class MainLauncher extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
-		FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("ui/mainLayout.fxml"));
-        Parent root = loader.load();
+        Parent root = FXMLLoader.load(getClass().getResource("ui/mainLayout.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setMaximized(true);
         primaryStage.show();
-
 	}
 	
 	public static void main(String[] args) {
