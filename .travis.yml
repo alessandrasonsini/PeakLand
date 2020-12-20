@@ -1,11 +1,11 @@
 language: java
 jdk:
-- oraclejdk11
+  - oraclejdk11
 
 addons:
-    sonarcloud:
-        organization: alessandrasonsini
-        token: 5902fbc08c17a4f42eb0a8c90556f83d9f27ebef
+  sonarcloud:
+    organization: alessandrasonsini
+    token: 5902fbc08c17a4f42eb0a8c90556f83d9f27ebef
 
 script:
 - ant build
