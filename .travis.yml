@@ -1,14 +1,11 @@
 language: java
 jdk:
-  - oraclejdk8
+  - openjdk8
 
 addons:
   sonarcloud:
     organization: alessandrasonsini
     token: 5902fbc08c17a4f42eb0a8c90556f83d9f27ebef
-  apt:
-    packages:
-      - oracle-java8-installer
 
 script:
 - ant build

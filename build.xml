@@ -10,7 +10,40 @@
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.8"/>
     <property name="source" value="1.8"/>
-    <path id="Server Library [Apache Tomcat v9.0] (unbound).libraryclasspath"/>
+    <path id="Apache Tomcat v9.0 [Apache Tomcat v9.0].libraryclasspath">
+        <pathelement location="../../../Downloads/apache-tomcat-9.0.41/lib/tomcat-i18n-ko.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-9.0.41/lib/el-api.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-9.0.41/lib/tomcat-i18n-es.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-9.0.41/lib/tomcat-websocket.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-9.0.41/lib/jasper.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-9.0.41/lib/jasper-el.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-9.0.41/lib/tomcat-util.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-9.0.41/lib/tomcat-i18n-de.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-9.0.41/lib/catalina-storeconfig.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-9.0.41/lib/jsp-api.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-9.0.41/lib/catalina-tribes.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-9.0.41/lib/tomcat-i18n-cs.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-9.0.41/lib/catalina.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-9.0.41/lib/tomcat-jni.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-9.0.41/lib/tomcat-i18n-pt-BR.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-9.0.41/lib/catalina-ssi.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-9.0.41/lib/websocket-api.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-9.0.41/lib/tomcat-coyote.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-9.0.41/lib/catalina-ha.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-9.0.41/lib/tomcat-api.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-9.0.41/lib/annotations-api.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-9.0.41/lib/jaspic-api.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-9.0.41/lib/tomcat-i18n-zh-CN.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-9.0.41/lib/catalina-ant.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-9.0.41/lib/ecj-4.17.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-9.0.41/lib/servlet-api.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-9.0.41/lib/tomcat-util-scan.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-9.0.41/lib/tomcat-i18n-ja.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-9.0.41/lib/tomcat-i18n-ru.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-9.0.41/lib/tomcat-jdbc.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-9.0.41/lib/tomcat-i18n-fr.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-9.0.41/lib/tomcat-dbcp.jar"/>
+    </path>
     <path id="Web App Libraries.libraryclasspath"/>
     <path id="EAR Libraries.libraryclasspath"/>
     <path id="JUnit 5.libraryclasspath">
@@ -34,7 +67,7 @@
     </path>
     <path id="PeakLand_.classpath">
         <pathelement location="build/classes"/>
-        <path refid="Server Library [Apache Tomcat v9.0] (unbound).libraryclasspath"/>
+        <path refid="Apache Tomcat v9.0 [Apache Tomcat v9.0].libraryclasspath"/>
         <path refid="Web App Libraries.libraryclasspath"/>
         <path refid="EAR Libraries.libraryclasspath"/>
         <path refid="JUnit 5.libraryclasspath"/>
