@@ -31,8 +31,7 @@ public class CustomListCell extends ListCell<SimpleMountainPathBean> {
 	@FXML
 	TextField travelTime;
 	
-	@FXML
-	
+
 	
 	public CustomListCell() {
 		super();
