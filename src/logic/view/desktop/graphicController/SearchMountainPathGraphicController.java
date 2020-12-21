@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.util.Callback;
 import logic.controller.SearchController;
 import logic.view.bean.SimpleMountainPathBean;
+import logic.view.desktop.graphic_element.CustomListCell;
 
 public class SearchMountainPathGraphicController {
 	
