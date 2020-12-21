@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="535.0" minWidth="1322.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.view.desktop.graphicController.ViewMountainPathInfoGraphicController">
+<AnchorPane minHeight="535.0" minWidth="1322.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.view.desktop.graphic_controller.ViewMountainPathInfoGraphicController">
    <children>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
