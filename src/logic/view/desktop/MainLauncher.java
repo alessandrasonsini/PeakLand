@@ -11,7 +11,7 @@ public class MainLauncher extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
-        Parent root = FXMLLoader.load(getClass().getResource("ui/mainLayout.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("graphic_element/layout/mainLayout.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setMaximized(true);

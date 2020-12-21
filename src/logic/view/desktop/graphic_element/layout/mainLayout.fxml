@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="root" maxHeight="${screen.visualBounds.height}" maxWidth="${screen.visualBounds.width}" minHeight="${screen.visualBounds.height}" minWidth="${screen.visualBounds.width}" prefHeight="${screen.visualBounds.height}" prefWidth="${screen.visualBounds.width}" xmlns="http://javafx.com/javafx/8.0.212" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.view.desktop.graphicController.MainGraphicController">
+<VBox fx:id="root" maxHeight="${screen.visualBounds.height}" maxWidth="${screen.visualBounds.width}" minHeight="${screen.visualBounds.height}" minWidth="${screen.visualBounds.width}" prefHeight="${screen.visualBounds.height}" prefWidth="${screen.visualBounds.width}" xmlns="http://javafx.com/javafx/8.0.212" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.view.desktop.graphic_controller.MainGraphicController">
    <children>
       <HBox minWidth="1322.0" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #CCE3C9">
          <children>
