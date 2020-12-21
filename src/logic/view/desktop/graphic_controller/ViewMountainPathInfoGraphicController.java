@@ -7,6 +7,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 public class ViewMountainPathInfoGraphicController {
+	
+	SearchMountainPathGraphicController searchController;
+	
+	public ViewMountainPathInfoGraphicController() {
+		// TODO Auto-generated constructor stub
+		searchController = new SearchMountainPathGraphicController();
+	}
 
 	@FXML
 	private TextField txtSearch;
@@ -19,6 +26,6 @@ public class ViewMountainPathInfoGraphicController {
 	
 	@FXML
     private void onSearchInputHandler(ActionEvent event) {
-        txtSearch.setText("ok");
+        searchController.onSearchRequest(event);
     }
 }
