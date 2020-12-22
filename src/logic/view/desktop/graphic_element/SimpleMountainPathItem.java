@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -21,16 +21,16 @@ public class SimpleMountainPathItem {
 	VBox vbInfo;
 	
 	@FXML
-	TextField txtName;
+	Label txtName;
 	
 	@FXML
-	TextField txtLocation;
+	Label txtLocation;
 	
 	@FXML
-	TextField txtDifficultyLevel;
+	Label txtDifficultyLevel;
 	
 	@FXML
-	TextField txtTravelTime;
+	Label txtTravelTime;
 	
 	public SimpleMountainPathItem() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("layout/simpleMountainPathItemLayout.fxml"));
@@ -45,16 +45,14 @@ public class SimpleMountainPathItem {
         }
 	}
 	
-	public void setInfo(String name, String location, String diffLevel, String travelTime)
-    {
+	public void setInfo(String name, String location, String diffLevel, String travelTime) {
         txtName.setText(name);
         txtLocation.setText(location);
         txtDifficultyLevel.setText(diffLevel);
         txtTravelTime.setText(travelTime);
     }
 
-    public HBox getBox()
-    {
+    public HBox getBox() {
         return itemBox;
     }
 }

@@ -6,39 +6,45 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="535.0" minWidth="1322.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.view.desktop.graphic_controller.SearchMountainPathGraphicController">
-   <children>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+
+<BorderPane fx:id="rootBorderPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.view.desktop.graphic_controller.SearchMountainPathGraphicController">
+   <center>
+      <AnchorPane minHeight="535.0" minWidth="1322.0">
          <children>
-            <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="322.0" style="-fx-background-color: FBC9A8;">
+            <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <TextField fx:id="txtSearch" layoutX="65.0" layoutY="186.0" onAction="#onSearchRequest" promptText="Search for a path..." AnchorPane.bottomAnchor="324.0" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="108.0" AnchorPane.topAnchor="186.0" />
-                  <ImageView fx:id="imgSearch" fitHeight="25.0" fitWidth="25.0" layoutX="234.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../images/icons8-search-52.png" />
-                     </image>
-                  </ImageView>
-                  <TextField editable="false" layoutX="34.0" layoutY="360.0" prefHeight="28.0" prefWidth="256.0" style="-fx-background-color: FBC9A8;" text="Se non sai cosa cercare ti aiutiamo noi!">
-                     <font>
-                        <Font name="Maiandra GD" size="14.0" />
-                     </font>
-                  </TextField>
-                  <Button fx:id="btnAssRes" layoutX="101.0" layoutY="400.0" mnemonicParsing="false" style="-fx-background-color: F69155;" text="Assisted research">
-                     <font>
-                        <Font name="Maiandra GD" size="14.0" />
-                     </font>
-                  </Button>
+                  <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="322.0" style="-fx-background-color: FBC9A8;">
+                     <children>
+                        <TextField fx:id="txtSearch" layoutX="65.0" layoutY="186.0" onAction="#onSearchRequest" promptText="Search for a path..." AnchorPane.bottomAnchor="324.0" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="108.0" AnchorPane.topAnchor="186.0" />
+                        <ImageView fx:id="imgSearch" fitHeight="25.0" fitWidth="25.0" layoutX="234.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/icons8-search-52.png" />
+                           </image>
+                        </ImageView>
+                        <TextField editable="false" layoutX="34.0" layoutY="360.0" prefHeight="28.0" prefWidth="256.0" style="-fx-background-color: FBC9A8;" text="Se non sai cosa cercare ti aiutiamo noi!">
+                           <font>
+                              <Font name="Maiandra GD" size="14.0" />
+                           </font>
+                        </TextField>
+                        <Button fx:id="btnAssRes" layoutX="101.0" layoutY="400.0" mnemonicParsing="false" style="-fx-background-color: F69155;" text="Assisted research">
+                           <font>
+                              <Font name="Maiandra GD" size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="1000.0">
+                     <children>
+                        <ListView fx:id="listViewMountainPath" onMouseClicked="#onListViewItemClicked" prefHeight="535.0" prefWidth="1000.0" />
+                     </children>
+                  </AnchorPane>
                </children>
-            </AnchorPane>
-            <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="1000.0">
-               <children>
-                  <ListView fx:id="listViewMountainPath" prefHeight="535.0" prefWidth="1000.0" />
-               </children>
-            </AnchorPane>
+            </HBox>
          </children>
-      </HBox>
-   </children>
-</AnchorPane>
+      </AnchorPane>
+   </center>
+</BorderPane>
