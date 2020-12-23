@@ -11,14 +11,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.util.Callback;
 import logic.controller.SearchController;
 import logic.view.bean.SimpleMountainPathBean;
+import logic.view.desktop.GraphicController;
 import logic.view.desktop.graphic_element.CustomListCell;
-import logic.view.desktop.graphic_element.Page;
 
-public class SearchMountainPathGraphicController {
+public class SearchMountainPathGraphicController extends GraphicController{
 	
 	@FXML
 	private BorderPane rootBorderPane;
@@ -36,6 +35,7 @@ public class SearchMountainPathGraphicController {
 	private SearchController controller;
 	
 	public SearchMountainPathGraphicController() {
+		super("searchPathLayout");
 		this.beanList = FXCollections.observableArrayList();
 		this.controller = new SearchController();
 	}
@@ -66,14 +66,12 @@ public class SearchMountainPathGraphicController {
 	public void onListViewItemClicked(MouseEvent event) {
 		// switch alla pagina di view mountain path info
 		System.out.println("hai cliccato l'item " + listViewMountainPath.getSelectionModel().getSelectedItem().getName());
-		switchPage("viewMountainPathInfoLayout");
+		
+		//Switch alla pagina del view info
+		ViewMountainPathInfoGraphicController viewInfoCtrl = new ViewMountainPathInfoGraphicController();
+		viewInfoCtrl.switchPage(rootBorderPane);
 		
 	}
 	
-	private void switchPage(String newPage) {
-		//Carico la view della nuova pagina
-		Pane newPageView = Page.getPage(newPage);
-		rootBorderPane.setCenter(newPageView);
-	}
 	
 }

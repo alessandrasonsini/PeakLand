@@ -1,29 +1,27 @@
 package logic.view.desktop.graphic_controller;
 
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
-import logic.view.desktop.graphic_element.Page;
+import logic.view.desktop.GraphicController;
 
-public class MainGraphicController  {
-	
+public class MainGraphicController extends GraphicController  {
 	@FXML
 	private Button btnSearch;
 	
 	@FXML
-	private BorderPane mainPane;
+	private BorderPane mainChild;
+	
+	public MainGraphicController() {
+		super("mainLayout");
+	}	
 	
 	@FXML
 	private void buttonHandler(ActionEvent event) {
-		switchPage("searchPathLayout");
+		SearchMountainPathGraphicController searchCtrl = new SearchMountainPathGraphicController();
+		searchCtrl.switchPage(mainChild);
 	}
 	
-	private void switchPage(String newPage) {
-		//Carico la view della nuova pagina
-		Pane newPageView = Page.getPage(newPage);
-		mainPane.setCenter(newPageView);
-	}
-
 }

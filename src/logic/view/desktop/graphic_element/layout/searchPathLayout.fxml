@@ -10,14 +10,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane fx:id="rootBorderPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.view.desktop.graphic_controller.SearchMountainPathGraphicController">
+<BorderPane fx:id="rootBorderPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <AnchorPane minHeight="535.0" minWidth="1322.0">
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="322.0" style="-fx-background-color: FBC9A8;">
+                  <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="322.0" style="-fx-background-color: fbc9a8;">
                      <children>
                         <TextField fx:id="txtSearch" layoutX="65.0" layoutY="186.0" onAction="#onSearchRequest" promptText="Search for a path..." AnchorPane.bottomAnchor="324.0" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="108.0" AnchorPane.topAnchor="186.0" />
                         <ImageView fx:id="imgSearch" fitHeight="25.0" fitWidth="25.0" layoutX="234.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
