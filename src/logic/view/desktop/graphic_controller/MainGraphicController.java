@@ -22,6 +22,7 @@ public class MainGraphicController extends GraphicController  {
 	private void buttonHandler(ActionEvent event) {
 		SearchMountainPathGraphicController searchCtrl = new SearchMountainPathGraphicController();
 		searchCtrl.switchPage(mainChild);
+		
 	}
 	
 }
