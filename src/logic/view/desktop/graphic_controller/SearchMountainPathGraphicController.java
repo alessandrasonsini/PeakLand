@@ -1,6 +1,5 @@
 package logic.view.desktop.graphic_controller;
 
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,7 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
-import logic.controller.SearchController;
+import logic.controller.SearchMountainPathController;
 import logic.view.bean.SimpleMountainPathBean;
 import logic.view.desktop.GraphicController;
 import logic.view.desktop.graphic_element.CustomListCell;
@@ -32,17 +31,17 @@ public class SearchMountainPathGraphicController extends GraphicController{
 	private ListView<SimpleMountainPathBean> listViewMountainPath;
 	
 	private ObservableList<SimpleMountainPathBean> beanList;
-	private SearchController controller;
+	private SearchMountainPathController controller;
 	
 	public SearchMountainPathGraphicController() {
 		super("searchPathLayout");
 		this.beanList = FXCollections.observableArrayList();
-		this.controller = new SearchController();
+		this.controller = new SearchMountainPathController();
 	}
 	
 	@FXML
 	public void onSearchRequest(ActionEvent event) {
-		// recupero richiesta di ricerca
+		// recupero richiesta di ricerca (testo di input dell'utente)
 		String request = txtSearch.getText();
 		
 		// controllo se stringa vuota
@@ -50,8 +49,10 @@ public class SearchMountainPathGraphicController extends GraphicController{
 			//comunicare all'utente che la stringa è vuota
 		}
 		else {
-			// richiamo metodo di ricerca del controller applicativo
+			// richiamo metodo di ricerca del controller applicativo SearchController
 			this.beanList.addAll(controller.searchMountainPath(request));
+			
+			// riempimento della list view coi risultati della ricerca
 			listViewMountainPath.setItems(this.beanList);
 			listViewMountainPath.setCellFactory(new Callback<ListView<SimpleMountainPathBean>, ListCell<SimpleMountainPathBean>>() {
 	            @Override
@@ -70,7 +71,6 @@ public class SearchMountainPathGraphicController extends GraphicController{
 		//Switch alla pagina del view info
 		ViewMountainPathInfoGraphicController viewInfoCtrl = new ViewMountainPathInfoGraphicController();
 		viewInfoCtrl.switchPage(rootBorderPane);
-		
 	}
 	
 	

@@ -2,19 +2,19 @@ package logic.view.bean;
 
 import java.time.LocalTime;
 
-import logic.model.DifficultyLevel;
+import logic.model.DifficultyLevelEnum;
 
 public class SimpleMountainPathBean {
 	
 	String name;
 	String location;
-	DifficultyLevel level;
+	DifficultyLevelEnum level;
 	LocalTime travelTime;
 	Integer vote;
 	Integer numberOfVotes;
 	//image
 	
-	public SimpleMountainPathBean(String name, String location, DifficultyLevel level, LocalTime travelTime, Integer vote, Integer numberOfVotes) {
+	public SimpleMountainPathBean(String name, String location, DifficultyLevelEnum level, LocalTime travelTime, Integer vote, Integer numberOfVotes) {
 		this.name = name;
 		this.location = location;
 		this.level = level;
@@ -39,11 +39,11 @@ public class SimpleMountainPathBean {
 		this.location = location;
 	}
 
-	public DifficultyLevel getLevel() {
+	public DifficultyLevelEnum getLevel() {
 		return level;
 	}
 
-	public void setLevel(DifficultyLevel level) {
+	public void setLevel(DifficultyLevelEnum level) {
 		this.level = level;
 	}
 

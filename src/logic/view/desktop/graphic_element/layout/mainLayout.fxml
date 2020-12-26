@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+
 <VBox fx:id="root" maxHeight="${screen.visualBounds.height}" maxWidth="${screen.visualBounds.width}" minHeight="${screen.visualBounds.height}" minWidth="${screen.visualBounds.width}" prefHeight="${screen.visualBounds.height}" prefWidth="${screen.visualBounds.width}" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox minWidth="1322.0" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #CCE3C9">
@@ -32,7 +33,8 @@
       </HBox>
       <HBox prefHeight="0.0" prefWidth="790.0">
          <children>
-            <Button minHeight="45.0" minWidth="100.0" mnemonicParsing="false" style="-fx-background-color: fbc9a8;" text="Home" wrapText="true">
+
+            <Button contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: FBC9A8 FBC9A8 FBC9A8 FBC9A8;" text="Home">
                <font>
                   <Font name="Maiandra GD" size="24.0" />
                </font>
@@ -43,6 +45,11 @@
             <Button fx:id="btnSearch" contentDisplay="CENTER" minHeight="45.0" minWidth="160.0" mnemonicParsing="false" onAction="#buttonHandler" style="-fx-background-color: FBC9A8;" text="Search path" wrapText="true">
                <font>
                   <Font name="Maiandra GD" size="24.0" />
+               </font>
+            </Button>
+            <Button contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: FBC9A8 FBC9A8;" text="Add new path">
+               <font>
+                  <Font size="24.0" />
                </font>
             </Button>
          </children>

@@ -28,8 +28,8 @@ public class GraphicController {
 	}
 	
 	protected void setLayout() {
-		
 		try {
+			// path of the fxml file to load
 			URL fileUrl = GraphicController.class.getResource("graphic_element/layout/" + fileName + ".fxml");
 			
 			if (fileUrl == null) {

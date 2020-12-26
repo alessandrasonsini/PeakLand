@@ -1,6 +1,6 @@
 package logic.model;
 
-public enum DifficultyLevel {
+public enum DifficultyLevelEnum {
 	T,
 	E,
 	EE,
