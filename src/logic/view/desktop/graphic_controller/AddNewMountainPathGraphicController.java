@@ -109,7 +109,7 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 	private AddNewMountainPathController controller;
 	
 	public AddNewMountainPathGraphicController() {
-		super("addNewMountainPathLayout");
+		super();
 	}
 	
 	@FXML
@@ -132,6 +132,10 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 		controller.saveNewMountainPath(newPathBean);
 	}
 	
+	@Override
+	protected String getFXMLFileName() {
+		return "addNewMountainPathLayout";
+	}
 	
 	//trovare il modo di farlo più elegantemente
 	private List<LandscapeEnum> checkSelectedLandscape(){

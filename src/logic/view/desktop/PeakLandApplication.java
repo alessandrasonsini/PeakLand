@@ -6,7 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import logic.view.desktop.graphic_controller.MainGraphicController;
 
-public class MainLauncher extends Application {
+public class PeakLandApplication extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {

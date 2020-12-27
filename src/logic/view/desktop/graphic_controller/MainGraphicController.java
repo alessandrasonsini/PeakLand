@@ -11,11 +11,16 @@ public class MainGraphicController extends GraphicController  {
 	@FXML
 	private Button btnSearch;
 	
+	@Override
+	protected String getFXMLFileName() {
+		return "mainLayout";
+	}
+
 	@FXML
 	private BorderPane mainChild;
 	
 	public MainGraphicController() {
-		super("mainLayout");
+		super();
 	}	
 	
 	@FXML

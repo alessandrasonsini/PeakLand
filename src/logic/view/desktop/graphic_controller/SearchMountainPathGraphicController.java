@@ -15,7 +15,6 @@ import logic.controller.SearchMountainPathController;
 import logic.view.bean.SimpleMountainPathBean;
 import logic.view.desktop.GraphicController;
 import logic.view.desktop.graphic_element.CustomListCell;
-
 public class SearchMountainPathGraphicController extends GraphicController{
 	
 	@FXML
@@ -34,7 +33,7 @@ public class SearchMountainPathGraphicController extends GraphicController{
 	private SearchMountainPathController controller;
 	
 	public SearchMountainPathGraphicController() {
-		super("searchPathLayout");
+		super();
 		this.beanList = FXCollections.observableArrayList();
 		this.controller = new SearchMountainPathController();
 	}
@@ -63,6 +62,11 @@ public class SearchMountainPathGraphicController extends GraphicController{
 		}
 	}
 	
+	@Override
+	protected String getFXMLFileName() {
+		return "searchPathLayout";
+	}
+
 	@FXML
 	public void onListViewItemClicked(MouseEvent event) {
 		// switch alla pagina di view mountain path info

@@ -9,14 +9,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
-public class GraphicController {
+public abstract class GraphicController {
 	 
 	protected Pane rootPane;
-	protected String fileName; 
 	private FXMLLoader loader;
 	
-	public GraphicController(String fileName) {
-		this.fileName = fileName;
+	public GraphicController() {
 		this.rootPane = new VBox();
 		this.loader = new FXMLLoader();
 		this.loader.setController(this);
@@ -27,10 +25,12 @@ public class GraphicController {
 		return rootPane;
 	}
 	
+	protected abstract String getFXMLFileName();
+	
 	protected void setLayout() {
+		
 		try {
-			// path of the fxml file to load
-			URL fileUrl = GraphicController.class.getResource("graphic_element/layout/" + fileName + ".fxml");
+			URL fileUrl = GraphicController.class.getResource("graphic_element/layout/" + getFXMLFileName() + ".fxml");
 			
 			if (fileUrl == null) {
 				throw new java.io.FileNotFoundException("FXML file not found.");
@@ -42,7 +42,7 @@ public class GraphicController {
 			
 		} catch (FileNotFoundException E) {
 			// Handle the exception
-			System.out.println("No page with name " + fileName);
+			System.out.println("No page with name " + getFXMLFileName());
 			
 		} catch (IOException E) {
 			
