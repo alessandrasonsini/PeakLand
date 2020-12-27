@@ -1,6 +1,6 @@
 package logic.controller;
 
-import logic.view.bean.MountainPathBean;
+import logic.model.bean.MountainPathBean;
 
 public class AddNewMountainPathController {
 

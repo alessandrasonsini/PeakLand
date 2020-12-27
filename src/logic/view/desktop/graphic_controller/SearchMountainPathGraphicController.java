@@ -12,10 +12,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
 import logic.controller.SearchMountainPathController;
-import logic.view.bean.SimpleMountainPathBean;
+import logic.model.bean.SimpleMountainPathBean;
 import logic.view.desktop.GraphicController;
 import logic.view.desktop.graphic_element.CustomListCell;
-public class SearchMountainPathGraphicController extends GraphicController{
+public class SearchMountainPathGraphicController extends GraphicController {
 	
 	@FXML
 	private BorderPane rootBorderPane;

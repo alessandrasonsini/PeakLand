@@ -2,7 +2,7 @@ package logic.view.desktop.graphic_element;
 
 
 import javafx.scene.control.ListCell;
-import logic.view.bean.SimpleMountainPathBean;
+import logic.model.bean.SimpleMountainPathBean;
 
 public class CustomListCell extends ListCell<SimpleMountainPathBean> {
 	

@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="1322.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="rootBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="1322.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <AnchorPane prefHeight="535.0" prefWidth="1322.0" BorderPane.alignment="CENTER">
+      <AnchorPane minHeight="535.0" minWidth="1322.0" prefHeight="535.0" prefWidth="1322.0" BorderPane.alignment="CENTER">
          <children>
             <HBox prefHeight="535.0" prefWidth="1322.0">
                <children>
@@ -30,7 +30,7 @@
                         <Label layoutX="63.0" layoutY="191.0" text="Add it and its information to earn " />
                         <Label layoutX="105.0" layoutY="210.0" text="awesome badges" />
                      </children></AnchorPane>
-                  <ScrollPane prefHeight="700.0">
+                  <ScrollPane hbarPolicy="NEVER" prefHeight="700.0">
                      <content>
                         <AnchorPane prefHeight="700.0" prefWidth="1000.0">
                            <children>
@@ -79,7 +79,7 @@
                               <Button fx:id="btnLoadPhoto" layoutX="274.0" layoutY="547.0" mnemonicParsing="false" text="Load file" />
                               <Button fx:id="btnSavePath" layoutX="97.0" layoutY="612.0" mnemonicParsing="false" onAction="#onSavePath" text="Save mountain path" />
                               <Label layoutX="52.0" layoutY="197.0" text="Lenght" />
-                              <TextField fx:id="txtLenght" layoutX="189.0" layoutY="192.0" promptText="in meters" />
+                              <TextField fx:id="txtLenght" layoutX="189.0" layoutY="192.0" promptText="in kilometers" />
                               <CheckBox fx:id="ckBoxMountain" layoutX="220.0" layoutY="284.0" mnemonicParsing="false" text="Mountain" />
                               <CheckBox fx:id="ckBoxLake" layoutX="374.0" layoutY="284.0" mnemonicParsing="false" text="Lake" />
                               <CheckBox fx:id="ckBoxSea" layoutX="532.0" layoutY="284.0" mnemonicParsing="false" text="Sea" />

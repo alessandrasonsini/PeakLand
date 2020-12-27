@@ -17,6 +17,9 @@ public class MainGraphicController extends GraphicController  {
 	}
 
 	@FXML
+	private Button btnAddPath;
+	
+	@FXML
 	private BorderPane mainChild;
 	
 	public MainGraphicController() {
@@ -27,7 +30,12 @@ public class MainGraphicController extends GraphicController  {
 	private void buttonHandler(ActionEvent event) {
 		SearchMountainPathGraphicController searchCtrl = new SearchMountainPathGraphicController();
 		searchCtrl.switchPage(mainChild);
-		
+	}
+	
+	@FXML
+	private void addPathButtonHandler(ActionEvent event) {
+		AddNewMountainPathGraphicController addCtrl = new AddNewMountainPathGraphicController();
+		addCtrl.switchPage(mainChild);
 	}
 	
 }

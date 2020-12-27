@@ -1,26 +1,21 @@
-package logic.view.bean;
+package logic.model.bean;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 
 import logic.model.DifficultyLevelEnum;
 
-public class SimpleMountainPathBean {
+public class SimpleMountainPathBean implements Serializable {
 	
-	String name;
-	String location;
-	DifficultyLevelEnum level;
-	LocalTime travelTime;
-	Integer vote;
-	Integer numberOfVotes;
-	//image
-	
-	public SimpleMountainPathBean(String name, String location, DifficultyLevelEnum level, LocalTime travelTime, Integer vote, Integer numberOfVotes) {
-		this.name = name;
-		this.location = location;
-		this.level = level;
-		this.travelTime = travelTime;
-		this.vote = vote;
-		this.numberOfVotes = numberOfVotes;
+	private String name;
+	private String location;
+	private DifficultyLevelEnum level;
+	private LocalTime travelTime;
+	private Integer vote;
+	private Integer numberOfVotes;
+	//private image
+
+	public SimpleMountainPathBean() {
 	}
 
 	public String getName() {

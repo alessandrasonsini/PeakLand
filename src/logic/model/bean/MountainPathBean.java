@@ -1,5 +1,6 @@
-package logic.view.bean;
+package logic.model.bean;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -7,26 +8,26 @@ import logic.model.DifficultyLevelEnum;
 import logic.model.GroundEnum;
 import logic.model.LandscapeEnum;
 
-public class MountainPathBean {
+public class MountainPathBean implements Serializable {
 	
-	String name;
-	Integer altitude;
-	String locationRegion;		//nell'MVC abbiamo messo una sola stringa
-	String locationCity;		//ma mi sembrava più completo metterci anche la regione (eventualmente cambiare anche in SimpleMountainPathBean)
-	Integer lenght;
-	DifficultyLevelEnum level;
-	List<LandscapeEnum> landscape;
-	List<GroundEnum> ground;
-	Boolean cycle;
-	Boolean historicalElements;
-	Boolean familySuitable;
-	LocalTime travelTime;
-	//image
+	private String name;
+	private Integer altitude;
+	private String locationRegion;		//nell'MVC abbiamo messo una sola stringa
+	private String locationCity;		//ma mi sembrava più completo metterci anche la regione (eventualmente cambiare anche in SimpleMountainPathBean)
+	private Integer lenght;
+	private DifficultyLevelEnum level;
+	private List<LandscapeEnum> landscape;
+	private List<GroundEnum> ground;
+	private Boolean cycle;
+	private Boolean historicalElements;
+	private Boolean familySuitable;
+	private LocalTime travelTime;
+	//private image
 	
-
-	//non so se inserire costruttore che prenda parametri (verrebbe lunghissimo) 
-	//o inserirli tramite setter
+	public MountainPathBean() {
+	}
 	
+	// ----------- modificare i metodi getter dei campi booleani in isCycle ecc..
 	
 	public String getName() {
 		return name;

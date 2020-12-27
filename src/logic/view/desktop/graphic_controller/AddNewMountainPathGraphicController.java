@@ -10,15 +10,19 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.BorderPane;
 import logic.controller.AddNewMountainPathController;
 import logic.model.DifficultyLevelEnum;
 import logic.model.GroundEnum;
 import logic.model.LandscapeEnum;
-import logic.view.bean.MountainPathBean;
+import logic.model.bean.MountainPathBean;
 import logic.view.desktop.GraphicController;
 
 public class AddNewMountainPathGraphicController extends GraphicController {
 
+	@FXML
+	private BorderPane rootBorderPane;
+	
 	@FXML
 	private TextField txtName;
 	
@@ -110,6 +114,7 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 	
 	public AddNewMountainPathGraphicController() {
 		super();
+		this.controller = new AddNewMountainPathController();
 	}
 	
 	@FXML
