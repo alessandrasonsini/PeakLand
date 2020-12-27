@@ -46,9 +46,9 @@
                   <Font name="Maiandra GD" size="24.0" />
                </font>
             </Button>
-            <Button fx:id="btnAddPath" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addPathButtonHandler" style="-fx-background-color: FBC9A8 FBC9A8;" text="Add new path">
+            <Button fx:id="btnAddPath" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buttonHandler" style="-fx-background-color: FBC9A8 FBC9A8;" text="Add new path">
                <font>
-                  <Font size="24.0" />
+                  <Font name="Maiandra GD" size="24.0" />
                </font>
             </Button>
          </children>

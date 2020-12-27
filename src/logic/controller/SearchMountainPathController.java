@@ -7,7 +7,7 @@ import java.util.List;
 import logic.model.DifficultyLevelEnum;
 import logic.model.bean.SimpleMountainPathBean;
 
-public class SearchMountainPathController {
+public class SearchMountainPathController extends Controller{
 
 	public List<SimpleMountainPathBean> searchMountainPath(String name) {
 		
@@ -24,4 +24,11 @@ public class SearchMountainPathController {
 		
 		return list;
 	}
+
+	@Override
+	public String getNextStep() {
+		return "search";
+	}
+
+	
 }

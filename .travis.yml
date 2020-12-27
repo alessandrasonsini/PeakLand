@@ -8,5 +8,5 @@ addons:
     token: 5902fbc08c17a4f42eb0a8c90556f83d9f27ebef
 
 script:
-- ant build
+- mvn test -B
 - sonar-scanner
