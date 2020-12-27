@@ -27,19 +27,19 @@
         <artifactId>maven-war-plugin</artifactId>
         <version>3.2.3</version>
         <configuration>
+          <failOnMissingWebXml>false</failOnMissingWebXml>
           <warSourceDirectory>WebContent</warSourceDirectory>
         </configuration>
       </plugin>
+      <plugin>
+	    <groupId>com.zenjava</groupId>
+	    <artifactId>javafx-maven-plugin</artifactId>
+	    <version>8.8.3</version>
+	    <configuration>
+	        <mainClass>logic.view.desktop.PeakLandApplication.java</mainClass>
+	    </configuration>
+	  </plugin>
     </plugins>
   </build>
-  <dependencies>
-  	<dependency>
-  		<groupId>jfxrt.jar</groupId>
-  		<artifactId>jfxrt.jar</artifactId>
-  		<version>1.0</version>
-  		<scope>system</scope>
-  		<systemPath>${java.home}\lib\jfxrt.jar</systemPath>
-  	</dependency>
-  </dependencies>
 
 </project>
