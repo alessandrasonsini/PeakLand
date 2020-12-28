@@ -13,6 +13,11 @@
           <exclude>**/*.java</exclude>
         </excludes>
       </resource>
+      <resource>
+      <directory>${basedir}/src/logic/view/desktop/graphic_element/layout</directory>
+      <filtering>false</filtering>  
+      <targetPath>view/desktop/graphic_element/layout</targetPath>            
+</resource>
     </resources>
     <plugins>
       <plugin>
