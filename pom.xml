@@ -13,12 +13,6 @@
           <exclude>**/*.java</exclude>
         </excludes>
       </resource>
-      <resource>
-        <directory>src/lib</directory>
-        <excludes>
-          <exclude>**/*.java</exclude>
-        </excludes>
-      </resource>
     </resources>
     <plugins>
       <plugin>
@@ -39,4 +33,11 @@
       </plugin>
     </plugins>
   </build>
+  <dependencies>
+  	<dependency>
+  		<groupId>org.openjfx</groupId>
+  		<artifactId>javafx-base</artifactId>
+  		<version>11.0.2</version>
+  	</dependency>
+  </dependencies>
 </project>
