@@ -72,7 +72,7 @@
         <path refid="EAR Libraries.libraryclasspath"/>
         <path refid="JUnit 5.libraryclasspath"/>
         <path refid="JavaFX SDK.libraryclasspath"/>
-        <pathelement location="src/jfxrt.jar"/>
+        <pathelement location="src/lib/jfxrt.jar"/>
     </path>
     <target name="init">
         <mkdir dir="build/classes"/>
