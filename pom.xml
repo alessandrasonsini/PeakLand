@@ -38,7 +38,14 @@
       </plugin>
     </plugins>
   </build>
-  <dependencies>
+  <distributionManagement>
+   <repository>
+    <id>internal.repo</id>
+     <name>Internal repo</name>
+     <url>file://${project.basedir}\target</url>
+    </repository>
+   </distributionManagement>
+   <dependencies>
   	<dependency>
   		<groupId>org.openjfx</groupId>
   		<artifactId>javafx-base</artifactId>
