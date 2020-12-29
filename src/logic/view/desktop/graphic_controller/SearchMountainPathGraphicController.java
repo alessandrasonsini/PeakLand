@@ -1,5 +1,6 @@
 package logic.view.desktop.graphic_controller;
 
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
+import logic.controller.Controller;
 import logic.controller.SearchMountainPathController;
 import logic.model.bean.SimpleMountainPathBean;
 import logic.view.desktop.GraphicController;
@@ -30,12 +32,11 @@ public class SearchMountainPathGraphicController extends GraphicController {
 	private ListView<SimpleMountainPathBean> listViewMountainPath;
 	
 	private ObservableList<SimpleMountainPathBean> beanList;
-	private SearchMountainPathController controller;
 	
-	public SearchMountainPathGraphicController() {
-		super();
+	
+	public SearchMountainPathGraphicController(Controller controller) {
+		super(controller);
 		this.beanList = FXCollections.observableArrayList();
-		this.controller = new SearchMountainPathController();
 	}
 	
 	@FXML
@@ -49,7 +50,7 @@ public class SearchMountainPathGraphicController extends GraphicController {
 		}
 		else {
 			// richiamo metodo di ricerca del controller applicativo SearchController
-			this.beanList.addAll(controller.searchMountainPath(request));
+			this.beanList.addAll(getSearchMountainPathController().searchMountainPath(request));
 			
 			// riempimento della list view coi risultati della ricerca
 			listViewMountainPath.setItems(this.beanList);
@@ -73,9 +74,12 @@ public class SearchMountainPathGraphicController extends GraphicController {
 		System.out.println("hai cliccato l'item " + listViewMountainPath.getSelectionModel().getSelectedItem().getName());
 		
 		//Switch alla pagina del view info
-		ViewMountainPathInfoGraphicController viewInfoCtrl = new ViewMountainPathInfoGraphicController();
-		viewInfoCtrl.switchPage(rootBorderPane);
+		this.executeAction("View info");
+		//MainGraphicController.getInstance().switchPage(rootPane);
 	}
 	
+	public SearchMountainPathController getSearchMountainPathController() {
+		return (SearchMountainPathController) myController;
+	}
 	
 }

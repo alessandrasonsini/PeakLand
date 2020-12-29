@@ -5,23 +5,27 @@ import java.io.IOException;
 import java.net.URL;
 
 import javafx.fxml.FXMLLoader;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import logic.controller.Controller;
+import logic.view.desktop.graphic_controller.GraphicControllerFactory;
+import logic.view.desktop.graphic_controller.MainGraphicController;
 
 public abstract class GraphicController {
 	 
 	protected Pane rootPane;
 	private FXMLLoader loader;
+	protected Controller myController;
 	
-	public GraphicController() {
+	public GraphicController(Controller controller) {
 		this.rootPane = new VBox();
 		this.loader = new FXMLLoader();
 		this.loader.setController(this);
+		this.myController = controller;
 		setLayout();
 	}
 	
-	public Pane getPane() {
+	public Pane getRootPane() {
 		return rootPane;
 	}
 	
@@ -52,8 +56,16 @@ public abstract class GraphicController {
 		
 	}
 	
-	public void switchPage(BorderPane mainPane) {
-		mainPane.setCenter(rootPane);
+	protected void executeAction(String action) {
+		
+		//Recupera l'istanza di controller necessaria
+		Controller nextController = myController.executeAction(action);
+
+		GraphicControllerFactory factory = new GraphicControllerFactory();
+		// Costruisce il prossimo graphic controller da eseguire in base alla action
+		GraphicController nextGraphicController = factory.getGraphicController(nextController);
+		MainGraphicController.getInstance().switchPage(nextGraphicController.getRootPane());
+		
 	}
 	
 }

@@ -1,10 +1,11 @@
 package logic.controller;
 
-public class MainController extends Controller {
+public class ErrorController extends Controller {
 
 	@Override
-	public void execute() {
+	public void execute() throws Exception {
 		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
@@ -12,6 +13,6 @@ public class MainController extends Controller {
 		// TODO Auto-generated method stub
 		
 	}
-
-
+	
+	
 }

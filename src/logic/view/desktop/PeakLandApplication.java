@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import logic.controller.MainController;
 import logic.view.desktop.graphic_controller.MainGraphicController;
 
 public class PeakLandApplication extends Application {
@@ -11,9 +12,9 @@ public class PeakLandApplication extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
-		MainGraphicController mainCtrl = new MainGraphicController();
+		MainGraphicController mainGraphCtrl = MainGraphicController.getInstance();
 		
-		Parent root = mainCtrl.getPane();
+		Parent root = mainGraphCtrl.getRootPane();
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setMaximized(true);

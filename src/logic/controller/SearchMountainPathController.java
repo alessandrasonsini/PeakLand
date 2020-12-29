@@ -26,8 +26,15 @@ public class SearchMountainPathController extends Controller{
 	}
 
 	@Override
-	public String getNextStep() {
-		return "search";
+	public void execute() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setup() {
+		// TODO Auto-generated method stub
+		setNextStepId("Search path");
 	}
 
 	

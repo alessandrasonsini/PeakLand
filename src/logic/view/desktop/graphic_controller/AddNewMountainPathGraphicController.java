@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import logic.controller.AddNewMountainPathController;
+import logic.controller.Controller;
 import logic.model.DifficultyLevelEnum;
 import logic.model.GroundEnum;
 import logic.model.LandscapeEnum;
@@ -110,11 +111,8 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 	@FXML
 	private ToggleGroup famGroup;
 	
-	private AddNewMountainPathController controller;
-	
-	public AddNewMountainPathGraphicController() {
-		super();
-		this.controller = new AddNewMountainPathController();
+	public AddNewMountainPathGraphicController(Controller controller) {
+		super(controller);
 	}
 	
 	@FXML
@@ -134,7 +132,7 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 		newPathBean.setTravelTime(LocalTime.of(Integer.parseInt(txtHours.getText()), Integer.parseInt(txtMinutes.getText())));
 		//gestire salvataggio immagine
 		
-		controller.saveNewMountainPath(newPathBean);
+		getAddNewMountainPathController().saveNewMountainPath(newPathBean);
 	}
 	
 	@Override
@@ -174,6 +172,10 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 		}
 		
 		return checked;
+	}
+	
+	public AddNewMountainPathController getAddNewMountainPathController() {
+		return (AddNewMountainPathController) myController;
 	}
 	
 }
