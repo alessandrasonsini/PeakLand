@@ -3,7 +3,7 @@ package logic.controller;
 
 public abstract class Controller {
 	
-	public Controller(){
+	protected Controller(){
 		setup();
 	}
 	

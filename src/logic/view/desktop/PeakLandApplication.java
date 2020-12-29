@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import logic.controller.MainController;
 import logic.view.desktop.graphic_controller.MainGraphicController;
 
 public class PeakLandApplication extends Application {

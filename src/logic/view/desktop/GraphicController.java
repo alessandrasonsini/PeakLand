@@ -17,7 +17,7 @@ public abstract class GraphicController {
 	private FXMLLoader loader;
 	protected Controller myController;
 	
-	public GraphicController(Controller controller) {
+	protected GraphicController(Controller controller) {
 		this.rootPane = new VBox();
 		this.loader = new FXMLLoader();
 		this.loader.setController(this);
