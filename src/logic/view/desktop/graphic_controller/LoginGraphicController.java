@@ -9,6 +9,7 @@ public class LoginGraphicController {
 	private Screen screen; 
 	
 	public void initialize() {
+		// TODO
 	}
 	
 	public void setScreenDim(Stage stage) {

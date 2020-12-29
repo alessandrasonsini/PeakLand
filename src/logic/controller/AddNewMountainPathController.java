@@ -7,11 +7,12 @@ public class AddNewMountainPathController extends Controller {
 	MountainPathBean newPathBean;
 	
 	public AddNewMountainPathController() {
+		super();
 		newPathBean = new MountainPathBean();
 	}
 	
 	public void saveNewMountainPath(MountainPathBean newPathBean) {
-		
+		// TODO 
 	}
 
 	@Override
