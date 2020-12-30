@@ -1,6 +1,5 @@
 package logic.view.desktop.graphic_controller;
 
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,7 +8,6 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
 import logic.controller.Controller;
@@ -17,11 +15,9 @@ import logic.controller.SearchMountainPathController;
 import logic.model.bean.SimpleMountainPathBean;
 import logic.view.desktop.GraphicController;
 import logic.view.desktop.graphic_element.CustomListCell;
+
 public class SearchMountainPathGraphicController extends GraphicController {
-	
-	@FXML
-	private BorderPane rootBorderPane;
-	
+		
 	@FXML
 	private TextField txtSearch;
 	
@@ -31,6 +27,7 @@ public class SearchMountainPathGraphicController extends GraphicController {
 	@FXML
 	private ListView<SimpleMountainPathBean> listViewMountainPath;
 	
+	// Lista di bean risultante dalla ricerca
 	private ObservableList<SimpleMountainPathBean> beanList;
 	
 	
@@ -46,7 +43,7 @@ public class SearchMountainPathGraphicController extends GraphicController {
 		
 		// controllo se stringa vuota
 		if (request.isEmpty()) {
-			//comunicare all'utente che la stringa è vuota
+			//comunico all'utente che non può inserire stringhe vuote
 		}
 		else {
 			// richiamo metodo di ricerca del controller applicativo SearchController
@@ -75,7 +72,6 @@ public class SearchMountainPathGraphicController extends GraphicController {
 		
 		//Switch alla pagina del view info
 		this.executeAction("View info");
-		//MainGraphicController.getInstance().switchPage(rootPane);
 	}
 	
 	public SearchMountainPathController getSearchMountainPathController() {

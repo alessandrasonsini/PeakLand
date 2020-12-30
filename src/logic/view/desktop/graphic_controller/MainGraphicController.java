@@ -19,13 +19,10 @@ public class MainGraphicController extends GraphicController {
 	@FXML
 	private BorderPane mainChild;
 
-	// private MainController controller;
-
 	private static MainGraphicController instance = null;;
 
 	private MainGraphicController(Controller controller) {
 		super(controller);
-		// this.controller = new MainController();
 	}
 
 	public static MainGraphicController getInstance() {

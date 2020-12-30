@@ -12,9 +12,12 @@ import logic.view.desktop.graphic_controller.GraphicControllerFactory;
 import logic.view.desktop.graphic_controller.MainGraphicController;
 
 public abstract class GraphicController {
-	 
+	
+	// Contenitore contenente tutta la pagina grafica gestita dal graphic controller
 	protected Pane rootPane;
 	private FXMLLoader loader;
+	
+	// Controller applicativo associato 
 	protected Controller myController;
 	
 	protected GraphicController(Controller controller) {
@@ -32,7 +35,9 @@ public abstract class GraphicController {
 	protected abstract String getFXMLFileName();
 	
 	protected void setLayout() {
-		
+		/**
+		 * Carica il file fxml gestito dal graphic controller
+		 */
 		try {
 			URL fileUrl = GraphicController.class.getResource("graphic_element/layout/" + getFXMLFileName() + ".fxml");
 			
