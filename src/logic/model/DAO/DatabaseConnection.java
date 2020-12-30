@@ -2,6 +2,8 @@ package logic.model.DAO;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
@@ -34,7 +36,7 @@ public class DatabaseConnection {
 	}
 	
 	public void initializeConnection() {
-		FileInputStream serviceAccount;
+		FileInputStream serviceAccount = null;
 		try {
 			serviceAccount = new FileInputStream(new java.io.File( "." ).getCanonicalPath() + "\\peakland-54c42-firebase-adminsdk-cihqn-dace282633.json");
 			FirebaseOptions options = FirebaseOptions.builder()
@@ -52,6 +54,14 @@ public class DatabaseConnection {
 		}catch (Exception e) {
 			// TODO: handle exception
 			System.out.println("Errore generico");
+		}
+		finally {
+			try {
+				serviceAccount.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 	}
