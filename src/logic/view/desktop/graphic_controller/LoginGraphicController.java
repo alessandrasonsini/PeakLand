@@ -8,24 +8,5 @@ public class LoginGraphicController {
 	@FXML 
 	private Screen screen; 
 	
-	public void initialize() {
-		// TODO
-	}
 	
-	public void setScreenDim(Stage stage) {
-		//Rectangle2D screenBounds = screen.getVisualBounds();
-		//stage.setHeight(screenBounds.getHeight());
-		//stage.setWidth(screenBounds.getWidth());
-		stage.setMaximized(true);
-		//stage.setX(screenBounds.getMinX());
-		//stage.setY(screenBounds.getMinY());
-		/*GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-		int width = gd.getDisplayMode().getWidth();
-		int height = gd.getDisplayMode().getHeight();
-		stage.setWidth(width);
-		stage.setHeight(height);
-		stage.setx
-		*/
-	}
-
 }

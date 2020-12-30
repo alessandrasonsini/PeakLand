@@ -126,9 +126,9 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 		newPathBean.setLevel(DifficultyLevelEnum.valueOf(( (RadioButton) levelGroup.getSelectedToggle()).getText().toUpperCase()));
 		newPathBean.setLandscape(checkSelectedLandscape());
 		newPathBean.setGround(checkSelectedGround());
-		newPathBean.setCycle(( (RadioButton) cycleGroup.getSelectedToggle()).getText().equals("Yes") ? true : false);
-		newPathBean.setHistoricalElements(( (RadioButton) histGroup.getSelectedToggle()).getText().equals("Yes") ? true : false);
-		newPathBean.setFamilySuitable(( (RadioButton) famGroup.getSelectedToggle()).getText().equals("Yes") ? true : false);
+		newPathBean.setCycle(( (RadioButton) cycleGroup.getSelectedToggle()).getText().equals("Yes"));
+		newPathBean.setHistoricalElements(( (RadioButton) histGroup.getSelectedToggle()).getText().equals("Yes"));
+		newPathBean.setFamilySuitable(( (RadioButton) famGroup.getSelectedToggle()).getText().equals("Yes"));
 		newPathBean.setTravelTime(LocalTime.of(Integer.parseInt(txtHours.getText()), Integer.parseInt(txtMinutes.getText())));
 		//gestire salvataggio immagine
 		
