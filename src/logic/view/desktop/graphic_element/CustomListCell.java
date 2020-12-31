@@ -12,7 +12,7 @@ public class CustomListCell extends ListCell<SimpleMountainPathBean> {
 		super.updateItem(item, empty);
 		if(item != null) {
 			SimpleMountainPathItem newItem = new SimpleMountainPathItem();
-			newItem.setInfo(item.getName(), item.getLocation(), item.getLevel().toString(), item.getTravelTime().toString());
+			newItem.setInfo(item.getName(), item.getLocationRegion(), item.getLocationCity(), item.getLevel().toString(), item.getTravelTime().toString());
 			setGraphic(newItem.getBox());
 		}
 	}

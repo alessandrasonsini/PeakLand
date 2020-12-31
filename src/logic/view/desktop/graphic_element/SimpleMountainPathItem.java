@@ -24,7 +24,10 @@ public class SimpleMountainPathItem {
 	Label txtName;
 	
 	@FXML
-	Label txtLocation;
+	Label txtLocationRegion;
+	
+	@FXML
+	Label txtLocationCity;
 	
 	@FXML
 	Label txtDifficultyLevel;
@@ -45,9 +48,10 @@ public class SimpleMountainPathItem {
         }
 	}
 	
-	public void setInfo(String name, String location, String diffLevel, String travelTime) {
+	public void setInfo(String name, String locationRegion, String locationCity, String diffLevel, String travelTime) {
         txtName.setText(name);
-        txtLocation.setText(location);
+        txtLocationRegion.setText(locationRegion);
+        txtLocationCity.setText(locationCity);
         txtDifficultyLevel.setText(diffLevel);
         txtTravelTime.setText(travelTime);
     }

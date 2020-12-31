@@ -13,11 +13,10 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import logic.controller.AddNewMountainPathController;
 import logic.controller.Controller;
-import logic.model.DifficultyLevelEnum;
-import logic.model.GroundEnum;
-import logic.model.LandscapeEnum;
 import logic.model.bean.MountainPathBean;
-import logic.view.desktop.GraphicController;
+import logic.model.enums.DifficultyLevelEnum;
+import logic.model.enums.GroundEnum;
+import logic.model.enums.LandscapeEnum;
 
 public class AddNewMountainPathGraphicController extends GraphicController {
 

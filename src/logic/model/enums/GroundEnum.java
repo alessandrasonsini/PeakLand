@@ -1,4 +1,4 @@
-package logic.model;
+package logic.model.enums;
 
 public enum GroundEnum {
 	ROCK,

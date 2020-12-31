@@ -1,4 +1,4 @@
-package logic.view.desktop;
+package logic.view.desktop.graphic_controller;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -8,8 +8,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import logic.controller.Controller;
-import logic.view.desktop.graphic_controller.GraphicControllerFactory;
-import logic.view.desktop.graphic_controller.MainGraphicController;
 
 public abstract class GraphicController {
 	
@@ -35,11 +33,9 @@ public abstract class GraphicController {
 	protected abstract String getFXMLFileName();
 	
 	protected void setLayout() {
-		/**
-		 * Carica il file fxml gestito dal graphic controller
-		 */
+		// Carica il file fxml gestito dal graphic controller
 		try {
-			URL fileUrl = GraphicController.class.getResource("graphic_element/layout/" + getFXMLFileName() + ".fxml");
+			URL fileUrl = GraphicController.class.getResource("../graphic_element/layout/" + getFXMLFileName() + ".fxml");
 			
 			if (fileUrl == null) {
 				throw new java.io.FileNotFoundException("FXML file not found.");
@@ -62,15 +58,13 @@ public abstract class GraphicController {
 	}
 	
 	protected void executeAction(String action) {
-		
-		//Recupera l'istanza di controller necessaria
+		//Recupera l'istanza di controller applicativo necessaria
 		Controller nextController = myController.executeAction(action);
 
 		GraphicControllerFactory factory = new GraphicControllerFactory();
 		// Costruisce il prossimo graphic controller da eseguire in base alla action
 		GraphicController nextGraphicController = factory.getGraphicController(nextController);
 		MainGraphicController.getInstance().switchPage(nextGraphicController.getRootPane());
-		
 	}
 	
 }

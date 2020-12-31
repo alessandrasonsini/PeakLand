@@ -1,17 +1,35 @@
 package logic.controller;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import logic.model.DifficultyLevelEnum;
+import logic.model.MountainPath;
 import logic.model.bean.SimpleMountainPathBean;
 
-public class SearchMountainPathController extends Controller{
+public class SearchMountainPathController extends Controller {
 
-	public List<SimpleMountainPathBean> searchMountainPath(String name) {
+	public List<SimpleMountainPathBean> searchMountainPathByName(String name) {
 		
-		List<SimpleMountainPathBean> list = new ArrayList<>();
+		List<MountainPath> results = MountainPath.searchMountainPathByName(name);
+		
+		List<SimpleMountainPathBean> beanResults = new ArrayList<>();
+		
+		for(MountainPath path : results) {
+			SimpleMountainPathBean bean = new SimpleMountainPathBean();
+			bean.setName(path.getName());
+			bean.setLocationRegion(path.getLocationRegion());
+			bean.setLocationCity(path.getLocationCity());
+			bean.setLevel(path.getLevel());
+			bean.setTravelTime(path.getTravelTime());
+			
+			// ------------ capire come inserire questi due campi
+			//bean.setVote(4);
+			//bean.setNumberOfVotes(300);
+			
+			beanResults.add(bean);
+		}
+		
+		/*List<SimpleMountainPathBean> list = new ArrayList<>();
 		SimpleMountainPathBean bean = new SimpleMountainPathBean();
 		bean.setName("Valle Dell'Orfento");
 		bean.setLocation("Caramanico");
@@ -22,7 +40,9 @@ public class SearchMountainPathController extends Controller{
 		
 		list.add(bean);
 		
-		return list;
+		return list;*/
+		
+		return beanResults;
 	}
 
 	@Override
@@ -33,7 +53,6 @@ public class SearchMountainPathController extends Controller{
 
 	@Override
 	public void setup() {
-		// TODO Auto-generated method stub
 		setNextStepId("Search path");
 	}
 

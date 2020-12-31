@@ -13,7 +13,6 @@ import javafx.util.Callback;
 import logic.controller.Controller;
 import logic.controller.SearchMountainPathController;
 import logic.model.bean.SimpleMountainPathBean;
-import logic.view.desktop.GraphicController;
 import logic.view.desktop.graphic_element.CustomListCell;
 
 public class SearchMountainPathGraphicController extends GraphicController {
@@ -47,7 +46,7 @@ public class SearchMountainPathGraphicController extends GraphicController {
 		}
 		else {
 			// richiamo metodo di ricerca del controller applicativo SearchController
-			this.beanList.addAll(getSearchMountainPathController().searchMountainPath(request));
+			this.beanList.addAll(getSearchMountainPathController().searchMountainPathByName(request));
 			
 			// riempimento della list view coi risultati della ricerca
 			listViewMountainPath.setItems(this.beanList);
@@ -70,7 +69,7 @@ public class SearchMountainPathGraphicController extends GraphicController {
 		// switch alla pagina di view mountain path info
 		System.out.println("hai cliccato l'item " + listViewMountainPath.getSelectionModel().getSelectedItem().getName());
 		
-		//Switch alla pagina del view info
+		// Switch alla pagina del view info
 		this.executeAction("View info");
 	}
 	

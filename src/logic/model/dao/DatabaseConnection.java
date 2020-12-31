@@ -23,7 +23,6 @@ public class DatabaseConnection {
 		initializeConnection();
 		this.firebaseDb = FirebaseDatabase.getInstance();
 		this.databaseReference = firebaseDb.getReference(databaseId);
-		
 	}
 	
 	public static DatabaseConnection getInstance() {
@@ -33,8 +32,11 @@ public class DatabaseConnection {
 		return instance;
 	}
 	
+	public FirebaseDatabase getDB() {
+		return firebaseDb;
+	}
+	
 	public void initializeConnection() {
-
 		try (FileInputStream serviceAccount = new FileInputStream(new java.io.File( "." ).getCanonicalPath() + "\\peakland-54c42-firebase-adminsdk-cihqn-dace282633.json")) {
 			FirebaseOptions options = FirebaseOptions.builder()
 				    .setCredentials(GoogleCredentials.fromStream(serviceAccount))
@@ -52,9 +54,6 @@ public class DatabaseConnection {
 			// TODO: handle exception
 			System.out.println("Errore generico");
 		}
-		
-		
 	}
-	
 	
 }

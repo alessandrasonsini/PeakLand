@@ -3,12 +3,13 @@ package logic.model.bean;
 import java.io.Serializable;
 import java.time.LocalTime;
 
-import logic.model.DifficultyLevelEnum;
+import logic.model.enums.DifficultyLevelEnum;
 
 public class SimpleMountainPathBean implements Serializable {
 	
 	private String name;
-	private String location;
+	private String locationRegion;
+	private String locationCity;
 	private DifficultyLevelEnum level;
 	private LocalTime travelTime;
 	private Integer vote;
@@ -26,12 +27,20 @@ public class SimpleMountainPathBean implements Serializable {
 		this.name = name;
 	}
 
-	public String getLocation() {
-		return location;
+	public String getLocationRegion() {
+		return locationRegion;
 	}
 
-	public void setLocation(String location) {
-		this.location = location;
+	public void setLocationRegion(String locationRegion) {
+		this.locationRegion = locationRegion;
+	}
+	
+	public String getLocationCity() {
+		return locationCity;
+	}
+
+	public void setLocationCity(String locationCity) {
+		this.locationCity = locationCity;
 	}
 
 	public DifficultyLevelEnum getLevel() {
