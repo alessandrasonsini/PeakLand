@@ -14,16 +14,15 @@ import com.google.firebase.database.ValueEventListener;
 
 import logic.model.MountainPath;
 
-public class MountainPathDAO {
+public class MountainPathDAO extends Dao {
 	
 	private DatabaseConnection dbConnection;
-	private FirebaseDatabase firebaseDb;
-	private DatabaseReference dbReference;
+	private DatabaseReference dbReferenceMountainPath;
+	private List<MountainPath> mountainPathResult;
 	
 	public MountainPathDAO() {
 		this.dbConnection = DatabaseConnection.getInstance();
-		this.firebaseDb = dbConnection.getDB();
-		this.dbReference = firebaseDb.getReference("MountainPath");
+		this.dbReferenceMountainPath = this.dbConnection.getDatabaseReference().child("Mountain Path");
 	}
 	
 	public void saveNewMountainPathOnDB(MountainPath mountainPath) {
@@ -32,33 +31,32 @@ public class MountainPathDAO {
 		paths.put(mountainPath.getName(), mountainPath);
 		
 		// Aggiunta del path al nodo MountainPath del DB
-		dbReference.setValueAsync(paths);
+		dbReferenceMountainPath.setValueAsync(paths);
 	}
 	
 	public List<MountainPath> searchMountainPathByName(String pathName) {
-		List<MountainPath> mountainPathList = new ArrayList<>();
-		Query query = dbReference.orderByChild("name").startAt(pathName).endAt(pathName+"\uf8ff");
+		this.mountainPathResult = new ArrayList<>();
+		//Creo la query al database
+		Query query = dbReferenceMountainPath.orderByChild("name").startAt(pathName).endAt(pathName+"\uf8ff");
+		readData(query);
 		
-		query.addValueEventListener(new ValueEventListener() {
-	        @Override
-	        public void onDataChange(DataSnapshot dataSnapshot) {
-	            if (dataSnapshot.exists()) {
-	                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-	                    MountainPath mountainPath = snapshot.getValue(MountainPath.class);
-	            		mountainPathList.add(mountainPath);
-	                }
-	            }
-	            else {
-	            	System.out.println("no matches for path with name '" + pathName + "'!");
-	            }
-	        }
-	
-	        @Override
-	        public void onCancelled(DatabaseError databaseError) {
-	        	//non so cosa metterci
-	        }
-		});
-		
-		return mountainPathList;
+		return mountainPathResult;
 	}
+
+	@Override
+	public void onSuccess(DataSnapshot dataSnapshot) {
+		if (dataSnapshot.exists()) {
+            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                MountainPath mountainPath = snapshot.getValue(MountainPath.class);
+        		mountainPathResult.add(mountainPath);
+        		System.out.println("Thread");
+            }
+        }
+        else {
+        	System.out.println("no matches for path with name");
+        }
+		
+	}
+	
+	
 }

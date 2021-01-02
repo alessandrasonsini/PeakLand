@@ -8,11 +8,5 @@ public class ViewMountainPathInfoController extends Controller {
 		setNextStepId("View info");
 	}
 
-	@Override
-	public void execute() throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
 	
 }

@@ -5,51 +5,30 @@ import java.util.List;
 
 import logic.model.MountainPath;
 import logic.model.bean.SimpleMountainPathBean;
+import logic.model.bean.factory.SimpleMountainPathBeanFactory;
 
 public class SearchMountainPathController extends Controller {
-
+	
+	List<MountainPath> searchResults;
+	
+	// Metodo che esegue la ricerca dei mountain path dato un nome parziale
 	public List<SimpleMountainPathBean> searchMountainPathByName(String name) {
 		
-		List<MountainPath> results = MountainPath.searchMountainPathByName(name);
+		// Chiama il metodo statico della entity che si occupa della ricerca
+		searchResults = MountainPath.searchMountainPathByName(name);
 		
 		List<SimpleMountainPathBean> beanResults = new ArrayList<>();
 		
-		for(MountainPath path : results) {
-			SimpleMountainPathBean bean = new SimpleMountainPathBean();
-			bean.setName(path.getName());
-			bean.setLocationRegion(path.getLocationRegion());
-			bean.setLocationCity(path.getLocationCity());
-			bean.setLevel(path.getLevel());
-			bean.setTravelTime(path.getTravelTime());
-			
-			// ------------ capire come inserire questi due campi
-			//bean.setVote(4);
-			//bean.setNumberOfVotes(300);
-			
-			beanResults.add(bean);
+		SimpleMountainPathBeanFactory beanFactory = new SimpleMountainPathBeanFactory();
+		
+		// Converte le entity in bean
+		for(MountainPath path : searchResults) {
+				beanResults.add(beanFactory.getSimpleMountainPath(path));
 		}
-		
-		/*List<SimpleMountainPathBean> list = new ArrayList<>();
-		SimpleMountainPathBean bean = new SimpleMountainPathBean();
-		bean.setName("Valle Dell'Orfento");
-		bean.setLocation("Caramanico");
-		bean.setLevel(DifficultyLevelEnum.E);
-		bean.setTravelTime(LocalTime.of(1, 30));
-		bean.setVote(4);
-		bean.setNumberOfVotes(300);
-		
-		list.add(bean);
-		
-		return list;*/
-		
+
 		return beanResults;
 	}
 
-	@Override
-	public void execute() throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void setup() {

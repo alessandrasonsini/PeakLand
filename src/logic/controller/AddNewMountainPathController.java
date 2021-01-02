@@ -16,11 +16,6 @@ public class AddNewMountainPathController extends Controller {
 	}
 
 	@Override
-	public void execute() {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
 	public void setup() {
 		// TODO Auto-generated method stub
 		setNextStepId("Add path");

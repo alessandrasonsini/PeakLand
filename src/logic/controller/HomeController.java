@@ -8,10 +8,4 @@ public class HomeController extends Controller {
 		
 	}
 
-	@Override
-	public void execute() throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

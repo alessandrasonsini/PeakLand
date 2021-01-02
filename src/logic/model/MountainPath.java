@@ -22,6 +22,8 @@ public class MountainPath {
 	private Boolean familySuitable;
 	private LocalTime travelTime;
 	// private image
+	private Integer numberOfVotes;
+	private Integer vote;
 	
 	private static MountainPathDAO mountainPathDAO;
 	
@@ -143,7 +145,6 @@ public class MountainPath {
 		this.familySuitable = familySuitable;
 	}
 
-
 	public LocalTime getTravelTime() {
 		return travelTime;
 	}
@@ -151,5 +152,21 @@ public class MountainPath {
 
 	public void setTravelTime(LocalTime travelTime) {
 		this.travelTime = travelTime;
+	}
+
+	public Integer getNumberOfVotes() {
+		return numberOfVotes;
+	}
+
+	public void setNumberOfVotes(Integer numberOfVotes) {
+		this.numberOfVotes = numberOfVotes;
+	}
+
+	public Integer getVote() {
+		return vote;
+	}
+
+	public void setVote(Integer vote) {
+		this.vote = vote;
 	}
 }

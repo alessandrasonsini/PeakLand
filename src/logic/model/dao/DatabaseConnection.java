@@ -13,7 +13,7 @@ public class DatabaseConnection {
 	 * Classe singleton contenente la connessione al realtime database di firebase
 	 */
 	
-	String databaseId = "peakland-54c42-default-rtdb";
+	//String databaseId = "peakland-54c42-default-rtdb";
 	FirebaseDatabase firebaseDb;
 	DatabaseReference databaseReference;
 	
@@ -22,7 +22,7 @@ public class DatabaseConnection {
 	private DatabaseConnection() {
 		initializeConnection();
 		this.firebaseDb = FirebaseDatabase.getInstance();
-		this.databaseReference = firebaseDb.getReference(databaseId);
+		this.databaseReference = firebaseDb.getReference();
 	}
 	
 	public static DatabaseConnection getInstance() {
@@ -32,8 +32,8 @@ public class DatabaseConnection {
 		return instance;
 	}
 	
-	public FirebaseDatabase getDB() {
-		return firebaseDb;
+	public DatabaseReference getDatabaseReference() {
+		return databaseReference;
 	}
 	
 	public void initializeConnection() {

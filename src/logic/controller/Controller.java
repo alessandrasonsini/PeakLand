@@ -28,7 +28,6 @@ public abstract class Controller {
 			nextController = controllerFactory.getController(action);
 		} catch (Exception e) {
 			// Gestione pagina di errore
-			// Non so se è meglio metterlo direttamente nella factory
 			nextController = new ErrorController();
 		}
 		
@@ -38,7 +37,4 @@ public abstract class Controller {
 	// Metodo che fa il setup alla creazione del controller
 	public abstract void setup();
 	
-	// Metodo che esegue l'azione principale del controller
-	public abstract void execute() throws Exception;
-
 }
