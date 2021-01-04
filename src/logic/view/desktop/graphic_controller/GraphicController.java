@@ -12,10 +12,7 @@ public abstract class GraphicController extends ShowableElement {
 	protected GraphicController(Controller controller) {
 		super();
 		this.myController = controller;
-		setLayout();
 	}
-	
-	//protected abstract String getFXMLFileName();
 	
 	protected void executeAction(String action) {
 		//Recupera l'istanza di controller applicativo necessaria

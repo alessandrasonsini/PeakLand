@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
+import logic.view.desktop.graphic_controller.GraphicController;
 
 public abstract class ShowableElement {
 	
@@ -46,6 +47,10 @@ public abstract class ShowableElement {
 	
 	protected Pane getRootPane() {
 		return rootPane;
+	}
+	
+	protected void setGraphicController(GraphicController controller) {
+		this.loader.setController(controller);
 	}
 	
 	protected abstract String getFXMLFileName(); 
