@@ -26,12 +26,12 @@ public class MountainPathDAO extends Dao {
 	}
 	
 	public void saveNewMountainPathOnDB(MountainPath mountainPath) {
-		Map<String, MountainPath> paths = new HashMap<>();
+		Map<String, Object> paths = new HashMap<>();
 		// Inserimento di ID (costituito dal nome) e dei dati del mountainPath
-		paths.put(mountainPath.getName(), mountainPath);
+		paths.put(mountainPath.getName(), (Object)mountainPath);
 		
 		// Aggiunta del path al nodo MountainPath del DB
-		dbReferenceMountainPath.setValueAsync(paths);
+		this.dbReferenceMountainPath.updateChildrenAsync(paths);
 	}
 	
 	public List<MountainPath> searchMountainPathByName(String pathName) {
@@ -47,9 +47,11 @@ public class MountainPathDAO extends Dao {
 	public void onSuccess(DataSnapshot dataSnapshot) {
 		if (dataSnapshot.exists()) {
             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+        // ----- LA PROSSIMA ISTRUZIONE GENERA UN ERRORE LEGATO AL PARSING CON IL TIPO DI DATO LOCAL TIME, FORSE DOVREMMO USARE 
+            	// SEMPLICEMENTE UN INTEGER PER NON FARE CASINI
                 MountainPath mountainPath = snapshot.getValue(MountainPath.class);
         		mountainPathResult.add(mountainPath);
-        		System.out.println("Thread");
+        		
             }
         }
         else {

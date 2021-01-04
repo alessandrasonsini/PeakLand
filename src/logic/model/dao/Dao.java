@@ -15,8 +15,6 @@ public abstract class Dao implements OnGetDataListener {
 
 	public void readData(Query query) {
 		
-		//static Object lockObject = new Object();
-		
 		query.addListenerForSingleValueEvent(new ValueEventListener() {
 	        @Override
 	        public void onDataChange(DataSnapshot dataSnapshot) {
@@ -29,7 +27,7 @@ public abstract class Dao implements OnGetDataListener {
 
 	        @Override
 	        public void onCancelled(DatabaseError firebaseError) {
-	            
+	            System.out.println("Read data error");
 	        }
 	    });
 		synchronized (lockObject) {
@@ -39,12 +37,10 @@ public abstract class Dao implements OnGetDataListener {
 				System.out.println("Sono sbloccato");
 			} catch (InterruptedException e) {
 				System.out.println("Eccezione");
+				Thread.currentThread().interrupt();
 				//e.printStackTrace();
 			}
 		}
-		
-		
-		System.out.println("Okay");
 
 	}
 	

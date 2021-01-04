@@ -44,8 +44,6 @@ public class DatabaseConnection {
 				    .build();
 			FirebaseApp.initializeApp(options);
 			
-			String current = new java.io.File( "." ).getCanonicalPath() + "\\src\\logic\\model\\peakland-54c42-firebase-adminsdk-cihqn-dace282633.json" ;
-	        System.out.println("Current dir:"+current);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

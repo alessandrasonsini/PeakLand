@@ -17,7 +17,7 @@ public class MountainPath {
 	private DifficultyLevelEnum level;
 	private List<LandscapeEnum> landscape;
 	private List<GroundEnum> ground;
-	private Boolean cycle;
+	private Boolean cycleble;
 	private Boolean historicalElements;
 	private Boolean familySuitable;
 	private LocalTime travelTime;
@@ -25,21 +25,19 @@ public class MountainPath {
 	private Integer numberOfVotes;
 	private Integer vote;
 	
-	private static MountainPathDAO mountainPathDAO;
-	
-	public MountainPath() {
-	}
+	private static MountainPathDAO mountainPathDAO = new MountainPathDAO();
 	
 	public static List<MountainPath> searchMountainPathByName(String name) {
-		mountainPathDAO = new MountainPathDAO();
 		return mountainPathDAO.searchMountainPathByName(name);
 	}
-
+	
+	public void saveMountainPathOnDb() {
+		mountainPathDAO.saveNewMountainPathOnDB(this);
+	}
 
 	public String getName() {
 		return name;
 	}
-
 
 	public void setName(String name) {
 		this.name = name;
@@ -116,17 +114,17 @@ public class MountainPath {
 	}
 
 
-	public Boolean getCycle() {
-		return cycle;
+	public Boolean isCycleble() {
+		return cycleble;
 	}
 
 
-	public void setCycle(Boolean cycle) {
-		this.cycle = cycle;
+	public void setCycleble(Boolean cycle) {
+		this.cycleble = cycle;
 	}
 
 
-	public Boolean getHistoricalElements() {
+	public Boolean isHistoricalElements() {
 		return historicalElements;
 	}
 
@@ -136,7 +134,7 @@ public class MountainPath {
 	}
 
 
-	public Boolean getFamilySuitable() {
+	public Boolean isFamilySuitable() {
 		return familySuitable;
 	}
 
