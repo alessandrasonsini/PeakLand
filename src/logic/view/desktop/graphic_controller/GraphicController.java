@@ -1,61 +1,21 @@
 package logic.view.desktop.graphic_controller;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.URL;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import logic.controller.Controller;
+import logic.view.desktop.ShowableElement;
 
-public abstract class GraphicController {
-	
-	// Contenitore contenente tutta la pagina grafica gestita dal graphic controller
-	protected Pane rootPane;
-	private FXMLLoader loader;
+public abstract class GraphicController extends ShowableElement {
 	
 	// Controller applicativo associato 
 	protected Controller myController;
 	
 	protected GraphicController(Controller controller) {
-		this.rootPane = new VBox();
-		this.loader = new FXMLLoader();
-		this.loader.setController(this);
+		super();
 		this.myController = controller;
 		setLayout();
 	}
 	
-	public Pane getRootPane() {
-		return rootPane;
-	}
-	
-	protected abstract String getFXMLFileName();
-	
-	protected void setLayout() {
-		// Carica il file fxml gestito dal graphic controller
-		try {
-			URL fileUrl = GraphicController.class.getResource("../graphic_element/layout/" + getFXMLFileName() + ".fxml");
-			
-			if (fileUrl == null) {
-				throw new java.io.FileNotFoundException("FXML file not found.");
-			}
-			
-			this.loader.setLocation(fileUrl);
-			Pane pane = this.loader.load();
-			rootPane = pane;
-			
-		} catch (FileNotFoundException E) {
-			// Handle the exception
-			System.out.println("No page with name " + getFXMLFileName());
-			
-		} catch (IOException E) {
-			
-			// Handle the exception
-			System.out.println("load exception");
-		}
-		
-	}
+	//protected abstract String getFXMLFileName();
 	
 	protected void executeAction(String action) {
 		//Recupera l'istanza di controller applicativo necessaria
@@ -66,5 +26,7 @@ public abstract class GraphicController {
 		GraphicController nextGraphicController = factory.getGraphicController(nextController);
 		MainGraphicController.getInstance().switchPage(nextGraphicController.getRootPane());
 	}
+	
+	
 	
 }

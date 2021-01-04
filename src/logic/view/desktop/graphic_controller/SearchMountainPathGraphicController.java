@@ -13,7 +13,7 @@ import javafx.util.Callback;
 import logic.controller.Controller;
 import logic.controller.SearchMountainPathController;
 import logic.model.bean.SimpleMountainPathBean;
-import logic.view.desktop.graphic_element.CustomListCell;
+import logic.view.desktop.graphic_element.SimpleMountainPathListCell;
 
 public class SearchMountainPathGraphicController extends GraphicController {
 		
@@ -48,12 +48,12 @@ public class SearchMountainPathGraphicController extends GraphicController {
 			// richiamo metodo di ricerca del controller applicativo SearchController
 			this.beanList.addAll(getSearchMountainPathController().searchMountainPathByName(request));
 			
-			// riempimento della list view coi risultati della ricerca
+			// riempimento della list view con i risultati della ricerca
 			listViewMountainPath.setItems(this.beanList);
 			listViewMountainPath.setCellFactory(new Callback<ListView<SimpleMountainPathBean>, ListCell<SimpleMountainPathBean>>() {
 	            @Override
 	            public ListCell<SimpleMountainPathBean> call(ListView<SimpleMountainPathBean> listViewMountainPath) {
-	                return new CustomListCell();
+	                return new SimpleMountainPathListCell();
 	            }
 	        });
 		}

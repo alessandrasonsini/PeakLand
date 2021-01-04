@@ -1,0 +1,19 @@
+package logic.view.desktop.graphic_element;
+
+import javafx.scene.control.ListCell;
+import logic.model.bean.ItemBean;
+import logic.model.bean.SimpleMountainPathBean;
+
+public class SimpleMountainPathListCell extends ListCell<SimpleMountainPathBean> {
+	
+	@Override
+	public void updateItem(SimpleMountainPathBean itemBean, boolean empty) {
+		super.updateItem(itemBean, empty);
+		if(itemBean != null) {
+			SimpleMountainPathItem newItem = new SimpleMountainPathItem();
+			newItem.setInfo(itemBean.convertToText(itemBean.getName()), itemBean.convertToText(itemBean.getLocationRegion()), itemBean.convertToText(itemBean.getLocationCity()), itemBean.convertToText(itemBean.getLevel()), itemBean.convertToText(itemBean.getTravelTime()));
+			setGraphic(newItem.getBox());
+		}
+	}
+}
+	

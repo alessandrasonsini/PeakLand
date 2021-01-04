@@ -1,6 +1,6 @@
 package logic.model.bean;
 
-import java.io.Serializable;
+
 import java.time.LocalTime;
 import java.util.List;
 
@@ -8,7 +8,7 @@ import logic.model.enums.DifficultyLevelEnum;
 import logic.model.enums.GroundEnum;
 import logic.model.enums.LandscapeEnum;
 
-public class MountainPathBean implements Serializable {
+public class MountainPathBean extends ItemBean {
 	
 	private String name;
 	private Integer altitude;
@@ -18,7 +18,7 @@ public class MountainPathBean implements Serializable {
 	private DifficultyLevelEnum level;
 	private List<LandscapeEnum> landscape;
 	private List<GroundEnum> ground;
-	private Boolean cycle;
+	private Boolean cycleble;
 	private Boolean historicalElements;
 	private Boolean familySuitable;
 	private LocalTime travelTime;
@@ -26,8 +26,6 @@ public class MountainPathBean implements Serializable {
 	
 	public MountainPathBean() {
 	}
-	
-	// ----------- modificare i metodi getter dei campi booleani in isCycle ecc..
 	
 	public String getName() {
 		return name;
@@ -93,15 +91,15 @@ public class MountainPathBean implements Serializable {
 		this.ground = ground;
 	}
 
-	public Boolean getCycle() {
-		return cycle;
+	public Boolean isCycleble() {
+		return cycleble;
 	}
 	
-	public void setCycle(Boolean cycle) {
-		this.cycle = cycle;
+	public void setCycle(Boolean cycleble) {
+		this.cycleble = cycleble;
 	}
 	
-	public Boolean getHistoricalElements() {
+	public Boolean isHistoricalElements() {
 		return historicalElements;
 	}
 	
@@ -109,7 +107,7 @@ public class MountainPathBean implements Serializable {
 		this.historicalElements = historicalElements;
 	}
 	
-	public Boolean getFamilySuitable() {
+	public Boolean isFamilySuitable() {
 		return familySuitable;
 	}
 	

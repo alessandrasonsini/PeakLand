@@ -1,15 +1,13 @@
 package logic.view.desktop.graphic_element;
 
-import java.io.IOException;
-
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import logic.view.desktop.ShowableElement;
 
-public class SimpleMountainPathItem {
+public class SimpleMountainPathItem extends ShowableElement {
 	
 	@FXML
 	HBox itemBox;
@@ -36,16 +34,7 @@ public class SimpleMountainPathItem {
 	Label txtTravelTime;
 	
 	public SimpleMountainPathItem() {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("layout/simpleMountainPathItemLayout.fxml"));
-        fxmlLoader.setController(this);
-        try
-        {
-            fxmlLoader.load();
-        }
-        catch (IOException e)
-        {
-            throw new RuntimeException(e);
-        }
+		super();
 	}
 	
 	public void setInfo(String name, String locationRegion, String locationCity, String diffLevel, String travelTime) {
@@ -59,4 +48,9 @@ public class SimpleMountainPathItem {
     public HBox getBox() {
         return itemBox;
     }
+
+	@Override
+	protected String getFXMLFileName() {
+		return "simpleMountainPathItemLayout";
+	}
 }

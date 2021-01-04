@@ -10,13 +10,13 @@ public abstract class Dao implements OnGetDataListener {
 	// Effettua la query sul db e sulla risposta asincrona richiama il metodo onSuccess definito 
 	// nelle classi dao figlie
 
-	public synchronized void readData(Query query) {
+	public void readData(Query query) {
 		
 		Object lockObject = new Object();
 		
 		query.addListenerForSingleValueEvent(new ValueEventListener() {
 	        @Override
-	        public synchronized void onDataChange(DataSnapshot dataSnapshot) {
+	        public void onDataChange(DataSnapshot dataSnapshot) {
 	            onSuccess(dataSnapshot);
 	            synchronized (lockObject) {
 	            	lockObject.notify();

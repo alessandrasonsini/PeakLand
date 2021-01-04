@@ -1,11 +1,9 @@
 package logic.model.bean;
 
-import java.io.Serializable;
 import java.time.LocalTime;
-
 import logic.model.enums.DifficultyLevelEnum;
 
-public class SimpleMountainPathBean implements Serializable {
+public class SimpleMountainPathBean extends ItemBean {
 	
 	private String name;
 	private String locationRegion;
