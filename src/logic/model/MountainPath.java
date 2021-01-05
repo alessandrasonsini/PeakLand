@@ -2,8 +2,6 @@ package logic.model;
 
 import java.util.List;
 
-import com.sun.media.jfxmedia.control.VideoDataBuffer;
-
 import logic.model.dao.MountainPathDAO;
 import logic.model.enums.DifficultyLevelEnum;
 import logic.model.enums.GroundEnum;
