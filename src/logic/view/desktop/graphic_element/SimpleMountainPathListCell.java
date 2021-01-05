@@ -11,7 +11,9 @@ public class SimpleMountainPathListCell extends ListCell<SimpleMountainPathBean>
 		super.updateItem(itemBean, empty);
 		if(itemBean != null) {
 			SimpleMountainPathItem newItem = new SimpleMountainPathItem();
-			newItem.setInfo(itemBean.convertToText(itemBean.getName()), itemBean.convertToText(itemBean.getLocationRegion()), itemBean.convertToText(itemBean.getLocationCity()), itemBean.convertToText(itemBean.getLevel()), itemBean.convertToText(itemBean.getTravelTime()));
+			newItem.setInfo(itemBean.convertToText(itemBean.getName()), itemBean.convertToText(itemBean.getRegion()), 
+					itemBean.convertToText(itemBean.getProvince()), itemBean.convertToText(itemBean.getCity()), 
+					itemBean.convertToText(itemBean.getLevel()), itemBean.convertToText(itemBean.getHours()) + ":" + itemBean.convertToText(itemBean.getMinutes()));
 			setGraphic(newItem.getBox());
 		}
 	}

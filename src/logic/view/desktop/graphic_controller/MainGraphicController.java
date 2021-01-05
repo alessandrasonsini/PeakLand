@@ -17,6 +17,11 @@ public class MainGraphicController extends GraphicController {
 
 	@FXML
 	private BorderPane mainChild;
+	
+	// Button precedentemente premuto
+	Button prevPressed;
+	
+	String defaultStyle = "-fx-background-color: FBC9A8; -fx-border-color: F69155;";
 
 	private static MainGraphicController instance = null;;
 
@@ -33,6 +38,7 @@ public class MainGraphicController extends GraphicController {
 	@FXML
 	private void buttonHandler(ActionEvent event) {
 		Button button = (Button) event.getSource();
+		this.setPressed(button);
 		this.executeAction(button.getId());
 
 	}
@@ -45,5 +51,13 @@ public class MainGraphicController extends GraphicController {
 	public void switchPage(Pane paneToSwitch) {
 		mainChild.setCenter(paneToSwitch);
 	}
-
+	
+	// Imposta il colore del button premuto e setta i valori di default di quello precedentemente premuto
+	private void setPressed(Button currPressed) {
+		currPressed.setStyle("-fx-background-color: F69155;");
+		if(prevPressed != null) {
+			prevPressed.setStyle(defaultStyle);
+		}
+		prevPressed = currPressed;
+	}
 }

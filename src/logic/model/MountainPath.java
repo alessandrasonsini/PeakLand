@@ -1,7 +1,8 @@
 package logic.model;
 
-import java.time.LocalTime;
 import java.util.List;
+
+import com.sun.media.jfxmedia.control.VideoDataBuffer;
 
 import logic.model.dao.MountainPathDAO;
 import logic.model.enums.DifficultyLevelEnum;
@@ -11,8 +12,7 @@ import logic.model.enums.LandscapeEnum;
 public class MountainPath {
 	private String name;
 	private Integer altitude;
-	private String locationRegion;
-	private String locationCity;
+	private Location location;
 	private Integer lenght;
 	private DifficultyLevelEnum level;
 	private List<LandscapeEnum> landscape;
@@ -20,12 +20,17 @@ public class MountainPath {
 	private Boolean cycleble;
 	private Boolean historicalElements;
 	private Boolean familySuitable;
-	private LocalTime travelTime;
+	private Time travelTime; 
 	// private image
 	private Integer numberOfVotes;
 	private Integer vote;
 	
 	private static MountainPathDAO mountainPathDAO = new MountainPathDAO();
+	
+	public MountainPath() {
+		this.location = new Location();
+		this.travelTime = new Time();
+	}
 	
 	public static List<MountainPath> searchMountainPathByName(String name) {
 		return mountainPathDAO.searchMountainPathByName(name);
@@ -43,7 +48,6 @@ public class MountainPath {
 		this.name = name;
 	}
 
-
 	public Integer getAltitude() {
 		return altitude;
 	}
@@ -53,26 +57,37 @@ public class MountainPath {
 		this.altitude = altitude;
 	}
 
-
-	public String getLocationRegion() {
-		return locationRegion;
+	public Location getLocation() {
+		return this.location;
 	}
-
-
-	public void setLocationRegion(String locationRegion) {
-		this.locationRegion = locationRegion;
+	
+	public void setLocation(Location loc) {
+		this.location = loc;
 	}
-
-
-	public String getLocationCity() {
-		return locationCity;
+	
+	public void setRegion(String region) {
+		this.location.setRegion(region);
 	}
-
-
-	public void setLocationCity(String locationCity) {
-		this.locationCity = locationCity;
+	
+	public void setProvince(String province) {
+		this.location.setProvince(province);
 	}
-
+	
+	public void setCity(String city) {
+		this.location.setCity(city);
+	}
+	
+//	public String getRegion() {
+//		return this.location.getRegion();
+//	}
+//	
+//	public String getProvince() {
+//		return this.location.getProvince();
+//	}
+//	
+//	public String getCity() {
+//		return this.location.getCity();
+//	}
 
 	public Integer getLenght() {
 		return lenght;
@@ -87,7 +102,6 @@ public class MountainPath {
 	public DifficultyLevelEnum getLevel() {
 		return level;
 	}
-
 
 	public void setLevel(DifficultyLevelEnum level) {
 		this.level = level;
@@ -143,14 +157,29 @@ public class MountainPath {
 		this.familySuitable = familySuitable;
 	}
 
-	public LocalTime getTravelTime() {
+	public Time getTravelTime() {
 		return travelTime;
 	}
 
-
-	public void setTravelTime(LocalTime travelTime) {
+	public void setTravelTime(Time travelTime) {
 		this.travelTime = travelTime;
 	}
+	
+	public void setHours(Integer hours) {
+		this.travelTime.setHours(hours);
+	}
+	
+	public void setMinutes(Integer minutes) {
+		this.travelTime.setMinutes(minutes);
+	}
+	
+//	public Integer getHours() {
+//		return this.travelTime.getHours();
+//	}
+//	
+//	public Integer getMinutes() {
+//		return this.travelTime.getMinutes();
+//	}
 
 	public Integer getNumberOfVotes() {
 		return numberOfVotes;

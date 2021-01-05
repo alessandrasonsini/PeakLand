@@ -1,38 +1,33 @@
 package logic.model.bean;
 
 
-import java.time.LocalTime;
 import java.util.List;
 
-import logic.model.enums.DifficultyLevelEnum;
 import logic.model.enums.GroundEnum;
 import logic.model.enums.LandscapeEnum;
 
-public class MountainPathBean extends ItemBean {
+public class MountainPathBean extends SimpleMountainPathBean {
 	
-	private String name;
 	private Integer altitude;
-	private String locationRegion;		//nell'MVC abbiamo messo una sola stringa
-	private String locationCity;		//ma mi sembrava più completo metterci anche la regione (eventualmente cambiare anche in SimpleMountainPathBean)
-	private Integer lenght;
-	private DifficultyLevelEnum level;
 	private List<LandscapeEnum> landscape;
 	private List<GroundEnum> ground;
 	private Boolean cycleble;
 	private Boolean historicalElements;
 	private Boolean familySuitable;
-	private LocalTime travelTime;
+	private Integer lenght;
+	
+
 	//private image
 	
+	public Integer getLenght() {
+		return lenght;
+	}
+
+	public void setLenght(Integer lenght) {
+		this.lenght = lenght;
+	}
+
 	public MountainPathBean() {
-	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
 	}
 	
 	public Integer getAltitude() {
@@ -41,38 +36,6 @@ public class MountainPathBean extends ItemBean {
 	
 	public void setAltitude(Integer altitude) {
 		this.altitude = altitude;
-	}
-	
-	public String getLocationRegion() {
-		return locationRegion;
-	}
-	
-	public void setLocationRegion(String locationRegion) {
-		this.locationRegion = locationRegion;
-	}
-	
-	public String getLocationCity() {
-		return locationCity;
-	}
-	
-	public void setLocationCity(String locationCity) {
-		this.locationCity = locationCity;
-	}
-	
-	public Integer getLenght() {
-		return lenght;
-	}
-	
-	public void setLenght(Integer lenght) {
-		this.lenght = lenght;
-	}
-	
-	public DifficultyLevelEnum getLevel() {
-		return level;
-	}
-	
-	public void setLevel(DifficultyLevelEnum level) {
-		this.level = level;
 	}
 	
 	public List<LandscapeEnum> getLandscape() {
@@ -115,11 +78,4 @@ public class MountainPathBean extends ItemBean {
 		this.familySuitable = familySuitable;
 	}
 	
-	public LocalTime getTravelTime() {
-		return travelTime;
-	}
-	
-	public void setTravelTime(LocalTime travelTime) {
-		this.travelTime = travelTime;
-	}
 }

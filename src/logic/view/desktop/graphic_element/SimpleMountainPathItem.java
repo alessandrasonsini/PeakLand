@@ -25,6 +25,9 @@ public class SimpleMountainPathItem extends ShowableElement {
 	Label txtLocationRegion;
 	
 	@FXML
+	Label txtLocationProvince;
+	
+	@FXML
 	Label txtLocationCity;
 	
 	@FXML
@@ -37,9 +40,10 @@ public class SimpleMountainPathItem extends ShowableElement {
 		super();
 	}
 	
-	public void setInfo(String name, String locationRegion, String locationCity, String diffLevel, String travelTime) {
+	public void setInfo(String name, String locationRegion, String locationProvince, String locationCity, String diffLevel, String travelTime) {
         txtName.setText(name);
         txtLocationRegion.setText(locationRegion);
+        txtLocationProvince.setText(locationProvince);
         txtLocationCity.setText(locationCity);
         txtDifficultyLevel.setText(diffLevel);
         txtTravelTime.setText(travelTime);

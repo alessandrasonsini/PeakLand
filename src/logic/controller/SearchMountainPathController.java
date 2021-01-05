@@ -9,13 +9,11 @@ import logic.model.bean.factory.SimpleMountainPathBeanFactory;
 
 public class SearchMountainPathController extends Controller {
 	
-	List<MountainPath> searchResults;
-	
 	// Metodo che esegue la ricerca dei mountain path dato un nome parziale
 	public List<SimpleMountainPathBean> searchMountainPathByName(String name) {
-		
+	
 		// Chiama il metodo statico della entity che si occupa della ricerca
-		searchResults = MountainPath.searchMountainPathByName(name);
+		List<MountainPath> searchResults = MountainPath.searchMountainPathByName(name);
 		
 		List<SimpleMountainPathBean> beanResults = new ArrayList<>();
 		

@@ -22,7 +22,6 @@ public abstract class Dao implements OnGetDataListener {
 	            synchronized (lockObject) {
 	            	lockObject.notifyAll();
 				}
-	            System.out.println("Sblocco il thread");
 	        }
 
 	        @Override
@@ -32,9 +31,7 @@ public abstract class Dao implements OnGetDataListener {
 	    });
 		synchronized (lockObject) {
 			try {
-				System.out.println("Blocco il thread");
 				lockObject.wait();
-				System.out.println("Sono sbloccato");
 			} catch (InterruptedException e) {
 				System.out.println("Eccezione");
 				Thread.currentThread().interrupt();

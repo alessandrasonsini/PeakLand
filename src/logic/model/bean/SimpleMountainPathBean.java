@@ -1,21 +1,49 @@
 package logic.model.bean;
 
-import java.time.LocalTime;
 import logic.model.enums.DifficultyLevelEnum;
 
 public class SimpleMountainPathBean extends ItemBean {
 	
 	private String name;
-	private String locationRegion;
-	private String locationCity;
 	private DifficultyLevelEnum level;
-	private LocalTime travelTime;
+	private String region;
+	private String province;
+	private String city;
+	private Integer hours;
+	private Integer minutes;
 	private Integer vote;
 	private Integer numberOfVotes;
 	//private image
 
 	public SimpleMountainPathBean() {
 	}
+	
+	public String getRegion() {
+		return region;
+	}
+
+	public void setRegion(String region) {
+		this.region = region;
+	}
+
+	public String getProvince() {
+		return province;
+	}
+
+	public void setProvince(String province) {
+		this.province = province;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	
+	
 
 	public String getName() {
 		return name;
@@ -23,22 +51,6 @@ public class SimpleMountainPathBean extends ItemBean {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getLocationRegion() {
-		return locationRegion;
-	}
-
-	public void setLocationRegion(String locationRegion) {
-		this.locationRegion = locationRegion;
-	}
-	
-	public String getLocationCity() {
-		return locationCity;
-	}
-
-	public void setLocationCity(String locationCity) {
-		this.locationCity = locationCity;
 	}
 
 	public DifficultyLevelEnum getLevel() {
@@ -49,12 +61,20 @@ public class SimpleMountainPathBean extends ItemBean {
 		this.level = level;
 	}
 
-	public LocalTime getTravelTime() {
-		return travelTime;
+	public Integer getHours() {
+		return hours;
 	}
 
-	public void setTravelTime(LocalTime travelTime) {
-		this.travelTime = travelTime;
+	public void setHours(Integer hours) {
+		this.hours = hours;
+	}
+
+	public Integer getMinutes() {
+		return minutes;
+	}
+
+	public void setMinutes(Integer minutes) {
+		this.minutes = minutes;
 	}
 
 	public Integer getVote() {

@@ -33,7 +33,7 @@
       <HBox prefHeight="0.0" prefWidth="790.0">
          <children>
 
-            <Button contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: FBC9A8 FBC9A8 FBC9A8 FBC9A8;" text="Home">
+            <Button contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: FBC9A8; -fx-border-color: F69155;" text="Home">
                <font>
                   <Font name="Maiandra GD" size="24.0" />
                </font>
@@ -41,12 +41,12 @@
                   <Insets top="1.0" />
                </opaqueInsets>
             </Button>
-            <Button fx:id="btnSearch" contentDisplay="CENTER" minHeight="45.0" minWidth="160.0" mnemonicParsing="false" onAction="#buttonHandler" style="-fx-background-color: FBC9A8;" text="Search path" wrapText="true">
+            <Button fx:id="btnSearch" contentDisplay="CENTER" minHeight="45.0" minWidth="160.0" mnemonicParsing="false" onAction="#buttonHandler" style="-fx-background-color: FBC9A8; -fx-border-color: F69155;" text="Search path" wrapText="true">
                <font>
                   <Font name="Maiandra GD" size="24.0" />
                </font>
             </Button>
-            <Button fx:id="btnAddPath" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buttonHandler" style="-fx-background-color: FBC9A8 FBC9A8;" text="Add new path">
+            <Button fx:id="btnAddPath" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buttonHandler" style="-fx-background-color: FBC9A8; -fx-border-color: F69155;" text="Add new path">
                <font>
                   <Font name="Maiandra GD" size="24.0" />
                </font>

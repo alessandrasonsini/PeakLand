@@ -37,6 +37,8 @@ public class SearchMountainPathGraphicController extends GraphicController {
 	
 	@FXML
 	public void onSearchRequest(ActionEvent event) {
+		// Pulisco la lista dalle ricerche precedenti
+		this.beanList.clear();
 		// recupero richiesta di ricerca (testo di input dell'utente)
 		String request = txtSearch.getText();
 		

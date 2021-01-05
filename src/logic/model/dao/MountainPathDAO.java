@@ -12,7 +12,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import logic.model.Location;
 import logic.model.MountainPath;
+import logic.model.Time;
+import logic.model.enums.DifficultyLevelEnum;
+import logic.model.enums.GroundEnum;
 
 public class MountainPathDAO extends Dao {
 	
@@ -39,17 +43,14 @@ public class MountainPathDAO extends Dao {
 		//Creo la query al database
 		Query query = dbReferenceMountainPath.orderByChild("name").startAt(pathName).endAt(pathName+"\uf8ff");
 		readData(query);
-		
 		return mountainPathResult;
 	}
 
 	@Override
 	public void onSuccess(DataSnapshot dataSnapshot) {
 		if (dataSnapshot.exists()) {
-            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-        // ----- LA PROSSIMA ISTRUZIONE GENERA UN ERRORE LEGATO AL PARSING CON IL TIPO DI DATO LOCAL TIME, FORSE DOVREMMO USARE 
-            	// SEMPLICEMENTE UN INTEGER PER NON FARE CASINI
-                MountainPath mountainPath = snapshot.getValue(MountainPath.class);
+            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {          	
+            	MountainPath mountainPath = snapshot.getValue(MountainPath.class);
         		mountainPathResult.add(mountainPath);
         		
             }
@@ -57,7 +58,7 @@ public class MountainPathDAO extends Dao {
         else {
         	System.out.println("no matches for path with name");
         }
-		
+
 	}
 	
 	

@@ -22,4 +22,8 @@ public class ControllerFactory {
 		
 		return newController;
 	}
+	
+	public SearchMountainPathController getSearchMountainPathController() {
+		return new SearchMountainPathController();
+	}
 }

@@ -110,17 +110,23 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 	@FXML
 	private ToggleGroup famGroup;
 	
+	@FXML
+	private TextField txtProvince;
+	
 	public AddNewMountainPathGraphicController(Controller controller) {
 		super(controller);
 	}
 	
 	@FXML
 	public void onSavePath(ActionEvent event) {
+		
+		// Inizializza la bean con tutti i campi inseriti
 		MountainPathBean newPathBean = new MountainPathBean();
 		newPathBean.setName(txtName.getText());
 		newPathBean.setAltitude(Integer.parseInt(txtAltitude.getText()));
-		newPathBean.setLocationRegion(txtRegion.getText());
-		newPathBean.setLocationCity(txtCity.getText());
+		newPathBean.setRegion(txtRegion.getText());
+		newPathBean.setProvince(txtProvince.getText());
+		newPathBean.setCity(txtCity.getText());
 		newPathBean.setLenght(Integer.parseInt(txtLenght.getText()));
 		newPathBean.setLevel(DifficultyLevelEnum.valueOf(( (RadioButton) levelGroup.getSelectedToggle()).getText().toUpperCase()));
 		newPathBean.setLandscape(checkSelectedLandscape());
@@ -128,9 +134,9 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 		newPathBean.setCycle(( (RadioButton) cycleGroup.getSelectedToggle()).getText().equals("Yes"));
 		newPathBean.setHistoricalElements(( (RadioButton) histGroup.getSelectedToggle()).getText().equals("Yes"));
 		newPathBean.setFamilySuitable(( (RadioButton) famGroup.getSelectedToggle()).getText().equals("Yes"));
-		newPathBean.setTravelTime(LocalTime.of(Integer.parseInt(txtHours.getText()), Integer.parseInt(txtMinutes.getText())));
+		newPathBean.setHours(Integer.parseInt(txtHours.getText()));
+		newPathBean.setMinutes(Integer.parseInt(txtMinutes.getText()));
 		//gestire salvataggio immagine
-		
 		getAddNewMountainPathController().saveNewMountainPath(newPathBean);
 	}
 	

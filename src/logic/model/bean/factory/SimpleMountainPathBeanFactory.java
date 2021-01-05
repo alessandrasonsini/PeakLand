@@ -9,10 +9,12 @@ public class SimpleMountainPathBeanFactory {
 		SimpleMountainPathBean bean = new SimpleMountainPathBean();
 				
 		bean.setName(path.getName());
-		bean.setLocationRegion(path.getLocationRegion());
-		bean.setLocationCity(path.getLocationCity());
+		bean.setRegion(path.getLocation().getRegion());
+		bean.setProvince(path.getLocation().getProvince());
+		bean.setCity(path.getLocation().getCity());
 		bean.setLevel(path.getLevel());
-		bean.setTravelTime(path.getTravelTime());
+		bean.setHours((path.getTravelTime().getHours()));
+		bean.setMinutes((path.getTravelTime().getMinutes()));
 		bean.setVote(path.getVote());
 		bean.setNumberOfVotes(path.getNumberOfVotes());
 		
