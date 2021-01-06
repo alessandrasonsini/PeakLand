@@ -1,7 +1,6 @@
 package logic.view.desktop.graphic_element;
 
 import javafx.scene.control.ListCell;
-import logic.model.bean.ItemBean;
 import logic.model.bean.SimpleMountainPathBean;
 
 public class SimpleMountainPathListCell extends ListCell<SimpleMountainPathBean> {

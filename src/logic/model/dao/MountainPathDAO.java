@@ -6,17 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
-
-import logic.model.Location;
 import logic.model.MountainPath;
-import logic.model.Time;
-import logic.model.enums.DifficultyLevelEnum;
-import logic.model.enums.GroundEnum;
 
 public class MountainPathDAO extends Dao {
 	
@@ -52,13 +44,11 @@ public class MountainPathDAO extends Dao {
             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {          	
             	MountainPath mountainPath = snapshot.getValue(MountainPath.class);
         		mountainPathResult.add(mountainPath);
-        		
             }
         }
         else {
         	System.out.println("no matches for path with name");
         }
-
 	}
 	
 	

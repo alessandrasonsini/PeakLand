@@ -40,7 +40,6 @@ public class MainGraphicController extends GraphicController {
 		Button button = (Button) event.getSource();
 		this.setPressed(button);
 		this.executeAction(button.getId());
-
 	}
 
 	@Override

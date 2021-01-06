@@ -15,14 +15,16 @@ public abstract class GraphicController extends ShowableElement {
 	}
 	
 	protected void executeAction(String action) {
-		//Recupera l'istanza di controller applicativo necessaria
+		// Istanzia controller applicativo del prossimo caso d'uso da eseguire
 		Controller nextController = myController.executeAction(action);
-
+		
 		GraphicControllerFactory factory = new GraphicControllerFactory();
 		// Costruisce il prossimo graphic controller da eseguire in base alla action
 		GraphicController nextGraphicController = factory.getGraphicController(nextController);
 		MainGraphicController.getInstance().switchPage(nextGraphicController.getRootPane());
 	}
+	
+	
 	
 	
 	

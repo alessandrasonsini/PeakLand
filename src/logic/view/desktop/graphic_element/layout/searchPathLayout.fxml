@@ -10,16 +10,16 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="rootBorderPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="rootBorderPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <AnchorPane minHeight="535.0" minWidth="1322.0">
+      <AnchorPane>
          <children>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="322.0" style="-fx-background-color: fbc9a8;">
+                  <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefWidth="322.0" style="-fx-background-color: fbc9a8;">
                      <children>
-                        <TextField fx:id="txtSearch" layoutX="65.0" layoutY="186.0" onAction="#onSearchRequest" promptText="Search for a path..." AnchorPane.bottomAnchor="324.0" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="108.0" AnchorPane.topAnchor="186.0" />
-                        <ImageView fx:id="imgSearch" fitHeight="25.0" fitWidth="25.0" layoutX="234.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
+                        <TextField fx:id="txtSearch" layoutX="65.0" layoutY="186.0" maxHeight="15.0" onAction="#onSearchRequest" promptText="Search for a path..." AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="108.0" AnchorPane.topAnchor="186.0" />
+                        <ImageView fx:id="imgSearch" fitHeight="25.0" fitWidth="25.0" layoutX="234.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="63.0">
                            <image>
                               <Image url="@../images/icons8-search-52.png" />
                            </image>
@@ -36,9 +36,9 @@
                         </Button>
                      </children>
                   </AnchorPane>
-                  <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="1000.0">
+                  <AnchorPane HBox.hgrow="ALWAYS">
                      <children>
-                        <ListView fx:id="listViewMountainPath" onMouseClicked="#onListViewItemClicked" prefHeight="535.0" prefWidth="1000.0" />
+                        <ListView fx:id="listViewMountainPath" minWidth="1000.0" onMouseClicked="#onListViewItemClicked" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children>
                   </AnchorPane>
                </children>

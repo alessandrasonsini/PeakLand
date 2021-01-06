@@ -4,33 +4,47 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="root" maxHeight="${screen.visualBounds.height}" maxWidth="${screen.visualBounds.width}" minHeight="${screen.visualBounds.height}" minWidth="${screen.visualBounds.width}" prefHeight="${screen.visualBounds.height}" prefWidth="${screen.visualBounds.width}" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="root" maxHeight="${screen.visualBounds.height}" maxWidth="${screen.visualBounds.width}" minHeight="${screen.visualBounds.height}" minWidth="${screen.visualBounds.width}" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox minWidth="1322.0" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #CCE3C9">
-         <children>
-            <ImageView fitHeight="212.0" fitWidth="494.0" pickOnBounds="true" preserveRatio="true">
+      <BorderPane style="-fx-background-color: #CCE3C9 #CCE3C9;" VBox.vgrow="NEVER">
+         <left>
+            <ImageView fitHeight="212.0" fitWidth="494.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                <image>
                   <Image url="@../images/montagna_2.png" />
                </image>
+               <BorderPane.margin>
+                  <Insets left="10.0" top="5.0" />
+               </BorderPane.margin>
             </ImageView>
-            <ImageView fitHeight="210.0" fitWidth="334.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/Logo.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="212.0" fitWidth="494.0" pickOnBounds="true" preserveRatio="true">
+         </left>
+         <right>
+            <ImageView fitHeight="212.0" fitWidth="494.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                <image>
                   <Image url="@../images/montagna.png" />
                </image>
+               <BorderPane.margin>
+                  <Insets right="10.0" top="5.0" />
+               </BorderPane.margin>
             </ImageView>
-         </children>
-      </HBox>
-      <HBox prefHeight="0.0" prefWidth="790.0">
+         </right>
+         <center>
+            <ImageView fitHeight="210.0" fitWidth="334.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <image>
+                  <Image url="@../images/Logo.png" />
+               </image>
+               <BorderPane.margin>
+                  <Insets top="5.0" />
+               </BorderPane.margin>
+            </ImageView>
+         </center>
+      </BorderPane>
+      <HBox prefWidth="790.0">
          <children>
 
             <Button contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: FBC9A8; -fx-border-color: F69155;" text="Home">
@@ -53,6 +67,10 @@
             </Button>
          </children>
       </HBox>
-      <BorderPane fx:id="mainChild" minHeight="535.0" minWidth="1000.0" prefHeight="200.0" prefWidth="200.0" />
+      <AnchorPane VBox.vgrow="ALWAYS">
+         <children>
+            <BorderPane fx:id="mainChild" minHeight="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
    </children>
 </VBox>

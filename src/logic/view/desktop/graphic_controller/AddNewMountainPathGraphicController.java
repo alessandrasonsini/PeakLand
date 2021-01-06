@@ -1,6 +1,5 @@
 package logic.view.desktop.graphic_controller;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.event.ActionEvent;
@@ -10,7 +9,6 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.BorderPane;
 import logic.controller.AddNewMountainPathController;
 import logic.controller.Controller;
 import logic.model.bean.MountainPathBean;
@@ -19,9 +17,6 @@ import logic.model.enums.GroundEnum;
 import logic.model.enums.LandscapeEnum;
 
 public class AddNewMountainPathGraphicController extends GraphicController {
-
-	@FXML
-	private BorderPane rootBorderPane;
 	
 	@FXML
 	private TextField txtName;

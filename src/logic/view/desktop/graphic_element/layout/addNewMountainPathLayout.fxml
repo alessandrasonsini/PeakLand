@@ -12,13 +12,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="rootBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="1322.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <AnchorPane minHeight="535.0" minWidth="1322.0" prefHeight="535.0" prefWidth="1322.0" BorderPane.alignment="CENTER">
+      <AnchorPane>
          <children>
-            <HBox prefHeight="535.0" prefWidth="1322.0">
+            <HBox prefHeight="535.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <AnchorPane prefHeight="535.0" prefWidth="322.0" style="-fx-background-color: FBC9A8;">
+                  <AnchorPane prefWidth="322.0" style="-fx-background-color: FBC9A8;">
                      <children>
                         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="12.0" layoutY="345.0" prefHeight="29.0" prefWidth="299.0" text="Help the community to grow!">
                            <font>
@@ -42,7 +42,7 @@
 	                             <Font name="Maiandra GD" size="12.0" />
 	                        </font></Label>
                      </children></AnchorPane>
-                  <ScrollPane hbarPolicy="NEVER" prefHeight="700.0">
+                  <ScrollPane hbarPolicy="NEVER" minViewportWidth="1000.0" HBox.hgrow="ALWAYS">
                      <content>
                         <AnchorPane prefHeight="700.0" prefWidth="1000.0">
                            <children>
