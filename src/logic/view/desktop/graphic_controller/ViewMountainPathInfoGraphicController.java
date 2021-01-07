@@ -3,14 +3,15 @@ package logic.view.desktop.graphic_controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import logic.controller.Controller;
 import logic.controller.ViewMountainPathInfoController;
 import logic.model.bean.MountainPathBean;
 
 public class ViewMountainPathInfoGraphicController extends GraphicController{
 	
-	/*@FXML
-	private Button btnBack;*/
+	@FXML
+	private ImageView btnBack;
 	
 	@FXML
 	private Label lbName;
@@ -77,9 +78,14 @@ public class ViewMountainPathInfoGraphicController extends GraphicController{
 	
 	private MountainPathBean selectedMountainPath;
 	
+	
 	public ViewMountainPathInfoGraphicController(Controller controller) {
 		super(controller);
+		
+		// Recupero delle informazioni relative al mountain path selezionato dall'utente
 		this.selectedMountainPath = getViewMountainPathInfoController().getMountainPathInfo();
+		
+		// GESTIRE CONTROLLO IN CASO DI BEAN == NULL
 		if (this.selectedMountainPath != null)
 			this.setupLayout();
 		else
@@ -91,16 +97,18 @@ public class ViewMountainPathInfoGraphicController extends GraphicController{
 		return "viewMountainPathInfoLayout";
 	}
 	
-	/*@FXML
+	// Permette di tornare al layout della ricerca
+	@FXML
 	private void onBackPressed(MouseEvent event) {
-		//this.switchPage(this.myController);
-		System.out.println("Cliccato il bottone back");
-	}*/
+		this.switchPage(this.myController);
+	}
 	
 	public ViewMountainPathInfoController getViewMountainPathInfoController() {
 		return (ViewMountainPathInfoController) myController;
 	}
 
+	// Fa il setup dell'FXML inserendo opportunamente le informazioni del path
+	// che ha ricevuto in input dal controllore applicativo
 	private void setupLayout() {
 		// NON SO SE INSERIRE QUI CONTROLLO SE BEAN E' NULL O SOPRA
 		lbName.setText(selectedMountainPath.convertToText(selectedMountainPath.getName()));

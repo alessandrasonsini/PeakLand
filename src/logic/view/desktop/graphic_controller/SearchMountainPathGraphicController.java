@@ -33,6 +33,7 @@ public class SearchMountainPathGraphicController extends GraphicController {
 	public SearchMountainPathGraphicController(Controller controller) {
 		super(controller);
 		this.beanList = FXCollections.observableArrayList();
+		setupLayout();
 	}
 	
 	@FXML
@@ -49,15 +50,28 @@ public class SearchMountainPathGraphicController extends GraphicController {
 		else {
 			// Richiamo metodo di ricerca del controller applicativo SearchController
 			this.beanList.addAll(getSearchMountainPathController().searchMountainPathByName(request));
+			fillListView(this.beanList);
 			
-			// Riempimento della list view con i risultati della ricerca
-			listViewMountainPath.setItems(this.beanList);
-			listViewMountainPath.setCellFactory(new Callback<ListView<SimpleMountainPathBean>, ListCell<SimpleMountainPathBean>>() {
-	            @Override
-	            public ListCell<SimpleMountainPathBean> call(ListView<SimpleMountainPathBean> listViewMountainPath) {
-	                return new SimpleMountainPathListCell();
-	            }
-	        });
+		}
+	}
+	
+	// Metodo che si occupa del riempimento della list view con i risultati della ricerca
+	private void fillListView(ObservableList<SimpleMountainPathBean> list) {
+		listViewMountainPath.setItems(list);
+		listViewMountainPath.setCellFactory(new Callback<ListView<SimpleMountainPathBean>, ListCell<SimpleMountainPathBean>>() {
+            @Override
+            public ListCell<SimpleMountainPathBean> call(ListView<SimpleMountainPathBean> listViewMountainPath) {
+                return new SimpleMountainPathListCell();
+            }
+        });
+	}
+	
+	// Fa il setup dell'FXML coi dati ricevuti dal controllore applicativo
+	// qualora l'utente avesse precedentemente effettuato una ricerca
+	private void setupLayout() {
+		if (getSearchMountainPathController().getSearchResultsList() != null) {
+			this.beanList.addAll(getSearchMountainPathController().getSearchResultsList());
+			fillListView(this.beanList);
 		}
 	}
 	
@@ -68,15 +82,10 @@ public class SearchMountainPathGraphicController extends GraphicController {
 
 	@FXML
 	public void onListViewItemClicked(MouseEvent event) {
-		//System.out.println("hai cliccato l'item " + listViewMountainPath.getSelectionModel().getSelectedItem().getName());
-		
-		// Switch alla pagina del view info
-		//this.executeAction("View info");
-		
 		// Passa la bean del MountainPath selezionato dalla list view al controller applicativo
 		this.getSearchMountainPathController().setSelectedItem(listViewMountainPath.getSelectionModel().getSelectedItem());
 		
-		// Switch alla pagina del view info
+		// Switch alla pagina per visualizzare le informazioni del path selezionato
 		try {
 			this.switchPage(this.myController);
 		}
