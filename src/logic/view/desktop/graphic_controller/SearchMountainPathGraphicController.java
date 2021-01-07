@@ -11,7 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
 import logic.controller.Controller;
-import logic.controller.SearchMountainPathController;
+import logic.controller.ViewMountainPathInfoController;
 import logic.model.bean.SimpleMountainPathBean;
 import logic.view.desktop.graphic_element.SimpleMountainPathListCell;
 
@@ -39,18 +39,18 @@ public class SearchMountainPathGraphicController extends GraphicController {
 	public void onSearchRequest(ActionEvent event) {
 		// Pulisco la lista dalle ricerche precedenti
 		this.beanList.clear();
-		// recupero richiesta di ricerca (testo di input dell'utente)
+		// Recupero richiesta di ricerca (testo di input dell'utente)
 		String request = txtSearch.getText();
 		
-		// controllo se stringa vuota
+		// Controllo se stringa vuota
 		if (request.isEmpty()) {
 			//comunico all'utente che non può inserire stringhe vuote
 		}
 		else {
-			// richiamo metodo di ricerca del controller applicativo SearchController
+			// Richiamo metodo di ricerca del controller applicativo SearchController
 			this.beanList.addAll(getSearchMountainPathController().searchMountainPathByName(request));
 			
-			// riempimento della list view con i risultati della ricerca
+			// Riempimento della list view con i risultati della ricerca
 			listViewMountainPath.setItems(this.beanList);
 			listViewMountainPath.setCellFactory(new Callback<ListView<SimpleMountainPathBean>, ListCell<SimpleMountainPathBean>>() {
 	            @Override
@@ -68,15 +68,25 @@ public class SearchMountainPathGraphicController extends GraphicController {
 
 	@FXML
 	public void onListViewItemClicked(MouseEvent event) {
-		// switch alla pagina di view mountain path info
-		System.out.println("hai cliccato l'item " + listViewMountainPath.getSelectionModel().getSelectedItem().getName());
+		//System.out.println("hai cliccato l'item " + listViewMountainPath.getSelectionModel().getSelectedItem().getName());
 		
 		// Switch alla pagina del view info
-		this.executeAction("View info");
+		//this.executeAction("View info");
+		
+		// Passa la bean del MountainPath selezionato dalla list view al controller applicativo
+		this.getSearchMountainPathController().setSelectedItem(listViewMountainPath.getSelectionModel().getSelectedItem());
+		
+		// Switch alla pagina del view info
+		try {
+			this.switchPage(this.myController);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
-	public SearchMountainPathController getSearchMountainPathController() {
-		return (SearchMountainPathController) myController;
+	public ViewMountainPathInfoController getSearchMountainPathController() {
+		return (ViewMountainPathInfoController) myController;
 	}
 	
 }

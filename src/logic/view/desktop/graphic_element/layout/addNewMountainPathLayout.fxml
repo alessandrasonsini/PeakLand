@@ -44,7 +44,7 @@
                      </children></AnchorPane>
                   <ScrollPane hbarPolicy="NEVER" minViewportWidth="1000.0" HBox.hgrow="ALWAYS">
                      <content>
-                        <AnchorPane prefHeight="700.0" prefWidth="1000.0">
+                        <AnchorPane prefWidth="1000.0" style="-fx-background-color: #FFFFFF;">
                            <children>
                               <Label layoutX="43.0" layoutY="52.0" text="Mountain path name" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="50.0">
 	                              <font>

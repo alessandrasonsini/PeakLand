@@ -11,7 +11,11 @@ public abstract class ItemBean {
 			return "Not available";
 		}
 		else {
-			return genericObject.toString();
+			return genericObject.toString()
+					.replace("[", "")
+					.replace("]", "")
+					.replace("true", "yes")
+					.replace("false", "no");
 		}
 	}
 

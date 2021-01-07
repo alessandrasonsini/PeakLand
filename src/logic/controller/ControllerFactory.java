@@ -8,14 +8,18 @@ public class ControllerFactory {
 		
 		switch(type) {
 			case "btnSearch": 
-				newController = new SearchMountainPathController();
+				//newController = new SearchMountainPathController();
+				newController = new ViewMountainPathInfoController();
 				break;
 			case "btnAddPath": 
 				newController = new AddNewMountainPathController();
 				break;
-			case "View info":
-				newController = new ViewMountainPathInfoController();
+			case "search":
+				newController = new SearchMountainPathController();
 				break;
+			//case "View info":
+				//newController = new ViewMountainPathInfoController();
+				//break;
 			default: 
 				throw new Exception("Invalid type : " + type);
 		}

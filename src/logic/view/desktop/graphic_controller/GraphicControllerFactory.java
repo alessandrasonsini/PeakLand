@@ -14,7 +14,7 @@ public class GraphicControllerFactory {
 				newGraphicController =  new AddNewMountainPathGraphicController(controller);
 				break;	
 			case "View info": 
-				newGraphicController =  new ViewMountainPathInfoGraphicController(controller);
+				newGraphicController =  new ViewMountainPathInfoGraphicController(controller);			
 				break;		
 			default: newGraphicController = null;
 		}

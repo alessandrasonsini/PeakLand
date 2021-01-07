@@ -1,21 +1,18 @@
 package logic.controller;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import logic.model.MountainPath;
-import logic.model.bean.SimpleMountainPathBean;
-import logic.model.bean.factory.SimpleMountainPathBeanFactory;
 
 public class SearchMountainPathController extends Controller {
 	
 	// Metodo che esegue la ricerca dei mountain path dato un nome parziale
-	public List<SimpleMountainPathBean> searchMountainPathByName(String name) {
+	public List<MountainPath> searchMountainPathByName(String name) {
 	
 		// Chiama il metodo statico della entity che si occupa della ricerca
 		List<MountainPath> searchResults = MountainPath.searchMountainPathByName(name);
 		
-		List<SimpleMountainPathBean> beanResults = new ArrayList<>();
+		
+		/*List<SimpleMountainPathBean> beanResults = new ArrayList<>();
 		
 		SimpleMountainPathBeanFactory beanFactory = new SimpleMountainPathBeanFactory();
 		
@@ -24,13 +21,15 @@ public class SearchMountainPathController extends Controller {
 				beanResults.add(beanFactory.getSimpleMountainPath(path));
 		}
 
-		return beanResults;
+		return beanResults;*/
+		
+		return searchResults;
 	}
 
 
 	@Override
 	public void setup() {
-		setNextStepId("Search path");
+		//setNextStepId("Search path");
 	}
 
 	

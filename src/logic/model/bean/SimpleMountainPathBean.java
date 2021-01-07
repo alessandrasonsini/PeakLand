@@ -42,9 +42,6 @@ public class SimpleMountainPathBean extends ItemBean {
 		this.city = city;
 	}
 
-	
-	
-
 	public String getName() {
 		return name;
 	}

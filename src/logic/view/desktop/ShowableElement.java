@@ -41,6 +41,7 @@ public abstract class ShowableElement {
 			
 			// Handle the exception
 			System.out.println("load exception");
+			E.printStackTrace();
 		}
 		
 	}
