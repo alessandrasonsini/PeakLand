@@ -50,7 +50,6 @@ public class MountainPath {
 		return altitude;
 	}
 
-
 	public void setAltitude(Integer altitude) {
 		this.altitude = altitude;
 	}
@@ -62,30 +61,6 @@ public class MountainPath {
 	public void setLocation(Location loc) {
 		this.location = loc;
 	}
-	
-	public void setRegion(String region) {
-		this.location.setRegion(region);
-	}
-	
-	public void setProvince(String province) {
-		this.location.setProvince(province);
-	}
-	
-	public void setCity(String city) {
-		this.location.setCity(city);
-	}
-	
-//	public String getRegion() {
-//		return this.location.getRegion();
-//	}
-//	
-//	public String getProvince() {
-//		return this.location.getProvince();
-//	}
-//	
-//	public String getCity() {
-//		return this.location.getCity();
-//	}
 
 	public Integer getLenght() {
 		return lenght;
@@ -171,14 +146,6 @@ public class MountainPath {
 		this.travelTime.setMinutes(minutes);
 	}
 	
-//	public Integer getHours() {
-//		return this.travelTime.getHours();
-//	}
-//	
-//	public Integer getMinutes() {
-//		return this.travelTime.getMinutes();
-//	}
-
 	public Integer getNumberOfVotes() {
 		return numberOfVotes;
 	}

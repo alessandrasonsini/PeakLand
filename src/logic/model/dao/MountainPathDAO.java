@@ -12,13 +12,11 @@ import logic.model.MountainPath;
 
 public class MountainPathDAO extends Dao {
 	
-	private DatabaseConnection dbConnection;
 	private DatabaseReference dbReferenceMountainPath;
 	private List<MountainPath> mountainPathResult;
 	
 	public MountainPathDAO() {
-		this.dbConnection = DatabaseConnection.getInstance();
-		this.dbReferenceMountainPath = this.dbConnection.getDatabaseReference().child("Mountain Path");
+		this.dbReferenceMountainPath = getSpecificReference();
 	}
 	
 	public void saveNewMountainPathOnDB(MountainPath mountainPath) {
@@ -28,6 +26,8 @@ public class MountainPathDAO extends Dao {
 		
 		// Aggiunta del path al nodo MountainPath del DB
 		this.dbReferenceMountainPath.updateChildrenAsync(paths);
+		
+
 	}
 	
 	public List<MountainPath> searchMountainPathByName(String pathName) {
@@ -49,6 +49,11 @@ public class MountainPathDAO extends Dao {
         else {
         	System.out.println("no matches for path with name");
         }
+	}
+
+	@Override
+	protected String getChild() {
+		return "Mountain Path";
 	}
 	
 	

@@ -1,15 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.stage.Screen?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.view.graphic_controller.LoginGraphicController"
-		prefWidth="${screen.visualBounds.width}" 
-        prefHeight="${screen.visualBounds.height}" >
-    <fx:define>
-        <Screen fx:factory="getPrimary" fx:id="screen"/>
-    </fx:define>
+<BorderPane fx:id="rootBorderPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+	<center>
+      <HBox prefWidth="1322.0" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane minWidth="-Infinity" prefHeight="535.0" prefWidth="322.0" style="-fx-background-color: FBC9A8;">
+               <children>
+                  <Label layoutX="77.0" layoutY="147.0" prefHeight="113.0" prefWidth="168.0" text="Login or sign in to access this feature" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="77.0" AnchorPane.rightAnchor="77.0">
+                     <font>
+                        <Font name="Maiandra GD" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="33.0" layoutY="340.0" prefHeight="88.0" prefWidth="257.0" text="Become part of hour community!" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="Maiandra GD" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="1000.0">
+               <children>
+                  <TextField fx:id="txtUsername" layoutX="400.0" layoutY="50.0" prefWidth="200.0" promptText="Username" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0" />
+                  <TextField fx:id="txtPassword" layoutX="400.0" layoutY="100.0" prefWidth="200.0" promptText="Password" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0" />
+                  <Button fx:id="btnLogin" layoutX="400.0" layoutY="201.0" mnemonicParsing="false" onAction="#onActionRequest" style="-fx-background-color: FBC9A8;" text="Login" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="532.0">
+                     <font>
+                        <Font name="Maiandra GD" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="400.0" layoutY="318.0" mnemonicParsing="false" prefWidth="200.0" style="-fx-background-color: DB4A39;" text="Login with Google" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0">
+                     <font>
+                        <Font name="Maiandra GD" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="400.0" layoutY="382.0" mnemonicParsing="false" style="-fx-background-color: #4169E1;" text="Login with Facebook" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0">
+                     <font>
+                        <Font name="Maiandra GD" size="18.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="492.0" layoutY="273.0" text="or" AnchorPane.leftAnchor="492.0" AnchorPane.rightAnchor="490.0">
+                     <font>
+                        <Font name="Maiandra GD" size="18.0" />
+                     </font>
+                  </Label>
+                  <Line endX="-5.0" endY="33.0" layoutX="505.0" layoutY="227.0" startX="-5.0" startY="-75.0" AnchorPane.leftAnchor="499.5" AnchorPane.rightAnchor="499.5" />
+                  <TextField fx:id="txtConfirmPassword" layoutX="524.0" layoutY="164.0" minWidth="-Infinity" prefWidth="200.0" promptText="Confirm your password" />
+                  <Button fx:id="btnSignIn" layoutX="524.0" layoutY="201.0" mnemonicParsing="false" onAction="#onActionRequest" style="-fx-background-color: FBC9A8;" text="Sign in">
+                     <font>
+                        <Font name="Maiandra GD" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+   </center>
     
 	<!-- TODO Add Nodes -->
-</AnchorPane>
-
+</BorderPane>

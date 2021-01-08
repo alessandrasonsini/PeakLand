@@ -17,6 +17,9 @@ public class ControllerFactory {
 			case "search":
 				newController = new SearchMountainPathController();
 				break;
+			case "login":
+				newController = new LoginController();
+				break;
 			//case "View info":
 				//newController = new ViewMountainPathInfoController();
 				//break;

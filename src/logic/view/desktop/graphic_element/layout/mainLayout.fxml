@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="root" maxHeight="${screen.visualBounds.height}" maxWidth="${screen.visualBounds.width}" minHeight="${screen.visualBounds.height}" minWidth="${screen.visualBounds.width}" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="root" maxHeight="${screen.visualBounds.height}" maxWidth="${screen.visualBounds.width}" minHeight="${screen.visualBounds.height}" minWidth="${screen.visualBounds.width}" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane style="-fx-background-color: #CCE3C9 #CCE3C9;" VBox.vgrow="NEVER">
          <left>
@@ -44,7 +44,7 @@
             </ImageView>
          </center>
       </BorderPane>
-      <HBox prefWidth="790.0">
+      <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="47.0" prefWidth="1322.0" style="-fx-background-color: FBC9A8;">
          <children>
 
             <Button contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: FBC9A8; -fx-border-color: F69155;" text="Home">
@@ -65,9 +65,21 @@
                   <Font name="Maiandra GD" size="24.0" />
                </font>
             </Button>
+            <Button fx:id="btnProfile" minHeight="-Infinity" mnemonicParsing="false" onAction="#buttonHandler" prefHeight="45.0" prefWidth="52.0" style="-fx-background-color: FBC9A8;">
+               <HBox.margin>
+                  <Insets left="800.0" />
+               </HBox.margin>
+               <graphic>
+                  <ImageView fitHeight="38.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icons8-male-user-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </HBox>
-      <AnchorPane VBox.vgrow="ALWAYS">
+      <AnchorPane fx:id="imgProfile" onMouseClicked="#buttonHandler" VBox.vgrow="ALWAYS">
          <children>
             <BorderPane fx:id="mainChild" minHeight="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>

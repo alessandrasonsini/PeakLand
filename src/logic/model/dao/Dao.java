@@ -2,11 +2,22 @@ package logic.model.dao;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 
 public abstract class Dao implements OnGetDataListener {
+	
+	private DatabaseConnection dbConnection;
+	
+	protected Dao() {
+		this.dbConnection = DatabaseConnection.getInstance();
+	}
+	
+	protected DatabaseReference getSpecificReference() {
+		return this.dbConnection.getDatabaseReference().child(this.getChild());
+	}
 	
 	final static Object lockObject = new Object(); 
 	
@@ -18,7 +29,7 @@ public abstract class Dao implements OnGetDataListener {
 		query.addListenerForSingleValueEvent(new ValueEventListener() {
 	        @Override
 	        public void onDataChange(DataSnapshot dataSnapshot) {
-	            onSuccess(dataSnapshot);
+	        	onSuccess(dataSnapshot);
 	            synchronized (lockObject) {
 	            	lockObject.notifyAll();
 				}
@@ -42,5 +53,7 @@ public abstract class Dao implements OnGetDataListener {
 	}
 	
 	@Override
-	public abstract void onSuccess(DataSnapshot snapshot);
+	public abstract void onSuccess(DataSnapshot dataSnapshot);
+	
+	protected abstract String getChild(); 
 }

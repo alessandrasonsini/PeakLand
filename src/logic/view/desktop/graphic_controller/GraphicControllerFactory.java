@@ -16,6 +16,9 @@ public class GraphicControllerFactory {
 			case "View info": 
 				newGraphicController =  new ViewMountainPathInfoGraphicController(controller);			
 				break;		
+			case "Login":
+				newGraphicController = new LoginGraphicController(controller);
+				break;
 			default: newGraphicController = null;
 		}
 		return newGraphicController;

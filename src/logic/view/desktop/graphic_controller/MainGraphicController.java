@@ -14,6 +14,9 @@ public class MainGraphicController extends GraphicController {
 
 	@FXML
 	private Button btnAddPath;
+	
+	@FXML
+	private Button btnProfile;
 
 	@FXML
 	private BorderPane mainChild;
@@ -39,7 +42,7 @@ public class MainGraphicController extends GraphicController {
 	private void buttonHandler(ActionEvent event) {
 		Button button = (Button) event.getSource();
 		this.setPressed(button);
-		this.executeAction(button.getId());
+		this.executeAction(getMainController().onActionRequired(button.getId()));
 	}
 
 	@Override
@@ -58,5 +61,13 @@ public class MainGraphicController extends GraphicController {
 			prevPressed.setStyle(defaultStyle);
 		}
 		prevPressed = currPressed;
+	}
+	
+	public String getLastPressed() {
+		return prevPressed.getId();
+	}
+	
+	private MainController getMainController() {
+		return (MainController)myController;
 	}
 }
