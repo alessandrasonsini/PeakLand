@@ -9,10 +9,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import logic.controller.Controller;
 import logic.controller.LoginController;
-import logic.controller.MainController;
 import logic.model.bean.CredentialBean;
 import logic.model.exception.EmptyMandatoryFieldsException;
 import logic.model.exception.InvalidCredentialException;
@@ -31,10 +31,10 @@ public class LoginGraphicController extends GraphicController {
 	TextField txtUsername;
 	
 	@FXML
-	TextField txtPassword;
+	PasswordField txtPassword;
 	
 	@FXML
-	TextField txtConfirmPassword;
+	PasswordField txtConfirmPassword;
 	
 	private ArrayList<TextField> mandatoryFields;
 	
@@ -57,7 +57,7 @@ public class LoginGraphicController extends GraphicController {
 				credential.setCredential(txtUsername.getText(),txtPassword.getText(),txtConfirmPassword.getText());
 				getLoginController().signInAction(credential);
 			}
-			executeAction(MainGraphicController.getInstance().getLastPressed());
+			MainGraphicController.getInstance().setPageAfterLogin();
 		}catch(EmptyMandatoryFieldsException e) {
 			this.displayEmptyFieldError();
 		}catch (InvalidUsernameException e) {

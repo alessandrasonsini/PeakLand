@@ -55,7 +55,7 @@
                   <Insets top="1.0" />
                </opaqueInsets>
             </Button>
-            <Button fx:id="btnSearch" contentDisplay="CENTER" minHeight="45.0" minWidth="160.0" mnemonicParsing="false" onAction="#buttonHandler" style="-fx-background-color: FBC9A8; -fx-border-color: F69155;" text="Search path" wrapText="true">
+            <Button fx:id="btnViewInfo" contentDisplay="CENTER" minHeight="45.0" minWidth="160.0" mnemonicParsing="false" onAction="#buttonHandler" style="-fx-background-color: FBC9A8; -fx-border-color: F69155;" text="View path info" wrapText="true">
                <font>
                   <Font name="Maiandra GD" size="24.0" />
                </font>

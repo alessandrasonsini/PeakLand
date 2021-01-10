@@ -30,6 +30,10 @@ public class MountainPath {
 		this.travelTime = new Time();
 	}
 	
+	public static List<MountainPath> searchMountainPathByPartialName(String name) {
+		return mountainPathDAO.searchMountainPathByPartialName(name);
+	}
+	
 	public static List<MountainPath> searchMountainPathByName(String name) {
 		return mountainPathDAO.searchMountainPathByName(name);
 	}
@@ -70,7 +74,6 @@ public class MountainPath {
 	public void setLenght(Integer lenght) {
 		this.lenght = lenght;
 	}
-
 
 	public DifficultyLevelEnum getLevel() {
 		return level;

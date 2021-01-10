@@ -17,6 +17,7 @@ public class MountainPathDAO extends Dao {
 	
 	public MountainPathDAO() {
 		this.dbReferenceMountainPath = getSpecificReference();
+		this.mountainPathResult = new ArrayList<>();
 	}
 	
 	public void saveNewMountainPathOnDB(MountainPath mountainPath) {
@@ -30,8 +31,15 @@ public class MountainPathDAO extends Dao {
 
 	}
 	
-	public List<MountainPath> searchMountainPathByName(String pathName) {
-		this.mountainPathResult = new ArrayList<>();
+	public List<MountainPath> searchMountainPathByName(String name) {
+		mountainPathResult.clear();
+		Query query = dbReferenceMountainPath.orderByChild("name").equalTo(name);
+		readData(query);
+		return mountainPathResult;
+	}
+	
+	public List<MountainPath> searchMountainPathByPartialName(String pathName) {
+		mountainPathResult.clear();
 		//Creo la query al database
 		Query query = dbReferenceMountainPath.orderByChild("name").startAt(pathName).endAt(pathName+"\uf8ff");
 		readData(query);

@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class MainController extends Controller {
 	
-	private static final ArrayList<String> noLoginAction = new ArrayList<>(Arrays.asList("btnSearch"));
+	private static final ArrayList<String> noLoginAction = new ArrayList<>(Arrays.asList("btnViewInfo"));
 	
 	public MainController(){
 		super();
@@ -14,7 +14,7 @@ public class MainController extends Controller {
 	public String onActionRequired(String actionId) {
 		String actionToExecute;
 		// Controlla se è un'azione accessibile solo se loggati e se l'utente è loggato
-		if((!noLoginAction.contains(actionId)) & (!LoginController.isLogged())) {
+		if((!noLoginAction.contains(actionId)) && (!LoginController.isLogged())) {
 			actionToExecute = "login";
 		}
 		else {

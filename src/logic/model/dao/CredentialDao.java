@@ -7,7 +7,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 
 import logic.model.Credential;
-import logic.model.MountainPath;
 
 public class CredentialDao extends Dao{
 	

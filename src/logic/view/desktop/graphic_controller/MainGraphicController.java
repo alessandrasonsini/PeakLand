@@ -26,7 +26,7 @@ public class MainGraphicController extends GraphicController {
 	
 	String defaultStyle = "-fx-background-color: FBC9A8; -fx-border-color: F69155;";
 
-	private static MainGraphicController instance = null;;
+	private static MainGraphicController instance = null;
 
 	private MainGraphicController(Controller controller) {
 		super(controller);
@@ -63,8 +63,8 @@ public class MainGraphicController extends GraphicController {
 		prevPressed = currPressed;
 	}
 	
-	public String getLastPressed() {
-		return prevPressed.getId();
+	public void setPageAfterLogin() {
+		this.executeAction(prevPressed.getId());
 	}
 	
 	private MainController getMainController() {

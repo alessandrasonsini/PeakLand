@@ -6,27 +6,15 @@ import logic.model.Time;
 import logic.model.bean.MountainPathBean;
 
 public class AddNewMountainPathController extends Controller {
-
-	//MountainPathBean newPathBean;
 	
 	public AddNewMountainPathController() {
 		super();
-		//newPathBean = new MountainPathBean();
 	}
 	
 	// Controlla se il nome inserito è già esistente sul db
 	public boolean checkName(String name) {
-		// Chiama il metodo relativo del controller di search
-		if(new ControllerFactory().getSearchMountainPathController().searchMountainPathByName(name) != null) {
-			// Gestisci l'errore
-			return false;
-		}
-		else {
-			// Vai avanti con l'inserimento
-			return true;
-			
-		}
-		
+		// Chiama il metodo relativo del controller di search per controllare se il nome è già esistente
+		return (new ControllerFactory().getSearchMountainPathController().searchMountainPathByName(name) == null);
 	}
 	
 	public void saveNewMountainPath(MountainPathBean newPathBean) {
@@ -52,7 +40,6 @@ public class AddNewMountainPathController extends Controller {
 
 	@Override
 	public void setup() {
-		// TODO Auto-generated method stub
 		setNextStepId("Add path");
 	}
 

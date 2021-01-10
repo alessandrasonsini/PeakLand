@@ -3,8 +3,6 @@ package logic.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.sound.midi.VoiceStatus;
-
 import logic.model.dao.LoggedUserDao;
 import logic.model.enums.UserLevel;
 
@@ -23,7 +21,7 @@ public class LoggedUser {
 	private static LoggedUserDao loggedUserDao = new LoggedUserDao();
 	
 	public LoggedUser() {
-		this.level = UserLevel.SofaMan;
+		this.level = UserLevel.SOFAMAN;
 		this.favouritesMountainPath = new ArrayList<>();
 	}
 	

@@ -46,7 +46,7 @@ public class ViewMountainPathInfoController extends Controller {
 		this.searchResults.clear();
 		this.beanResults.clear();
 		
-		this.searchResults = this.searchController.searchMountainPathByName(name);
+		this.searchResults = this.searchController.searchMountainPathByPartialName(name);
 		
 		SimpleMountainPathBeanFactory beanFactory = new SimpleMountainPathBeanFactory();
 		

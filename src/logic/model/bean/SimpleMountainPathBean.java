@@ -15,9 +15,6 @@ public class SimpleMountainPathBean extends ItemBean {
 	private Integer numberOfVotes;
 	//private image
 
-	public SimpleMountainPathBean() {
-	}
-	
 	public String getRegion() {
 		return region;
 	}

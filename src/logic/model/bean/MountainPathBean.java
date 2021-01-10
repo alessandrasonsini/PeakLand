@@ -26,9 +26,6 @@ public class MountainPathBean extends SimpleMountainPathBean {
 	public void setLenght(Integer lenght) {
 		this.lenght = lenght;
 	}
-
-	public MountainPathBean() {
-	}
 	
 	public Integer getAltitude() {
 		return altitude;

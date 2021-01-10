@@ -20,7 +20,7 @@ public class CredentialBean {
 	}
 	
 	public void setCredential(String username, String password) throws EmptyMandatoryFieldsException{
-		if(username.isEmpty() | password.isEmpty())
+		if(username.isEmpty() || password.isEmpty())
 			throw new EmptyMandatoryFieldsException();
 		else {
 			setPassword(password);

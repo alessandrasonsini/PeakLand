@@ -1,8 +1,7 @@
 package logic.model;
 
-import java.io.Serializable;
 
-public class Time implements Serializable {
+public class Time{
 	
 	Integer hours;
 	Integer minutes;

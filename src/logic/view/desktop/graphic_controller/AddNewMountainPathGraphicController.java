@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.AnchorPane;
 import logic.controller.AddNewMountainPathController;
 import logic.controller.Controller;
 import logic.model.bean.MountainPathBean;
@@ -108,13 +111,35 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 	@FXML
 	private TextField txtProvince;
 	
+	@FXML
+	private AnchorPane panePathInfo;
+	
 	public AddNewMountainPathGraphicController(Controller controller) {
 		super(controller);
+		panePathInfo.setDisable(true);
+	}
+
+	@FXML 
+	public void onNameEntered(ActionEvent event) {
+		// Chiama il metodo del controller applicativo
+		if(getAddNewMountainPathController().checkName(txtName.getText())){
+			// Permette l'inserimento delle altre info
+			panePathInfo.setDisable(false);
+		}
+		else {
+			// Disabilita l'inserimento di altre info
+			panePathInfo.setDisable(true);
+			// Mostra il messaggio di errore
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setHeaderText("Add new path error");
+			alert.setContentText("Mountain path with entered name already exists");
+
+			alert.showAndWait();
+		}
 	}
 	
 	@FXML
 	public void onSavePath(ActionEvent event) {
-		
 		// Inizializza la bean con tutti i campi inseriti
 		MountainPathBean newPathBean = new MountainPathBean();
 		newPathBean.setName(txtName.getText());
