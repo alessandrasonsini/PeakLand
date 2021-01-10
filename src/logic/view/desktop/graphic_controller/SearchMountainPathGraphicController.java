@@ -16,7 +16,6 @@ import javafx.util.Callback;
 import logic.controller.Controller;
 import logic.controller.ViewMountainPathInfoController;
 import logic.model.bean.SimpleMountainPathBean;
-import logic.model.dao.MountainPathDao;
 import logic.view.desktop.graphic_element.SimpleMountainPathListCell;
 
 public class SearchMountainPathGraphicController extends GraphicController {

@@ -1,14 +1,11 @@
 package logic.view.desktop;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
-import logic.model.dao.MountainPathDao;
 import logic.view.desktop.graphic_controller.GraphicController;
 
 public abstract class ShowableElement {
@@ -39,10 +36,7 @@ public abstract class ShowableElement {
 			this.loader.setLocation(fileUrl);
 			rootPane = this.loader.load();
 			
-		} catch (FileNotFoundException E) {
-			// Handle the exception
-			LOGGER.log(Level.SEVERE, E.toString(), E);
-		} catch (IOException E) {
+		} catch (Exception E) {
 			// Handle the exception
 			LOGGER.log(Level.SEVERE, E.toString(), E);
 		}

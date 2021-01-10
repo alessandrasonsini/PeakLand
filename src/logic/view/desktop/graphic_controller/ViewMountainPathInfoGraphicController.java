@@ -10,7 +10,6 @@ import javafx.scene.input.MouseEvent;
 import logic.controller.Controller;
 import logic.controller.ViewMountainPathInfoController;
 import logic.model.bean.MountainPathBean;
-import logic.model.dao.MountainPathDao;
 
 public class ViewMountainPathInfoGraphicController extends GraphicController{
 	
