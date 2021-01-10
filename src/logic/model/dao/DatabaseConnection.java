@@ -2,6 +2,9 @@ package logic.model.dao;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
@@ -13,11 +16,12 @@ public class DatabaseConnection {
 	 * Classe singleton contenente la connessione al realtime database di firebase
 	 */
 	
-	//String databaseId = "peakland-54c42-default-rtdb";
 	FirebaseDatabase firebaseDb;
 	DatabaseReference databaseReference;
 	
 	private static DatabaseConnection instance = null;
+	
+	private static final Logger LOGGER = Logger.getLogger(DatabaseConnection.class.getName());
 	
 	private DatabaseConnection() {
 		initializeConnection();
@@ -43,14 +47,8 @@ public class DatabaseConnection {
 				    .setDatabaseUrl("https://peakland-54c42-default-rtdb.europe-west1.firebasedatabase.app/")
 				    .build();
 			FirebaseApp.initializeApp(options);
-			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("Errore file");
 		}catch (Exception e) {
-			// TODO: handle exception
-			System.out.println("Errore generico");
+			LOGGER.log(Level.SEVERE,e.toString(),e);
 		}
 	}
 	

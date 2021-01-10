@@ -1,10 +1,8 @@
 package logic.controller;
 
 import logic.model.Credential;
-import logic.model.CurrentLoggedUser;
 import logic.model.LoggedUser;
 import logic.model.bean.CredentialBean;
-import logic.model.exception.CurrentUserNotFindException;
 import logic.model.exception.InvalidCredentialException;
 import logic.model.exception.InvalidUsernameException;
 import logic.model.exception.WrongInputException;
@@ -14,14 +12,11 @@ public class LoginController extends Controller {
 	// Ritorna vero se esiste un'istanza dello user loggato corrente
 	public static boolean isLogged() {
 		boolean check;
-		try {
-			CurrentLoggedUser.getInstance();
+		if(LoggedUser.getCurrentLoggedUser() != null) {
+			// C'è un'istanza di utente attualmente loggato
 			check = true;
 		}
-		catch (CurrentUserNotFindException e) {
-			// l'utente non è loggato
-			check = false;
-		}
+		else check = false;
 		return check;
 	} 
 		
@@ -36,11 +31,8 @@ public class LoginController extends Controller {
 			// Recupera le informazioni dell'utente che si è loggato
 			LoggedUser currLoggedUser = LoggedUser.getLoggedUserInfo(credential.getUsername());
 			
-			try {
-				// Setta l'istanza dell'utente corrente
-				CurrentLoggedUser.getInstance(currLoggedUser);
-				
-			}catch(CurrentUserNotFindException e) {}
+			// Setta l'istanza dell'utente corrente
+			LoggedUser.setCurrentLoggedUser(currLoggedUser);
 
 		}
 	}
@@ -57,10 +49,8 @@ public class LoginController extends Controller {
 				// Setta l'istanza del nuovo utente creato
 				LoggedUser currLoggedUser = new LoggedUser(credential.getUsername());
 				currLoggedUser.saveLoggedUserOnDb();
-				try {
-					CurrentLoggedUser.getInstance(currLoggedUser);
-					
-				}catch(CurrentUserNotFindException e) {}
+				
+				LoggedUser.setCurrentLoggedUser(currLoggedUser);
 			}
 			else {
 				// lo username inserito esiste già

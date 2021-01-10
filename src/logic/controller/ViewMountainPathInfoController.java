@@ -2,6 +2,8 @@ package logic.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import logic.model.MountainPath;
 import logic.model.bean.MountainPathBean;
@@ -10,6 +12,8 @@ import logic.model.bean.factory.MountainPathBeanFactory;
 import logic.model.bean.factory.SimpleMountainPathBeanFactory;
 
 public class ViewMountainPathInfoController extends Controller {
+	
+	private static final Logger LOGGER = Logger.getLogger(ViewMountainPathInfoController.class.getName() );
 
 	SearchMountainPathController searchController;
 	ControllerFactory controllerFactory;
@@ -29,7 +33,7 @@ public class ViewMountainPathInfoController extends Controller {
 		try {
 			this.searchController = (SearchMountainPathController) controllerFactory.getController("search");
 		} catch (Exception e) {
-			System.out.println("Impossibile istanziare controllore");
+			LOGGER.log(Level.SEVERE, e.toString(), e);
 			// Gestione pagina di errore
 			// capire come metterlo perché c'è mismatch dei tipi di controller
 			//this.searchController = new ErrorController();

@@ -1,5 +1,8 @@
 package logic.view.desktop.graphic_controller;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,10 +16,13 @@ import javafx.util.Callback;
 import logic.controller.Controller;
 import logic.controller.ViewMountainPathInfoController;
 import logic.model.bean.SimpleMountainPathBean;
+import logic.model.dao.MountainPathDao;
 import logic.view.desktop.graphic_element.SimpleMountainPathListCell;
 
 public class SearchMountainPathGraphicController extends GraphicController {
-		
+	
+	private static final Logger LOGGER = Logger.getLogger(MountainPathDao.class.getName());
+	
 	@FXML
 	private TextField txtSearch;
 	
@@ -90,7 +96,8 @@ public class SearchMountainPathGraphicController extends GraphicController {
 			this.switchPage(this.myController);
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, e.toString(),e);
+			
 		}
 	}
 	

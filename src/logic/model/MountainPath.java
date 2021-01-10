@@ -2,7 +2,7 @@ package logic.model;
 
 import java.util.List;
 
-import logic.model.dao.MountainPathDAO;
+import logic.model.dao.MountainPathDao;
 import logic.model.enums.DifficultyLevelEnum;
 import logic.model.enums.GroundEnum;
 import logic.model.enums.LandscapeEnum;
@@ -23,7 +23,7 @@ public class MountainPath {
 	private Integer numberOfVotes;
 	private Integer vote;
 	
-	private static MountainPathDAO mountainPathDAO = new MountainPathDAO();
+	private static MountainPathDao mountainPathDAO = new MountainPathDao();
 	
 	public MountainPath() {
 		this.location = new Location();

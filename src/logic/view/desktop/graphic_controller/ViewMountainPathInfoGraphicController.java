@@ -1,5 +1,8 @@
 package logic.view.desktop.graphic_controller;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -7,8 +10,11 @@ import javafx.scene.input.MouseEvent;
 import logic.controller.Controller;
 import logic.controller.ViewMountainPathInfoController;
 import logic.model.bean.MountainPathBean;
+import logic.model.dao.MountainPathDao;
 
 public class ViewMountainPathInfoGraphicController extends GraphicController{
+	
+	private static final Logger LOGGER = Logger.getLogger(MountainPathDao.class.getName());
 	
 	@FXML
 	private ImageView btnBack;
@@ -89,7 +95,7 @@ public class ViewMountainPathInfoGraphicController extends GraphicController{
 		if (this.selectedMountainPath != null)
 			this.setupLayout();
 		else
-			System.out.println("Nessun parametro passato");
+			LOGGER.log(Level.FINE, "No parameters inserted");
 	}
 
 	@Override

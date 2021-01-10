@@ -9,9 +9,7 @@ public class SearchMountainPathController extends Controller {
 	public List<MountainPath> searchMountainPathByPartialName(String name) {
 	
 		// Chiama il metodo statico della entity che si occupa della ricerca
-		List<MountainPath> searchResults = MountainPath.searchMountainPathByPartialName(name);
-		
-		return searchResults;
+		return MountainPath.searchMountainPathByPartialName(name);
 	}
 	
 	public MountainPath searchMountainPathByName(String name) {

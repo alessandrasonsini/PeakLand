@@ -2,6 +2,8 @@ package logic.model.dao;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
@@ -13,6 +15,8 @@ public class LoggedUserDao extends Dao{
 	
 	private DatabaseReference dbReferenceLoggedUser;
 	private LoggedUser result;
+	
+	private static final Logger LOGGER = Logger.getLogger(LoggedUserDao.class.getName());
 	
 	public LoggedUserDao() {
 		super();
@@ -33,7 +37,9 @@ public class LoggedUserDao extends Dao{
 		// Aggiunta dello user al nodo Logged User del DB
 		this.dbReferenceLoggedUser.updateChildrenAsync(users);
 	}
-
+	
+	//PER FARE LE COSE FATTE BENE COSTRUIRE LISTA DI RISULTATI PER IL RITORNO DELLA QUERY
+	
 	@Override
 	public void onSuccess(DataSnapshot dataSnapshot) {
 		if (dataSnapshot.exists()) {
@@ -42,7 +48,7 @@ public class LoggedUserDao extends Dao{
             }
         }
         else {
-        	System.out.println("no matches for logged user");
+        	LOGGER.log(Level.FINE, "No matches founded");
         }
 		
 	}

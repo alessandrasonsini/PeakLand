@@ -3,11 +3,17 @@ package logic.view.desktop;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
+import logic.model.dao.MountainPathDao;
 import logic.view.desktop.graphic_controller.GraphicController;
 
 public abstract class ShowableElement {
+	
+	private static final Logger LOGGER = Logger.getLogger(MountainPathDao.class.getName());
 	
 	protected FXMLLoader loader;
 	
@@ -35,13 +41,10 @@ public abstract class ShowableElement {
 			
 		} catch (FileNotFoundException E) {
 			// Handle the exception
-			System.out.println("No page with name " + getFXMLFileName());
-			
+			LOGGER.log(Level.SEVERE, E.toString(), E);
 		} catch (IOException E) {
-			
 			// Handle the exception
-			System.out.println("load exception");
-			E.printStackTrace();
+			LOGGER.log(Level.SEVERE, E.toString(), E);
 		}
 		
 	}

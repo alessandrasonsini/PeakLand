@@ -20,6 +20,9 @@ public class LoggedUser {
 	
 	private static LoggedUserDao loggedUserDao = new LoggedUserDao();
 	
+	// Istanza dell'utente correntemente loggato
+	private static LoggedUser currentLoggedUser;
+	
 	public LoggedUser() {
 		this.level = UserLevel.SOFAMAN;
 		this.favouritesMountainPath = new ArrayList<>();
@@ -28,6 +31,14 @@ public class LoggedUser {
 	public LoggedUser(String username) {
 		this();
 		this.username = username;
+	}
+	
+	public static LoggedUser getCurrentLoggedUser() {
+		return currentLoggedUser;
+	}
+	
+	public static void setCurrentLoggedUser(LoggedUser user) {
+		currentLoggedUser = user;
 	}
 	
 	public static LoggedUser getLoggedUserInfo(String id) {

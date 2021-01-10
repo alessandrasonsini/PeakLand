@@ -1,5 +1,8 @@
 package logic.model.dao;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -9,7 +12,13 @@ import com.google.firebase.database.ValueEventListener;
 
 public abstract class Dao implements OnGetDataListener {
 	
+	private static final Logger LOGGER = Logger.getLogger(Dao.class.getName());
+	
 	private DatabaseConnection dbConnection;
+	
+	static final Object lockObject = new Object(); 
+	static boolean condition = false;
+	
 	
 	protected Dao() {
 		this.dbConnection = DatabaseConnection.getInstance();
@@ -18,8 +27,6 @@ public abstract class Dao implements OnGetDataListener {
 	protected DatabaseReference getSpecificReference() {
 		return this.dbConnection.getDatabaseReference().child(this.getChild());
 	}
-	
-	final static Object lockObject = new Object(); 
 	
 	// Effettua la query sul db e sulla risposta asincrona richiama il metodo onSuccess definito 
 	// nelle classi dao figlie
@@ -32,21 +39,24 @@ public abstract class Dao implements OnGetDataListener {
 	        	onSuccess(dataSnapshot);
 	            synchronized (lockObject) {
 	            	lockObject.notifyAll();
+	            	condition = true;
 				}
 	        }
 
 	        @Override
 	        public void onCancelled(DatabaseError firebaseError) {
-	            System.out.println("Read data error");
+	            LOGGER.log(Level.FINE, "Firebase error");
 	        }
 	    });
 		synchronized (lockObject) {
 			try {
-				lockObject.wait();
+				while(!condition) {
+					lockObject.wait();
+				}
+				
 			} catch (InterruptedException e) {
-				System.out.println("Eccezione");
 				Thread.currentThread().interrupt();
-				//e.printStackTrace();
+				LOGGER.log(Level.SEVERE,e.toString(),e);
 			}
 		}
 
