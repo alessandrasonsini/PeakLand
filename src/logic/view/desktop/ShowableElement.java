@@ -13,7 +13,7 @@ import logic.view.desktop.graphic_controller.GraphicController;
 
 public abstract class ShowableElement {
 	
-	private static final Logger LOGGER = Logger.getLogger(MountainPathDao.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(ShowableElement.class.getName());
 	
 	protected FXMLLoader loader;
 	

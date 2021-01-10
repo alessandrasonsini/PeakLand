@@ -14,7 +14,7 @@ import logic.model.dao.MountainPathDao;
 
 public class ViewMountainPathInfoGraphicController extends GraphicController{
 	
-	private static final Logger LOGGER = Logger.getLogger(MountainPathDao.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(ViewMountainPathInfoGraphicController.class.getName());
 	
 	@FXML
 	private ImageView btnBack;

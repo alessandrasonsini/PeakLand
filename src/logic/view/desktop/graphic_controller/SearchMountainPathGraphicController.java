@@ -21,7 +21,7 @@ import logic.view.desktop.graphic_element.SimpleMountainPathListCell;
 
 public class SearchMountainPathGraphicController extends GraphicController {
 	
-	private static final Logger LOGGER = Logger.getLogger(MountainPathDao.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(SearchMountainPathGraphicController.class.getName());
 	
 	@FXML
 	private TextField txtSearch;
