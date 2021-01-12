@@ -1,6 +1,10 @@
 package logic.model;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import logic.model.dao.CredentialDao;
+import logic.model.exception.DatabaseException;
 
 // NON VEDO TANTO IL SENSO DI STA CLASSE, MI SERVIVA PIU' CHE ALTRO PER CREARE LA DAO ASSOCIATA
 // SE CAPIAMO CHE SI PUO' CREARE LA DAO ANCHE SENZA ENTITA' ASSOCIATA POSSIAMO TOGLIERLA
@@ -10,6 +14,8 @@ public class Credential {
 	private String password;
 	
 	private static CredentialDao credentialDao = new CredentialDao();
+	
+	private static final Logger LOGGER = Logger.getLogger(Credential.class.getName());
 	
 	public Credential() {
 		
@@ -41,7 +47,12 @@ public class Credential {
 	}
 	
 	public void saveNewCredential() {
-		credentialDao.saveNewCredentialOnDb(this);
+		//PROPAGARE
+		try {
+			credentialDao.saveNewCredentialOnDb(this);
+		} catch (DatabaseException e) {
+			LOGGER.log(Level.SEVERE, e.toString(), e);
+		}
 	}
 	
 	public String getUsername() {

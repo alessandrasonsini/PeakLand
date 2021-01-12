@@ -50,12 +50,12 @@ public class LoginGraphicController extends GraphicController {
 			if(event.getSource().equals(btnLogin)) {
 				credential.setCredential(txtUsername.getText(),txtPassword.getText());
 				// Chiama il metodo del controller applicativo per eseguire il login
-				getLoginController().loginAction(credential);
+				MainGraphicController.getInstance().setSessionId(getLoginController().loginAction(credential));
 			}
 			else if(event.getSource().equals(btnSignIn)) {
 				mandatoryFields.add(txtConfirmPassword);
 				credential.setCredential(txtUsername.getText(),txtPassword.getText(),txtConfirmPassword.getText());
-				getLoginController().signInAction(credential);
+				MainGraphicController.getInstance().setSessionId(getLoginController().signInAction(credential));
 			}
 			MainGraphicController.getInstance().setPageAfterLogin();
 		}catch(EmptyMandatoryFieldsException e) {

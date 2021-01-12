@@ -2,9 +2,12 @@ package logic.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import logic.model.dao.LoggedUserDao;
 import logic.model.enums.UserLevel;
+import logic.model.exception.DatabaseException;
 
 public class LoggedUser {
 	/**
@@ -20,8 +23,10 @@ public class LoggedUser {
 	
 	private static LoggedUserDao loggedUserDao = new LoggedUserDao();
 	
+	private static final Logger LOGGER = Logger.getLogger(LoggedUser.class.getName());
+	
+	
 	// Istanza dell'utente correntemente loggato
-	private static LoggedUser currentLoggedUser;
 	
 	public LoggedUser() {
 		this.level = UserLevel.SOFAMAN;
@@ -33,20 +38,18 @@ public class LoggedUser {
 		this.username = username;
 	}
 	
-	public static LoggedUser getCurrentLoggedUser() {
-		return currentLoggedUser;
-	}
-	
-	public static void setCurrentLoggedUser(LoggedUser user) {
-		currentLoggedUser = user;
-	}
-	
 	public static LoggedUser getLoggedUserInfo(String id) {
 		return loggedUserDao.getLoggedUserInfoFromDb(id);
 	}
 	
 	public void saveLoggedUserOnDb() {
-		loggedUserDao.saveNewLoggedUserOnDb(this);
+		
+		//PROPAGARE
+		try {
+			loggedUserDao.saveNewLoggedUserOnDb(this);
+		} catch (DatabaseException e) {
+			LOGGER.log(Level.SEVERE, e.toString(),e);
+		}
 	}
 	
 	public String getUsername() {

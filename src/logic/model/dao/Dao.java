@@ -1,5 +1,6 @@
 package logic.model.dao;
 
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,31 +16,34 @@ public abstract class Dao implements OnGetDataListener {
 	private static final Logger LOGGER = Logger.getLogger(Dao.class.getName());
 	
 	private DatabaseConnection dbConnection;
+	protected DatabaseReference dbReference;
 	
-	static final Object lockObject = new Object(); 
-	static boolean condition = false;
+	private boolean writeCompleted;
 	
+	//private final Object lockObject = new Object(); 
+	private Boolean readLock = false;
+	private Boolean writeLock = false;
 	
 	protected Dao() {
 		this.dbConnection = DatabaseConnection.getInstance();
+		this.dbReference = this.dbConnection.getDatabaseReference().child(this.getChild());
 	}
 	
 	protected DatabaseReference getSpecificReference() {
 		return this.dbConnection.getDatabaseReference().child(this.getChild());
 	}
 	
-	// Effettua la query sul db e sulla risposta asincrona richiama il metodo onSuccess definito 
+	// Effettua la query sul db e sulla risposta asincrona richiama il metodo onSuccess implementato
 	// nelle classi dao figlie
 
 	public void readData(Query query) {
-		
 		query.addListenerForSingleValueEvent(new ValueEventListener() {
 	        @Override
 	        public void onDataChange(DataSnapshot dataSnapshot) {
-	        	onSuccess(dataSnapshot);
-	            synchronized (lockObject) {
-	            	lockObject.notifyAll();
-	            	condition = true;
+	        	onReadSuccess(dataSnapshot);
+	            synchronized (readLock) {
+	            	readLock.notifyAll();
+	            	readLock = true;
 				}
 	        }
 
@@ -48,11 +52,12 @@ public abstract class Dao implements OnGetDataListener {
 	            LOGGER.log(Level.FINE, "Firebase error");
 	        }
 	    });
-		synchronized (lockObject) {
+		synchronized (readLock) {
 			try {
-				while(!condition) {
-					lockObject.wait();
+				while(!readLock) {
+					readLock.wait();
 				}
+				readLock = false;
 				
 			} catch (InterruptedException e) {
 				Thread.currentThread().interrupt();
@@ -62,8 +67,41 @@ public abstract class Dao implements OnGetDataListener {
 
 	}
 	
+	public boolean writeData(Map<String, Object> data) {
+		
+		this.dbReference.updateChildren(data, new DatabaseReference.CompletionListener() {
+			@Override
+			public void onComplete(DatabaseError error, DatabaseReference ref) {
+				if(error != null) {
+					writeCompleted = false;
+				}
+				else writeCompleted = true;
+				synchronized (writeLock) {
+					writeLock.notifyAll();
+					writeLock = true;
+				}
+			}
+		});
+		synchronized (writeLock) {
+			try {
+				while(!writeLock) {
+					writeLock.wait();
+				}
+				writeLock = false;
+				
+			} catch (InterruptedException e) {
+				Thread.currentThread().interrupt();
+				LOGGER.log(Level.SEVERE,e.toString(),e);
+			}
+		}
+		return writeCompleted;
+		
+	}
+	
+	
+	
 	@Override
-	public abstract void onSuccess(DataSnapshot dataSnapshot);
+	public abstract void onReadSuccess(DataSnapshot dataSnapshot);
 	
 	protected abstract String getChild(); 
 }

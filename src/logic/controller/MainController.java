@@ -11,10 +11,10 @@ public class MainController extends Controller {
 		super();
 	}
 	
-	public String onActionRequired(String actionId) {
+	public String onActionRequired(String actionId, Integer sessionId) {
 		String actionToExecute;
 		// Controlla se è un'azione accessibile solo se loggati e se l'utente è loggato
-		if((!noLoginAction.contains(actionId)) && (!LoginController.isLogged())) {
+		if((!noLoginAction.contains(actionId)) && (!LoginController.isLogged(sessionId))){
 			actionToExecute = "login";
 		}
 		else {
@@ -24,6 +24,7 @@ public class MainController extends Controller {
 		
 	}
 	
+
 	
 	@Override
 	public void setup() {

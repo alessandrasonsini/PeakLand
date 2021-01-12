@@ -1,5 +1,8 @@
 package logic.controller;
 
+import java.util.HashMap;
+import java.util.concurrent.ThreadLocalRandom;
+
 import logic.model.Credential;
 import logic.model.LoggedUser;
 import logic.model.bean.CredentialBean;
@@ -8,19 +11,23 @@ import logic.model.exception.InvalidUsernameException;
 import logic.model.exception.WrongInputException;
 
 public class LoginController extends Controller {
-
+	
+	// Mantiene gli id delle sessioni attualmente attive, ovvero gli utenti correntemente loggati
+	private static HashMap<Integer, LoggedUser> currentLoggedUsers = new HashMap<> ();
+	
+	
 	// Ritorna vero se esiste un'istanza dello user loggato corrente
-	public static boolean isLogged() {
+	public static boolean isLogged(Integer sessionId) {
 		boolean check;
-		if(LoggedUser.getCurrentLoggedUser() != null) {
+		if(sessionId != null) {
 			// C'è un'istanza di utente attualmente loggato
-			check = true;
+			check = currentLoggedUsers.containsKey(sessionId);
 		}
 		else check = false;
 		return check;
 	} 
 		
-	public void loginAction(CredentialBean credentialBean) throws WrongInputException {
+	public Integer loginAction(CredentialBean credentialBean) throws WrongInputException {
 		Credential credential = new Credential(credentialBean.getUsername(),credentialBean.getPassword());
 		// Verificare le credenziali
 		if(!credential.verifyCredential()) {
@@ -31,13 +38,12 @@ public class LoginController extends Controller {
 			// Recupera le informazioni dell'utente che si è loggato
 			LoggedUser currLoggedUser = LoggedUser.getLoggedUserInfo(credential.getUsername());
 			
-			// Setta l'istanza dell'utente corrente
-			LoggedUser.setCurrentLoggedUser(currLoggedUser);
-
+			// Aggiunge la coppia sessionId - LoggedUser alla lista degli utenti correntemente loggati
+			return addCurrentLoggedUser(currLoggedUser);
 		}
 	}
 	
-	public void signInAction(CredentialBean credentialBean) throws WrongInputException {
+	public Integer signInAction(CredentialBean credentialBean) throws WrongInputException {
 		Credential credential = new Credential(credentialBean.getUsername(),credentialBean.getPassword());
 		// Verifica se la password coincide con la password di conferma
 		if(credentialBean.getConfirmPassword().equals(credential.getPassword())) {
@@ -50,7 +56,7 @@ public class LoginController extends Controller {
 				LoggedUser currLoggedUser = new LoggedUser(credential.getUsername());
 				currLoggedUser.saveLoggedUserOnDb();
 				
-				LoggedUser.setCurrentLoggedUser(currLoggedUser);
+				return addCurrentLoggedUser(currLoggedUser);
 			}
 			else {
 				// lo username inserito esiste già
@@ -59,6 +65,21 @@ public class LoginController extends Controller {
 			
 		}
 		else throw new WrongInputException();
+	}
+	
+	public Integer addCurrentLoggedUser(LoggedUser currLoggedUser) {
+		Integer newSessionId;
+		// Genera una nuova chiave che non esista già nella lista
+		do {
+			newSessionId = (Integer) ThreadLocalRandom.current().nextInt(1000);
+		} while (currentLoggedUsers.containsKey(newSessionId));
+		
+		// Aggiunge la coppia all'hash map
+		currentLoggedUsers.put(newSessionId, currLoggedUser);
+		
+		// Ritorna la nuova chiave generata
+		return newSessionId;
+		
 	}
 	
 	@Override

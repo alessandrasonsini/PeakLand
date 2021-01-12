@@ -7,6 +7,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 
 import logic.model.Credential;
+import logic.model.exception.DatabaseException;
 
 public class CredentialDao extends Dao{
 	
@@ -25,17 +26,19 @@ public class CredentialDao extends Dao{
 		
 	}
 	
-	public void saveNewCredentialOnDb(Credential newCredential) {
+	public void saveNewCredentialOnDb(Credential newCredential) throws DatabaseException {
 		HashMap<String, Object> credential = new HashMap<>();
 		credential.put(newCredential.getUsername(), newCredential);
 		
-		// NON MI FA IMPAZZIRE CHE NON FACCIAMO CONTROLLI SE IL SALVATAGGIO E' ANDATO BENE
-		this.dbReferenceCredential.updateChildrenAsync(credential);
-		
+		if(!writeData(credential)) {
+			// se fallisce
+			throw new DatabaseException();
+		}
+
 	}
 	
 	@Override
-	public void onSuccess(DataSnapshot dataSnapshot) {
+	public void onReadSuccess(DataSnapshot dataSnapshot) {
 		// TROVARE UN MODO DECENTE PER FARE STA COSA
 		if(dataSnapshot.exists()) {
 			for (DataSnapshot snapshot : dataSnapshot.getChildren()) { 

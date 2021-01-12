@@ -1,11 +1,13 @@
 package logic.model;
 
 import java.util.List;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import logic.model.dao.MountainPathDao;
 import logic.model.enums.DifficultyLevelEnum;
 import logic.model.enums.GroundEnum;
 import logic.model.enums.LandscapeEnum;
+import logic.model.exception.DatabaseException;
 
 public class MountainPath {
 	private String name;
@@ -25,6 +27,8 @@ public class MountainPath {
 	
 	private static MountainPathDao mountainPathDAO = new MountainPathDao();
 	
+	private static final Logger LOGGER = Logger.getLogger(MountainPath.class.getName());
+	
 	public MountainPath() {
 		this.location = new Location();
 		this.travelTime = new Time();
@@ -39,7 +43,12 @@ public class MountainPath {
 	}
 	
 	public void saveMountainPathOnDb() {
-		mountainPathDAO.saveNewMountainPathOnDB(this);
+		// Sto facendo il try catch qui ma in realtà va propagata fino alla view penso
+		try {
+			mountainPathDAO.saveNewMountainPathOnDB(this);
+		} catch (DatabaseException e) {
+			LOGGER.log(Level.SEVERE, e.toString(),e);
+		}
 	}
 
 	public String getName() {

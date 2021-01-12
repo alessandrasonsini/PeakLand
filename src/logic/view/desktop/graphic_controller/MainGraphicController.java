@@ -21,6 +21,9 @@ public class MainGraphicController extends GraphicController {
 	@FXML
 	private BorderPane mainChild;
 	
+	// Id della sessione corrente dell'utente
+	private Integer sessionId;
+	
 	// Button precedentemente premuto
 	Button prevPressed;
 	
@@ -42,7 +45,7 @@ public class MainGraphicController extends GraphicController {
 	private void buttonHandler(ActionEvent event) {
 		Button button = (Button) event.getSource();
 		this.setPressed(button);
-		this.executeAction(getMainController().onActionRequired(button.getId()));
+		this.executeAction(getMainController().onActionRequired(button.getId(),sessionId));
 	}
 
 	@Override
@@ -65,6 +68,10 @@ public class MainGraphicController extends GraphicController {
 	
 	public void setPageAfterLogin() {
 		this.executeAction(prevPressed.getId());
+	}
+	
+	public void setSessionId(Integer newSessionId) {
+		this.sessionId = newSessionId;
 	}
 	
 	private MainController getMainController() {

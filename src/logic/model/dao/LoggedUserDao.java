@@ -10,6 +10,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 
 import logic.model.LoggedUser;
+import logic.model.exception.DatabaseException;
 
 public class LoggedUserDao extends Dao{
 	
@@ -29,19 +30,20 @@ public class LoggedUserDao extends Dao{
 		return result;
 	}
 	
-	public void saveNewLoggedUserOnDb(LoggedUser user) {
+	public void saveNewLoggedUserOnDb(LoggedUser user) throws DatabaseException {
 		Map<String, Object> users = new HashMap<>();
 		// Inserimento di ID (costituito dallo username) e dei dati dello user
 		users.put(user.getUsername(), (Object)user);
 		
-		// Aggiunta dello user al nodo Logged User del DB
-		this.dbReferenceLoggedUser.updateChildrenAsync(users);
-	}
+		if(!writeData(users)) {
+			// se fallisce
+			throw new DatabaseException();
+		}}
 	
 	//PER FARE LE COSE FATTE BENE COSTRUIRE LISTA DI RISULTATI PER IL RITORNO DELLA QUERY
 	
 	@Override
-	public void onSuccess(DataSnapshot dataSnapshot) {
+	public void onReadSuccess(DataSnapshot dataSnapshot) {
 		if (dataSnapshot.exists()) {
             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {          	
             	result = snapshot.getValue(LoggedUser.class);
