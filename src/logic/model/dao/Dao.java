@@ -20,9 +20,11 @@ public abstract class Dao implements OnGetDataListener {
 	
 	private boolean writeCompleted;
 	
-	//private final Object lockObject = new Object(); 
-	private Boolean readLock = false;
-	private Boolean writeLock = false;
+	private static final Object readLock = new Object(); 
+	private static final Object writeLock = new Object();
+	
+	private Boolean readLockCondition = false;
+	private Boolean writeLockCondition = false;
 	
 	protected Dao() {
 		this.dbConnection = DatabaseConnection.getInstance();
@@ -43,8 +45,8 @@ public abstract class Dao implements OnGetDataListener {
 	        	onReadSuccess(dataSnapshot);
 	            synchronized (readLock) {
 	            	readLock.notifyAll();
-	            	readLock = true;
-				}
+	            	readLockCondition = true;
+	           	}
 	        }
 
 	        @Override
@@ -54,10 +56,10 @@ public abstract class Dao implements OnGetDataListener {
 	    });
 		synchronized (readLock) {
 			try {
-				while(!readLock) {
+				while(!readLockCondition) {
 					readLock.wait();
 				}
-				readLock = false;
+				readLockCondition = false;
 				
 			} catch (InterruptedException e) {
 				Thread.currentThread().interrupt();
@@ -78,16 +80,16 @@ public abstract class Dao implements OnGetDataListener {
 				else writeCompleted = true;
 				synchronized (writeLock) {
 					writeLock.notifyAll();
-					writeLock = true;
+					writeLockCondition = true;
 				}
 			}
 		});
 		synchronized (writeLock) {
 			try {
-				while(!writeLock) {
+				while(!writeLockCondition) {
 					writeLock.wait();
 				}
-				writeLock = false;
+				writeLockCondition = false;
 				
 			} catch (InterruptedException e) {
 				Thread.currentThread().interrupt();
