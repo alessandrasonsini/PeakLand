@@ -23,8 +23,8 @@ public abstract class Dao implements OnGetDataListener {
 	private static final Object readLock = new Object(); 
 	private static final Object writeLock = new Object();
 	
-	private Boolean readLockCondition = false;
-	private Boolean writeLockCondition = false;
+	private boolean readLockCondition = false;
+	private boolean writeLockCondition = false;
 	
 	protected Dao() {
 		this.dbConnection = DatabaseConnection.getInstance();

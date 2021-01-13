@@ -19,6 +19,9 @@ public class ControllerFactory {
 			case "login":
 				newController = new LoginController();
 				break;
+			case "btnAssistedResearch":
+				newController = new AssistedResearchController();
+				break;
 			default: 
 				throw new Exception("Invalid type : " + type);
 		}

@@ -22,6 +22,7 @@ public abstract class GraphicController extends ShowableElement {
 		
 	}
 	
+	// CAMBIARE NOME AL METODO
 	public void switchPage(Controller appController) {
 		GraphicControllerFactory factory = new GraphicControllerFactory();
 		// Costruisce il prossimo graphic controller da eseguire in base alla action

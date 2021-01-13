@@ -71,5 +71,10 @@
   		<artifactId>firebase-admin</artifactId>
   		<version>7.1.0</version>
   	</dependency>
-  </dependencies>
+  	<dependency>
+  		<groupId>org.controlsfx</groupId>
+  		<artifactId>controlsfx</artifactId>
+  		<version>11.0.0</version>
+  	</dependency>
+   </dependencies>
 </project>

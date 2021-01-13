@@ -8,6 +8,7 @@ import javafx.scene.layout.Pane;
 import logic.controller.Controller;
 import logic.controller.MainController;
 
+
 public class MainGraphicController extends GraphicController {
 	@FXML
 	private Button btnSearch;

@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -25,6 +26,9 @@ public class SearchMountainPathGraphicController extends GraphicController {
 	@FXML
 	private TextField txtSearch;
 	
+	@FXML 
+	private Button btnAssistedResearch;
+	
 	@FXML
 	private HBox itemBox;
 	
@@ -39,6 +43,12 @@ public class SearchMountainPathGraphicController extends GraphicController {
 		super(controller);
 		this.beanList = FXCollections.observableArrayList();
 		setupLayout();
+	}
+	
+	@FXML 
+	public void onAssistedResearchRequest(ActionEvent event) {
+		Button source = (Button)event.getSource();
+		this.executeAction(source.getId());
 	}
 	
 	@FXML
