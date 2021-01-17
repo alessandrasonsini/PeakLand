@@ -1,18 +1,30 @@
 package logic.view.desktop.graphic_controller;
 
 import logic.controller.Controller;
+import logic.model.enums.DifficultyLevelEnum;
+
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
 import org.controlsfx.control.CheckComboBox;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 
 public class AssistedResearchGraphicController extends GraphicController{
+	
+	@FXML
+	CheckComboBox<String> boxDifficultyLevel;
 
 	protected AssistedResearchGraphicController(Controller controller) {
 		super(controller);
 		
-		provaLib();
+		// Solo per testare la grafica
+		//provaLib();
 	}
 
 	@Override
@@ -20,6 +32,7 @@ public class AssistedResearchGraphicController extends GraphicController{
 		return "assistedResearchLayout";
 	}
 	
+	// Solo per testare la grafica
 	private void provaLib() {
 		// create the data to show in the CheckComboBox 
 		 final ObservableList<String> strings = FXCollections.observableArrayList();
@@ -27,17 +40,16 @@ public class AssistedResearchGraphicController extends GraphicController{
 		     strings.add("Item " + i);
 		 }
 		 
-		 // Create the CheckComboBox with the data 
-		 final CheckComboBox<String> checkComboBox = new CheckComboBox<String>(strings);
-		 
+		 boxDifficultyLevel.getItems().addAll(EnumSet.allOf(DifficultyLevelEnum.class).stream().map(DifficultyLevelEnum::name).collect(Collectors.toList()));
+		 System.out.println("Eccomi");
 		 // and listen to the relevant events (e.g. when the selected indices or 
 		 // selected items change).
-		 checkComboBox.getCheckModel().getCheckedItems().addListener(new ListChangeListener<String>() {
+		 boxDifficultyLevel.getCheckModel().getCheckedItems().addListener(new ListChangeListener<String>() {
 		     public void onChanged(ListChangeListener.Change<? extends String> c) {
 		          while(c.next()) {
 		              //do something with changes here
 		          }
-		          System.out.println(checkComboBox.getCheckModel().getCheckedItems());
+		          System.out.println(boxDifficultyLevel.getCheckModel().getCheckedItems());
 		     }
 		 });
 		 

@@ -7,8 +7,17 @@ import logic.model.bean.MountainPathBean;
 
 public class AddNewMountainPathController extends Controller {
 	
-	public AddNewMountainPathController() {
+	private static AddNewMountainPathController instance;
+	
+	private AddNewMountainPathController() {
 		super();
+	}
+	
+	public static AddNewMountainPathController getInstance() {
+		if(instance == null) {
+			instance = new AddNewMountainPathController();
+		}
+		return instance;
 	}
 	
 	// Controlla se il nome inserito è già esistente sul db
@@ -39,8 +48,17 @@ public class AddNewMountainPathController extends Controller {
 	}
 
 	@Override
-	public void setup() {
-		setNextStepId("Add path");
+	public String getNextPageId(String action) {
+		String nextPageId;
+		switch(action) {
+			case "init":
+				nextPageId = "Add path";
+				break;
+			default: 
+				nextPageId = null;
+		}
+		return nextPageId;
+			
 	}
 
 }

@@ -18,19 +18,18 @@ public abstract class GraphicController extends ShowableElement {
 		// Istanzia controller applicativo del prossimo caso d'uso da eseguire
 		Controller nextController = myController.executeAction(action);
 		
-		this.switchPage(nextController);
+		executeAction(nextController, "init");
+		
 		
 	}
 	
 	// CAMBIARE NOME AL METODO
-	public void switchPage(Controller appController) {
+	public void executeAction(Controller appController, String action) {
 		GraphicControllerFactory factory = new GraphicControllerFactory();
 		// Costruisce il prossimo graphic controller da eseguire in base alla action
-		GraphicController nextGraphicController = factory.getGraphicController(appController);
+		GraphicController nextGraphicController = factory.getGraphicController(appController,action);
 		MainGraphicController.getInstance().switchPage(nextGraphicController.getRootPane());
+		
 	}
-	
-	
-	
 	
 }

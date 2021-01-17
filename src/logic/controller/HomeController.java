@@ -3,9 +3,9 @@ package logic.controller;
 public class HomeController extends Controller {
 
 	@Override
-	public void setup() {
+	public String getNextPageId(String action) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 }

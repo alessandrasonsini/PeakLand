@@ -2,9 +2,6 @@ package logic.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import logic.model.MountainPath;
 import logic.model.bean.MountainPathBean;
 import logic.model.bean.SimpleMountainPathBean;
@@ -13,83 +10,73 @@ import logic.model.bean.factory.SimpleMountainPathBeanFactory;
 
 public class ViewMountainPathInfoController extends Controller {
 	
-	private static final Logger LOGGER = Logger.getLogger(ViewMountainPathInfoController.class.getName() );
+	private static ViewMountainPathInfoController instance;
 
-	SearchMountainPathController searchController;
-	ControllerFactory controllerFactory;
-	List<SimpleMountainPathBean> beanResults;
-	List<MountainPath> searchResults;
-	SimpleMountainPathBean selectedMountainPath;
+	private ViewMountainPathInfoController() {
+		super();
+	}
 	
-	@Override
-	public void setup() {
-		
-		this.beanResults = new ArrayList<>();
-		this.searchResults = new ArrayList<>();
-		this.controllerFactory = new ControllerFactory();
-		
-		// Crea riferimento al controller applicativo SearchMountainPath
-		// per poter eseguire le ricerche nel DB
-		try {
-			this.searchController = (SearchMountainPathController) controllerFactory.getController("search");
-		} catch (Exception e) {
-			LOGGER.log(Level.SEVERE, e.toString(), e);
-			// Gestione pagina di errore
-			// capire come metterlo perché c'è mismatch dei tipi di controller
-			//this.searchController = new ErrorController();
+	public static ViewMountainPathInfoController getInstance() {
+		if(instance == null) {
+			instance = new ViewMountainPathInfoController();
 		}
-		setNextStepId("Search path");
+		return instance;
 	}
 	
 	// Richiama il metodo del controllore applicativo Search per
 	// effettuare la ricerca nel DB
 	public List<SimpleMountainPathBean> searchMountainPathByName(String name) {
-		setNextStepId("View info");
 		
-		// Elimina contenuti dalle liste di eventuali ricerche precedenti
-		this.searchResults.clear();
-		this.beanResults.clear();
+		// Prende l'istanza del controller che si occupa della search
+		SearchMountainPathController searchController = new ControllerFactory().getSearchMountainPathController();
 		
-		this.searchResults = this.searchController.searchMountainPathByPartialName(name);
+		List<MountainPath> searchResults = searchController.searchMountainPathByPartialName(name);
 		
 		SimpleMountainPathBeanFactory beanFactory = new SimpleMountainPathBeanFactory();
 		
+		List<SimpleMountainPathBean> beanResults= new ArrayList<>();
 		// Converte le entity in bean per poterle passare al controllore grafico
 		for(MountainPath path : searchResults) {
-				this.beanResults.add(beanFactory.getSimpleMountainPath(path));
+				beanResults.add(beanFactory.getSimpleMountainPath(path));
 		}
-
-		return this.beanResults;
+		return beanResults;
 	}
 	
-	// Ricorda quale MountainPath è stato selezionato
-	// dall'utente per poi passare al controller grafico le informazioni relative 
-	public void setSelectedItem(SimpleMountainPathBean bean) {
-		this.selectedMountainPath = bean;
-	}
-	
-	// Converte il mountain path selezionato dall'utente in una bean
-	// per poterla passare al controllore grafico ViewInfo
-	public MountainPathBean getMountainPathInfo() {
-		setNextStepId("Search path");
+	// Restituisce le info complete del mountain path selezionato
+	public MountainPathBean getMountainPathInfo(String selectedPath) {
 		
-		MountainPathBeanFactory beanFactory = new MountainPathBeanFactory();
+		// Prende l'istanza del controller che si occupa della search
+		SearchMountainPathController searchController = new ControllerFactory().getSearchMountainPathController();
 		
-		for (MountainPath path : searchResults) {
-			if (path.getName().equals(selectedMountainPath.getName())) {
-				return beanFactory.getMountainPathBean(path);
-			}
+		MountainPath searchResult = searchController.searchMountainPathByName(selectedPath);
+		
+		MountainPathBean selectedPathBean = null;
+		if(searchResult != null) {
+			// Converte la entity in bean per poterla passare al controller grafico
+			selectedPathBean = new MountainPathBeanFactory().getMountainPathBean(searchResult);
 		}
-		
-		return null;
+		 return selectedPathBean;
 	}
 	
-	// Ritrona al controllore grafico Search la lista di dei path col
-	// nome precedentemente cercato dall'utente
-	public List<SimpleMountainPathBean> getSearchResultsList() {
-		setNextStepId("View info");
-		return this.beanResults;
+	@Override
+	public String getNextPageId(String action) {
+		String nextPageId;
+		switch(action) {
+			case "init":
+				nextPageId = "Search path";
+				break;
+			case "Item selected":
+				nextPageId = "View info";
+				break;	
+			case "Back":
+				nextPageId = "Search path";
+				break;		
+			default:
+				nextPageId = null;
+		}
+		return nextPageId;
 	}
-
+	
+	
 	
 }

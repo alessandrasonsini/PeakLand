@@ -6,7 +6,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 
 import logic.model.LoggedUser;
@@ -14,18 +13,16 @@ import logic.model.exception.DatabaseException;
 
 public class LoggedUserDao extends Dao{
 	
-	private DatabaseReference dbReferenceLoggedUser;
 	private LoggedUser result;
 	
 	private static final Logger LOGGER = Logger.getLogger(LoggedUserDao.class.getName());
 	
 	public LoggedUserDao() {
 		super();
-		this.dbReferenceLoggedUser = getSpecificReference();
 	}
 	
 	public LoggedUser getLoggedUserInfoFromDb(String id) {
-		Query query = dbReferenceLoggedUser.orderByChild("username").equalTo(id);
+		Query query = this.dbReference.orderByChild("username").equalTo(id);
 		readData(query);
 		return result;
 	}

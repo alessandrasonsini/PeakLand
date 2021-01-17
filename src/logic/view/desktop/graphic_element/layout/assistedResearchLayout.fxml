@@ -37,16 +37,7 @@
                      </font>
                   </Label>
                   <Label layoutX="88.0" layoutY="108.0" text="Difficulty level" AnchorPane.leftAnchor="90.0" />
-                  <CheckComboBox layoutX="187.0" layoutY="104.0" prefWidth="150.0">
-                  	<items>
-       					 <FXCollections fx:factory="observableArrayList">
-            				<String fx:value="T" />
-            				<String fx:value="E" />
-            				<String fx:value="EE" />
-            				<String fx:value="EEA" />
-        				</FXCollections>
-    				</items>
-                  </CheckComboBox>	
+                  <CheckComboBox fx:id="boxDifficultyLevel" layoutX="187.0" layoutY="104.0" prefWidth="150.0"/>
                </children>
             </AnchorPane>
          </children>

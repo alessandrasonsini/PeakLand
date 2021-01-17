@@ -16,11 +16,9 @@ public class MountainPathDao extends Dao {
 	
 	private static final Logger LOGGER = Logger.getLogger(MountainPathDao.class.getName());
 	
-	//private DatabaseReference dbReferenceMountainPath;
 	private List<MountainPath> mountainPathResult;
 	
 	public MountainPathDao() {
-		//this.dbReferenceMountainPath = getSpecificReference();
 		this.mountainPathResult = new ArrayList<>();
 	}
 	
@@ -33,7 +31,6 @@ public class MountainPathDao extends Dao {
 			// se fallisce
 			throw new DatabaseException();
 		}
-
 	}
 	
 	public List<MountainPath> searchMountainPathByName(String name) {
@@ -47,6 +44,13 @@ public class MountainPathDao extends Dao {
 		mountainPathResult.clear();
 		//Creo la query al database
 		Query query = this.dbReference.orderByChild("name").startAt(pathName).endAt(pathName+"\uf8ff");
+		readData(query);
+		return mountainPathResult;
+	}
+	
+	public List<MountainPath> searchMountainPathbyFilter(String filterName, String filterValue){
+		mountainPathResult.clear();
+		Query query= this.dbReference.orderByChild(filterName).equalTo(filterValue);
 		readData(query);
 		return mountainPathResult;
 	}

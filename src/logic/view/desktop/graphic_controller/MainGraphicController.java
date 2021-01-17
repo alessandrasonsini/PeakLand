@@ -1,5 +1,7 @@
 package logic.view.desktop.graphic_controller;
 
+import java.util.HashMap;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,7 +13,7 @@ import logic.controller.MainController;
 
 public class MainGraphicController extends GraphicController {
 	@FXML
-	private Button btnSearch;
+	private Button btnViewInfo;
 
 	@FXML
 	private Button btnAddPath;
@@ -22,8 +24,7 @@ public class MainGraphicController extends GraphicController {
 	@FXML
 	private BorderPane mainChild;
 	
-	// Id della sessione corrente dell'utente
-	private Integer sessionId;
+	private HashMap<String, Object> session;
 	
 	// Button precedentemente premuto
 	Button prevPressed;
@@ -34,19 +35,38 @@ public class MainGraphicController extends GraphicController {
 
 	private MainGraphicController(Controller controller) {
 		super(controller);
+		session = new HashMap<>();
+		session.put("sessionId", null);
 	}
 
 	public static MainGraphicController getInstance() {
 		if (instance == null)
-			instance = new MainGraphicController(new MainController());
+			instance = new MainGraphicController(MainController.getInstance());
 		return instance;
 	}
 
 	@FXML
 	private void buttonHandler(ActionEvent event) {
-		Button button = (Button) event.getSource();
-		this.setPressed(button);
-		this.executeAction(getMainController().onActionRequired(button.getId(),sessionId));
+		Button pressedButton = (Button) event.getSource();
+		this.setPressed(pressedButton);
+		this.executeAction(getMainController().onActionRequired(convertAction(pressedButton.getId()),(Integer)session.get("sessionId")));
+	}
+	
+	// Converte l'id dell'azione richiesta nell'interfaccia nell'id dell'azione che deve eseguire il sistema
+	private String convertAction(String actionId) {
+		String newActionId;
+		switch(actionId) {
+			case "btnViewInfo":
+				newActionId = "View info";
+				break;
+			case "btnAddPath":
+				newActionId = "Add path";
+				break;
+			default: 
+				newActionId = null;
+				break;				
+		}
+		return newActionId;
 	}
 
 	@Override
@@ -67,12 +87,19 @@ public class MainGraphicController extends GraphicController {
 		prevPressed = currPressed;
 	}
 	
-	public void setPageAfterLogin() {
-		this.executeAction(prevPressed.getId());
+	// Setta il valore del session id e ritorna alla pagina richiesta prima della comparsa del login
+	public void loginSucceded(Integer id) {
+		this.executeAction(convertAction(prevPressed.getId()));
 	}
 	
-	public void setSessionId(Integer newSessionId) {
-		this.sessionId = newSessionId;
+	public HashMap<String, Object> getSession(){
+		return session;
+	}
+	
+	public void updateSession(String key, Object value) {
+		if(session.get(key) == null)
+			session.put(key,value);
+		else session.replace(key, value);
 	}
 	
 	private MainController getMainController() {

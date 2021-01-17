@@ -81,18 +81,21 @@ public class ViewMountainPathInfoGraphicController extends GraphicController{
 	@FXML
 	private ImageView imageStar5;
 	
-	private MountainPathBean selectedMountainPath;
+	private static final String selectedPathKey = "selectedPath";
 	
 	
 	public ViewMountainPathInfoGraphicController(Controller controller) {
 		super(controller);
 		
+		// Recupero dalla sessione il path selezionato
+		String selectedPathName = (String )MainGraphicController.getInstance().getSession().get(selectedPathKey);
+		
 		// Recupero delle informazioni relative al mountain path selezionato dall'utente
-		this.selectedMountainPath = getViewMountainPathInfoController().getMountainPathInfo();
+		MountainPathBean selectedMountainPath = getViewMountainPathInfoController().getMountainPathInfo(selectedPathName);
 		
 		// GESTIRE CONTROLLO IN CASO DI BEAN == NULL
-		if (this.selectedMountainPath != null)
-			this.setupLayout();
+		if (selectedMountainPath != null)
+			this.setupLayout(selectedMountainPath);
 		else
 			LOGGER.log(Level.FINE, "No parameters inserted");
 	}
@@ -105,7 +108,7 @@ public class ViewMountainPathInfoGraphicController extends GraphicController{
 	// Permette di tornare al layout della ricerca
 	@FXML
 	private void onBackPressed(MouseEvent event) {
-		this.switchPage(this.myController);
+		this.executeAction(this.myController, "Back");
 	}
 	
 	public ViewMountainPathInfoController getViewMountainPathInfoController() {
@@ -114,7 +117,7 @@ public class ViewMountainPathInfoGraphicController extends GraphicController{
 
 	// Fa il setup dell'FXML inserendo opportunamente le informazioni del path
 	// che ha ricevuto in input dal controllore applicativo
-	private void setupLayout() {
+	private void setupLayout(MountainPathBean selectedMountainPath) {
 		// NON SO SE INSERIRE QUI CONTROLLO SE BEAN E' NULL O SOPRA
 		lbName.setText(selectedMountainPath.convertToText(selectedMountainPath.getName()));
 		lbRegion.setText(selectedMountainPath.convertToText(selectedMountainPath.getRegion()));

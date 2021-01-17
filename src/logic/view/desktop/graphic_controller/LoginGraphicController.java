@@ -36,6 +36,8 @@ public class LoginGraphicController extends GraphicController {
 	@FXML
 	PasswordField txtConfirmPassword;
 	
+	private static final String sessionIdKey = "sessionId";
+	
 	private ArrayList<TextField> mandatoryFields;
 	
 	protected LoginGraphicController(Controller controller) {
@@ -47,17 +49,20 @@ public class LoginGraphicController extends GraphicController {
 	public void onActionRequest(ActionEvent event) {
 		CredentialBean credential = new CredentialBean();
 		try {
+			Integer id = null;
 			if(event.getSource().equals(btnLogin)) {
 				credential.setCredential(txtUsername.getText(),txtPassword.getText());
 				// Chiama il metodo del controller applicativo per eseguire il login
-				MainGraphicController.getInstance().setSessionId(getLoginController().loginAction(credential));
+				id = getLoginController().loginAction(credential);
 			}
 			else if(event.getSource().equals(btnSignIn)) {
 				mandatoryFields.add(txtConfirmPassword);
 				credential.setCredential(txtUsername.getText(),txtPassword.getText(),txtConfirmPassword.getText());
-				MainGraphicController.getInstance().setSessionId(getLoginController().signInAction(credential));
+				// chiama il metodo applicativo per eseguire il sign in
+				id = getLoginController().signInAction(credential);
 			}
-			MainGraphicController.getInstance().setPageAfterLogin();
+			MainGraphicController.getInstance().updateSession(sessionIdKey, id);
+			MainGraphicController.getInstance().loginSucceded(id);
 		}catch(EmptyMandatoryFieldsException e) {
 			this.displayEmptyFieldError();
 		}catch (InvalidUsernameException e) {

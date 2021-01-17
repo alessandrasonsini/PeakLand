@@ -1,6 +1,7 @@
 package logic.model;
 
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import logic.model.dao.MountainPathDao;
@@ -41,6 +42,9 @@ public class MountainPath {
 	public static List<MountainPath> searchMountainPathByName(String name) {
 		return mountainPathDAO.searchMountainPathByName(name);
 	}
+	
+	//public static List<MountainPath> searchMountainPathByFilters(Map<String, String> filters){	 
+//	}
 	
 	public void saveMountainPathOnDb() {
 		// Sto facendo il try catch qui ma in realtà va propagata fino alla view penso

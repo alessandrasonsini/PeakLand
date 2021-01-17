@@ -12,9 +12,21 @@ import logic.model.exception.WrongInputException;
 
 public class LoginController extends Controller {
 	
+	private static LoginController instance;
+	
 	// Mantiene gli id delle sessioni attualmente attive, ovvero gli utenti correntemente loggati
 	private static HashMap<Integer, LoggedUser> currentLoggedUsers = new HashMap<> ();
 	
+	private LoginController() {
+		super();
+	}
+	
+	public static LoginController getInstance() {
+		if(instance == null) {
+			instance = new LoginController();
+		}
+		return instance;
+	}
 	
 	// Ritorna vero se esiste un'istanza dello user loggato corrente
 	public static boolean isLogged(Integer sessionId) {
@@ -81,11 +93,18 @@ public class LoginController extends Controller {
 		return newSessionId;
 		
 	}
-	
-	@Override
-	public void setup() {
-		setNextStepId("Login");
-		
-	}
 
+	@Override
+	public String getNextPageId(String action) {
+		String nextPageId;
+		switch(action) {
+			case "init":
+				nextPageId = "Login";
+				break;
+			default: 
+				nextPageId = null;
+		}
+		return nextPageId;
+			
+	}
 }

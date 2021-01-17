@@ -33,28 +33,25 @@ public class SearchMountainPathGraphicController extends GraphicController {
 	private HBox itemBox;
 	
 	@FXML
-	private ListView<SimpleMountainPathBean> listViewMountainPath;
-	
-	// Lista di bean risultante dalla ricerca
-	private ObservableList<SimpleMountainPathBean> beanList;
-	
+	private ListView<SimpleMountainPathBean> listViewMountainPath;	
+
+	private static final String searchResultKey = "searchResult"; 
+	private static final String selectedPathKey = "selectedPath";
 	
 	public SearchMountainPathGraphicController(Controller controller) {
 		super(controller);
-		this.beanList = FXCollections.observableArrayList();
 		setupLayout();
 	}
 	
 	@FXML 
 	public void onAssistedResearchRequest(ActionEvent event) {
 		Button source = (Button)event.getSource();
-		this.executeAction(source.getId());
+		
+		// da fare
 	}
 	
 	@FXML
 	public void onSearchRequest(ActionEvent event) {
-		// Pulisco la lista dalle ricerche precedenti
-		this.beanList.clear();
 		// Recupero richiesta di ricerca (testo di input dell'utente)
 		String request = txtSearch.getText();
 		
@@ -63,9 +60,14 @@ public class SearchMountainPathGraphicController extends GraphicController {
 			//comunico all'utente che non può inserire stringhe vuote
 		}
 		else {
+			ObservableList<SimpleMountainPathBean> beanList = FXCollections.observableArrayList();
 			// Richiamo metodo di ricerca del controller applicativo SearchController
-			this.beanList.addAll(getSearchMountainPathController().searchMountainPathByName(request));
-			fillListView(this.beanList);
+			beanList.addAll(getViewMountainPathInfoController().searchMountainPathByName(request));
+			
+			// Salva i risultati sulla sessione
+			MainGraphicController.getInstance().updateSession(searchResultKey,beanList);
+			
+			fillListView(beanList);
 			
 		}
 	}
@@ -81,13 +83,13 @@ public class SearchMountainPathGraphicController extends GraphicController {
         });
 	}
 	
-	// Fa il setup dell'FXML coi dati ricevuti dal controllore applicativo
+	// Fa il setup dell'FXML con i dati salvati nella sessione
 	// qualora l'utente avesse precedentemente effettuato una ricerca
 	private void setupLayout() {
-		if (getSearchMountainPathController().getSearchResultsList() != null) {
-			this.beanList.addAll(getSearchMountainPathController().getSearchResultsList());
-			fillListView(this.beanList);
-		}
+		// Recupera dalla sessione la lista dei risultati precedenti
+		@SuppressWarnings("unchecked")
+		ObservableList<SimpleMountainPathBean> beanList = (ObservableList<SimpleMountainPathBean>) MainGraphicController.getInstance().getSession().get(searchResultKey);
+		fillListView(beanList);
 	}
 	
 	@Override
@@ -97,20 +99,19 @@ public class SearchMountainPathGraphicController extends GraphicController {
 
 	@FXML
 	public void onListViewItemClicked(MouseEvent event) {
-		// Passa la bean del MountainPath selezionato dalla list view al controller applicativo
-		this.getSearchMountainPathController().setSelectedItem(listViewMountainPath.getSelectionModel().getSelectedItem());
+		// Memorizza la bean del path selezionato nella sessione
+		MainGraphicController.getInstance().updateSession(selectedPathKey, listViewMountainPath.getSelectionModel().getSelectedItem().getName());
 		
 		// Switch alla pagina per visualizzare le informazioni del path selezionato
 		try {
-			this.switchPage(this.myController);
+			this.executeAction(this.myController,"Item selected");
 		}
 		catch (Exception e) {
 			LOGGER.log(Level.SEVERE, e.toString(),e);
-			
 		}
 	}
 	
-	public ViewMountainPathInfoController getSearchMountainPathController() {
+	public ViewMountainPathInfoController getViewMountainPathInfoController() {
 		return (ViewMountainPathInfoController) myController;
 	}
 	
