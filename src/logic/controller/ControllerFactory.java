@@ -8,19 +8,19 @@ public class ControllerFactory {
 		
 		switch(type) {
 			case "View info": 
-				newController = ViewMountainPathInfoController.getInstance();
+				newController = new ViewMountainPathInfoController();
 				break;
 			case "Add path": 
-				newController = AddNewMountainPathController.getInstance();
+				newController = new AddNewMountainPathController();
 				break;
 			case "Search":
-				newController = SearchMountainPathController.getInstance();
+				newController = new SearchMountainPathController();
 				break;
 			case "Login":
-				newController = LoginController.getInstance();
+				newController = new LoginController();
 				break;
 			case "Assisted research":
-				newController = AssistedResearchController.getInstance();
+				newController = new AssistedResearchController();
 				break;
 			default: 
 				throw new Exception("Invalid type : " + type);
@@ -32,11 +32,11 @@ public class ControllerFactory {
 	
 	// NON SO SE QUESTI METODI HANNO SENSO
 	public SearchMountainPathController getSearchMountainPathController() {
-		return SearchMountainPathController.getInstance();
+		return new SearchMountainPathController();
 	}
 	
 	public LoginController getLoginController() {
-		return LoginController.getInstance();
+		return new LoginController();
 				
 	}
 }

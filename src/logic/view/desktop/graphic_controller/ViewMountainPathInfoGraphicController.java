@@ -3,10 +3,11 @@ package logic.view.desktop.graphic_controller;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import logic.controller.Controller;
 import logic.controller.ViewMountainPathInfoController;
 import logic.model.bean.MountainPathBean;
@@ -16,7 +17,7 @@ public class ViewMountainPathInfoGraphicController extends GraphicController{
 	private static final Logger LOGGER = Logger.getLogger(ViewMountainPathInfoGraphicController.class.getName());
 	
 	@FXML
-	private ImageView btnBack;
+	private Button btnBack;
 	
 	@FXML
 	private Label lbName;
@@ -81,17 +82,12 @@ public class ViewMountainPathInfoGraphicController extends GraphicController{
 	@FXML
 	private ImageView imageStar5;
 	
-	private static final String selectedPathKey = "selectedPath";
-	
 	
 	public ViewMountainPathInfoGraphicController(Controller controller) {
 		super(controller);
 		
-		// Recupero dalla sessione il path selezionato
-		String selectedPathName = (String )MainGraphicController.getInstance().getSession().get(selectedPathKey);
-		
 		// Recupero delle informazioni relative al mountain path selezionato dall'utente
-		MountainPathBean selectedMountainPath = getViewMountainPathInfoController().getMountainPathInfo(selectedPathName);
+		MountainPathBean selectedMountainPath = getViewMountainPathInfoController().getSelectedMountainPath();
 		
 		// GESTIRE CONTROLLO IN CASO DI BEAN == NULL
 		if (selectedMountainPath != null)
@@ -107,8 +103,9 @@ public class ViewMountainPathInfoGraphicController extends GraphicController{
 	
 	// Permette di tornare al layout della ricerca
 	@FXML
-	private void onBackPressed(MouseEvent event) {
-		this.executeAction(this.myController, "Back");
+	private void onBackPressed(ActionEvent event) {
+		getViewMountainPathInfoController().onBackPressed();
+		this.executeAction(this.myController);
 	}
 	
 	public ViewMountainPathInfoController getViewMountainPathInfoController() {

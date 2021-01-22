@@ -2,21 +2,12 @@ package logic.controller;
 
 public class AssistedResearchController extends Controller {
 	
-	private static AssistedResearchController instance;
-	
-	private AssistedResearchController() {
+	public AssistedResearchController() {
 		super();
-	}
-	
-	public static AssistedResearchController getInstance() {
-		if(instance == null) {
-			instance = new AssistedResearchController();
-		}
-		return instance;
 	}
 
 	@Override
-	public String getNextPageId(String action) {
+	public void setNextPageId(String action) {
 		String nextPageId;
 		switch(action) {
 			case "init":
@@ -25,7 +16,7 @@ public class AssistedResearchController extends Controller {
 			default: 
 				nextPageId = null;
 		}
-		return nextPageId;
+		this.nextPageId = nextPageId;
 			
 	}
 	

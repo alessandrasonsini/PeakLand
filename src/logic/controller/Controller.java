@@ -3,6 +3,12 @@ package logic.controller;
 
 public abstract class Controller {
 	
+	protected String nextPageId;
+	
+	protected Controller() {
+		setNextPageId("init");
+	}
+	
 	// Costruisce il prossimo controller da istanziare per eseguire l'azione
 	// chiamata
 	public Controller executeAction(String action) {
@@ -13,12 +19,17 @@ public abstract class Controller {
 			nextController = controllerFactory.getController(action);
 		} catch (Exception e) {
 			// Gestione pagina di errore
+			
 			nextController = new ErrorController();
 		}
 		
 		return nextController;
 	}
 	
-	public abstract String getNextPageId(String action);
+	public String getNextPageId() {
+		return this.nextPageId;
+	}
+	
+	public abstract void setNextPageId(String action);
 	
 }

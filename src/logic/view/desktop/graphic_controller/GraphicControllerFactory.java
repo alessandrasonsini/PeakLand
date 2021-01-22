@@ -4,9 +4,9 @@ import logic.controller.Controller;
 
 public class GraphicControllerFactory {
 	
-	public GraphicController getGraphicController(Controller controller, String action) {
+	public GraphicController getGraphicController(Controller controller) {
 		GraphicController newGraphicController;
-		switch(controller.getNextPageId(action)) {
+		switch(controller.getNextPageId()) {
 			case "Search path": 
 				newGraphicController =  new SearchMountainPathGraphicController(controller);
 				break;

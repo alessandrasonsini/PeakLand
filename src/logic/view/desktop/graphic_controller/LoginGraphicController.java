@@ -36,8 +36,6 @@ public class LoginGraphicController extends GraphicController {
 	@FXML
 	PasswordField txtConfirmPassword;
 	
-	private static final String sessionIdKey = "sessionId";
-	
 	private ArrayList<TextField> mandatoryFields;
 	
 	protected LoginGraphicController(Controller controller) {
@@ -61,7 +59,6 @@ public class LoginGraphicController extends GraphicController {
 				// chiama il metodo applicativo per eseguire il sign in
 				id = getLoginController().signInAction(credential);
 			}
-			MainGraphicController.getInstance().updateSession(sessionIdKey, id);
 			MainGraphicController.getInstance().loginSucceded(id);
 		}catch(EmptyMandatoryFieldsException e) {
 			this.displayEmptyFieldError();

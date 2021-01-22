@@ -5,22 +5,12 @@ import logic.model.MountainPath;
 
 public class SearchMountainPathController extends Controller {
 	
-	private static SearchMountainPathController instance;
-	
-	private SearchMountainPathController() {
+	public SearchMountainPathController() {
 		super();
-	}
-	
-	public static SearchMountainPathController getInstance() {
-		if(instance == null) {
-			instance = new SearchMountainPathController();
-		}
-		return instance;
 	}
 	
 	// Metodo che esegue la ricerca dei mountain path dato un nome parziale
 	public List<MountainPath> searchMountainPathByPartialName(String name) {
-	
 		// Chiama il metodo statico della entity che si occupa della ricerca
 		return MountainPath.searchMountainPathByPartialName(name);
 	}
@@ -34,9 +24,8 @@ public class SearchMountainPathController extends Controller {
 	}
 
 	@Override
-	public String getNextPageId(String action) {
+	public void setNextPageId(String action) {
 		// TODO Auto-generated method stub
-		return null;
 	}
 	
 	

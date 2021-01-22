@@ -1,7 +1,5 @@
 package logic.view.desktop.graphic_controller;
 
-import java.util.HashMap;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -24,10 +22,10 @@ public class MainGraphicController extends GraphicController {
 	@FXML
 	private BorderPane mainChild;
 	
-	private HashMap<String, Object> session;
+	private Integer sessionId;
 	
 	// Button precedentemente premuto
-	Button prevPressed;
+	private Button prevPressed;
 	
 	String defaultStyle = "-fx-background-color: FBC9A8; -fx-border-color: F69155;";
 
@@ -35,13 +33,11 @@ public class MainGraphicController extends GraphicController {
 
 	private MainGraphicController(Controller controller) {
 		super(controller);
-		session = new HashMap<>();
-		session.put("sessionId", null);
 	}
 
 	public static MainGraphicController getInstance() {
 		if (instance == null)
-			instance = new MainGraphicController(MainController.getInstance());
+			instance = new MainGraphicController(new MainController());
 		return instance;
 	}
 
@@ -49,7 +45,7 @@ public class MainGraphicController extends GraphicController {
 	private void buttonHandler(ActionEvent event) {
 		Button pressedButton = (Button) event.getSource();
 		this.setPressed(pressedButton);
-		this.executeAction(getMainController().onActionRequired(convertAction(pressedButton.getId()),(Integer)session.get("sessionId")));
+		this.executeAction(getMainController().onActionRequired(convertAction(pressedButton.getId()),sessionId));
 	}
 	
 	// Converte l'id dell'azione richiesta nell'interfaccia nell'id dell'azione che deve eseguire il sistema
@@ -89,17 +85,8 @@ public class MainGraphicController extends GraphicController {
 	
 	// Setta il valore del session id e ritorna alla pagina richiesta prima della comparsa del login
 	public void loginSucceded(Integer id) {
+		this.sessionId = id;
 		this.executeAction(convertAction(prevPressed.getId()));
-	}
-	
-	public HashMap<String, Object> getSession(){
-		return session;
-	}
-	
-	public void updateSession(String key, Object value) {
-		if(session.get(key) == null)
-			session.put(key,value);
-		else session.replace(key, value);
 	}
 	
 	private MainController getMainController() {
