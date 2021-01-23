@@ -12,6 +12,8 @@ import com.google.firebase.database.Query;
 import logic.model.MountainPath;
 import logic.model.exception.DatabaseException;
 
+//VEDERE SE IL METODO CHE STANDARDIZZA I NOMI LO VOGLIAMO LASCIARE QUI, FORSE SAREBBE MEGLIO SE LO FACESSE
+//IL CONTROLLER, IL PROBLEMA E' CHE VIENE CHIAMATO DA PIU' CONTROLLER DIVERSI
 public class MountainPathDao extends Dao {
 	
 	private static final Logger LOGGER = Logger.getLogger(MountainPathDao.class.getName());
@@ -25,6 +27,8 @@ public class MountainPathDao extends Dao {
 	public void saveNewMountainPathOnDB(MountainPath mountainPath) throws DatabaseException {
 		Map<String, Object> paths = new HashMap<>();
 		// Inserimento di ID (costituito dal nome) e dei dati del mountainPath
+		String standardName = standardizeName(mountainPath.getName());
+		mountainPath.setName(standardName);
 		paths.put(mountainPath.getName(), (Object)mountainPath);
 		// Aggiunta del path al nodo MountainPath del DB
 		if(!writeData(paths)) {
@@ -34,13 +38,14 @@ public class MountainPathDao extends Dao {
 	}
 	
 	public MountainPath searchMountainPathByName(String name) {
-		Query query = this.dbReference.orderByChild("name").equalTo(name);
+		Query query = this.dbReference.orderByChild("name").equalTo(standardizeName(name));
 		readData(query);
 		return mountainPathResult.size()>0 ? mountainPathResult.get(0) : null;
 	}
 	
 	public List<MountainPath> searchMountainPathByPartialName(String pathName) {
 		//Creo la query al database
+		pathName = standardizeName(pathName);
 		Query query = this.dbReference.orderByChild("name").startAt(pathName).endAt(pathName+"\uf8ff");
 		readData(query);
 		return mountainPathResult;
@@ -67,7 +72,18 @@ public class MountainPathDao extends Dao {
         }    
 		
 	}
-
+	
+	// Standardizza i nomi dei mountain path rendendo maiuscola la prima lettera prima di operare sul db
+	private String standardizeName(String name) {
+		String standardName = name;
+		if(name != null && name.length()>0) {
+			standardName = name.substring(0,1).toUpperCase();
+			if(name.length() > 1)
+				standardName += name.substring(1); 
+		}
+		return standardName;
+	}
+	
 	@Override
 	protected String getChild() {
 		return "Mountain Path";

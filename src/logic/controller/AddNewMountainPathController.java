@@ -15,8 +15,10 @@ public class AddNewMountainPathController extends Controller {
 	
 	// Controlla se il nome inserito è già esistente sul db
 	public boolean checkName(String name) {
+		
+		String nameToSearch = name.replaceFirst(name.substring(0,0), name.substring(0,0).toUpperCase());
 		// Chiama il metodo relativo del controller di search per controllare se il nome è già esistente
-		return (new ControllerFactory().getSearchMountainPathController().searchMountainPathByName(name) == null);
+		return (new ControllerFactory().getSearchMountainPathController().searchMountainPathByName(nameToSearch) == null);
 	}
 	
 	public void saveNewMountainPath(MountainPathBean newPathBean) throws DatabaseException {

@@ -25,7 +25,7 @@ public class ViewMountainPathInfoController extends Controller {
 	// effettuare la ricerca nel DB
 	public List<SimpleMountainPathBean> searchMountainPathByName(String name) {
 		this.searchResults.clear();
-
+		
 		List<MountainPath> searchResults = searchController.searchMountainPathByPartialName(name);
 		
 		SimpleMountainPathBeanFactory beanFactory = new SimpleMountainPathBeanFactory();

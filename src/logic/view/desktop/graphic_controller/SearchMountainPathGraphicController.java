@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -26,6 +27,9 @@ public class SearchMountainPathGraphicController extends GraphicController {
 	
 	@FXML
 	private TextField txtSearch;
+	
+	@FXML
+	private Label lbNoResults;
 	
 	@FXML 
 	private Button btnAssistedResearch;
@@ -50,6 +54,7 @@ public class SearchMountainPathGraphicController extends GraphicController {
 	
 	@FXML
 	public void onSearchRequest(ActionEvent event) {
+		lbNoResults.setText("");
 		// Recupero richiesta di ricerca (testo di input dell'utente)
 		String request = txtSearch.getText();
 		
@@ -80,6 +85,11 @@ public class SearchMountainPathGraphicController extends GraphicController {
 		if(newSearchResults == null) {
 			// Recupera i risultati della precedente ricerca
 			newSearchResults = getViewMountainPathInfoController().getPreviousSearchResults();
+		}
+		else {
+			if(newSearchResults.isEmpty())
+				lbNoResults.setText("No matches found for the inserted name");
+			
 		}
 		// Costruisco l'observable list da passare alla funzione che si occupa di rimpire la list view
 		ObservableList<SimpleMountainPathBean> beanList = FXCollections.observableArrayList();
