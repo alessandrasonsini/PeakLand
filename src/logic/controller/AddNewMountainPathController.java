@@ -4,6 +4,8 @@ import logic.model.Location;
 import logic.model.MountainPath;
 import logic.model.Time;
 import logic.model.bean.MountainPathBean;
+import logic.model.dao.MountainPathDao;
+import logic.model.exception.DatabaseException;
 
 public class AddNewMountainPathController extends Controller {
 	
@@ -17,7 +19,7 @@ public class AddNewMountainPathController extends Controller {
 		return (new ControllerFactory().getSearchMountainPathController().searchMountainPathByName(name) == null);
 	}
 	
-	public void saveNewMountainPath(MountainPathBean newPathBean) {
+	public void saveNewMountainPath(MountainPathBean newPathBean) throws DatabaseException {
 		// A partire dalla bean, costruisce l'entità mountain path da salvare
 		MountainPath newMountainPath = new MountainPath();
 		
@@ -34,8 +36,8 @@ public class AddNewMountainPathController extends Controller {
 		newMountainPath.setLocation(new Location(newPathBean.getRegion(),newPathBean.getProvince(),newPathBean.getCity()));
 		newMountainPath.setTravelTime(new Time(newPathBean.getHours(), newPathBean.getMinutes()));
 		
-		// Invoca il metodo della entity che si occupa di salvare sul db
-		newMountainPath.saveMountainPathOnDb();
+		// Invoca il metodo del dao per salvare il mountain path sul db
+		new MountainPathDao().saveNewMountainPathOnDB(newMountainPath);
 	}
 
 	@Override

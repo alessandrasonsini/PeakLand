@@ -1,6 +1,8 @@
 package logic.view.desktop.graphic_controller;
 
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import logic.controller.Controller;
 import logic.view.desktop.ShowableElement;
 
@@ -19,17 +21,26 @@ public abstract class GraphicController extends ShowableElement {
 		Controller nextController = myController.executeAction(action);
 		
 		executeAction(nextController);
-		
-		
 	}
 	
-	// CAMBIARE NOME AL METODO
 	public void executeAction(Controller appController) {
 		GraphicControllerFactory factory = new GraphicControllerFactory();
 		// Costruisce il prossimo graphic controller da eseguire in base alla action
 		GraphicController nextGraphicController = factory.getGraphicController(appController);
 		MainGraphicController.getInstance().switchPage(nextGraphicController.getRootPane());
-		
+	}
+	
+	// Metodo che mostra all'utente l'errore che si è verificato
+	protected void showError(String header, String message) {
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setHeaderText(header);
+		alert.setContentText(message);
+
+		alert.showAndWait();
+	}
+	
+	protected void showDatabaseError() {
+		showError("Database error", "Ops, there was an error connecting to database. Retry later");
 	}
 	
 }

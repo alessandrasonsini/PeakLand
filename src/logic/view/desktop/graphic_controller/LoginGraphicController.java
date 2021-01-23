@@ -6,14 +6,13 @@ import java.util.Arrays;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import logic.controller.Controller;
 import logic.controller.LoginController;
 import logic.model.bean.CredentialBean;
+import logic.model.exception.DatabaseException;
 import logic.model.exception.EmptyMandatoryFieldsException;
 import logic.model.exception.InvalidCredentialException;
 import logic.model.exception.InvalidUsernameException;
@@ -63,41 +62,22 @@ public class LoginGraphicController extends GraphicController {
 		}catch(EmptyMandatoryFieldsException e) {
 			this.displayEmptyFieldError();
 		}catch (InvalidUsernameException e) {
-			this.displayInvalidUsername();
+			showError("Login error", "Credentials are not valid");
 		}catch (InvalidCredentialException e) {
-			this.displayCredentialError();
+			showError("Sign in error", "Username not available");
 		}catch(WrongInputException e) {
-			this.displayPasswordMismatch();
+			showError("Sign in error", "Password mismatch");
+		}catch(DatabaseException e) {
+			showDatabaseError();
 		}
 		
 	}
-	private void displayPasswordMismatch() {
-		Alert alert = new Alert(AlertType.ERROR);
-		alert.setHeaderText("Sign in error");
-		alert.setContentText("Password mismatch");
-
-		alert.showAndWait();
-	}
+	
 	private void displayEmptyFieldError() {
 		for(int i = 0; i < mandatoryFields.size(); i++)
 			mandatoryFields.get(i).setStyle("-fx-border-color: FF0000;");
 	}
 	
-	private void displayCredentialError() {
-		Alert alert = new Alert(AlertType.ERROR);
-		alert.setHeaderText("Sign in error");
-		alert.setContentText("Username not available");
-
-		alert.showAndWait();
-	}
-	
-	private void displayInvalidUsername() {
-		Alert alert = new Alert(AlertType.ERROR);
-		alert.setHeaderText("Log in error");
-		alert.setContentText("Credentials are not valid");
-
-		alert.showAndWait();
-	}
 	@Override
 	protected String getFXMLFileName() {
 		return "loginLayout";

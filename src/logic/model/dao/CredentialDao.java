@@ -1,6 +1,8 @@
 package logic.model.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.Query;
@@ -10,16 +12,17 @@ import logic.model.exception.DatabaseException;
 
 public class CredentialDao extends Dao{
 	
-	private Credential result;
+	private List<Credential> credentialResults;
 	
 	public CredentialDao() {
 		super();
+		this.credentialResults = new ArrayList<>();
 	}
 	
 	public Credential getCredentialFromDb(String username) {
 		Query query = this.dbReference.orderByChild("username").equalTo(username);
 		readData(query);
-		return result;
+		return credentialResults.size()>0 ? credentialResults.get(0): null;
 		
 	}
 	
@@ -36,14 +39,13 @@ public class CredentialDao extends Dao{
 	
 	@Override
 	public void onReadSuccess(DataSnapshot dataSnapshot) {
+		credentialResults.clear();
 		// TROVARE UN MODO DECENTE PER FARE STA COSA
 		if(dataSnapshot.exists()) {
 			for (DataSnapshot snapshot : dataSnapshot.getChildren()) { 
-            	result = snapshot.getValue(Credential.class);
+				credentialResults.add(snapshot.getValue(Credential.class));
             }
 		}
-		else result = null;
-		
 	}
 
 	@Override

@@ -4,13 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import logic.controller.AddNewMountainPathController;
 import logic.controller.Controller;
@@ -18,6 +16,7 @@ import logic.model.bean.MountainPathBean;
 import logic.model.enums.DifficultyLevelEnum;
 import logic.model.enums.GroundEnum;
 import logic.model.enums.LandscapeEnum;
+import logic.model.exception.DatabaseException;
 
 public class AddNewMountainPathGraphicController extends GraphicController {
 	
@@ -130,11 +129,7 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 			// Disabilita l'inserimento di altre info
 			panePathInfo.setDisable(true);
 			// Mostra il messaggio di errore
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setHeaderText("Add new path error");
-			alert.setContentText("Mountain path with entered name already exists");
-
-			alert.showAndWait();
+			showError("Add new path error", "Mountain path with entered name already exists");
 		}
 	}
 	
@@ -157,7 +152,13 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 		newPathBean.setHours(Integer.parseInt(txtHours.getText()));
 		newPathBean.setMinutes(Integer.parseInt(txtMinutes.getText()));
 		//gestire salvataggio immagine
-		getAddNewMountainPathController().saveNewMountainPath(newPathBean);
+		
+		// Chiama il metodo del controller applicativo per il salvataggio del nuovo mountain path
+		try {
+			getAddNewMountainPathController().saveNewMountainPath(newPathBean);
+		} catch (DatabaseException e) {
+			showDatabaseError();
+		}
 	}
 	
 	@Override

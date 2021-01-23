@@ -1,14 +1,9 @@
 package logic.model;
 
 import java.util.List;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import logic.model.dao.MountainPathDao;
 import logic.model.enums.DifficultyLevelEnum;
 import logic.model.enums.GroundEnum;
 import logic.model.enums.LandscapeEnum;
-import logic.model.exception.DatabaseException;
 
 public class MountainPath {
 	private String name;
@@ -26,33 +21,9 @@ public class MountainPath {
 	private Integer numberOfVotes;
 	private Integer vote;
 	
-	private static MountainPathDao mountainPathDAO = new MountainPathDao();
-	
-	private static final Logger LOGGER = Logger.getLogger(MountainPath.class.getName());
-	
 	public MountainPath() {
 		this.location = new Location();
 		this.travelTime = new Time();
-	}
-	
-	public static List<MountainPath> searchMountainPathByPartialName(String name) {
-		return mountainPathDAO.searchMountainPathByPartialName(name);
-	}
-	
-	public static List<MountainPath> searchMountainPathByName(String name) {
-		return mountainPathDAO.searchMountainPathByName(name);
-	}
-	
-	//public static List<MountainPath> searchMountainPathByFilters(Map<String, String> filters){	 
-//	}
-	
-	public void saveMountainPathOnDb() {
-		// Sto facendo il try catch qui ma in realtà va propagata fino alla view penso
-		try {
-			mountainPathDAO.saveNewMountainPathOnDB(this);
-		} catch (DatabaseException e) {
-			LOGGER.log(Level.SEVERE, e.toString(),e);
-		}
 	}
 
 	public String getName() {

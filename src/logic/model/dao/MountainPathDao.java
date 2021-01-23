@@ -33,15 +33,13 @@ public class MountainPathDao extends Dao {
 		}
 	}
 	
-	public List<MountainPath> searchMountainPathByName(String name) {
-		mountainPathResult.clear();
+	public MountainPath searchMountainPathByName(String name) {
 		Query query = this.dbReference.orderByChild("name").equalTo(name);
 		readData(query);
-		return mountainPathResult;
+		return mountainPathResult.size()>0 ? mountainPathResult.get(0) : null;
 	}
 	
 	public List<MountainPath> searchMountainPathByPartialName(String pathName) {
-		mountainPathResult.clear();
 		//Creo la query al database
 		Query query = this.dbReference.orderByChild("name").startAt(pathName).endAt(pathName+"\uf8ff");
 		readData(query);
@@ -57,6 +55,7 @@ public class MountainPathDao extends Dao {
 	
 	@Override
 	public void onReadSuccess(DataSnapshot dataSnapshot) {
+		mountainPathResult.clear();
 		if (dataSnapshot.exists()) {
             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {          	
             	MountainPath mountainPath = snapshot.getValue(MountainPath.class);

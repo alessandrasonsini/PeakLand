@@ -100,8 +100,6 @@ public abstract class Dao implements OnGetDataListener {
 		
 	}
 	
-	
-	
 	@Override
 	public abstract void onReadSuccess(DataSnapshot dataSnapshot);
 	

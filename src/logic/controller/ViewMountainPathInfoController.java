@@ -34,6 +34,7 @@ public class ViewMountainPathInfoController extends Controller {
 		for(MountainPath path : searchResults) {
 				this.searchResults.add(beanFactory.getSimpleMountainPath(path));
 		}
+		sortResultsByVote(this.searchResults);
 		return this.searchResults;
 	}
 	
@@ -63,6 +64,11 @@ public class ViewMountainPathInfoController extends Controller {
 	
 	public List<SimpleMountainPathBean> getPreviousSearchResults(){
 		return this.searchResults;
+	}
+	
+	private List<SimpleMountainPathBean> sortResultsByVote(List<SimpleMountainPathBean> results){
+		// dummy
+		return results;
 	}
 	
 	@Override
