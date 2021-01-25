@@ -13,8 +13,6 @@ public class MountainPathBean extends SimpleMountainPathBean {
 	private Boolean historicalElements;
 	private Boolean familySuitable;
 	private Integer lenght;
-	
-
 	//private image
 	
 	public Integer getLenght() {

@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.Query;
 import logic.model.MountainPath;
@@ -26,10 +25,12 @@ public class MountainPathDao extends Dao {
 	
 	public void saveNewMountainPathOnDB(MountainPath mountainPath) throws DatabaseException {
 		Map<String, Object> paths = new HashMap<>();
+		
 		// Inserimento di ID (costituito dal nome) e dei dati del mountainPath
 		String standardName = standardizeName(mountainPath.getName());
 		mountainPath.setName(standardName);
 		paths.put(mountainPath.getName(), (Object)mountainPath);
+		
 		// Aggiunta del path al nodo MountainPath del DB
 		if(!writeData(paths)) {
 			// se fallisce
@@ -76,7 +77,7 @@ public class MountainPathDao extends Dao {
 	// Standardizza i nomi dei mountain path rendendo maiuscola la prima lettera prima di operare sul db
 	private String standardizeName(String name) {
 		String standardName = name;
-		if(name != null && name.length()>0) {
+		if(name != null && name.length() > 0) {
 			standardName = name.substring(0,1).toUpperCase();
 			if(name.length() > 1)
 				standardName += name.substring(1); 

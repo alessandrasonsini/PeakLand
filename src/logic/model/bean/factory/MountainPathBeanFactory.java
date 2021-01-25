@@ -12,15 +12,26 @@ public class MountainPathBeanFactory {
 		bean.setRegion(path.getLocation().getRegion());
 		bean.setProvince(path.getLocation().getProvince());
 		bean.setCity(path.getLocation().getCity());
-		bean.setLevel(path.getLevel());
+		bean.setLevel(path.getLevel().toString());
 		bean.setHours((path.getTravelTime().getHours()));
 		bean.setMinutes((path.getTravelTime().getMinutes()));
 		bean.setVote(path.getVote());
 		bean.setNumberOfVotes(path.getNumberOfVotes());
 		bean.setAltitude(path.getAltitude());
-		bean.setLandscape(path.getLandscape());
-		bean.setGround(path.getGround()); 
-		bean.setCycle(path.isCycleble());
+		
+		String[] landscape = new String[path.getLandscape().size()];
+		for (int i = 0; i < path.getLandscape().size(); i++) {
+			landscape[i] = path.getLandscape().get(i).toString();
+		}
+		bean.setLandscape(landscape);
+		
+		String[] ground = new String[path.getGround().size()];
+		for (int i = 0; i < path.getGround().size(); i++) {
+			ground[i] = path.getGround().get(i).toString();
+		}
+		bean.setGround(ground); 
+		
+		bean.setCycleble(path.isCycleble());
 		bean.setHistoricalElements(path.isHistoricalElements());
 		bean.setFamilySuitable(path.isFamilySuitable());
 		bean.setLenght(path.getLenght());

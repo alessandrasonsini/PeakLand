@@ -1,0 +1,118 @@
+@charset "UTF-8";
+
+html, body {
+ 	height: 100%;
+}
+
+.background-orange {
+	background-color: #fbc9a8
+}
+
+.fill { 
+    min-height: 100%;
+    height: 100%;
+}
+
+.search-form {
+	margin-top: 45%;
+	padding-left: 5%;
+	padding-right: 0%;
+}
+
+.btn-ass-research {
+	color: #000;
+	background-color: #f69155;
+	float: center;
+}
+
+.card-view-simple-path {
+	background-color: #CCE3C9;
+	margin-top: 3%;
+}
+
+.img-responsive {
+	display: inline-block;
+	margin-left: auto;
+  	margin-right: auto;
+  	padding-top: 2%;
+  	padding-bottom: 2%;
+	width: auto;
+	min-height: 100%;
+}
+
+.path-name-font {
+  	font-weight: bold;
+  	font-size: 170%;
+}
+
+.icons {
+	padding-top: 5%;
+	max-width: 60%;
+	max-height: 53%;
+	min-width: 40%;
+	min-height: 31%;
+}
+
+.text {
+  	font-size: 120%;
+  	padding-top: 5%;
+  	vertical-align: bottom;
+}
+
+.green-text {
+	color: #CCE3C9;
+	padding-bottom: 2%;
+}
+
+.black-text {
+	color: #000000;
+	padding-bottom: 2%;
+}
+
+.rotate-180 {
+	 -moz-transform: rotate(180deg);
+	 -webkit-transform: rotate(180deg);
+	 -o-transform: rotate(180deg);
+	 -ms-transform: rotate(180deg);
+	 transform: rotate(180deg);
+}
+
+.arrows {
+	max-width: 20%;
+	max-height: 18%;
+	min-width: 20%;
+	min-height: 18%;
+	margin-top: 70%;
+}
+
+.photos {
+	max-width: 90%;
+	max-height: 80%;
+	min-width: 90%;
+	min-height: 80%;
+}
+
+.stars {
+	max-width: 30%;
+	min-width: 30%;
+	max-height: 19%;
+	margin-left: 0px;
+  	margin-right: 0px;
+  	padding-left: 0px;
+  	padding-right: 0px;
+  	padding-top: 5%;
+  	padding-bottom: 5%;
+}
+
+.link {
+	max-width: 20%;
+	max-height: 18%;
+	min-width: 20%;
+	min-height: 18%;
+	margin-top: 4%;
+}
+
+.btn-save-path {
+	color: #000;
+	background-color: #fbc9a8;
+}

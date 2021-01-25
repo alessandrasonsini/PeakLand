@@ -1,6 +1,6 @@
 package logic.view.desktop.graphic_controller;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,9 +13,6 @@ import javafx.scene.layout.AnchorPane;
 import logic.controller.AddNewMountainPathController;
 import logic.controller.Controller;
 import logic.model.bean.MountainPathBean;
-import logic.model.enums.DifficultyLevelEnum;
-import logic.model.enums.GroundEnum;
-import logic.model.enums.LandscapeEnum;
 import logic.model.exception.DatabaseException;
 
 public class AddNewMountainPathGraphicController extends GraphicController {
@@ -113,6 +110,10 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 	@FXML
 	private AnchorPane panePathInfo;
 	
+	
+	private List<CheckBox> landscapeList = Arrays.asList(this.ckBoxMountain, this.ckBoxLake, this.ckBoxSea);
+	private List<CheckBox> groundList = Arrays.asList(this.ckBoxRock, this.ckBoxGrass, this.ckBoxWood);
+	
 	public AddNewMountainPathGraphicController(Controller controller) {
 		super(controller);
 		panePathInfo.setDisable(true);
@@ -143,10 +144,10 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 		newPathBean.setProvince(txtProvince.getText());
 		newPathBean.setCity(txtCity.getText());
 		newPathBean.setLenght(Integer.parseInt(txtLenght.getText()));
-		newPathBean.setLevel(DifficultyLevelEnum.valueOf(( (RadioButton) levelGroup.getSelectedToggle()).getText().toUpperCase()));
+		newPathBean.setLevel(( (RadioButton) levelGroup.getSelectedToggle()).getText().toUpperCase());
 		newPathBean.setLandscape(checkSelectedLandscape());
 		newPathBean.setGround(checkSelectedGround());
-		newPathBean.setCycle(( (RadioButton) cycleGroup.getSelectedToggle()).getText().equals("Yes"));
+		newPathBean.setCycleble(( (RadioButton) cycleGroup.getSelectedToggle()).getText().equals("Yes"));
 		newPathBean.setHistoricalElements(( (RadioButton) histGroup.getSelectedToggle()).getText().equals("Yes"));
 		newPathBean.setFamilySuitable(( (RadioButton) famGroup.getSelectedToggle()).getText().equals("Yes"));
 		newPathBean.setHours(Integer.parseInt(txtHours.getText()));
@@ -166,35 +167,29 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 		return "addNewMountainPathLayout";
 	}
 	
-	//trovare il modo di farlo più elegantemente
-	private List<LandscapeEnum> checkSelectedLandscape(){
-		List<LandscapeEnum> checked = new ArrayList<>();
+	private String[] checkSelectedLandscape(){
+		String[] checked = new String[landscapeList.size()];
+		Integer count = 0;
 		
-		if (ckBoxMountain.isSelected()) {
-			checked.add(LandscapeEnum.valueOf(ckBoxMountain.getText().toUpperCase()));
-		}
-		if (ckBoxLake.isSelected()) {
-			checked.add(LandscapeEnum.valueOf(ckBoxLake.getText().toUpperCase()));
-		}
-		if (ckBoxSea.isSelected()) {
-			checked.add(LandscapeEnum.valueOf(ckBoxSea.getText().toUpperCase()));
+		for (CheckBox box : landscapeList) {
+			if (box.isSelected()) {
+				checked[count] = box.getText().toUpperCase();
+				count++;
+			}
 		}
 		
 		return checked;
 	}
 	
-	//trovare il modo di farlo più elegantemente
-	private List<GroundEnum> checkSelectedGround(){
-		List<GroundEnum> checked = new ArrayList<>();
+	private String[] checkSelectedGround(){
+		String[] checked = new String[groundList.size()];
+		Integer count = 0;
 		
-		if (ckBoxRock.isSelected()) {
-			checked.add(GroundEnum.valueOf(ckBoxRock.getText().toUpperCase()));
-		}
-		if (ckBoxGrass.isSelected()) {
-			checked.add(GroundEnum.valueOf(ckBoxGrass.getText().toUpperCase()));
-		}
-		if (ckBoxWood.isSelected()) {
-			checked.add(GroundEnum.valueOf(ckBoxWood.getText().toUpperCase()));
+		for (CheckBox box : groundList) {
+			if (box.isSelected()) {
+				checked[count] = box.getText().toUpperCase();
+				count++;
+			}
 		}
 		
 		return checked;

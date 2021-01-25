@@ -1,9 +1,8 @@
 package logic.model.dao;
 
-import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
@@ -40,14 +39,15 @@ public class DatabaseConnection {
 	}
 	
 	public void initializeConnection() {
-		try (FileInputStream serviceAccount = new FileInputStream(new java.io.File( "." ).getCanonicalPath() + "//peakland-54c42-firebase-adminsdk-cihqn-dace282633.json")) {
+		
+		try (InputStream serviceAccount = this.getClass().getClassLoader().getResourceAsStream("peakland-54c42-firebase-adminsdk-cihqn-dace282633.json")) {
 			FirebaseOptions options = FirebaseOptions.builder()
 				    .setCredentials(GoogleCredentials.fromStream(serviceAccount))
 				    .setDatabaseUrl("https://peakland-54c42-default-rtdb.europe-west1.firebasedatabase.app/")
 				    .build();
 			FirebaseApp.initializeApp(options);
-		}catch (Exception e) {
-			LOGGER.log(Level.SEVERE,e.toString(),e);
+		} catch (Exception e) {
+			LOGGER.log(Level.SEVERE, e.toString(), e);
 		}
 	}
 	

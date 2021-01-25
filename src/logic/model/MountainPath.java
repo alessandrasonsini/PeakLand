@@ -1,5 +1,6 @@
 package logic.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import logic.model.enums.DifficultyLevelEnum;
 import logic.model.enums.GroundEnum;
@@ -31,6 +32,7 @@ public class MountainPath {
 	}
 
 	public void setName(String name) {
+		System.out.println("setName : " + name);
 		this.name = name;
 	}
 
@@ -39,6 +41,7 @@ public class MountainPath {
 	}
 
 	public void setAltitude(Integer altitude) {
+		System.out.println("setAltitude : " + altitude);
 		this.altitude = altitude;
 	}
 
@@ -47,6 +50,7 @@ public class MountainPath {
 	}
 	
 	public void setLocation(Location loc) {
+		System.out.println("setLoc : " + loc);
 		this.location = loc;
 	}
 
@@ -56,6 +60,7 @@ public class MountainPath {
 
 
 	public void setLenght(Integer lenght) {
+		System.out.println("setLenght : " + lenght);
 		this.lenght = lenght;
 	}
 
@@ -63,55 +68,54 @@ public class MountainPath {
 		return level;
 	}
 
-	public void setLevel(DifficultyLevelEnum level) {
-		this.level = level;
+	public void setLevel(String level) {
+		System.out.println("setLevel : " + level);
+		this.level = DifficultyLevelEnum.valueOf(level);
 	}
-
 
 	public List<LandscapeEnum> getLandscape() {
 		return landscape;
 	}
 
-
-	public void setLandscape(List<LandscapeEnum> landscape) {
-		this.landscape = landscape;
+	public void setLandscape(String[] landscape) {
+		this.landscape = new ArrayList<LandscapeEnum>();
+		for (String str : landscape) {
+			System.out.println("setLandscape : " + str);
+			this.landscape.add(LandscapeEnum.valueOf(str));
+		}
 	}
-
 
 	public List<GroundEnum> getGround() {
 		return ground;
 	}
 
-
-	public void setGround(List<GroundEnum> ground) {
-		this.ground = ground;
+	public void setGround(String[] ground) {
+		this.ground = new ArrayList<GroundEnum>();
+		for (String str : ground) {
+			System.out.println("setGround : " + str);
+			this.ground.add(GroundEnum.valueOf(str));
+		}
 	}
-
 
 	public Boolean isCycleble() {
 		return cycleble;
 	}
 
-
 	public void setCycleble(Boolean cycle) {
 		this.cycleble = cycle;
 	}
-
 
 	public Boolean isHistoricalElements() {
 		return historicalElements;
 	}
 
-
 	public void setHistoricalElements(Boolean historicalElements) {
 		this.historicalElements = historicalElements;
 	}
 
-
 	public Boolean isFamilySuitable() {
 		return familySuitable;
 	}
-
 
 	public void setFamilySuitable(Boolean familySuitable) {
 		this.familySuitable = familySuitable;

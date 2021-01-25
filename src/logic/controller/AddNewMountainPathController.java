@@ -40,6 +40,7 @@ public class AddNewMountainPathController extends Controller {
 		
 		// Invoca il metodo del dao per salvare il mountain path sul db
 		new MountainPathDao().saveNewMountainPathOnDB(newMountainPath);
+
 	}
 
 	@Override
@@ -53,7 +54,6 @@ public class AddNewMountainPathController extends Controller {
 				nextPageId = null;
 		}
 		this.nextPageId = nextPageId;
-			
 	}
 
 }

@@ -14,6 +14,7 @@ public class ViewMountainPathInfoController extends Controller {
 	private SearchMountainPathController searchController;
 	private List<SimpleMountainPathBean> searchResults;
 
+
 	public ViewMountainPathInfoController() {
 		super();
 		// Prende l'istanza del controller che si occupa della search e che collabora nell'esecuzione del caso d'uso
@@ -21,7 +22,7 @@ public class ViewMountainPathInfoController extends Controller {
 		this.searchResults = new ArrayList<>();
 	}
 	
-	// Richiama il metodo del controllore applicativo Search per
+	//Richiama il metodo del controllore applicativo Search per
 	// effettuare la ricerca nel DB
 	public List<SimpleMountainPathBean> searchMountainPathByName(String name) {
 		this.searchResults.clear();
@@ -62,7 +63,7 @@ public class ViewMountainPathInfoController extends Controller {
 		setNextPageId("Back");
 	}
 	
-	public List<SimpleMountainPathBean> getPreviousSearchResults(){
+	public List<SimpleMountainPathBean> getPreviousSearchResults() {
 		return this.searchResults;
 	}
 	
@@ -70,6 +71,7 @@ public class ViewMountainPathInfoController extends Controller {
 		// dummy
 		return results;
 	}
+	
 	
 	@Override
 	public void setNextPageId(String action) {
@@ -89,7 +91,5 @@ public class ViewMountainPathInfoController extends Controller {
 		}
 		this.nextPageId = nextPageId;
 	}
-	
-	
 	
 }

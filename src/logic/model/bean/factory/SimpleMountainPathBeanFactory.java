@@ -12,7 +12,7 @@ public class SimpleMountainPathBeanFactory {
 		bean.setRegion(path.getLocation().getRegion());
 		bean.setProvince(path.getLocation().getProvince());
 		bean.setCity(path.getLocation().getCity());
-		bean.setLevel(path.getLevel());
+		bean.setLevel(path.getLevel().toString());
 		bean.setHours((path.getTravelTime().getHours()));
 		bean.setMinutes((path.getTravelTime().getMinutes()));
 		bean.setVote(path.getVote());

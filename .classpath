@@ -25,6 +25,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX11"/>
-	<classpathentry kind="lib" path="C:/Users/Federica/Desktop/ISPW/Librerie/controlsfx-11.0.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

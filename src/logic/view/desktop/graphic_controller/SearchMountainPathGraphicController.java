@@ -3,7 +3,6 @@ package logic.view.desktop.graphic_controller;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -39,7 +38,7 @@ public class SearchMountainPathGraphicController extends GraphicController {
 	
 	@FXML
 	private ListView<SimpleMountainPathBean> listViewMountainPath;
-	
+
 	public SearchMountainPathGraphicController(Controller controller) {
 		super(controller);
 		setupLayout(null);
@@ -101,7 +100,7 @@ public class SearchMountainPathGraphicController extends GraphicController {
 	protected String getFXMLFileName() {
 		return "searchPathLayout";
 	}
-
+	
 	@FXML
 	public void onListViewItemClicked(MouseEvent event) {
 		// Comunico al controller applicativo il mountain path selezionato

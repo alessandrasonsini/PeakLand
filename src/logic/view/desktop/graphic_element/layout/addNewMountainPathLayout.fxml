@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <AnchorPane>
          <children>
@@ -144,7 +144,7 @@
                         </AnchorPane>
                      </content>
                      <HBox.margin>
-                        <Insets bottom="60.0" />
+                        <Insets />
                      </HBox.margin>
                   </ScrollPane>
                </children>

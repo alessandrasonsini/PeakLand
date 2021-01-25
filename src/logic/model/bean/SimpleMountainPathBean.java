@@ -2,12 +2,10 @@ package logic.model.bean;
 
 import java.lang.reflect.Field;
 
-import logic.model.enums.DifficultyLevelEnum;
-
 public class SimpleMountainPathBean extends ItemBean {
 	
 	private String name;
-	private DifficultyLevelEnum level;
+	private String level;
 	private String region;
 	private String province;
 	private String city;
@@ -49,11 +47,11 @@ public class SimpleMountainPathBean extends ItemBean {
 		this.name = name;
 	}
 
-	public DifficultyLevelEnum getLevel() {
+	public String getLevel() {
 		return level;
 	}
 
-	public void setLevel(DifficultyLevelEnum level) {
+	public void setLevel(String level) {
 		this.level = level;
 	}
 
