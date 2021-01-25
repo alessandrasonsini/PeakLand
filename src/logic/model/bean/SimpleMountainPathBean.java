@@ -1,5 +1,7 @@
 package logic.model.bean;
 
+import java.lang.reflect.Field;
+
 import logic.model.enums.DifficultyLevelEnum;
 
 public class SimpleMountainPathBean extends ItemBean {
@@ -85,5 +87,9 @@ public class SimpleMountainPathBean extends ItemBean {
 
 	public void setNumberOfVotes(Integer numberOfVotes) {
 		this.numberOfVotes = numberOfVotes;
+	}
+	
+	public Field[] getFields() {
+		return SimpleMountainPathBean.class.getDeclaredFields();
 	}
 }

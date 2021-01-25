@@ -1,16 +1,14 @@
 package logic.model.bean;
 
+import java.lang.reflect.Field;
 
-import java.util.List;
-
-import logic.model.enums.GroundEnum;
-import logic.model.enums.LandscapeEnum;
+import org.apache.commons.lang3.ArrayUtils;
 
 public class MountainPathBean extends SimpleMountainPathBean {
 	
 	private Integer altitude;
-	private List<LandscapeEnum> landscape;
-	private List<GroundEnum> ground;
+	private String[] landscape;
+	private String[] ground;
 	private Boolean cycleble;
 	private Boolean historicalElements;
 	private Boolean familySuitable;
@@ -35,19 +33,19 @@ public class MountainPathBean extends SimpleMountainPathBean {
 		this.altitude = altitude;
 	}
 	
-	public List<LandscapeEnum> getLandscape() {
+	public String[] getLandscape() {
 		return landscape;
 	}
 
-	public void setLandscape(List<LandscapeEnum> landscape) {
+	public void setLandscape(String[] landscape) {
 		this.landscape = landscape;
 	}
 
-	public List<GroundEnum> getGround() {
+	public String[] getGround() {
 		return ground;
 	}
 
-	public void setGround(List<GroundEnum> ground) {
+	public void setGround(String[] ground) {
 		this.ground = ground;
 	}
 
@@ -55,7 +53,7 @@ public class MountainPathBean extends SimpleMountainPathBean {
 		return cycleble;
 	}
 	
-	public void setCycle(Boolean cycleble) {
+	public void setCycleble(Boolean cycleble) {
 		this.cycleble = cycleble;
 	}
 	
@@ -73,6 +71,11 @@ public class MountainPathBean extends SimpleMountainPathBean {
 	
 	public void setFamilySuitable(Boolean familySuitable) {
 		this.familySuitable = familySuitable;
+	}
+	
+	public Field[] getFields() {
+		Field[] myFields = ArrayUtils.addAll(this.getClass().getDeclaredFields(), super.getFields());
+		return myFields;
 	}
 	
 }
