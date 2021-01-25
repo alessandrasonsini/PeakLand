@@ -7,13 +7,14 @@ import logic.model.bean.MountainPathBean;
 import logic.model.bean.SimpleMountainPathBean;
 import logic.model.bean.factory.MountainPathBeanFactory;
 import logic.model.bean.factory.SimpleMountainPathBeanFactory;
+import logic.model.enums.DifficultyLevelEnum;
+import logic.model.enums.GroundEnum;
 
 public class ViewMountainPathInfoController extends Controller {
 	
 	private MountainPathBean selectedMountainPath;
 	private SearchMountainPathController searchController;
 	private List<SimpleMountainPathBean> searchResults;
-
 
 	public ViewMountainPathInfoController() {
 		super();
@@ -22,7 +23,7 @@ public class ViewMountainPathInfoController extends Controller {
 		this.searchResults = new ArrayList<>();
 	}
 	
-	//Richiama il metodo del controllore applicativo Search per
+	// Richiama il metodo del controllore applicativo Search per
 	// effettuare la ricerca nel DB
 	public List<SimpleMountainPathBean> searchMountainPathByName(String name) {
 		this.searchResults.clear();
@@ -63,7 +64,7 @@ public class ViewMountainPathInfoController extends Controller {
 		setNextPageId("Back");
 	}
 	
-	public List<SimpleMountainPathBean> getPreviousSearchResults() {
+	public List<SimpleMountainPathBean> getPreviousSearchResults(){
 		return this.searchResults;
 	}
 	
@@ -72,6 +73,18 @@ public class ViewMountainPathInfoController extends Controller {
 		return results;
 	}
 	
+	public List<SimpleMountainPathBean> searchMountainPathByAssistedResearch(MountainPathBean wishPath){
+		wishPath = new MountainPathBean();
+		wishPath.setFamilySuitable(true);
+		wishPath.setCycleble(true);
+				
+		List<MountainPath> list = new ArrayList<>();
+		list = new ControllerFactory().getAssistedResearchController().searchMountainPathByFilter(wishPath);
+		for(MountainPath path : list) {
+			this.searchResults.add(new SimpleMountainPathBeanFactory().getSimpleMountainPath(path));
+		}
+		return this.searchResults;
+	}
 	
 	@Override
 	public void setNextPageId(String action) {
@@ -91,5 +104,7 @@ public class ViewMountainPathInfoController extends Controller {
 		}
 		this.nextPageId = nextPageId;
 	}
+	
+	
 	
 }

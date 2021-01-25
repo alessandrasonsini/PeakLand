@@ -36,6 +36,7 @@ public class MountainPathDao extends Dao {
 			// se fallisce
 			throw new DatabaseException();
 		}
+		
 	}
 	
 	public MountainPath searchMountainPathByName(String name) {
@@ -53,8 +54,22 @@ public class MountainPathDao extends Dao {
 	}
 	
 	public List<MountainPath> searchMountainPathbyFilter(String filterName, String filterValue){
-		mountainPathResult.clear();
 		Query query= this.dbReference.orderByChild(filterName).equalTo(filterValue);
+		return executeQuery(query);
+	}
+	
+	public List<MountainPath> searchMountainPathbyFilter(String filterName, Boolean filterValue){
+		Query query= this.dbReference.orderByChild(filterName).equalTo(filterValue);
+		return executeQuery(query);	
+	}
+	
+	public List<MountainPath> searchMountainPathbyFilter(String filterName, Integer filterValue){
+		Query query= this.dbReference.orderByChild(filterName).equalTo(filterValue);
+		return executeQuery(query);	
+	}
+	
+	private List<MountainPath> executeQuery(Query query){
+		mountainPathResult.clear();
 		readData(query);
 		return mountainPathResult;
 	}
