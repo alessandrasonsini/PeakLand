@@ -7,7 +7,7 @@
 
 <%
 	ViewMountainPathInfoController controller = (ViewMountainPathInfoController) session.getAttribute("controller");
-	MountainPathBean path = controller.getMountainPathInfo();
+	MountainPathBean path = controller.getSelectedMountainPath();
 %>
 
 <html>

@@ -109,7 +109,7 @@
 				<%
 				if (request.getParameter("selectedPathName") != null) {
 					%><%=request.getParameter("selectedPathName")%><%
-					controller.setSelectedItem(request.getParameter("selectedPathName"));
+					controller.setSelectedMountainPath(request.getParameter("selectedPathName"));
 					
 					%><jsp:forward page="viewMountainPathInfo.jsp"/><%
 				}

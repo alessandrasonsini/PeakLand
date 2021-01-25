@@ -46,9 +46,7 @@ public class SearchMountainPathGraphicController extends GraphicController {
 	
 	@FXML 
 	public void onAssistedResearchRequest(ActionEvent event) {
-		Button source = (Button)event.getSource();
-		
-		// da fare
+		setupLayout(getViewMountainPathInfoController().searchMountainPathByAssistedResearch(null));
 	}
 	
 	@FXML

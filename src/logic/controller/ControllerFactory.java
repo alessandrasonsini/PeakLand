@@ -36,7 +36,11 @@ public class ControllerFactory {
 	}
 	
 	public LoginController getLoginController() {
-		return new LoginController();
-				
+		return new LoginController();		
 	}
+	
+	public AssistedResearchController getAssistedResearchController() {
+		return new AssistedResearchController()
+;	}
+	
 }

@@ -32,7 +32,6 @@ public class MountainPath {
 	}
 
 	public void setName(String name) {
-		System.out.println("setName : " + name);
 		this.name = name;
 	}
 
@@ -41,7 +40,6 @@ public class MountainPath {
 	}
 
 	public void setAltitude(Integer altitude) {
-		System.out.println("setAltitude : " + altitude);
 		this.altitude = altitude;
 	}
 
@@ -50,7 +48,6 @@ public class MountainPath {
 	}
 	
 	public void setLocation(Location loc) {
-		System.out.println("setLoc : " + loc);
 		this.location = loc;
 	}
 
@@ -60,7 +57,6 @@ public class MountainPath {
 
 
 	public void setLenght(Integer lenght) {
-		System.out.println("setLenght : " + lenght);
 		this.lenght = lenght;
 	}
 
@@ -69,7 +65,6 @@ public class MountainPath {
 	}
 
 	public void setLevel(String level) {
-		System.out.println("setLevel : " + level);
 		this.level = DifficultyLevelEnum.valueOf(level);
 	}
 
@@ -80,7 +75,6 @@ public class MountainPath {
 	public void setLandscape(String[] landscape) {
 		this.landscape = new ArrayList<LandscapeEnum>();
 		for (String str : landscape) {
-			System.out.println("setLandscape : " + str);
 			this.landscape.add(LandscapeEnum.valueOf(str));
 		}
 	}
@@ -92,7 +86,6 @@ public class MountainPath {
 	public void setGround(String[] ground) {
 		this.ground = new ArrayList<GroundEnum>();
 		for (String str : ground) {
-			System.out.println("setGround : " + str);
 			this.ground.add(GroundEnum.valueOf(str));
 		}
 	}

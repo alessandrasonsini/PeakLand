@@ -1,7 +1,9 @@
 package logic.view.desktop.graphic_controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -110,13 +112,14 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 	@FXML
 	private AnchorPane panePathInfo;
 	
-	
-	private List<CheckBox> landscapeList = Arrays.asList(this.ckBoxMountain, this.ckBoxLake, this.ckBoxSea);
-	private List<CheckBox> groundList = Arrays.asList(this.ckBoxRock, this.ckBoxGrass, this.ckBoxWood);
+	private List<CheckBox> ground;
+	private List<CheckBox> landscape;
 	
 	public AddNewMountainPathGraphicController(Controller controller) {
 		super(controller);
 		panePathInfo.setDisable(true);
+		ground = new ArrayList<>(Arrays.asList(ckBoxGrass,ckBoxRock,ckBoxWood));
+		landscape = new ArrayList<>(Arrays.asList(ckBoxMountain,ckBoxSea,ckBoxLake));
 	}
 
 	@FXML 
@@ -144,9 +147,9 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 		newPathBean.setProvince(txtProvince.getText());
 		newPathBean.setCity(txtCity.getText());
 		newPathBean.setLenght(Integer.parseInt(txtLenght.getText()));
-		newPathBean.setLevel(( (RadioButton) levelGroup.getSelectedToggle()).getText().toUpperCase());
-		newPathBean.setLandscape(checkSelectedLandscape());
-		newPathBean.setGround(checkSelectedGround());
+		newPathBean.setLevel(((RadioButton) levelGroup.getSelectedToggle()).getText().toUpperCase());
+		newPathBean.setLandscape(checkSelectedBox(landscape));
+		newPathBean.setGround(checkSelectedBox(ground));
 		newPathBean.setCycleble(( (RadioButton) cycleGroup.getSelectedToggle()).getText().equals("Yes"));
 		newPathBean.setHistoricalElements(( (RadioButton) histGroup.getSelectedToggle()).getText().equals("Yes"));
 		newPathBean.setFamilySuitable(( (RadioButton) famGroup.getSelectedToggle()).getText().equals("Yes"));
@@ -167,32 +170,13 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 		return "addNewMountainPathLayout";
 	}
 	
-	private String[] checkSelectedLandscape(){
-		String[] checked = new String[landscapeList.size()];
-		Integer count = 0;
-		
-		for (CheckBox box : landscapeList) {
-			if (box.isSelected()) {
-				checked[count] = box.getText().toUpperCase();
-				count++;
-			}
+	private String[] checkSelectedBox(List<CheckBox> checkBoxs) {
+		List<String> selected = new ArrayList<>();
+		for(CheckBox box : checkBoxs) {
+			if(box.isSelected())
+				selected.add(box.getText().toUpperCase());
 		}
-		
-		return checked;
-	}
-	
-	private String[] checkSelectedGround(){
-		String[] checked = new String[groundList.size()];
-		Integer count = 0;
-		
-		for (CheckBox box : groundList) {
-			if (box.isSelected()) {
-				checked[count] = box.getText().toUpperCase();
-				count++;
-			}
-		}
-		
-		return checked;
+		return Arrays.copyOf(selected.toArray(), selected.size(), String[].class);
 	}
 	
 	public AddNewMountainPathController getAddNewMountainPathController() {
