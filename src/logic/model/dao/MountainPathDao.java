@@ -74,7 +74,6 @@ public class MountainPathDao extends Dao {
 	private void executeQuery(Query query){
 		mountainPathResult.clear();
 		readData(query);
-		System.out.println(mountainPathResult.size());
 	}
 	
 	@Override

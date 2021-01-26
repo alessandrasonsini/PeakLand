@@ -73,9 +73,11 @@ public class ViewMountainPathInfoController extends Controller {
 	
 	public List<SimpleMountainPathBean> searchMountainPathByAssistedResearch(MountainPathBean wishPath){
 		wishPath = new MountainPathBean();
-		wishPath.setFamilySuitable(true);
-		wishPath.setCycleble(true);
-				
+		//wishPath.setFamilySuitable(true);
+		//wishPath.setCycleble(true);
+		//String[] ground = {"ROCK","GRASS"};
+		//wishPath.setGround(ground);
+		wishPath.setRegion("Abruzzo");		
 		List<MountainPath> list = new ArrayList<>();
 		list = new ControllerFactory().getAssistedResearchController().searchMountainPathByFilter(wishPath);
 		for(MountainPath path : list) {
