@@ -55,32 +55,35 @@ public class MountainPathDao extends Dao {
 	
 	public List<MountainPath> searchMountainPathbyFilter(String filterName, String filterValue){
 		Query query= this.dbReference.orderByChild(filterName).equalTo(filterValue);
-		return executeQuery(query);
+		executeQuery(query);
+		return mountainPathResult;
 	}
 	
 	public List<MountainPath> searchMountainPathbyFilter(String filterName, Boolean filterValue){
 		Query query= this.dbReference.orderByChild(filterName).equalTo(filterValue);
-		return executeQuery(query);	
+		executeQuery(query);	
+		return mountainPathResult;
 	}
 	
 	public List<MountainPath> searchMountainPathbyFilter(String filterName, Integer filterValue){
 		Query query= this.dbReference.orderByChild(filterName).equalTo(filterValue);
-		return executeQuery(query);	
+		executeQuery(query);
+		return mountainPathResult;
 	}
 	
-	private List<MountainPath> executeQuery(Query query){
+	private void executeQuery(Query query){
 		mountainPathResult.clear();
 		readData(query);
-		return mountainPathResult;
+		System.out.println(mountainPathResult.size());
 	}
 	
 	@Override
 	public void onReadSuccess(DataSnapshot dataSnapshot) {
 		mountainPathResult.clear();
 		if (dataSnapshot.exists()) {
-            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {          	
+            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {  
             	MountainPath mountainPath = snapshot.getValue(MountainPath.class);
-        		mountainPathResult.add(mountainPath);
+            	mountainPathResult.add(mountainPath);
             }
 		}
         else {

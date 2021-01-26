@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -17,7 +18,7 @@
          <children>
             <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefWidth="322.0" style="-fx-background-color: fbc9a8;">
+                  <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="322.0" style="-fx-background-color: fbc9a8;">
                      <children>
                         <TextField fx:id="txtSearch" layoutX="65.0" layoutY="186.0" maxHeight="15.0" onAction="#onSearchRequest" promptText="Search for a path..." AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="108.0" AnchorPane.topAnchor="186.0" />
                         <ImageView fx:id="imgSearch" fitHeight="25.0" fitWidth="25.0" layoutX="234.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="63.0">
@@ -37,15 +38,18 @@
                         </Button>
                      </children>
                   </AnchorPane>
-                  <AnchorPane HBox.hgrow="ALWAYS">
+                  <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="120.0" prefWidth="1000.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <ListView fx:id="listViewMountainPath" minWidth="1000.0" onMouseClicked="#onListViewItemClicked" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <ListView fx:id="listViewMountainPath" layoutY="4.0" maxWidth="-Infinity" minWidth="1000.0" onMouseClicked="#onListViewItemClicked" prefHeight="425.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="4.0" />
                         <Label fx:id="lbNoResults" layoutX="222.0" layoutY="192.0" prefHeight="29.0" prefWidth="574.0" textAlignment="CENTER" AnchorPane.leftAnchor="210.0" AnchorPane.rightAnchor="210.0">
                            <font>
                               <Font name="Maiandra GD" size="24.0" />
                            </font>
                         </Label>
                      </children>
+                     <padding>
+                        <Insets bottom="80.0" />
+                     </padding>
                   </AnchorPane>
                </children>
             </HBox>

@@ -25,6 +25,8 @@ public class MountainPath {
 	public MountainPath() {
 		this.location = new Location();
 		this.travelTime = new Time();
+		this.landscape = new ArrayList<>();
+		this.ground = new ArrayList<>();
 	}
 
 	public String getName() {
@@ -55,7 +57,6 @@ public class MountainPath {
 		return lenght;
 	}
 
-
 	public void setLenght(Integer lenght) {
 		this.lenght = lenght;
 	}
@@ -64,32 +65,42 @@ public class MountainPath {
 		return level;
 	}
 
-	public void setLevel(String level) {
+	public void setLevel(DifficultyLevelEnum level) {
+		this.level = level;
+	}
+	
+	public void setLevelFromString(String level) {
 		this.level = DifficultyLevelEnum.valueOf(level);
 	}
-
+	
 	public List<LandscapeEnum> getLandscape() {
 		return landscape;
 	}
-
-	public void setLandscape(String[] landscape) {
-		this.landscape = new ArrayList<LandscapeEnum>();
+	
+	public void setLandscape(List<LandscapeEnum> landscape) {
+		this.landscape = landscape;
+	}
+	
+	public void setLandscapeFromString(String[] landscape) {
 		for (String str : landscape) {
 			this.landscape.add(LandscapeEnum.valueOf(str));
 		}
 	}
-
+	
 	public List<GroundEnum> getGround() {
 		return ground;
 	}
 
-	public void setGround(String[] ground) {
-		this.ground = new ArrayList<GroundEnum>();
+	public void setGround(List<GroundEnum> ground) {
+		this.ground = ground;
+	}
+	
+	public void setGroundFromString(String[] ground) {
 		for (String str : ground) {
 			this.ground.add(GroundEnum.valueOf(str));
 		}
 	}
-
+	
 	public Boolean isCycleble() {
 		return cycleble;
 	}

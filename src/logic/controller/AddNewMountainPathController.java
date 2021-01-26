@@ -30,11 +30,11 @@ public class AddNewMountainPathController extends Controller {
 		newMountainPath.setAltitude(newPathBean.getAltitude());
 		newMountainPath.setCycleble(newPathBean.isCycleble());
 		newMountainPath.setFamilySuitable(newPathBean.isFamilySuitable());
-		newMountainPath.setGround(newPathBean.getGround());
+		newMountainPath.setGroundFromString(newPathBean.getGround());
 		newMountainPath.setHistoricalElements(newPathBean.isHistoricalElements());
-		newMountainPath.setLandscape(newPathBean.getLandscape());
+		newMountainPath.setLandscapeFromString(newPathBean.getLandscape());
 		newMountainPath.setLenght(newPathBean.getLenght());
-		newMountainPath.setLevel(newPathBean.getLevel());
+		newMountainPath.setLevelFromString(newPathBean.getLevel());
 		newMountainPath.setLocation(new Location(newPathBean.getRegion(),newPathBean.getProvince(),newPathBean.getCity()));
 		newMountainPath.setTravelTime(new Time(newPathBean.getHours(), newPathBean.getMinutes()));
 		

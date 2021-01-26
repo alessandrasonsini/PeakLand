@@ -7,8 +7,6 @@ import logic.model.bean.MountainPathBean;
 import logic.model.bean.SimpleMountainPathBean;
 import logic.model.bean.factory.MountainPathBeanFactory;
 import logic.model.bean.factory.SimpleMountainPathBeanFactory;
-import logic.model.enums.DifficultyLevelEnum;
-import logic.model.enums.GroundEnum;
 
 public class ViewMountainPathInfoController extends Controller {
 	
