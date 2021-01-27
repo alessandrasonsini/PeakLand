@@ -19,14 +19,13 @@
 		<!-- Bootstrap CSS -->
     	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
     	
+		<%@ include file="header.jsp" %>
+    	
     	<!-- import our CSS for body of the page -->
     	<link rel="stylesheet" href="body.css" type="text/css"/>
-    	
-		<%@ include file="header.jsp" %>
 	</head>
 	
 	<body>
-		
 		<div class="row fill">
 			<div class="col-3 background-orange">
 				<!-- text and assisted research button -->				
@@ -125,32 +124,32 @@
 									<div class="col"><div class="text" style="transform: translateY(-5%);">Vote:</div></div>
 									
 									<%
-									switch (path.getVote()) {
-										case 5:
+									switch (path.convertToText(path.getVote())) {
+										case "5":
 											%>
 											<div class="col-2" style="transform: translateY(-40%);">
 												<img src="Images/star.png" class="img-responsive stars">
 											</div>
 											<%	
-										case 4:
+										case "4":
 											%>
 											<div class="col-2" style="transform: translateY(-40%);">
 												<img src="Images/star.png" class="img-responsive stars">
 											</div>
 											<%	
-										case 3:
+										case "3":
 											%>
 											<div class="col-2" style="transform: translateY(-40%);">
 												<img src="Images/star.png" class="img-responsive stars">
 											</div>
 											<%
-										case 2:
+										case "2":
 											%>
 											<div class="col-2" style="transform: translateY(-40%);">
 												<img src="Images/star.png" class="img-responsive stars">
 											</div>
 											<%
-										case 1:
+										case "1":
 											%>
 											<div class="col-2" style="transform: translateY(-40%);">
 												<img src="Images/star.png" class="img-responsive stars">
@@ -195,6 +194,9 @@
 			</div>
 		</div>
 		
+	<!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+	
 	</body>
 	
 </html>

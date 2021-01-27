@@ -28,11 +28,12 @@
 		
 		<!-- Bootstrap CSS -->
     	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
-    	
-    	<!-- import our CSS for body of the page -->
+		
+		<%@ include file="header.jsp" %>
+		
+		<!-- import our CSS for body of the page -->
     	<link rel="stylesheet" href="body.css" type="text/css"/>
     	
-		<%@ include file="header.jsp" %>
 	</head>
 	<body>
 		<div class="row fill">
@@ -207,7 +208,7 @@
 							</div>
 						</div>
 						<div class="container" style="text-align: center;">
-							<button type="submit" name="savePath" value="savePath" class="btn btn-save-path" ${ sessionScope.disable eq true  ? 'disabled' : ''}>Save mountain path</button>
+							<button type="submit" name="savePath" value="savePath" class="btn btn-light-orange" ${ sessionScope.disable eq true  ? 'disabled' : ''}>Save mountain path</button>
 						</div>
 					</form>
 					
@@ -220,6 +221,14 @@
 				session.removeAttribute("disable");
 				controller.saveNewMountainPath(newPath);
 				session.removeAttribute("name");
+				%>
+				<div class="container" style="padding-top: 3%;">
+					<div class="alert alert-success alert-dismissible fade show" role="alert">
+						<strong>New path added successfully!</strong>
+					  	<a href="#" class="close" style="float: right;" data-dismiss="alert" aria-label="close">&times;</a>
+					</div>
+				</div>
+				<%
 			}
 			%>
 			

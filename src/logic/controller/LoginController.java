@@ -20,7 +20,6 @@ public class LoginController extends Controller {
 		super();
 		this.credentialDao = new CredentialDao();
 		this.loggedUserDao = new LoggedUserDao();
-		
 	}
 	
 	// Ritorna vero se esiste un'istanza dello user loggato corrente

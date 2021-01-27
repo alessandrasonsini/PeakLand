@@ -24,10 +24,18 @@
   	margin-bottom: 0;
 }
 
-.btn-primary {
-  color: #000;
-  background-color: #fbc9a8;
-  border-color: #f69155;
+.btn-primary.btn-nav {
+	color: #000;
+  	background-color: #fbc9a8;
+  	border-color: #f69155;
+}
+
+.btn-primary.btn-nav:focus,
+.btn-primaryc.btn-nav:active,
+.btn-primary.btn-nav:hover {
+	background-color: #f69155 !important;
+	border-color: #f69155 !important;
+	color: #000 !important;
 }
 
 .img-responsive {

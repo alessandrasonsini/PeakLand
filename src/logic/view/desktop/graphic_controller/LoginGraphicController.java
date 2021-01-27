@@ -39,7 +39,7 @@ public class LoginGraphicController extends GraphicController {
 	
 	protected LoginGraphicController(Controller controller) {
 		super(controller);
-		this.mandatoryFields = new ArrayList<>(Arrays.asList(txtUsername,txtPassword));
+		this.mandatoryFields = new ArrayList<>(Arrays.asList(txtUsername, txtPassword));
 	}
 	
 	@FXML
