@@ -12,19 +12,21 @@ public class ViewMountainPathInfoController extends Controller {
 	
 	private MountainPathBean selectedMountainPath;
 	private SearchMountainPathController searchController;
+	private AssistedResearchController assistedResearchController;
 	private List<SimpleMountainPathBean> searchResults;
 
 	public ViewMountainPathInfoController() {
 		super();
 		// Prende l'istanza del controller che si occupa della search e che collabora nell'esecuzione del caso d'uso
 		this.searchController = new ControllerFactory().getSearchMountainPathController();
-		this.searchResults = new ArrayList<>();
+		this.assistedResearchController = new ControllerFactory().getAssistedResearchController();
+		this.searchResults = null;
 	}
 	
 	// Richiama il metodo del controllore applicativo Search per
 	// effettuare la ricerca nel DB
 	public List<SimpleMountainPathBean> searchMountainPathByName(String name) {
-		this.searchResults.clear();
+		this.searchResults = new ArrayList<>();
 		
 		List<MountainPath> searchResults = searchController.searchMountainPathByPartialName(name);
 		
@@ -71,38 +73,42 @@ public class ViewMountainPathInfoController extends Controller {
 		return results;
 	}
 	
-	public List<SimpleMountainPathBean> searchMountainPathByAssistedResearch(MountainPathBean wishPath){
-		wishPath = new MountainPathBean();
-		//wishPath.setFamilySuitable(true);
-		//wishPath.setCycleble(true);
-		//String[] ground = {"ROCK","GRASS"};
-		//wishPath.setGround(ground);
-		wishPath.setRegion("Abruzzo");		
-		List<MountainPath> list = new ArrayList<>();
-		list = new ControllerFactory().getAssistedResearchController().searchMountainPathByFilter(wishPath);
-		for(MountainPath path : list) {
+	public void assistedResearchRequest() {
+		setNextPageId("Next assisted research");
+	}
+	
+	public List<SimpleMountainPathBean> searchMountainPathByAssistedResearch(MountainPathBean wishPath){		
+		this.searchResults = new ArrayList<>();
+		List<MountainPath> resultList = new ArrayList<>();
+		resultList = this.assistedResearchController.searchMountainPathByFilter(wishPath);
+		for(MountainPath path : resultList) {
 			this.searchResults.add(new SimpleMountainPathBeanFactory().getSimpleMountainPath(path));
 		}
+		setNextPageId("Done assisted research");
 		return this.searchResults;
 	}
 	
 	@Override
 	public void setNextPageId(String action) {
-		String nextPageId;
 		switch(action) {
 			case "init":
-				nextPageId = "Search path";
+				this.nextPageId = "Search path";
 				break;
 			case "Item selected":
-				nextPageId = "View info";
+				this.nextPageId = "View info";
 				break;	
 			case "Back":
-				nextPageId = "Search path";
-				break;		
+				this.nextPageId = searchController.getNextPageId();
+				break;
+			case "Next assisted research":
+				this.nextPageId = assistedResearchController.getNextPageId();
+				break;
+			case "Done assisted research":
+				this.nextPageId = searchController.getNextPageId();
+				break;
 			default:
-				nextPageId = null;
+				this.nextPageId = null;
 		}
-		this.nextPageId = nextPageId;
 	}
 	
 	

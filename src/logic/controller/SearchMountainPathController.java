@@ -28,7 +28,9 @@ public class SearchMountainPathController extends Controller {
 
 	@Override
 	public void setNextPageId(String action) {
-		// TODO Auto-generated method stub
+		if(action.equals("init"))
+			this.nextPageId = "Search path";
+		else this.nextPageId = null;
 	}
 	
 	

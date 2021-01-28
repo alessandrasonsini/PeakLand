@@ -84,15 +84,9 @@ public class LoginController extends Controller {
 	
 	@Override
 	public void setNextPageId(String action) {
-		String nextPageId;
-		switch(action) {
-			case "init":
-				nextPageId = "Login";
-				break;
-			default: 
-				nextPageId = null;
-		}
-		this.nextPageId = nextPageId;
+		if(action.equals("init"))
+			this.nextPageId = "Login";
+		else this.nextPageId = null;
 			
 	}
 }

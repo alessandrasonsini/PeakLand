@@ -4,7 +4,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.EnumSet;
 import java.util.List;
 
 import logic.model.MountainPath;
@@ -14,7 +13,7 @@ import logic.model.dao.MountainPathDao;
 public class AssistedResearchController extends Controller {
 
 	private MountainPathDao mountainPathDao;
-	private List<String> intersectionResult = null;
+	private List<String> intersectionResult;
 
 	public AssistedResearchController() {
 		super();
@@ -23,6 +22,7 @@ public class AssistedResearchController extends Controller {
 
 	@SuppressWarnings("unchecked")
 	public List<MountainPath> searchMountainPathByFilter(MountainPathBean wishPath) {
+		this.intersectionResult = null;
 		String fieldName;
 		List<MountainPath> firstResult = null;
 		// Chiama il metodo della bean che restituisce tutti i suoi Fields tramite la reflection
@@ -85,7 +85,7 @@ public class AssistedResearchController extends Controller {
 		}	
 		else {
 			// Mantiene solo i nomi comuni alle due liste
-			this.intersectionResult.containsAll(newResultName);
+			this.intersectionResult.retainAll(newResultName);
 		}
 	}
 	
@@ -154,15 +154,9 @@ public class AssistedResearchController extends Controller {
 
 	@Override
 	public void setNextPageId(String action) {
-		String nextPageId;
-		switch (action) {
-		case "init":
-			nextPageId = "Assisted research";
-			break;
-		default:
-			nextPageId = null;
-		}
-		this.nextPageId = nextPageId;
+		if(action.equals("init"))
+			this.nextPageId = "Assisted research";
+		else this.nextPageId = null;
 
 	}
 
