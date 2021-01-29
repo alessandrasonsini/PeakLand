@@ -219,7 +219,7 @@
 			<%
 			if (request.getParameter("savePath") != null) {
 				session.removeAttribute("disable");
-				controller.saveNewMountainPath(newPath);
+				controller.saveNewMountainPath(newPath,(Integer)session.getAttribute("sessionId"));
 				session.removeAttribute("name");
 				%>
 				<div class="container" style="padding-top: 3%;">

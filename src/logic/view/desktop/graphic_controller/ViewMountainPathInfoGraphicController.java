@@ -1,5 +1,8 @@
 package logic.view.desktop.graphic_controller;
 
+import java.io.ByteArrayInputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -7,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import logic.controller.Controller;
 import logic.controller.ViewMountainPathInfoController;
@@ -56,10 +60,7 @@ public class ViewMountainPathInfoGraphicController extends GraphicController{
 	private Label lbFam;
 
 	@FXML
-	private Label lbHours;
-	
-	@FXML
-	private Label lbMinutes;
+	private Label lbTime;
 	
 	@FXML
 	private Label lbVotesNumber;
@@ -82,6 +83,21 @@ public class ViewMountainPathInfoGraphicController extends GraphicController{
 	@FXML
 	private ImageView imageStar5;
 	
+	@FXML
+	private ImageView imgMountainPath;
+	
+	@FXML
+	private ImageView imgProfile;
+	
+	@FXML
+	private Button btnPrevImg;
+	
+	@FXML
+	private Button btnNextImg;
+	
+	private List<Image> selectedMountainPathImages;
+	private int currentImageNumber = -1;
+	
 	
 	public ViewMountainPathInfoGraphicController(Controller controller) {
 		super(controller);
@@ -90,10 +106,51 @@ public class ViewMountainPathInfoGraphicController extends GraphicController{
 		MountainPathBean selectedMountainPath = getViewMountainPathInfoController().getSelectedMountainPath();
 		
 		// GESTIRE CONTROLLO IN CASO DI BEAN == NULL
-		if (selectedMountainPath != null)
+		if (selectedMountainPath != null) {
+			this.getImages();
 			this.setupLayout(selectedMountainPath);
+		}
+			
 		else
 			LOGGER.log(Level.FINE, "No parameters inserted");
+		
+	}
+	
+	@FXML
+	public void onChangeImage(ActionEvent event) {
+		if(((Button)event.getSource()).getId().equals("btnPrevImg"))
+			this.currentImageNumber--;
+		else 
+			this.currentImageNumber++;
+		setupImage();
+	}
+	
+	private void enableCorrectButtons() {
+		if(this.currentImageNumber == 0)
+			this.btnPrevImg.setVisible(false);
+		else 
+			this.btnPrevImg.setVisible(true);
+		if(this.selectedMountainPathImages.size() -1 - this.currentImageNumber <= 0)
+			this.btnNextImg.setVisible(false);
+		else 
+			this.btnNextImg.setVisible(true);
+	}
+	
+	private void setupImage() {
+		if(this.currentImageNumber == -1) {
+			this.currentImageNumber = 0;
+			imgProfile.setImage(this.selectedMountainPathImages.get(this.currentImageNumber));
+		}
+		
+		imgMountainPath.setImage(this.selectedMountainPathImages.get(this.currentImageNumber));
+		this.enableCorrectButtons();
+	}
+	
+	private void getImages() {
+		this.selectedMountainPathImages = new ArrayList<>();
+		List<ByteArrayInputStream> streams = getViewMountainPathInfoController().getImageStreams();
+		for(ByteArrayInputStream stream : streams)
+			this.selectedMountainPathImages.add(new Image(stream));
 	}
 
 	@Override
@@ -128,8 +185,7 @@ public class ViewMountainPathInfoGraphicController extends GraphicController{
 		lbCycleable.setText(selectedMountainPath.convertToText(selectedMountainPath.isCycleble()));
 		lbHistElements.setText(selectedMountainPath.convertToText(selectedMountainPath.isHistoricalElements()));
 		lbFam.setText(selectedMountainPath.convertToText(selectedMountainPath.isFamilySuitable()));
-		lbHours.setText(selectedMountainPath.convertToText(selectedMountainPath.getHours()));
-		lbMinutes.setText(selectedMountainPath.convertToText(selectedMountainPath.getMinutes()));
+		lbTime.setText(selectedMountainPath.convertToText(selectedMountainPath.getHours()) + " : " + selectedMountainPath.convertToText(selectedMountainPath.getMinutes()));
 		lbVotesNumber.setText(selectedMountainPath.convertToText(selectedMountainPath.getNumberOfVotes()));
 		
 		switch(selectedMountainPath.convertToText(selectedMountainPath.getVote())) {
@@ -147,7 +203,13 @@ public class ViewMountainPathInfoGraphicController extends GraphicController{
 			default:
 				lbVote.setText(selectedMountainPath.convertToText(selectedMountainPath.getVote()));
 				lbVote.setVisible(true);
-				break;
+				break;		
 		}
+		
+		if(!this.selectedMountainPathImages.isEmpty()) {
+			setupImage();
+		}
+		
+		
 	}
 }

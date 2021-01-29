@@ -1,21 +1,27 @@
 package logic.view.desktop.graphic_controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import logic.controller.AddNewMountainPathController;
 import logic.controller.Controller;
 import logic.model.bean.MountainPathBean;
 import logic.model.exception.DatabaseException;
+import logic.model.exception.TooManyImagesException;
 
 public class AddNewMountainPathGraphicController extends GraphicController {
 	
@@ -110,6 +116,9 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 	private TextField txtProvince;
 	
 	@FXML
+	private Label lbLoad;
+	
+	@FXML
 	private AnchorPane panePathInfo;
 	
 	private List<CheckBox> ground;
@@ -120,6 +129,8 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 		panePathInfo.setDisable(true);
 		ground = new ArrayList<>(Arrays.asList(ckBoxGrass,ckBoxRock,ckBoxWood));
 		landscape = new ArrayList<>(Arrays.asList(ckBoxMountain,ckBoxSea,ckBoxLake));
+		lbLoad.setText("");
+	
 	}
 
 	@FXML 
@@ -134,6 +145,17 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 			panePathInfo.setDisable(true);
 			// Mostra il messaggio di errore
 			showError("Add new path error", "Mountain path with entered name already exists");
+		}
+	}
+	
+	@FXML
+	public void onLoadPhoto(ActionEvent event) {
+		List<File> selectedFileList = new FileChooser().showOpenMultipleDialog(null);
+		try {
+			getAddNewMountainPathController().setMountainPathImages(selectedFileList);
+			lbLoad.setText("Images loaded");
+		} catch (TooManyImagesException e) {
+			this.showError("Load error", "Too many images selected");
 		}
 	}
 	
@@ -159,10 +181,15 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 		
 		// Chiama il metodo del controller applicativo per il salvataggio del nuovo mountain path
 		try {
-			getAddNewMountainPathController().saveNewMountainPath(newPathBean);
+			getAddNewMountainPathController().saveNewMountainPath(newPathBean, MainGraphicController.getInstance().getSessionId());
 		} catch (DatabaseException e) {
 			showDatabaseError();
 		}
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setHeaderText("Add succeded");
+		alert.setContentText("The new mountain path is now on the system ");
+
+		alert.showAndWait();
 	}
 	
 	@Override

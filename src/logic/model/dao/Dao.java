@@ -1,9 +1,19 @@
 package logic.model.dao;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import com.google.api.gax.paging.Page;
+import com.google.cloud.storage.Blob;
+import com.google.cloud.storage.Blob.BlobSourceOption;
+import com.google.cloud.storage.Bucket;
+import com.google.cloud.storage.Storage;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -97,11 +107,35 @@ public abstract class Dao implements OnGetDataListener {
 			}
 		}
 		return writeCompleted;
-		
+	}
+	
+	public List<ByteArrayInputStream> getImagesStream(String directory) {
+		Page<Blob> blobs = getStorageReference().list(Storage.BlobListOption.prefix(directory));
+		List<ByteArrayInputStream> imageStreams = new ArrayList<>();
+		for(Blob blob : blobs.iterateAll()) {
+			imageStreams.add(new ByteArrayInputStream(blob.getContent(BlobSourceOption.generationMatch())));
+		}
+		return imageStreams;
+	}
+	
+	public void uploadImage(List<File> images, String directory) {
+		int imgNumber = images.size();
+		for(int i = 0; i < imgNumber; i++) {
+			try {
+				getStorageReference().create(directory + "/" + String.valueOf(i) + ".jpeg", new FileInputStream(images.get(i)),Bucket.BlobWriteOption.doesNotExist());
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	@Override
 	public abstract void onReadSuccess(DataSnapshot dataSnapshot);
 	
 	protected abstract String getChild(); 
+	
+	protected Bucket getStorageReference() {
+		return this.dbConnection.getStorageReference();
+	}
 }

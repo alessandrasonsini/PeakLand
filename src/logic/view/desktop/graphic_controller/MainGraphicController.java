@@ -89,6 +89,10 @@ public class MainGraphicController extends GraphicController {
 		this.executeAction(convertAction(prevPressed.getId()));
 	}
 	
+	public Integer getSessionId() {
+		return this.sessionId;
+	}
+	
 	private MainController getMainController() {
 		return (MainController)myController;
 	}

@@ -1,5 +1,6 @@
 package logic.controller;
 
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
 import logic.model.MountainPath;
@@ -7,6 +8,7 @@ import logic.model.bean.MountainPathBean;
 import logic.model.bean.SimpleMountainPathBean;
 import logic.model.bean.factory.MountainPathBeanFactory;
 import logic.model.bean.factory.SimpleMountainPathBeanFactory;
+import logic.model.dao.MountainPathDao;
 
 public class ViewMountainPathInfoController extends Controller {
 	
@@ -54,6 +56,10 @@ public class ViewMountainPathInfoController extends Controller {
 		
 		// Aggiorno il nextPageId
 		setNextPageId("Item selected");
+	}
+	
+	public List<ByteArrayInputStream> getImageStreams(){
+		return new MountainPathDao().getImagesStream("Mountain path/" + this.selectedMountainPath.getName());
 	}
 	
 	public MountainPathBean getSelectedMountainPath() {

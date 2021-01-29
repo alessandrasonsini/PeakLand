@@ -1,16 +1,27 @@
 package logic.controller;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import logic.controller.utils.CurrentLoggedUsers;
 import logic.model.Location;
 import logic.model.MountainPath;
 import logic.model.Time;
 import logic.model.bean.MountainPathBean;
 import logic.model.dao.MountainPathDao;
 import logic.model.exception.DatabaseException;
+import logic.model.exception.TooManyImagesException;
 
 public class AddNewMountainPathController extends Controller {
 	
+	private static final int MAXIMAGES = 5;
+	
+	private List<File> pathImages;
+	
 	public AddNewMountainPathController() {
 		super();
+		pathImages = new ArrayList<>();
 	}
 	
 	// Controlla se il nome inserito è già esistente sul db
@@ -21,7 +32,7 @@ public class AddNewMountainPathController extends Controller {
 		return (new ControllerFactory().getSearchMountainPathController().searchMountainPathByName(nameToSearch) == null);
 	}
 	
-	public void saveNewMountainPath(MountainPathBean newPathBean) throws DatabaseException {
+	public void saveNewMountainPath(MountainPathBean newPathBean, Integer sessionId) throws DatabaseException {
 		// A partire dalla bean, costruisce l'entità mountain path da salvare
 		MountainPath newMountainPath = new MountainPath();
 		
@@ -38,9 +49,20 @@ public class AddNewMountainPathController extends Controller {
 		newMountainPath.setLocation(new Location(newPathBean.getRegion(),newPathBean.getProvince(),newPathBean.getCity()));
 		newMountainPath.setTravelTime(new Time(newPathBean.getHours(), newPathBean.getMinutes()));
 		
-		// Invoca il metodo del dao per salvare il mountain path sul db
-		new MountainPathDao().saveNewMountainPathOnDB(newMountainPath);
+		// Invoca il metodo del dao per salvare il mountain path sul db e le immagini inserite
+		MountainPathDao mountainPathDao = new MountainPathDao();
+		mountainPathDao.saveNewMountainPathOnDB(newMountainPath);
+		mountainPathDao.uploadImage(this.pathImages, "Mountain path/" + newMountainPath.getName() + "/" + CurrentLoggedUsers.getInstance().getCurrentLoggedUser(sessionId).getUsername());
+		
 
+	}
+	
+	public void setMountainPathImages(List<File> images) throws TooManyImagesException {
+		if(images.size() > MAXIMAGES)
+			throw new TooManyImagesException();
+		else
+			this.pathImages = images;
+		
 	}
 
 	@Override

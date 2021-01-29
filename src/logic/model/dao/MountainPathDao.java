@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import com.google.cloud.storage.Bucket;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.Query;
 import logic.model.MountainPath;
@@ -17,10 +19,14 @@ public class MountainPathDao extends Dao {
 	
 	private static final Logger LOGGER = Logger.getLogger(MountainPathDao.class.getName());
 	
+	private Bucket mountainPathBucket;
 	private List<MountainPath> mountainPathResult;
 	
 	public MountainPathDao() {
+		super();
 		this.mountainPathResult = new ArrayList<>();
+		this.mountainPathBucket = this.getStorageReference();
+		
 	}
 	
 	public void saveNewMountainPathOnDB(MountainPath mountainPath) throws DatabaseException {
