@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -98,7 +97,6 @@ public class ViewMountainPathInfoGraphicController extends GraphicController{
 	private List<Image> selectedMountainPathImages;
 	private int currentImageNumber = -1;
 	
-	
 	public ViewMountainPathInfoGraphicController(Controller controller) {
 		super(controller);
 		
@@ -141,7 +139,7 @@ public class ViewMountainPathInfoGraphicController extends GraphicController{
 			this.currentImageNumber = 0;
 			imgProfile.setImage(this.selectedMountainPathImages.get(this.currentImageNumber));
 		}
-		
+	
 		imgMountainPath.setImage(this.selectedMountainPathImages.get(this.currentImageNumber));
 		this.enableCorrectButtons();
 	}
@@ -152,7 +150,7 @@ public class ViewMountainPathInfoGraphicController extends GraphicController{
 		for(ByteArrayInputStream stream : streams)
 			this.selectedMountainPathImages.add(new Image(stream));
 	}
-
+	
 	@Override
 	protected String getFXMLFileName() {
 		return "viewMountainPathInfoLayout";

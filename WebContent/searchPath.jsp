@@ -1,4 +1,5 @@
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.io.ByteArrayInputStream"%>
 <%@page import="java.util.List" %>
 <%@page import="logic.controller.ViewMountainPathInfoController"%>
 <%@page import="logic.model.bean.SimpleMountainPathBean"%>
@@ -7,11 +8,17 @@
 
 <%!
 	List<SimpleMountainPathBean> beanList = new ArrayList<SimpleMountainPathBean>();
-	ViewMountainPathInfoController controller = new ViewMountainPathInfoController();
 	SimpleMountainPathBean selectedPath;
+	ViewMountainPathInfoController controller;
 %>
 <%
-	session.setAttribute("controller", controller);
+	if (request.getParameter("controller") != null) {
+		controller = (ViewMountainPathInfoController) session.getAttribute("controller");
+	}
+	else {
+		controller = new ViewMountainPathInfoController();
+		session.setAttribute("controller", controller);
+	}
 %>
 
 
@@ -46,7 +53,7 @@
 					</div>
 					<div class="row mx-auto" style="padding-top: 5%;">
 						<div class="col" align="center">
-							<a class="btn btn-ass-research" href="#" role="button">Assisted research</a>
+							<a class="btn btn-ass-research" href="assistedResearch.jsp" role="button">Assisted research</a>
 						</div>
 					</div>
 				</div>
@@ -58,26 +65,32 @@
 				<div class="container">
 				
 				<%
-				if (request.getParameter("pathName") != null) {
-					beanList.clear();
-					beanList.addAll(controller.searchMountainPathByName(request.getParameter("pathName")));
-    				
+				if ((request.getParameter("pathName") != null) || (controller.getPreviousSearchResults() != null) ) {
+					
+					if (request.getParameter("pathName") != null) {
+						beanList.clear();
+						beanList.addAll(controller.searchMountainPathByName(request.getParameter("pathName")));
+					}
+					else {
+						beanList.addAll(controller.getPreviousSearchResults());
+					}
+					
 					for(SimpleMountainPathBean bean : beanList)	{
 						%>
 						<div class="container">
-						
-							<input type='hidden' name='selectedPathName' id='pathName' value="<%= bean.getName() %>"/>
-							
-							
-							<button type="submit" class="btn" style="min-width: 100%;">
+							<button type="submit" class="btn" name="path" value="<%=bean.getName()%>" style="min-width: 100%;">
 								<div class="row card-view-simple-path">
-									<div class="col-3" align="center">
+									<div class="col-3">
 										<!-- inserire recupero immagine dal DB -->
-										<img src="Images/mountain_path.png" class="img-responsive">
+										<div class="d-flex justify-content-center align-items-center">
+											<div class="p-2 flex-item-search-photo">
+												<img src="Images/mountain_path.png" class="img-responsive photo">
+											</div>
+										</div>
 									</div>
 									<div class="col-9">
 										<div class="row justify-content-center" style="padding-bottom: 1%; padding-top:1%">
-											<%= bean.getName() %>
+											<span class="path-name-font"><%=bean.getName()%></span>
 										</div>
 										<div class="row">
 											<div class="col-4" align="center" style="padding-bottom: 1%;">
@@ -108,9 +121,9 @@
 				
 				
 				<%
-				if (request.getParameter("selectedPathName") != null) {
-					%><%=request.getParameter("selectedPathName")%><%
-					controller.setSelectedMountainPath(request.getParameter("selectedPathName"));
+				if (request.getParameter("path") != null) {
+					%><%=request.getParameter("path")%><%
+					controller.setSelectedMountainPath(request.getParameter("path"));
 					
 					%><jsp:forward page="viewMountainPathInfo.jsp"/><%
 				}

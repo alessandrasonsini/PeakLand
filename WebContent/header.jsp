@@ -8,6 +8,7 @@
 	String pageName = "home.jsp";
 	String nextAction = "";
 	String nextPage = "";
+	String btn = "";
 %>
 <%
 	if (session.getAttribute("mainController") != null) {
@@ -16,6 +17,11 @@
 	else {
 		session.setAttribute("mainController", mainController);
 	}
+	
+	if (session.getAttribute("btn") == null) 
+		session.setAttribute("btn", "home");
+	else 
+		btn = (String) session.getAttribute("btn");
 %>
 
 
@@ -44,11 +50,11 @@
 			<form class="form" action="header.jsp" method="post">
 				<ul class="nav navbar background-orange">
 					<li>
-						<button type="submit" name="home" value="home" class="btn btn-primary btn-nav">Home</button>
+						<button type="submit" name="home" value="home" class="btn btn-primary btn-nav" ${ sessionScope.btn eq "home"  ? 'style="background-color: #f69155"' : ''}>Home</button>
 					<li>
-						<button type="submit" name="searchPath" value="searchPath" class="btn btn-primary btn-nav">Search path</button>
+						<button type="submit" name="searchPath" value="searchPath" class="btn btn-primary btn-nav" ${ sessionScope.btn eq "view"  ? 'style="background-color: #f69155"' : ''}>Search path</button>
 					<li>
-						<button type="submit" name="addNewPath" value="addNewPath" class="btn btn-primary btn-nav">Add new path</button>
+						<button type="submit" name="addNewPath" value="addNewPath" class="btn btn-primary btn-nav" ${ sessionScope.btn eq "new"  ? 'style="background-color: #f69155"' : ''}>Add new path</button>
 					</li>
 				</ul>
 			</form>
@@ -56,16 +62,19 @@
 		
 		<%
 		if (request.getParameter("home") != null && request.getAttribute("new") == null) {
+			session.setAttribute("btn", "home");
 			nextPage = "";
 			nextAction = mainController.onActionRequired(nextPage, (Integer) session.getAttribute("sessionId"));
 			request.setAttribute("new", false);
 		}
 		else if (request.getParameter("searchPath") != null && request.getAttribute("new") == null) {
+			session.setAttribute("btn", "view");
 			nextPage = "View info";
 			nextAction = mainController.onActionRequired(nextPage, (Integer) session.getAttribute("sessionId"));
 			request.setAttribute("new", false);
 		}
 		else if (request.getParameter("addNewPath") != null && request.getAttribute("new") == null) {
+			session.setAttribute("btn", "new");
 			nextPage = "Add path";
 			nextAction = mainController.onActionRequired(nextPage, (Integer) session.getAttribute("sessionId"));
 			request.setAttribute("new", false);
@@ -99,7 +108,7 @@
 		if (pageName != "home.jsp") {
 			%>
 			<jsp:forward page="<%=pageName%>">
-				<jsp:param name="nextPageId" value="<%=nextPage%>" /> 
+				<jsp:param name="nextPageId" value="<%=nextPage%>"/>
 			</jsp:forward>
 			<%
 		}

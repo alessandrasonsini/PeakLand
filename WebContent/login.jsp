@@ -91,7 +91,6 @@
 		try {
 			System.out.println("dento tryyyy");
 			if (request.getParameter("login") != null) {
-				System.out.println("dento tryyyy if");
 				id = controller.loginAction(credential);
 				session.setAttribute("sessionId", id);
 				%>
@@ -99,7 +98,6 @@
 				<%
 			}
 			else if (request.getParameter("signin") != null) {
-				System.out.println("dento tryyyy else");
 				id = controller.signInAction(credential);
 				session.setAttribute("sessionId", id);
 				%>

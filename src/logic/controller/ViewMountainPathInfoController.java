@@ -53,7 +53,7 @@ public class ViewMountainPathInfoController extends Controller {
 			this.selectedMountainPath = new MountainPathBeanFactory().getMountainPathBean(searchResult);
 		}
 		else this.selectedMountainPath = null;
-		
+	
 		// Aggiorno il nextPageId
 		setNextPageId("Item selected");
 	}

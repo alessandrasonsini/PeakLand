@@ -35,7 +35,7 @@ public class SearchMountainPathGraphicController extends GraphicController {
 	
 	@FXML
 	private HBox itemBox;
-	
+
 	@FXML
 	private ListView<SimpleMountainPathBean> listViewMountainPath;
 

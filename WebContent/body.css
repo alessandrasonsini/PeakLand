@@ -45,22 +45,30 @@ html, body {
   	font-size: 170%;
 }
 
-.icons {
+.img-responsive.icons {
 	padding-top: 5%;
-	max-width: 60%;
-	max-height: 53%;
-	min-width: 40%;
-	min-height: 31%;
+	max-width: 100%;
+	max-height: auto;
 }
 
-.text {
-  	font-size: 120%;
-  	padding-top: 5%;
-  	vertical-align: bottom;
+.flex-item-icon {
+	max-width: 15%;
+	max-height: auto;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+.flex-item-text {
+	max-height: 25%;
+}
+
+.flex-item-text.text {
+  	font-size: 130%;
+  	text-align: left;
 }
 
 .green-text {
-	color: #CCE3C9;
+	color: #90D3AE;
 	padding-bottom: 2%;
 }
 
@@ -77,39 +85,31 @@ html, body {
 	 transform: rotate(180deg);
 }
 
-.arrows {
-	max-width: 20%;
-	max-height: 18%;
-	min-width: 20%;
-	min-height: 18%;
-	margin-top: 70%;
+.p-2.flex-item-arrow {
+	max-height: 8%;
+	max-width: 8%;
 }
 
-.photos {
-	max-width: 90%;
-	max-height: 80%;
-	min-width: 90%;
-	min-height: 80%;
+.p-3.flex-item-photos {
+	max-height: 100%;
+	max-width: 100%;
+	padding-left: 50%;
+	padding-right: 50%;
 }
 
-.stars {
-	max-width: 30%;
-	min-width: 30%;
-	max-height: 19%;
-	margin-left: 0px;
-  	margin-right: 0px;
-  	padding-left: 0px;
-  	padding-right: 0px;
-  	padding-top: 5%;
-  	padding-bottom: 5%;
+.p-2.flex-item-stars {
+	max-width: 9%;
+	max-height: 9%;
+	margin-top: 0px;
+	margin-bottom: 0px;
 }
 
-.link {
-	max-width: 20%;
-	max-height: 18%;
-	min-width: 20%;
-	min-height: 18%;
-	margin-top: 4%;
+.p-2.flex-item-link {
+	max-width: 25%;
+	max-height: 25%;
+	min-width: 25%;
+	min-height: 25%;
+	margin-top: 0px;
 }
 
 .btn.btn-light-orange {
@@ -117,6 +117,35 @@ html, body {
 	background-color: #fbc9a8;
 }
 
+.img-responsive.photos {
+	max-height: 100%;
+	max-width: 100%;
+	min-height: 100%;
+	min-width: 100%;
+}
 
+.img-responsive.photo {
+	max-height: 100%;
+	max-width: 100%;
+	min-height: 50%;
+	min-width: 50%;
+	padding-top: 5%;
+	padding-bottom: 5%;
+}
 
+.p-2.flex-item-photos {
+	max-height: 100%;
+	max-width: 100%;
+	padding-left: 50%;
+	padding-right: 50%;
+}
+
+.p-2.flex-item-search-photo {
+	max-width: 70%;
+	max-height: 70%;
+	min-width: 70%;
+	min-height: 70%;
+	padding-left: 50%;
+	padding-right: 50%;
+}
 
