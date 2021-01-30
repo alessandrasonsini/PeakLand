@@ -4,15 +4,15 @@ import java.lang.reflect.Field;
 
 public class SimpleMountainPathBean extends ItemBean {
 	
-	private String name;
-	private String level;
-	private String region;
-	private String province;
-	private String city;
-	private Integer hours;
-	private Integer minutes;
-	private Integer vote;
-	private Integer numberOfVotes;
+	protected String name;
+	protected String level;
+	protected String region;
+	protected String province;
+	protected String city;
+	protected Integer hours;
+	protected Integer minutes;
+	protected Integer vote;
+	protected Integer numberOfVotes;
 	//private image
 
 	public String getRegion() {
@@ -90,4 +90,6 @@ public class SimpleMountainPathBean extends ItemBean {
 	public Field[] getFields() {
 		return SimpleMountainPathBean.class.getDeclaredFields();
 	}
+	
+	
 }

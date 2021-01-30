@@ -18,14 +18,12 @@ import logic.model.exception.DatabaseException;
 public class MountainPathDao extends Dao {
 	
 	private static final Logger LOGGER = Logger.getLogger(MountainPathDao.class.getName());
-	
-	private Bucket mountainPathBucket;
+
 	private List<MountainPath> mountainPathResult;
 	
 	public MountainPathDao() {
 		super();
 		this.mountainPathResult = new ArrayList<>();
-		this.mountainPathBucket = this.getStorageReference();
 		
 	}
 	

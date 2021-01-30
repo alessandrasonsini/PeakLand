@@ -7,7 +7,6 @@ import java.util.List;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -21,6 +20,7 @@ import logic.controller.AddNewMountainPathController;
 import logic.controller.Controller;
 import logic.model.bean.MountainPathBean;
 import logic.model.exception.DatabaseException;
+import logic.model.exception.SystemException;
 import logic.model.exception.TooManyImagesException;
 
 public class AddNewMountainPathGraphicController extends GraphicController {
@@ -182,14 +182,14 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 		// Chiama il metodo del controller applicativo per il salvataggio del nuovo mountain path
 		try {
 			getAddNewMountainPathController().saveNewMountainPath(newPathBean, MainGraphicController.getInstance().getSessionId());
+			// Mostra il messaggio di avvenuto salvataggio
+			showMessage("Add succeded", "The new mountain path is now on the system ", AlertType.INFORMATION);
 		} catch (DatabaseException e) {
 			showDatabaseError();
+		} catch(SystemException e) {
+			showSystemError();
 		}
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setHeaderText("Add succeded");
-		alert.setContentText("The new mountain path is now on the system ");
-
-		alert.showAndWait();
+		
 	}
 	
 	@Override

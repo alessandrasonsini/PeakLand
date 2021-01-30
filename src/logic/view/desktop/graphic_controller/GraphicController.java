@@ -30,17 +30,26 @@ public abstract class GraphicController extends ShowableElement {
 		MainGraphicController.getInstance().switchPage(nextGraphicController.getRootPane());
 	}
 	
-	// Metodo che mostra all'utente l'errore che si è verificato
-	protected void showError(String header, String message) {
-		Alert alert = new Alert(AlertType.ERROR);
+	// Metodo che mostra all'utente un messaggio
+	protected void showMessage(String header, String message, AlertType type) {
+		Alert alert = new Alert(type);
 		alert.setHeaderText(header);
 		alert.setContentText(message);
 
 		alert.showAndWait();
 	}
 	
+	// Metodo che mostra all'utente l'errore che si è verificato
+	protected void showError(String header, String message) {
+		showMessage(header, message, AlertType.ERROR);
+	}
+	
 	protected void showDatabaseError() {
 		showError("Database error", "Ops, there was an error connecting to database. Retry later");
+	}
+	
+	protected void showSystemError() {
+		showError("System error", "Ops, there was a system error. Retry later");
 	}
 	
 }

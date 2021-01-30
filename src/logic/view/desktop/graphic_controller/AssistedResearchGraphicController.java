@@ -3,6 +3,7 @@ package logic.view.desktop.graphic_controller;
 import logic.controller.Controller;
 import logic.controller.ViewMountainPathInfoController;
 import logic.model.bean.MountainPathBean;
+import logic.model.exception.SystemException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -124,14 +125,19 @@ public class AssistedResearchGraphicController extends GraphicController{
 			wishMountainPath.setCycleble(radioButton.getText().equals("Yes"));
 		radioButton = ((RadioButton) histGroup.getSelectedToggle());
 		if(radioButton != null)
-		wishMountainPath.setHistoricalElements(radioButton.getText().equals("Yes"));
+			wishMountainPath.setHistoricalElements(radioButton.getText().equals("Yes"));
 		radioButton = ((RadioButton) famGroup.getSelectedToggle());
 		if(radioButton != null)
 			wishMountainPath.setFamilySuitable(radioButton.getText().equals("Yes"));
 		
 		//Chiama il metodo del controller applicativo
-		getViewMountainPathInfoController().searchMountainPathByAssistedResearch(wishMountainPath);
-		this.executeAction(this.myController);
+		try {
+			getViewMountainPathInfoController().searchMountainPathByAssistedResearch(wishMountainPath);
+			this.executeAction(this.myController);
+		} catch (SystemException e) {
+			showSystemError();
+		}
+		
 	}
 	
 	private String[] checkSelectedBox(List<CheckBox> checkBoxs) {
@@ -141,7 +147,7 @@ public class AssistedResearchGraphicController extends GraphicController{
 				selected.add(box.getText().toUpperCase());
 		}
 		if(selected.isEmpty())
-			return null;
+			return (String[])null;
 		else
 			return Arrays.copyOf(selected.toArray(), selected.size(), String[].class);
 	}

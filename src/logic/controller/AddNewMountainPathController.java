@@ -11,6 +11,7 @@ import logic.model.Time;
 import logic.model.bean.MountainPathBean;
 import logic.model.dao.MountainPathDao;
 import logic.model.exception.DatabaseException;
+import logic.model.exception.SystemException;
 import logic.model.exception.TooManyImagesException;
 
 public class AddNewMountainPathController extends Controller {
@@ -32,7 +33,7 @@ public class AddNewMountainPathController extends Controller {
 		return (new ControllerFactory().getSearchMountainPathController().searchMountainPathByName(nameToSearch) == null);
 	}
 	
-	public void saveNewMountainPath(MountainPathBean newPathBean, Integer sessionId) throws DatabaseException {
+	public void saveNewMountainPath(MountainPathBean newPathBean, Integer sessionId) throws DatabaseException, SystemException {
 		// A partire dalla bean, costruisce l'entità mountain path da salvare
 		MountainPath newMountainPath = new MountainPath();
 		
@@ -67,15 +68,9 @@ public class AddNewMountainPathController extends Controller {
 
 	@Override
 	public void setNextPageId(String action) {
-		String nextPageId;
-		switch(action) {
-			case "init":
-				nextPageId = "Add path";
-				break;
-			default: 
-				nextPageId = null;
-		}
-		this.nextPageId = nextPageId;
+		if(action.equals("init"))
+			this.nextPageId = "Add path";
+		else this.nextPageId = null;
 	}
 
 }

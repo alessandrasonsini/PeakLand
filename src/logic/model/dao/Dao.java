@@ -20,6 +20,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import logic.model.exception.SystemException;
+
 
 public abstract class Dao implements OnGetDataListener {
 	
@@ -118,14 +120,13 @@ public abstract class Dao implements OnGetDataListener {
 		return imageStreams;
 	}
 	
-	public void uploadImage(List<File> images, String directory) {
+	public void uploadImage(List<File> images, String directory) throws SystemException {
 		int imgNumber = images.size();
 		for(int i = 0; i < imgNumber; i++) {
 			try {
-				getStorageReference().create(directory + "/" + String.valueOf(i) + ".jpeg", new FileInputStream(images.get(i)),Bucket.BlobWriteOption.doesNotExist());
+				getStorageReference().create(directory + "/" + i + ".jpeg", new FileInputStream(images.get(i)),Bucket.BlobWriteOption.doesNotExist());
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				throw new SystemException();
 			}
 		}
 	}

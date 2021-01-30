@@ -9,6 +9,7 @@ import logic.model.bean.SimpleMountainPathBean;
 import logic.model.bean.factory.MountainPathBeanFactory;
 import logic.model.bean.factory.SimpleMountainPathBeanFactory;
 import logic.model.dao.MountainPathDao;
+import logic.model.exception.SystemException;
 
 public class ViewMountainPathInfoController extends Controller {
 	
@@ -30,12 +31,12 @@ public class ViewMountainPathInfoController extends Controller {
 	public List<SimpleMountainPathBean> searchMountainPathByName(String name) {
 		this.searchResults = new ArrayList<>();
 		
-		List<MountainPath> searchResults = searchController.searchMountainPathByPartialName(name);
+		List<MountainPath> resultList = searchController.searchMountainPathByPartialName(name);
 		
 		SimpleMountainPathBeanFactory beanFactory = new SimpleMountainPathBeanFactory();
 		
 		// Converte le entity in bean per poterle passare al controllore grafico
-		for(MountainPath path : searchResults) {
+		for(MountainPath path : resultList) {
 				this.searchResults.add(beanFactory.getSimpleMountainPath(path));
 		}
 		sortResultsByVote(this.searchResults);
@@ -83,10 +84,10 @@ public class ViewMountainPathInfoController extends Controller {
 		setNextPageId("Next assisted research");
 	}
 	
-	public List<SimpleMountainPathBean> searchMountainPathByAssistedResearch(MountainPathBean wishPath){		
+	public List<SimpleMountainPathBean> searchMountainPathByAssistedResearch(MountainPathBean wishPath) throws SystemException{		
 		this.searchResults = new ArrayList<>();
-		List<MountainPath> resultList = new ArrayList<>();
-		resultList = this.assistedResearchController.searchMountainPathByFilter(wishPath);
+		List<MountainPath> resultList;
+		resultList = this.assistedResearchController.searchMountainPathByFilters(wishPath);
 		for(MountainPath path : resultList) {
 			this.searchResults.add(new SimpleMountainPathBeanFactory().getSimpleMountainPath(path));
 		}

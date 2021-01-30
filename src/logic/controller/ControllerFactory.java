@@ -1,9 +1,11 @@
 package logic.controller;
 
+import logic.model.exception.SystemException;
+
 public class ControllerFactory {
 	
 	// Ritorna il controller relativo al tipo richiesto
-	public Controller getController(String type) throws Exception {
+	public Controller getController(String type) throws SystemException	 {
 		Controller newController;
 		
 		switch(type) {
@@ -23,7 +25,7 @@ public class ControllerFactory {
 				newController = new AssistedResearchController();
 				break;
 			default: 
-				throw new Exception("Invalid type : " + type);
+				throw new SystemException();
 		}
 		
 		return newController;

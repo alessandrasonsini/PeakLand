@@ -7,10 +7,10 @@ public abstract class ItemBean {
 	
 	// Converte l'array di stringhe in un'unica stringa
 	public String convertToText(String[] array) {
-		String text = new String();
+		String text = "";
 		
 		for (int i = 0; i < array.length; i++) {
-			text = text + " " + array[i];
+			text.concat(" " + array[i]);
 		}
 		
 		return text;

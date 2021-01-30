@@ -124,14 +124,8 @@ public class ViewMountainPathInfoGraphicController extends GraphicController{
 	}
 	
 	private void enableCorrectButtons() {
-		if(this.currentImageNumber == 0)
-			this.btnPrevImg.setVisible(false);
-		else 
-			this.btnPrevImg.setVisible(true);
-		if(this.selectedMountainPathImages.size() -1 - this.currentImageNumber <= 0)
-			this.btnNextImg.setVisible(false);
-		else 
-			this.btnNextImg.setVisible(true);
+		this.btnPrevImg.setVisible(!(this.currentImageNumber == 0));
+		this.btnNextImg.setVisible(!(this.selectedMountainPathImages.size() -1 - this.currentImageNumber <= 0));
 	}
 	
 	private void setupImage() {

@@ -72,8 +72,10 @@ public class MountainPathBean extends SimpleMountainPathBean {
 	}
 	
 	public Field[] getFields() {
-		Field[] myFields = ArrayUtils.addAll(this.getClass().getDeclaredFields(), super.getFields());
-		return myFields;
+		return ArrayUtils.addAll(this.getClass().getDeclaredFields(), super.getFields());
 	}
 	
+	public Object getFieldValue(Field f) throws IllegalArgumentException, IllegalAccessException {
+		return f.get(this);
+	}
 }
