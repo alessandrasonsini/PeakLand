@@ -19,61 +19,61 @@ import javafx.scene.control.ToggleGroup;
 public class AssistedResearchGraphicController extends GraphicController{
 	
 	@FXML
-	private TextField txtRegion;
+	private TextField txtRegionFilter;
 	
 	@FXML
-	private TextField txtCity;
+	private TextField txtCityFilter;
 	
 	@FXML
-	private TextField txtProvince;
+	private TextField txtProvinceFilter;
 	
 	@FXML
-	private RadioButton radioBtnT;
+	private RadioButton radioBtnTFilter;
 	
 	@FXML
-	private RadioButton radioBtnE;
+	private RadioButton radioBtnEFilter;
 	
 	@FXML
-	private RadioButton radioBtnEE;
+	private RadioButton radioBtnEEFilter;
 	
 	@FXML
-	private RadioButton radioBtnEEA;
+	private RadioButton radioBtnEEAFilter;
 	
 	@FXML
-	private CheckBox ckBoxMountain;
+	private CheckBox ckBoxMountainFilter;
 	
 	@FXML
-	private CheckBox ckBoxLake;
+	private CheckBox ckBoxLakeFilter;
 	
 	@FXML
-	private CheckBox ckBoxSea;
+	private CheckBox ckBoxSeaFilter;
 	
 	@FXML
-	private CheckBox ckBoxRock;
+	private CheckBox ckBoxRockFilter;
 	
 	@FXML
-	private CheckBox ckBoxGrass;
+	private CheckBox ckBoxGrassFilter;
 	
 	@FXML
-	private CheckBox ckBoxWood;
+	private CheckBox ckBoxWoodFilter;
 	
 	@FXML
-	private RadioButton radioBtnCycleY;
+	private RadioButton radioBtnCycleYFilter;
 	
 	@FXML
-	private RadioButton radioBtnCycleN;
+	private RadioButton radioBtnCycleNFilter;
 	
 	@FXML
-	private RadioButton radioBtnHistY;
+	private RadioButton radioBtnHistYFilter;
 	
 	@FXML
-	private RadioButton radioBtnHistN;
+	private RadioButton radioBtnHistNFilter;
 	
 	@FXML
-	private RadioButton radioBtnFamY;
+	private RadioButton radioBtnFamYFilter;
 	
 	@FXML
-	private RadioButton radioBtnFamN;
+	private RadioButton radioBtnFamNFilter;
 	
 	@FXML
 	private Button btnSearch;
@@ -95,8 +95,8 @@ public class AssistedResearchGraphicController extends GraphicController{
 	
 	protected AssistedResearchGraphicController(Controller controller) {
 		super(controller);
-		ground = new ArrayList<>(Arrays.asList(ckBoxGrass,ckBoxRock,ckBoxWood));
-		landscape = new ArrayList<>(Arrays.asList(ckBoxMountain,ckBoxSea,ckBoxLake));
+		ground = new ArrayList<>(Arrays.asList(ckBoxGrassFilter,ckBoxRockFilter,ckBoxWoodFilter));
+		landscape = new ArrayList<>(Arrays.asList(ckBoxMountainFilter,ckBoxSeaFilter,ckBoxLakeFilter));
 	}
 	
 	@FXML
@@ -109,12 +109,12 @@ public class AssistedResearchGraphicController extends GraphicController{
 	private void onSearchPressed(ActionEvent event) {
 		MountainPathBean wishMountainPath = new MountainPathBean();
 		// Costruisce la bean con tutti i filtri inseriti
-		if(txtRegion != null && !txtRegion.getText().isEmpty())
-			wishMountainPath.setRegion(txtRegion.getText());
-		if(txtProvince != null && !txtProvince.getText().isEmpty())	
-			wishMountainPath.setProvince(txtProvince.getText());
-		if(txtCity != null && !txtCity.getText().isEmpty())		
-			wishMountainPath.setCity(txtCity.getText());
+		if(txtRegionFilter != null && !txtRegionFilter.getText().isEmpty())
+			wishMountainPath.setRegion(txtRegionFilter.getText());
+		if(txtProvinceFilter != null && !txtProvinceFilter.getText().isEmpty())	
+			wishMountainPath.setProvince(txtProvinceFilter.getText());
+		if(txtCityFilter != null && !txtCityFilter.getText().isEmpty())		
+			wishMountainPath.setCity(txtCityFilter.getText());
 		RadioButton radioButton = ((RadioButton) levelGroup.getSelectedToggle());
 		if(radioButton != null)
 			wishMountainPath.setLevel(radioButton.getText().toUpperCase());
@@ -147,7 +147,7 @@ public class AssistedResearchGraphicController extends GraphicController{
 				selected.add(box.getText().toUpperCase());
 		}
 		if(selected.isEmpty())
-			return (String[])null;
+			return null;
 		else
 			return Arrays.copyOf(selected.toArray(), selected.size(), String[].class);
 	}

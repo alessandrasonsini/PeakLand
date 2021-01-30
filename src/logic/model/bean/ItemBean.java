@@ -10,7 +10,7 @@ public abstract class ItemBean {
 		String text = "";
 		
 		for (int i = 0; i < array.length; i++) {
-			text.concat(" " + array[i]);
+			text = text.concat(" " + array[i]);
 		}
 		
 		return text;

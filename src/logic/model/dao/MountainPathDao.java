@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.google.cloud.storage.Bucket;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.Query;
 import logic.model.MountainPath;
