@@ -26,7 +26,7 @@ public class MainGraphicController extends GraphicController {
 	
 	// Button precedentemente premuto
 	private Button prevPressed;
-	
+
 	String defaultStyle = "-fx-background-color: FBC9A8; -fx-border-color: F69155;";
 
 	private static MainGraphicController instance = null;
@@ -74,6 +74,7 @@ public class MainGraphicController extends GraphicController {
 	}
 
 	public void switchPage(Pane paneToSwitch) {
+		System.out.println("dentro switchPage");
 		mainChild.setCenter(paneToSwitch);
 	}
 	

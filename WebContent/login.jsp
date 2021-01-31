@@ -60,7 +60,7 @@
 								<div class="col"><input type="text" class="form-control" name="username" placeholder="Username"></div>
 							</div>
 							<div class="row" style="padding-bottom: 3%;">
-								<div class="col"><input type="text" class="form-control" name="password" placeholder="Password"></div>
+								<div class="col"><input type="password" class="form-control" name="password" placeholder="Password"></div>
 							</div>
 							<div class="row">
 								<div class="col">

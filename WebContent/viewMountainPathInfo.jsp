@@ -229,21 +229,23 @@
 									<img src="Images/filled-like.png" class="img-responsive icons">
 								</div>
   								<div class="p-2 flex-item-text pull-left text">Vote</div>
-  								<div class="p-2 flex-item-stars">
-									<img src="Images/star.png" class="img-responsive icons">
-								</div>
-								<div class="p-2 flex-item-stars">
-									<img src="Images/star.png" class="img-responsive icons">
-								</div>
-								<div class="p-2 flex-item-stars">
-									<img src="Images/star.png" class="img-responsive icons">
-								</div>
-								<div class="p-2 flex-item-stars">
-									<img src="Images/star.png" class="img-responsive icons">
-								</div>
-								<div class="p-2 flex-item-stars">
-									<img src="Images/star.png" class="img-responsive icons">
-								</div>
+  								
+  								<%	if (path.getVote() != null) {
+	  									for(int i = 0; i < path.getVote(); i++) {
+	  									%>
+		  								<div class="p-2 flex-item-stars">
+											<img src="Images/star.png" class="img-responsive icons">
+										</div>
+										<%
+	  									}
+  									}
+  									else {
+  										%>
+  										<div class="p-2 black-text"><%=path.convertToText(path.getVote())%></div>
+  										<%
+  									}
+								%>
+								
 							</div>
 							
 							<div class="container" style="padding-left: 5%;">

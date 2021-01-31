@@ -57,19 +57,19 @@ public class MountainPathDao extends Dao {
 	}
 	
 	public List<MountainPath> searchMountainPathbyFilter(String filterName, String filterValue){
-		Query query= this.dbReference.orderByChild(filterName).equalTo(filterValue);
+		Query query = this.dbReference.orderByChild(filterName).equalTo(filterValue);
 		executeQuery(query);
 		return mountainPathResult;
 	}
 	
 	public List<MountainPath> searchMountainPathbyFilter(String filterName, Boolean filterValue){
-		Query query= this.dbReference.orderByChild(filterName).equalTo(filterValue);
+		Query query = this.dbReference.orderByChild(filterName).equalTo(filterValue);
 		executeQuery(query);	
 		return mountainPathResult;
 	}
 	
 	public List<MountainPath> searchMountainPathbyFilter(String filterName, Integer filterValue){
-		Query query= this.dbReference.orderByChild(filterName).equalTo(filterValue);
+		Query query = this.dbReference.orderByChild(filterName).equalTo(filterValue);
 		executeQuery(query);
 		return mountainPathResult;
 	}
@@ -90,8 +90,7 @@ public class MountainPathDao extends Dao {
 		}
         else {
         	LOGGER.log(Level.FINE,"No matches founded");
-        }    
-		
+        }
 	}
 	
 	// Standardizza i nomi dei mountain path rendendo maiuscola la prima lettera prima di operare sul db

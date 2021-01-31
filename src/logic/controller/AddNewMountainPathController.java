@@ -7,14 +7,19 @@ import java.util.List;
 import logic.controller.utils.CurrentLoggedUsers;
 import logic.model.Location;
 import logic.model.MountainPath;
+import logic.model.Review;
 import logic.model.Time;
 import logic.model.bean.MountainPathBean;
+import logic.model.bean.ReviewBean;
 import logic.model.dao.MountainPathDao;
+import logic.model.dao.ReviewDao;
 import logic.model.exception.DatabaseException;
 import logic.model.exception.SystemException;
 import logic.model.exception.TooManyImagesException;
 
 public class AddNewMountainPathController extends Controller {
+	
+	private AddReviewController addReviewController;
 	
 	private static final int MAXIMAGES = 5;
 	private static final String directory = "Mountain path/";
@@ -23,18 +28,23 @@ public class AddNewMountainPathController extends Controller {
 	
 	public AddNewMountainPathController() {
 		super();
+		this.addReviewController = new ControllerFactory().getAddReviewController();
 		pathImages = new ArrayList<>();
 	}
-	
+
 	// Controlla se il nome inserito è già esistente sul db
 	public boolean checkName(String name) {
-		
 		String nameToSearch = name.replaceFirst(name.substring(0,0), name.substring(0,0).toUpperCase());
 		// Chiama il metodo relativo del controller di search per controllare se il nome è già esistente
 		return (new ControllerFactory().getSearchMountainPathController().searchMountainPathByName(nameToSearch) == null);
 	}
-	
+
+	public void saveReview(ReviewBean reviewBean) throws DatabaseException {
+		addReviewController.saveReview(reviewBean);
+	}
+
 	public void saveNewMountainPath(MountainPathBean newPathBean, Integer sessionId) throws DatabaseException, SystemException {
+
 		// A partire dalla bean, costruisce l'entità mountain path da salvare
 		MountainPath newMountainPath = new MountainPath();
 		
@@ -55,8 +65,6 @@ public class AddNewMountainPathController extends Controller {
 		MountainPathDao mountainPathDao = new MountainPathDao();
 		mountainPathDao.saveNewMountainPathOnDB(newMountainPath);
 		mountainPathDao.uploadImage(this.pathImages, directory + newMountainPath.getName() + "/" + CurrentLoggedUsers.getInstance().getCurrentLoggedUser(sessionId).getUsername());
-		
-
 	}
 	
 	public void setMountainPathImages(List<File> images) throws TooManyImagesException {
@@ -67,6 +75,10 @@ public class AddNewMountainPathController extends Controller {
 		
 	}
 
+	public void addReviewRequest() {
+		setNextPageId("New review");
+	}
+	
 	@Override
 	public void setNextPageId(String action) {
 		if(action.equals("init"))

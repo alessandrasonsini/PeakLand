@@ -25,7 +25,7 @@ public class ViewMountainPathInfoController extends Controller {
 		this.assistedResearchController = new ControllerFactory().getAssistedResearchController();
 		this.searchResults = null;
 	}
-	
+
 	// Richiama il metodo del controllore applicativo Search per
 	// effettuare la ricerca nel DB
 	public List<SimpleMountainPathBean> searchMountainPathByName(String name) {
@@ -117,7 +117,4 @@ public class ViewMountainPathInfoController extends Controller {
 				this.nextPageId = null;
 		}
 	}
-	
-	
-	
 }

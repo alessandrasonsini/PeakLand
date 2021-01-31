@@ -21,7 +21,7 @@ public class LoginController extends Controller {
 		this.credentialDao = new CredentialDao();
 		this.loggedUserDao = new LoggedUserDao();
 	}
-	
+
 	// Ritorna vero se esiste un'istanza dello user loggato corrente
 	public static boolean isLogged(Integer sessionId) {
 		return CurrentLoggedUsers.getInstance().isCurrentlyLogged(sessionId);

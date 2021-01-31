@@ -14,7 +14,7 @@ public class SearchMountainPathController extends Controller {
 		super();
 		this.mountainPathDao = new MountainPathDao();
 	}
-	
+
 	// Metodo che esegue la ricerca dei mountain path dato un nome parziale
 	public List<MountainPath> searchMountainPathByPartialName(String name) {
 		// Chiama il metodo del dao che si occupa di effettuare la ricerca per nome parziale sul db
@@ -32,7 +32,6 @@ public class SearchMountainPathController extends Controller {
 			this.nextPageId = "Search path";
 		else this.nextPageId = null;
 	}
-	
-	
+
 	
 }

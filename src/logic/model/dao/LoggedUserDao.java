@@ -44,6 +44,7 @@ public class LoggedUserDao extends Dao{
 			throw new DatabaseException();
 		}
 	}
+
 	
 	public void updateUserImage(File f, String fileName) throws SystemException {
 		try {
@@ -57,9 +58,8 @@ public class LoggedUserDao extends Dao{
 		} catch (FileNotFoundException e) {
 			throw new SystemException();
 		}
-		
-		
 	}
+
 	
 	@Override
 	public void onReadSuccess(DataSnapshot dataSnapshot) {

@@ -8,18 +8,28 @@
 <%!
 	AddNewMountainPathController controller = new AddNewMountainPathController();
 	boolean disable = true;
+	boolean disableAddReview = true;
 %>
 <%
 	session.setAttribute("controller", controller);
 	session.setAttribute("disable", disable);
+	if (session.getAttribute("disableAddReview") == null)
+			session.setAttribute("disableAddReview", disableAddReview);
+	else
+		disableAddReview = (boolean) session.getAttribute("disableAddReview");
 
-	session.removeAttribute("name");
 %>
 
 <!-- dichiarazione e instanziazione di una MountainPathBean !-->
 <jsp:useBean id="newPath" scope="request" class="logic.model.bean.MountainPathBean"/>
-<!-- mappa attributi della bean sui campi del form -->
 <jsp:setProperty name="newPath" property="*"/>
+<%
+	if (request.getParameter("addReview") != null) {
+		%>
+		<jsp:forward page="addReview.jsp"/>
+		<% 
+	}
+%>
 
 <html>
 	<head>
@@ -71,6 +81,22 @@
 						</div>
 						<%
 					}
+				}
+				if (request.getParameter("savePath") != null) {
+					disableAddReview = false;
+					session.setAttribute("disableAddReview", disableAddReview);
+					session.removeAttribute("disable");
+					controller.saveNewMountainPath(newPath, (Integer)session.getAttribute("sessionId"));
+					session.removeAttribute("newPath");
+					
+					%>
+					<div class="container" style="padding-top: 3%;">
+						<div class="alert alert-success alert-dismissible fade show" role="alert">
+							<strong>New path added successfully!</strong> Now you can add a review.
+						  	<a href="#" class="close" style="float: right;" data-dismiss="alert" aria-label="close">&times;</a>
+						</div>
+					</div>
+					<%
 				}
 				%>
 				
@@ -210,30 +236,18 @@
 						<div class="container" style="text-align: center;">
 							<button type="submit" name="savePath" value="savePath" class="btn btn-light-orange" ${ sessionScope.disable eq true  ? 'disabled' : ''}>Save mountain path</button>
 						</div>
+						<br>
+						<div class="row mx-auto" style="padding-bottom: 3%;">
+							<div class="d-flex">
+								<div class="col-3 black-text">Add review</div>
+								<input type="submit" name="addReview" value="addReview" ${ sessionScope.disableAddReview eq true  ? 'disabled' : ''}/>
+							</div>
+						</div>
 					</form>
 					
-					<br><br>
+					<br>
 				</div>
 			</div>
-			
-			<%
-			if (request.getParameter("savePath") != null) {
-				session.removeAttribute("disable");
-				controller.saveNewMountainPath(newPath,(Integer)session.getAttribute("sessionId"));
-				session.removeAttribute("name");
-				%>
-				<div class="container" style="padding-top: 3%;">
-					<div class="alert alert-success alert-dismissible fade show" role="alert">
-						<strong>New path added successfully!</strong>
-					  	<a href="#" class="close" style="float: right;" data-dismiss="alert" aria-label="close">&times;</a>
-					</div>
-				</div>
-				<%
-			}
-			%>
-			
-			
-			
 		</div>
 		
 		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

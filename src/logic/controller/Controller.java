@@ -25,7 +25,7 @@ public abstract class Controller {
 		
 		return nextController;
 	}
-	
+
 	public String getNextPageId() {
 		return this.nextPageId;
 	}

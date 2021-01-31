@@ -17,5 +17,4 @@ public class HomeGraphicController extends GraphicController {
 	public HomeController getHomeGraphicController() {
 		return (HomeController) myController;
 	}
-
 }

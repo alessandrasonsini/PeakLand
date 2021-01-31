@@ -24,13 +24,15 @@ public class ControllerFactory {
 			case "Assisted research":
 				newController = new AssistedResearchController();
 				break;
+			case "Add review":
+				newController = new AddReviewController();
 			case "Profile":
 				newController = new ProfileController();
-				break;	
+				break;
 			default: 
 				throw new SystemException();
 		}
-		
+
 		return newController;
 	}
 	
@@ -45,7 +47,11 @@ public class ControllerFactory {
 	}
 	
 	public AssistedResearchController getAssistedResearchController() {
-		return new AssistedResearchController()
-;	}
+		return new AssistedResearchController();
+	}
+	
+	public AddReviewController getAddReviewController() {
+		return new AddReviewController();
+	}
 	
 }

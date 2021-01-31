@@ -123,14 +123,13 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 	
 	private List<CheckBox> ground;
 	private List<CheckBox> landscape;
-	
+
 	public AddNewMountainPathGraphicController(Controller controller) {
 		super(controller);
 		panePathInfo.setDisable(true);
 		ground = new ArrayList<>(Arrays.asList(ckBoxGrass,ckBoxRock,ckBoxWood));
 		landscape = new ArrayList<>(Arrays.asList(ckBoxMountain,ckBoxSea,ckBoxLake));
 		lbLoad.setText("");
-	
 	}
 
 	@FXML 
@@ -157,6 +156,13 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 		} catch (TooManyImagesException e) {
 			this.showError("Load error", "Too many images selected");
 		}
+	}
+	
+	@FXML
+	public void onAddReview(ActionEvent event) {
+		System.out.println("dentro onAddReview");
+		getAddNewMountainPathController().addReviewRequest();
+		this.executeAction(this.myController);
 	}
 	
 	@FXML
