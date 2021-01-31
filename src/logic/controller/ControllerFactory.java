@@ -24,6 +24,9 @@ public class ControllerFactory {
 			case "Assisted research":
 				newController = new AssistedResearchController();
 				break;
+			case "Profile":
+				newController = new ProfileController();
+				break;	
 			default: 
 				throw new SystemException();
 		}

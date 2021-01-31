@@ -1,15 +1,20 @@
 package logic.model.dao;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.Query;
 import logic.model.LoggedUser;
 import logic.model.exception.DatabaseException;
+import logic.model.exception.SystemException;
 
 
 public class LoggedUserDao extends Dao{
@@ -37,7 +42,24 @@ public class LoggedUserDao extends Dao{
 		if(!writeData(users)) {
 			// se fallisce
 			throw new DatabaseException();
-		}}
+		}
+	}
+	
+	public void updateUserImage(File f, String fileName) throws SystemException {
+		try {
+			FileInputStream imageStream = new FileInputStream(f);
+			// Controlla se è già presenta una foto del profilo dell'utente
+			if(getImage(fileName) != null) {
+				// se è presente la cancella
+				deleteImage(fileName);
+			}
+			uploadImage(imageStream, fileName);
+		} catch (FileNotFoundException e) {
+			throw new SystemException();
+		}
+		
+		
+	}
 	
 	@Override
 	public void onReadSuccess(DataSnapshot dataSnapshot) {

@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.google.api.gax.paging.Page;
 import com.google.cloud.storage.Blob;
+import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.Blob.BlobSourceOption;
 import com.google.cloud.storage.Bucket;
 import com.google.cloud.storage.Storage;
@@ -29,6 +30,8 @@ public abstract class Dao implements OnGetDataListener {
 	
 	private DatabaseConnection dbConnection;
 	protected DatabaseReference dbReference;
+	private Bucket bucketReference;
+	private Storage storageRefence;
 	
 	private boolean writeCompleted;
 	
@@ -41,6 +44,8 @@ public abstract class Dao implements OnGetDataListener {
 	protected Dao() {
 		this.dbConnection = DatabaseConnection.getInstance();
 		this.dbReference = this.dbConnection.getDatabaseReference().child(this.getChild());
+		this.bucketReference = this.dbConnection.getBucketReference();
+		this.storageRefence = this.dbConnection.getStorageReference();
 	}
 	
 	protected DatabaseReference getSpecificReference() {
@@ -112,7 +117,7 @@ public abstract class Dao implements OnGetDataListener {
 	}
 	
 	public List<ByteArrayInputStream> getImagesStream(String directory) {
-		Page<Blob> blobs = getStorageReference().list(Storage.BlobListOption.prefix(directory));
+		Page<Blob> blobs = this.bucketReference.list(Storage.BlobListOption.prefix(directory));
 		List<ByteArrayInputStream> imageStreams = new ArrayList<>();
 		for(Blob blob : blobs.iterateAll()) {
 			imageStreams.add(new ByteArrayInputStream(blob.getContent(BlobSourceOption.generationMatch())));
@@ -124,11 +129,27 @@ public abstract class Dao implements OnGetDataListener {
 		int imgNumber = images.size();
 		for(int i = 0; i < imgNumber; i++) {
 			try {
-				getStorageReference().create(directory + "/" + i + ".jpeg", new FileInputStream(images.get(i)),Bucket.BlobWriteOption.doesNotExist());
+				this.bucketReference.create(directory + "/" + i + ".jpeg", new FileInputStream(images.get(i)),Bucket.BlobWriteOption.doesNotExist());
 			} catch (FileNotFoundException e) {
 				throw new SystemException();
 			}
 		}
+	}
+	
+	public ByteArrayInputStream getImage(String fileName) {
+		Blob blob = this.storageRefence.get(this.bucketReference.getName(),fileName);
+		ByteArrayInputStream imageReturn = null;
+		if(blob != null)
+			imageReturn = new ByteArrayInputStream(blob.getContent(BlobSourceOption.generationMatch()));
+		return imageReturn;
+	}
+	
+	public void uploadImage(FileInputStream f, String fileName) {
+		this.bucketReference.create(fileName,f,Bucket.BlobWriteOption.doesNotExist());
+	}
+	
+	public void deleteImage(String fileToDelete) {
+		this.storageRefence.delete(BlobId.of(this.bucketReference.getName(),fileToDelete));
 	}
 	
 	@Override
@@ -136,7 +157,4 @@ public abstract class Dao implements OnGetDataListener {
 	
 	protected abstract String getChild(); 
 	
-	protected Bucket getStorageReference() {
-		return this.dbConnection.getStorageReference();
-	}
 }

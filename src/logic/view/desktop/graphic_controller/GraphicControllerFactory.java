@@ -22,6 +22,9 @@ public class GraphicControllerFactory {
 			case "Assisted research":
 				newGraphicController = new AssistedResearchGraphicController(controller);
 				break;
+			case "Profile":
+				newGraphicController = new ProfileGraphicController(controller);
+				break;	
 			default: newGraphicController = null;
 		}
 		return newGraphicController;

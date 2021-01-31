@@ -17,6 +17,7 @@ import logic.model.exception.TooManyImagesException;
 public class AddNewMountainPathController extends Controller {
 	
 	private static final int MAXIMAGES = 5;
+	private static final String directory = "Mountain path/";
 	
 	private List<File> pathImages;
 	
@@ -53,7 +54,7 @@ public class AddNewMountainPathController extends Controller {
 		// Invoca il metodo del dao per salvare il mountain path sul db e le immagini inserite
 		MountainPathDao mountainPathDao = new MountainPathDao();
 		mountainPathDao.saveNewMountainPathOnDB(newMountainPath);
-		mountainPathDao.uploadImage(this.pathImages, "Mountain path/" + newMountainPath.getName() + "/" + CurrentLoggedUsers.getInstance().getCurrentLoggedUser(sessionId).getUsername());
+		mountainPathDao.uploadImage(this.pathImages, directory + newMountainPath.getName() + "/" + CurrentLoggedUsers.getInstance().getCurrentLoggedUser(sessionId).getUsername());
 		
 
 	}

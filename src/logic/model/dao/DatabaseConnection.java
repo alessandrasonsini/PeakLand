@@ -5,6 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.storage.Bucket;
+import com.google.cloud.storage.Storage;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.StorageClient;
@@ -16,9 +17,10 @@ public class DatabaseConnection {
 	 * Classe singleton contenente la connessione al realtime database di firebase
 	 */
 	
-	FirebaseDatabase firebaseDb;
-	DatabaseReference databaseReference;
-	Bucket storageReference;
+	private FirebaseDatabase firebaseDb;
+	private DatabaseReference databaseReference;
+	private Bucket bucketReference;
+	private Storage storageReference;
 	
 	private static DatabaseConnection instance = null;
 	
@@ -28,7 +30,9 @@ public class DatabaseConnection {
 		initializeConnection();
 		this.firebaseDb = FirebaseDatabase.getInstance();
 		this.databaseReference = firebaseDb.getReference();
-		this.storageReference = StorageClient.getInstance().bucket();
+		this.bucketReference = StorageClient.getInstance().bucket();
+		this.storageReference = this.bucketReference.getStorage();
+		
 	}
 	
 	public static DatabaseConnection getInstance() {
@@ -42,7 +46,11 @@ public class DatabaseConnection {
 		return this.databaseReference;
 	}
 	
-	public Bucket getStorageReference() {
+	public Bucket getBucketReference() {
+		return this.bucketReference;
+	}
+	
+	public Storage getStorageReference() {
 		return this.storageReference;
 	}
 	

@@ -58,6 +58,9 @@ public class MainGraphicController extends GraphicController {
 			case "btnAddPath":
 				newActionId = "Add path";
 				break;
+			case "btnProfile":
+				newActionId = "Profile";
+				break;
 			default: 
 				newActionId = null;
 				break;				

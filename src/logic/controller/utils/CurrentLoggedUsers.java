@@ -44,6 +44,10 @@ public class CurrentLoggedUsers {
 		
 	}
 	
+	public void removeCurrentLoggedUser(Integer id) {
+		this.loggedUsers.remove(id);
+	}
+	
 	public LoggedUser getCurrentLoggedUser(Integer id) {
 		return this.loggedUsers.get(id);
 	}

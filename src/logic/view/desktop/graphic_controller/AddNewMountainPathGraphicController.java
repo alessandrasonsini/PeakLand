@@ -177,7 +177,6 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 		newPathBean.setFamilySuitable(( (RadioButton) famGroup.getSelectedToggle()).getText().equals("Yes"));
 		newPathBean.setHours(Integer.parseInt(txtHours.getText()));
 		newPathBean.setMinutes(Integer.parseInt(txtMinutes.getText()));
-		//gestire salvataggio immagine
 		
 		// Chiama il metodo del controller applicativo per il salvataggio del nuovo mountain path
 		try {

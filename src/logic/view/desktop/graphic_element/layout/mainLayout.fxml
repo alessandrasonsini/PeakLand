@@ -12,7 +12,7 @@
 
 <VBox fx:id="root" maxHeight="${screen.visualBounds.height}" maxWidth="${screen.visualBounds.width}" minHeight="${screen.visualBounds.height}" minWidth="${screen.visualBounds.width}" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <BorderPane style="-fx-background-color: #CCE3C9 #CCE3C9;" VBox.vgrow="NEVER">
+      <BorderPane style="-fx-background-color: #CCE3C9;" VBox.vgrow="NEVER">
          <left>
             <ImageView fitHeight="212.0" fitWidth="494.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                <image>
