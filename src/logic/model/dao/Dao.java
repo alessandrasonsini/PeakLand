@@ -1,9 +1,7 @@
 package logic.model.dao;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -125,14 +123,10 @@ public abstract class Dao implements OnGetDataListener {
 		return imageStreams;
 	}
 	
-	public void uploadImage(List<File> images, String directory) throws SystemException {
+	public void uploadImage(List<InputStream> images, String directory) throws SystemException {
 		int imgNumber = images.size();
 		for(int i = 0; i < imgNumber; i++) {
-			try {
-				this.bucketReference.create(directory + "/" + i + ".jpeg", new FileInputStream(images.get(i)),Bucket.BlobWriteOption.doesNotExist());
-			} catch (FileNotFoundException e) {
-				throw new SystemException();
-			}
+			this.bucketReference.create(directory + "/" + i + ".jpeg", images.get(i),Bucket.BlobWriteOption.doesNotExist());
 		}
 	}
 	
@@ -144,7 +138,7 @@ public abstract class Dao implements OnGetDataListener {
 		return imageReturn;
 	}
 	
-	public void uploadImage(FileInputStream f, String fileName) {
+	public void uploadImage(InputStream f, String fileName) {
 		this.bucketReference.create(fileName,f,Bucket.BlobWriteOption.doesNotExist());
 	}
 	

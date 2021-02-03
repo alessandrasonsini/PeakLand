@@ -1,6 +1,9 @@
 package logic.view.desktop.graphic_controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -151,10 +154,16 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 	public void onLoadPhoto(ActionEvent event) {
 		List<File> selectedFileList = new FileChooser().showOpenMultipleDialog(null);
 		try {
-			getAddNewMountainPathController().setMountainPathImages(selectedFileList);
+			List<InputStream> selectedFileListInputStream = new ArrayList<>();
+			for (File f : selectedFileList) {
+				selectedFileListInputStream.add(new FileInputStream(f));
+			}
+			getAddNewMountainPathController().setMountainPathImages(selectedFileListInputStream);
 			lbLoad.setText("Images loaded");
 		} catch (TooManyImagesException e) {
 			this.showError("Load error", "Too many images selected");
+		} catch (FileNotFoundException e) {
+			showSystemError();
 		}
 	}
 	

@@ -149,3 +149,23 @@ html, body {
 	padding-right: 50%;
 }
 
+.custom-file-upload {
+    cursor: pointer;
+    background-color: #f69155;
+    border: 2px #f69155;
+  	border-radius: 7%;
+}
+
+.btn.btn-edit {
+	min-width:100%;
+	min-height: 100%;
+    background-color: #f69155;
+  	border-radius: 7%;
+}
+
+.btn.btn-dark-orange {
+	color: #000;
+	background-color: #f69155;
+}
+
+

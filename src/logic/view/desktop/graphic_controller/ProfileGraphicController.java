@@ -1,6 +1,9 @@
 package logic.view.desktop.graphic_controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 
@@ -99,10 +102,13 @@ public class ProfileGraphicController extends GraphicController {
 	public void onEditProfile(ActionEvent event) {
 		File selectedFile = new FileChooser().showOpenDialog(null);
 		try {
-			this.getProfileController().setProfileImage(selectedFile);
+			InputStream selectedFileInputStream = new FileInputStream(selectedFile);
+			this.getProfileController().setProfileImage(selectedFileInputStream);
 			// fa il refresh della pagina
 			executeAction(this.myController);
 		} catch (SystemException e) {
+			showSystemError();
+		} catch (FileNotFoundException e) {
 			showSystemError();
 		}
 	}

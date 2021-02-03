@@ -74,7 +74,6 @@ public class MainGraphicController extends GraphicController {
 	}
 
 	public void switchPage(Pane paneToSwitch) {
-		System.out.println("dentro switchPage");
 		mainChild.setCenter(paneToSwitch);
 	}
 	

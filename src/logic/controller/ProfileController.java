@@ -1,7 +1,6 @@
 package logic.controller;
 
-import java.io.File;
-
+import java.io.InputStream;
 import logic.controller.utils.CurrentLoggedUsers;
 import logic.model.LoggedUser;
 import logic.model.bean.LoggedUserBean;
@@ -32,9 +31,9 @@ public class ProfileController extends Controller{
 		return bean;
 	}
 	
-	public void setProfileImage(File f) throws SystemException {
+	public void setProfileImage(InputStream is) throws SystemException {
 		//Chiama il metodo del dao per salvare l'immagine inserita
-		loggedUserDao.updateUserImage(f, directory + currentUser.getUsername() +".jpeg");
+		loggedUserDao.updateUserImage(is, directory + currentUser.getUsername() +".jpeg");
 	}
 	
 	public void updateUserInfo(LoggedUserBean userBean) throws DatabaseException {

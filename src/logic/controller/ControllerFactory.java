@@ -26,6 +26,7 @@ public class ControllerFactory {
 				break;
 			case "Add review":
 				newController = new AddReviewController();
+				break;
 			case "Profile":
 				newController = new ProfileController();
 				break;

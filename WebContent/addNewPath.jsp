@@ -1,7 +1,18 @@
 <%@page import="logic.controller.AddNewMountainPathController"%>
+<%@page import="java.util.Collection"%>
+<%@page import="org.apache.commons.fileupload.servlet.ServletFileUpload"%>
+<%@page import="java.io.InputStream"%>
+<%@page import="java.io.ByteArrayInputStream"%>
+<%@page import="org.apache.commons.io.IOUtils"%>
 <%@page import="logic.model.enums.DifficultyLevelEnum" %>
 <%@page import="logic.model.enums.GroundEnum" %>
 <%@page import="logic.model.enums.LandscapeEnum" %>
+
+
+<%@page import="org.apache.commons.fileupload.FileItem" %>
+<%@page import="org.apache.commons.fileupload.disk.DiskFileItemFactory" %>
+<%@page import="org.apache.commons.fileupload.servlet.ServletFileUpload" %>
+
 <%@ page language="java" session="true" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
@@ -10,6 +21,8 @@
 	boolean disable = true;
 	boolean disableAddReview = true;
 %>
+<jsp:useBean id="newPath" scope="request" class="logic.model.bean.MountainPathBean"/>
+<jsp:setProperty name="newPath" property="*"/>
 <%
 	session.setAttribute("controller", controller);
 	session.setAttribute("disable", disable);
@@ -17,12 +30,8 @@
 			session.setAttribute("disableAddReview", disableAddReview);
 	else
 		disableAddReview = (boolean) session.getAttribute("disableAddReview");
-
 %>
 
-<!-- dichiarazione e instanziazione di una MountainPathBean !-->
-<jsp:useBean id="newPath" scope="request" class="logic.model.bean.MountainPathBean"/>
-<jsp:setProperty name="newPath" property="*"/>
 <%
 	if (request.getParameter("addReview") != null) {
 		%>
@@ -82,12 +91,25 @@
 						<%
 					}
 				}
-				if (request.getParameter("savePath") != null) {
-					disableAddReview = false;
-					session.setAttribute("disableAddReview", disableAddReview);
-					session.removeAttribute("disable");
-					controller.saveNewMountainPath(newPath, (Integer)session.getAttribute("sessionId"));
-					session.removeAttribute("newPath");
+				
+				boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+				if (isMultipart) {
+					List<Part> partList = (List<Part>) request.getParts();
+					List<InputStream> streamList = new ArrayList<>();
+					if (partList != null) {
+					}
+					for (Part part : partList) {
+						if (part.getName().equals("pathPhoto")) {
+							try {
+						    	InputStream fileContent = part.getInputStream();
+						    	streamList.add(fileContent);
+							} catch(Exception e) {
+								e.printStackTrace();
+							}
+						}
+					}
+					controller.setMountainPathImages(streamList);
+				    controller.saveNewMountainPath(newPath, (Integer)session.getAttribute("sessionId"));
 					
 					%>
 					<div class="container" style="padding-top: 3%;">
@@ -97,6 +119,8 @@
 						</div>
 					</div>
 					<%
+					disableAddReview = false;
+					session.setAttribute("disableAddReview", disableAddReview);
 				}
 				%>
 				
@@ -110,7 +134,7 @@
 						</div>
 					</form>
 					
-					<form class="form-inline" action="addNewPath.jsp" method="post">
+					<form class="form-inline" action="addNewPath.jsp" method="post"  enctype="multipart/form-data">
 					
 						<input type='hidden' name='name' id='name' value="${sessionScope.name}"/>
 					
@@ -226,25 +250,18 @@
 							<div class="col-3 black-text">Travel time</div>
 							<div class="col-3"><input type="text" class="form-control" name="hours" placeholder="hours" ${ sessionScope.disable eq true  ? 'disabled' : ''}></div>
 							<div class="col-3"><input type="text" class="form-control" name="minutes" placeholder="minutes" ${ sessionScope.disable eq true  ? 'disabled' : ''}></div>
-						</div>						
+						</div>
 						<div class="row mx-auto" style="padding-bottom: 3%;">
 							<div class="d-flex">
 								<div class="col-3 black-text">Image of the path</div>
-								<input type="file" name="pathPhoto" value="choose file" ${ sessionScope.disable eq true  ? 'disabled' : ''}/>
+								<input type="file" name="pathPhoto" value="pathPhoto" multiple="multiple"/>
 							</div>
 						</div>
 						<div class="container" style="text-align: center;">
-							<button type="submit" name="savePath" value="savePath" class="btn btn-light-orange" ${ sessionScope.disable eq true  ? 'disabled' : ''}>Save mountain path</button>
-						</div>
-						<br>
-						<div class="row mx-auto" style="padding-bottom: 3%;">
-							<div class="d-flex">
-								<div class="col-3 black-text">Add review</div>
-								<input type="submit" name="addReview" value="addReview" ${ sessionScope.disableAddReview eq true  ? 'disabled' : ''}/>
-							</div>
+							<input type="submit" name="savePath" value="Save path" class="btn btn-light-orange" ${ sessionScope.disable eq true  ? 'disabled' : ''}/>
+							<input type="submit" name="addReview" value="Add Review" class="btn btn-light-orange" ${ sessionScope.disableAddReview eq true  ? 'disabled' : ''}/>
 						</div>
 					</form>
-					
 					<br>
 				</div>
 			</div>

@@ -1,3 +1,5 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List" %>
 <%@page import="logic.controller.MainController"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -5,21 +7,20 @@
 
 <%!
 	MainController mainController = new MainController();
+	List<String> actionList = List.of("Home", "View info", "Add path", "Profile");
 	String pageName = "home.jsp";
 	String nextAction = "";
 	String nextPage = "";
 	String btn = "";
 %>
 <%
-	if (session.getAttribute("mainController") != null) {
+	if (session.getAttribute("mainController") != null)
 		mainController = (MainController) session.getAttribute("mainController");
-	}
-	else {
+	else
 		session.setAttribute("mainController", mainController);
-	}
 	
 	if (session.getAttribute("btn") == null) 
-		session.setAttribute("btn", "home");
+		session.setAttribute("btn", "Home");
 	else 
 		btn = (String) session.getAttribute("btn");
 %>
@@ -48,38 +49,41 @@
 			</div>
 			
 			<form class="form" action="header.jsp" method="post">
-				<ul class="nav navbar background-orange">
-					<li>
-						<button type="submit" name="home" value="home" class="btn btn-primary btn-nav" ${ sessionScope.btn eq "home"  ? 'style="background-color: #f69155"' : ''}>Home</button>
-					<li>
-						<button type="submit" name="searchPath" value="searchPath" class="btn btn-primary btn-nav" ${ sessionScope.btn eq "view"  ? 'style="background-color: #f69155"' : ''}>Search path</button>
-					<li>
-						<button type="submit" name="addNewPath" value="addNewPath" class="btn btn-primary btn-nav" ${ sessionScope.btn eq "new"  ? 'style="background-color: #f69155"' : ''}>Add new path</button>
-					</li>
-				</ul>
+				<div class="row background-orange">
+					<div class="col-6 float-left">
+						<ul class="nav navbar background-orange">
+							<li>
+								<button type="submit" name="Home" value="Home" class="btn btn-primary btn-nav" ${ sessionScope.btn eq "Home"  ? 'style="background-color: #f69155"' : ''}>Home</button>
+							<li>
+								<button type="submit" name="View info" value="View info" class="btn btn-primary btn-nav" ${ sessionScope.btn eq "View info"  ? 'style="background-color: #f69155"' : ''}>Search path</button>
+							<li>
+								<button type="submit" name="Add path" value="Add path" class="btn btn-primary btn-nav" ${ sessionScope.btn eq "Add path"  ? 'style="background-color: #f69155"' : ''}>Add new path</button>
+							</li>
+						</ul>
+					</div>
+					<div class="col-6 float-right" style="text-align:right;">
+						<ul class="nav navbar background-orange">
+							<li>
+								<button type="submit" name="Profile" value="Profile" class="btn btn-primary btn-nav" ${ sessionScope.btn eq "Profile"  ? 'style="background-color: #f69155"' : ''}>
+									<img src="Images/icons8-male-user-64.png" width="45%">
+								</button>
+							<li>
+						</ul>
+					</div>
+				</div>
 			</form>
 		</div>
 		
 		<%
-		if (request.getParameter("home") != null && request.getAttribute("new") == null) {
-			session.setAttribute("btn", "home");
-			nextPage = "";
-			nextAction = mainController.onActionRequired(nextPage, (Integer) session.getAttribute("sessionId"));
-			request.setAttribute("new", false);
+		for (String action : actionList) {
+			if (request.getParameter(action) != null && request.getAttribute("new") == null) {
+				session.setAttribute("btn", action);
+				nextPage = action;
+				nextAction = mainController.onActionRequired(nextPage, (Integer) session.getAttribute("sessionId"));
+				request.setAttribute("new", false);
+				break;
+			}
 		}
-		else if (request.getParameter("searchPath") != null && request.getAttribute("new") == null) {
-			session.setAttribute("btn", "view");
-			nextPage = "View info";
-			nextAction = mainController.onActionRequired(nextPage, (Integer) session.getAttribute("sessionId"));
-			request.setAttribute("new", false);
-		}
-		else if (request.getParameter("addNewPath") != null && request.getAttribute("new") == null) {
-			session.setAttribute("btn", "new");
-			nextPage = "Add path";
-			nextAction = mainController.onActionRequired(nextPage, (Integer) session.getAttribute("sessionId"));
-			request.setAttribute("new", false);
-		}
-		
 		
 		switch(nextAction) {
 			case "Login":
@@ -90,6 +94,12 @@
 				break;
 			case "Add path":
 				pageName = "addNewPath.jsp";
+				break;
+			case "Profile":
+				pageName = "profile.jsp";
+				break;
+			case "Home":
+				pageName = "home.jsp";
 				break;
 		}
 		
@@ -102,6 +112,12 @@
 				break;
 			case "Add path":
 				nextPage = "addNewPath.jsp";
+				break;
+			case "Profile":
+				nextPage = "profile.jsp";
+				break;
+			case "Home":
+				nextPage = "home.jsp";
 				break;
 		}
 		

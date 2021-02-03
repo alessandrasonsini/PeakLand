@@ -1,18 +1,15 @@
 package logic.controller;
 
-import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-
 import logic.controller.utils.CurrentLoggedUsers;
 import logic.model.Location;
 import logic.model.MountainPath;
-import logic.model.Review;
 import logic.model.Time;
 import logic.model.bean.MountainPathBean;
 import logic.model.bean.ReviewBean;
 import logic.model.dao.MountainPathDao;
-import logic.model.dao.ReviewDao;
 import logic.model.exception.DatabaseException;
 import logic.model.exception.SystemException;
 import logic.model.exception.TooManyImagesException;
@@ -24,7 +21,7 @@ public class AddNewMountainPathController extends Controller {
 	private static final int MAXIMAGES = 5;
 	private static final String directory = "Mountain path/";
 	
-	private List<File> pathImages;
+	private List<InputStream> pathImages;
 	
 	public AddNewMountainPathController() {
 		super();
@@ -44,7 +41,6 @@ public class AddNewMountainPathController extends Controller {
 	}
 
 	public void saveNewMountainPath(MountainPathBean newPathBean, Integer sessionId) throws DatabaseException, SystemException {
-
 		// A partire dalla bean, costruisce l'entità mountain path da salvare
 		MountainPath newMountainPath = new MountainPath();
 		
@@ -67,7 +63,7 @@ public class AddNewMountainPathController extends Controller {
 		mountainPathDao.uploadImage(this.pathImages, directory + newMountainPath.getName() + "/" + CurrentLoggedUsers.getInstance().getCurrentLoggedUser(sessionId).getUsername());
 	}
 	
-	public void setMountainPathImages(List<File> images) throws TooManyImagesException {
+	public void setMountainPathImages(List<InputStream> images) throws TooManyImagesException {
 		if(images.size() > MAXIMAGES)
 			throw new TooManyImagesException();
 		else

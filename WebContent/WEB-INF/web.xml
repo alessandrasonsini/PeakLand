@@ -9,4 +9,34 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <servlet-name>profilejsp</servlet-name>
+    <jsp-file>/profile.jsp</jsp-file>
+    <multipart-config>
+        <!-- enter your values -->
+        <max-file-size>1000000</max-file-size> 
+        <max-request-size>1000000</max-request-size>
+        <file-size-threshold>1000000</file-size-threshold>
+    </multipart-config>
+  </servlet>
+  <servlet-mapping>
+	    <servlet-name>profilejsp</servlet-name>
+	    <url-pattern>/profile.jsp</url-pattern>
+   </servlet-mapping>
+   <servlet>
+    <description></description>
+    <servlet-name>addnewpathjsp</servlet-name>
+    <jsp-file>/addNewPath.jsp</jsp-file>
+    <multipart-config>
+        <!-- enter your values -->
+        <max-file-size>20848820</max-file-size> 
+        <max-request-size>418018841</max-request-size>
+        <file-size-threshold>20848820</file-size-threshold>
+    </multipart-config>
+  </servlet>
+  <servlet-mapping>
+	    <servlet-name>addnewpathjsp</servlet-name>
+	    <url-pattern>/addNewPath.jsp</url-pattern>
+   </servlet-mapping>
 </web-app>
