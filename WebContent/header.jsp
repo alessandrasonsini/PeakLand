@@ -49,8 +49,8 @@
 			</div>
 			
 			<form class="form" action="header.jsp" method="post">
-				<div class="row background-orange">
-					<div class="col-6 float-left">
+				<div class="row background-orange justify-content-between">
+					<div class="col-9">
 						<ul class="nav navbar background-orange">
 							<li>
 								<button type="submit" name="Home" value="Home" class="btn btn-primary btn-nav" ${ sessionScope.btn eq "Home"  ? 'style="background-color: #f69155"' : ''}>Home</button>
@@ -61,11 +61,11 @@
 							</li>
 						</ul>
 					</div>
-					<div class="col-6 float-right" style="text-align:right;">
+					<div class="col-2">
 						<ul class="nav navbar background-orange">
 							<li>
 								<button type="submit" name="Profile" value="Profile" class="btn btn-primary btn-nav" ${ sessionScope.btn eq "Profile"  ? 'style="background-color: #f69155"' : ''}>
-									<img src="Images/icons8-male-user-64.png" width="45%">
+									<img src="Images/icons8-male-user-64.png" width="44%">
 								</button>
 							<li>
 						</ul>
@@ -84,44 +84,44 @@
 				break;
 			}
 		}
+			
+		if (!nextPage.equals("")) {
+			switch(nextAction) {
+				case "Login":
+					pageName = "login.jsp";
+					break;
+				case "View info":
+					pageName = "searchPath.jsp";
+					break;
+				case "Add path":
+					pageName = "addNewPath.jsp";
+					break;
+				case "Profile":
+					pageName = "profile.jsp";
+					break;
+				case "Home":
+					pageName = "home.jsp";
+					break;
+			}
 		
-		switch(nextAction) {
-			case "Login":
-				pageName = "login.jsp";
-				break;
-			case "View info":
-				pageName = "searchPath.jsp";
-				break;
-			case "Add path":
-				pageName = "addNewPath.jsp";
-				break;
-			case "Profile":
-				pageName = "profile.jsp";
-				break;
-			case "Home":
-				pageName = "home.jsp";
-				break;
-		}
+			switch(nextPage) {
+				case "Login":
+					nextPage = "login.jsp";
+					break;
+				case "View info":
+					nextPage = "searchPath.jsp";
+					break;
+				case "Add path":
+					nextPage = "addNewPath.jsp";
+					break;
+				case "Profile":
+					nextPage = "profile.jsp";
+					break;
+				case "Home":
+					nextPage = "home.jsp";
+					break;
+			}
 		
-		switch(nextPage) {
-			case "Login":
-				nextPage = "login.jsp";
-				break;
-			case "View info":
-				nextPage = "searchPath.jsp";
-				break;
-			case "Add path":
-				nextPage = "addNewPath.jsp";
-				break;
-			case "Profile":
-				nextPage = "profile.jsp";
-				break;
-			case "Home":
-				nextPage = "home.jsp";
-				break;
-		}
-		
-		if (pageName != "home.jsp") {
 			%>
 			<jsp:forward page="<%=pageName%>">
 				<jsp:param name="nextPageId" value="<%=nextPage%>"/>

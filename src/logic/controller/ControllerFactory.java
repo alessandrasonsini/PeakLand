@@ -55,4 +55,7 @@ public class ControllerFactory {
 		return new AddReviewController();
 	}
 	
+	public ViewReviewController getViewReviewController() {
+		return new ViewReviewController();
+	}
 }

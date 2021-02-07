@@ -23,7 +23,6 @@ public class MountainPathDao extends Dao {
 	public MountainPathDao() {
 		super();
 		this.mountainPathResult = new ArrayList<>();
-		
 	}
 	
 	public void saveNewMountainPathOnDB(MountainPath mountainPath) throws DatabaseException {
@@ -72,6 +71,19 @@ public class MountainPathDao extends Dao {
 		Query query = this.dbReference.orderByChild(filterName).equalTo(filterValue);
 		executeQuery(query);
 		return mountainPathResult;
+	}
+	
+	public List<MountainPath> getPaths() {
+		Query query = this.dbReference;
+		executeQuery(query);
+		return mountainPathResult;
+	}
+	
+	public void updateMountainPath(MountainPath path) {
+		Map<String, Object> paths = new HashMap<>();
+		
+		paths.put(path.getName(), (Object)path);
+		this.dbReference.updateChildrenAsync(paths);
 	}
 	
 	private void executeQuery(Query query){

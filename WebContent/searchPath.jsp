@@ -12,12 +12,12 @@
 	ViewMountainPathInfoController controller;
 %>
 <%
-	if (request.getParameter("controller") != null) {
-		controller = (ViewMountainPathInfoController) session.getAttribute("controller");
+	if (request.getParameter("viewInfoController") != null) {
+		controller = (ViewMountainPathInfoController) session.getAttribute("viewInfoController");
 	}
 	else {
 		controller = new ViewMountainPathInfoController();
-		session.setAttribute("controller", controller);
+		session.setAttribute("viewInfoController", controller);
 	}
 %>
 

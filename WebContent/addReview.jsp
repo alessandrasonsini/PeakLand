@@ -12,7 +12,7 @@
 <jsp:useBean id="review" scope="request" class="logic.model.bean.ReviewBean"/>
 <jsp:setProperty name="review" property="*"/>
 <%		
-	AddNewMountainPathController controller = (AddNewMountainPathController) session.getAttribute("controller");
+	AddNewMountainPathController controller = (AddNewMountainPathController) session.getAttribute("addPathController");
 
 	session.setAttribute("disable", disable);
 	
@@ -56,13 +56,15 @@
 				
 				<%
 				if (request.getParameter("addReviewBtn") != null) {
-					review.setPathName((String) session.getAttribute("name"));
+					
+					review.setPathName(((String) session.getAttribute("name")));
 					review.setVote(vote);
 					review.setAuthor(CurrentLoggedUsers.getInstance()
 							.getCurrentLoggedUser((Integer)session.getAttribute("sessionId")).getUsername());
 					controller.saveReview(review);
 					session.removeAttribute("name");
-					
+					//vedere se metterlo qui o dopo l'alert
+					session.removeAttribute("vote");
 					%>
 					<div class="container" style="padding-top: 3%;">
 						<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -71,7 +73,7 @@
 						</div>
 					</div>
 					<%
-					session.removeAttribute("vote");
+					
 				}
 				%>
 				
@@ -113,7 +115,7 @@
 							</div>
 						</div>
 						<div class="container">
-							<textarea rows="10" cols="60" name="comment" placeholder="Write your comment here..." ${ sessionScope.disable eq true  ? 'disabled' : ''}></textarea>
+							<textarea maxlength="300" rows="10" cols="60" name="comment" placeholder="Write your comment here..." ${ sessionScope.disable eq true  ? 'disabled' : ''}></textarea>
 						</div>
 						<div class="container" style="pagging-top: 10%;">
 							<button type="submit" name="addReviewBtn" value="addReviewBtn" class="btn btn-light-orange" ${ sessionScope.disable eq true  ? 'disabled' : ''}>Add review</button>
@@ -124,7 +126,6 @@
 				</div>
 			</div>
 		</div>
-
 
 		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>

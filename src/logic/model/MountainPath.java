@@ -142,7 +142,10 @@ public class MountainPath {
 	}
 	
 	public Integer getNumberOfVotes() {
-		return numberOfVotes;
+		if (numberOfVotes == null)
+			return 0;
+		else
+			return numberOfVotes;
 	}
 
 	public void setNumberOfVotes(Integer numberOfVotes) {
@@ -150,7 +153,10 @@ public class MountainPath {
 	}
 
 	public Integer getVote() {
-		return vote;
+		if (vote == null)
+			return 0;
+		else
+			return vote;
 	}
 
 	public void setVote(Integer vote) {

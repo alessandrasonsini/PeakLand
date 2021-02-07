@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <AnchorPane BorderPane.alignment="CENTER">
          <children>
@@ -55,39 +55,39 @@
                      <content>
                         <AnchorPane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #FFFFFF;">
                            <children>
-                              <Label layoutX="61.0" layoutY="46.0" style="-fx-text-fill: #77DD77;" text="Altitude:" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="100.0">
+                              <Label layoutX="61.0" layoutY="46.0" style="-fx-text-fill: #90D3AE;" text="Altitude:" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="100.0">
                                  <font>
                                     <Font name="Maiandra GD" size="16.0" />
                                  </font></Label>
-                              <Label layoutX="51.0" layoutY="106.0" style="-fx-text-fill: #77DD77;" text="Lenght:" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="150.0">
+                              <Label layoutX="51.0" layoutY="106.0" style="-fx-text-fill: #90D3AE#90D3AE;" text="Lenght:" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="150.0">
                               <font>
                                     <Font name="Maiandra GD" size="16.0" />
                                  </font></Label>
-                              <Label layoutX="45.0" layoutY="152.0" style="-fx-text-fill: #77DD77;" text="Level:" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="200.0">
+                              <Label layoutX="45.0" layoutY="152.0" style="-fx-text-fill: #90D3AE#90D3AE;" text="Level:" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="200.0">
                               <font>
                                     <Font name="Maiandra GD" size="16.0" />
                                  </font></Label>
-                              <Label layoutX="55.0" layoutY="162.0" style="-fx-text-fill: #77DD77;" text="Landscape:" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="250.0">
+                              <Label layoutX="55.0" layoutY="162.0" style="-fx-text-fill: #90D3AE#90D3AE;" text="Landscape:" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="250.0">
                               <font>
                                     <Font name="Maiandra GD" size="16.0" />
                                  </font></Label>
-                              <Label layoutX="65.0" layoutY="172.0" style="-fx-text-fill: #77DD77;" text="Ground:" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="300.0">
+                              <Label layoutX="65.0" layoutY="172.0" style="-fx-text-fill: #90D3AE#90D3AE;" text="Ground:" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="300.0">
                               <font>
                                     <Font name="Maiandra GD" size="16.0" />
                                  </font></Label>
-                              <Label layoutX="75.0" layoutY="182.0" style="-fx-text-fill: #77DD77;" text="Cycleble:" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="350.0">
+                              <Label layoutX="75.0" layoutY="182.0" style="-fx-text-fill: #90D3AE#90D3AE;" text="Cycleble:" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="350.0">
                               <font>
                                     <Font name="Maiandra GD" size="16.0" />
                                  </font></Label>
-                              <Label layoutX="85.0" layoutY="192.0" style="-fx-text-fill: #77DD77;" text="Presence of historical elements:" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="400.0">
+                              <Label layoutX="85.0" layoutY="192.0" style="-fx-text-fill: #90D3AE#90D3AE;" text="Presence of historical elements:" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="400.0">
                               <font>
                                     <Font name="Maiandra GD" size="16.0" />
                                  </font></Label>
-                              <Label layoutX="95.0" layoutY="202.0" style="-fx-text-fill: #77DD77;" text="Family suitable:" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="450.0">
+                              <Label layoutX="95.0" layoutY="202.0" style="-fx-text-fill: #90D3AE#90D3AE;" text="Family suitable:" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="450.0">
                               <font>
                                     <Font name="Maiandra GD" size="16.0" />
                                  </font></Label>
-                              <Label layoutX="105.0" layoutY="212.0" style="-fx-text-fill: #77DD77;" text="Travel time:" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="500.0">
+                              <Label layoutX="105.0" layoutY="212.0" style="-fx-text-fill: #90D3AE#90D3AE;" text="Travel time:" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="500.0">
                               <font>
                                     <Font name="Maiandra GD" size="16.0" />
                                  </font></Label>
@@ -138,7 +138,7 @@
                                     <Image url="@../images/star.png" />
                                  </image>
                               </ImageView>
-                              <Label layoutX="562.0" layoutY="483.0" style="-fx-text-fill: #77DD77;" text="Number of votes:" AnchorPane.leftAnchor="562.0" AnchorPane.topAnchor="483.0">
+                              <Label layoutX="562.0" layoutY="483.0" style="-fx-text-fill: #90D3AE#90D3AE;" text="Number of votes:" AnchorPane.leftAnchor="562.0" AnchorPane.topAnchor="483.0">
                               <font>
                                     <Font name="Maiandra GD" size="16.0" />
                                  </font></Label>

@@ -24,12 +24,14 @@
 <jsp:useBean id="newPath" scope="request" class="logic.model.bean.MountainPathBean"/>
 <jsp:setProperty name="newPath" property="*"/>
 <%
-	session.setAttribute("controller", controller);
+	session.setAttribute("addPathController", controller);
 	session.setAttribute("disable", disable);
 	if (session.getAttribute("disableAddReview") == null)
 			session.setAttribute("disableAddReview", disableAddReview);
 	else
 		disableAddReview = (boolean) session.getAttribute("disableAddReview");
+	
+	System.out.println("nome path dentro addnewpath " + (String) session.getAttribute("name"));
 %>
 
 <%
@@ -96,15 +98,17 @@
 				if (isMultipart) {
 					List<Part> partList = (List<Part>) request.getParts();
 					List<InputStream> streamList = new ArrayList<>();
-					if (partList != null) {
-					}
+					
 					for (Part part : partList) {
-						if (part.getName().equals("pathPhoto")) {
-							try {
-						    	InputStream fileContent = part.getInputStream();
-						    	streamList.add(fileContent);
-							} catch(Exception e) {
-								e.printStackTrace();
+						if (part.getName().equals("pathPhoto") ) {
+							System.out.println("filename   "+part.getSubmittedFileName());
+							if (part.getSubmittedFileName() != "") {
+								try {
+							    	InputStream fileContent = part.getInputStream();
+							    	streamList.add(fileContent);
+								} catch(Exception e) {
+									e.printStackTrace();
+								}
 							}
 						}
 					}

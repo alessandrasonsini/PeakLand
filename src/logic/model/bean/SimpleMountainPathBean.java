@@ -72,7 +72,10 @@ public class SimpleMountainPathBean extends ItemBean {
 	}
 
 	public Integer getVote() {
-		return vote;
+		if (vote == null)
+			return 0;
+		else
+			return vote;
 	}
 
 	public void setVote(Integer vote) {
@@ -80,7 +83,10 @@ public class SimpleMountainPathBean extends ItemBean {
 	}
 
 	public Integer getNumberOfVotes() {
-		return numberOfVotes;
+		if (numberOfVotes == null)
+			return 0;
+		else
+			return numberOfVotes;
 	}
 
 	public void setNumberOfVotes(Integer numberOfVotes) {

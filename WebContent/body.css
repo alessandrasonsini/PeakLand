@@ -168,4 +168,21 @@ html, body {
 	background-color: #f69155;
 }
 
+.p-2.flex-item-stars-2 {
+	width:  40px;
+	height: auto;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
 
+.icon-star {
+	width:  40px;
+    height: auto;
+    object-fit: cover;
+}
+
+.vertical { 
+    border-left: 3px solid black; 
+    height: 80px;
+    margin-left: 50%;
+} 

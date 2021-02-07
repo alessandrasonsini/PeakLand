@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 <%
-	ViewMountainPathInfoController controller = (ViewMountainPathInfoController) session.getAttribute("controller");
+	ViewMountainPathInfoController controller = (ViewMountainPathInfoController) session.getAttribute("viewInfoController");
 %>
 
 <!-- dichiarazione e instanziazione di una MountainPathBean !-->

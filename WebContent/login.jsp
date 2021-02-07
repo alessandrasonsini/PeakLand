@@ -14,7 +14,7 @@
 	Integer id;
 %>
 <%
-	session.setAttribute("controller", controller);
+	session.setAttribute("loginController", controller);
 	if (request.getParameter("nextPageId") != null)
 		session.setAttribute("nextPageId", request.getParameter("nextPageId"));
 %>
@@ -52,40 +52,57 @@
 			</div>
 			
 			<div class="col-9">
-				<div class="col-4 mx-auto" style="padding-top: 3%; text-align: center;">
+				<br>
+				<form class="form" style="text-align: center;" action="login.jsp" method="post">
+
+					<div class="container">
+						<div class="d-flex flex-column justify-content-center align-items-center">
+							<div class="p-2" style="padding-bottom: 3%;">
+								<input type="text" class="form-control" name="username" placeholder="Username">
+							</div>
+							<div class="p-2" style="padding-bottom: 3%;">
+								<input type="password" class="form-control" name="password" placeholder="Password">
+							</div>
+						</div>
+					</div>
 					
-					<form class="form" style="text-align: center;" action="login.jsp" method="post">
-						
-							<div class="row" style="padding-bottom: 3%;">
-								<div class="col"><input type="text" class="form-control" name="username" placeholder="Username"></div>
+					<div class="container">
+						<div class="row justify-content-center align-items-center">
+							<div class="col-3">
+								<button type="submit" name="login" value="login" class="btn btn-light-orange">Login</button>
 							</div>
-							<div class="row" style="padding-bottom: 3%;">
-								<div class="col"><input type="password" class="form-control" name="password" placeholder="Password"></div>
+							<div class="col-1">
+								<div class="vertical"></div>
 							</div>
-							<div class="row">
-								<div class="col">
-									<button type="submit" name="login" value="login" class="btn btn-light-orange">Login</button>
+							<div class="col-3">
+								<div class="row justify-content-center" style="padding-bottom:3%;">
+									<div class="col-10">
+										<input type="text" class="form-control" name="confirmPassword" placeholder="Confirm your password">
+									</div>
 								</div>
-								<div class="col border-right">
-									<input type="text" class="form-control" name="confirmPassword" placeholder="Confirm your password">
-									<button type="submit" name="signin" value="signin" class="btn btn-light-orange">Sign in</button>
-								</div>
+								<button type="submit" name="signin" value="signin" class="btn btn-light-orange">Sign in</button>
 							</div>
-							<div class="row">
-								<div class="col">or</div>
+						</div>
+					</div>
+					<div class="container">
+						<div class="d-flex flex-column justify-content-center align-items-center">
+							<div class="p-2" style="padding-bottom: 3%;">or</div>
+							<div class="p-2" style="padding-bottom: 3%;">
+								<img src="Images/google-plus.png" width="15%">
+								<button type="submit" name="google" value="google" class="btn btn-danger">
+									Login with Google
+								</button>
 							</div>
-							<div class="row">
-								<div class="col">
-									<button type="submit" name="google" value="google" class="btn btn-danger">Login with Google</button>
-								</div>
+							<div class="p-2">
+								<img src="Images/facebook-new.png" width="15%">
+								<button type="submit" name="fb" value="fb" class="btn btn-primary">
+									Login with Facebook
+								</button>
 							</div>
-							<div class="row">
-								<div class="col">
-									<button type="submit" name="fb" value="fb" class="btn btn-primary">Login with Facebook</button>
-								</div>
-							</div>
+						</div>
+					</div>
 					</form>
-				</div>
+				
 		
 		<%
 		try {

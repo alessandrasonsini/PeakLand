@@ -2,11 +2,15 @@ package logic.controller;
 
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import logic.model.MountainPath;
+import logic.model.Review;
 import logic.model.bean.MountainPathBean;
+import logic.model.bean.ReviewBean;
 import logic.model.bean.SimpleMountainPathBean;
 import logic.model.bean.factory.MountainPathBeanFactory;
+import logic.model.bean.factory.ReviewBeanFactory;
 import logic.model.bean.factory.SimpleMountainPathBeanFactory;
 import logic.model.dao.MountainPathDao;
 import logic.model.exception.SystemException;
@@ -16,6 +20,7 @@ public class ViewMountainPathInfoController extends Controller {
 	private MountainPathBean selectedMountainPath;
 	private SearchMountainPathController searchController;
 	private AssistedResearchController assistedResearchController;
+	private ViewReviewController viewReviewController;
 	private List<SimpleMountainPathBean> searchResults;
 
 	public ViewMountainPathInfoController() {
@@ -23,6 +28,7 @@ public class ViewMountainPathInfoController extends Controller {
 		// Prende l'istanza del controller che si occupa della search e che collabora nell'esecuzione del caso d'uso
 		this.searchController = new ControllerFactory().getSearchMountainPathController();
 		this.assistedResearchController = new ControllerFactory().getAssistedResearchController();
+		this.viewReviewController = new ControllerFactory().getViewReviewController();
 		this.searchResults = null;
 	}
 
@@ -45,13 +51,14 @@ public class ViewMountainPathInfoController extends Controller {
 	
 	// Restituisce le info complete del mountain path selezionato
 	public void setSelectedMountainPath(String selectedPath) {
-		
+		System.out.println("home controller   path name "+selectedPath);
 		MountainPath searchResult = searchController.searchMountainPathByName(selectedPath);
 		
 		if(searchResult != null) {
 			// Converte la entity in bean e la memorizza, per poterla poi passare alla view che si occupa di visualizzare
 			// tutte le info del path
 			this.selectedMountainPath = new MountainPathBeanFactory().getMountainPathBean(searchResult);
+		
 		}
 		else this.selectedMountainPath = null;
 	
@@ -67,6 +74,26 @@ public class ViewMountainPathInfoController extends Controller {
 		return this.selectedMountainPath;
 	}
 	
+	public List<ReviewBean> getPathReview(String pathName) {
+		List<ReviewBean> reviewBeanList = new ArrayList<>();
+		
+		List<Review> reviewList = viewReviewController.getReview(pathName);
+		for (Review review : reviewList) {
+			reviewBeanList.add(new ReviewBeanFactory().getReviewBean(review));
+		}
+		
+		return reviewBeanList;
+	}
+	
+	public ReviewBean getOnePathReview() {
+		Review review = viewReviewController.getOneReview(this.selectedMountainPath.getName());
+		if (review != null) {
+			ReviewBean bean = new ReviewBeanFactory().getReviewBean(review);
+			return bean;
+		}
+		else return null;
+	}
+	
 	public void onBackPressed() {
 		setNextPageId("Back");
 	}
@@ -76,7 +103,8 @@ public class ViewMountainPathInfoController extends Controller {
 	}
 	
 	private List<SimpleMountainPathBean> sortResultsByVote(List<SimpleMountainPathBean> results){
-		// dummy
+		results.sort(Comparator.comparing(SimpleMountainPathBean::getVote).reversed());
+		
 		return results;
 	}
 	

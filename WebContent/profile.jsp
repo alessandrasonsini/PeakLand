@@ -23,7 +23,7 @@
 
 
 <%
-	session.setAttribute("controller", controller);
+	session.setAttribute("profileController", controller);
 	
 	currentUser = controller.getCurrentUser((Integer) session.getAttribute("sessionId"));
 	session.setAttribute("currentUser", currentUser);
@@ -144,7 +144,7 @@
 								<div class="row mx-auto" style="padding-bottom: 3%;">
 									<div class="col-3 black-text">About me</div>
 									<div class="col-3">
-										<textarea rows="5" cols="30" name="description" placeholder="About me" ${ sessionScope.disable eq true  ? 'disabled' : ''}>
+										<textarea maxlength="200" rows="5" cols="30" name="description" placeholder="About me" ${ sessionScope.disable eq true  ? 'disabled' : ''}>
 											${sessionScope.currentUser.description}
 										</textarea>
 									</div>

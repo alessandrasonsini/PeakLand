@@ -1,3 +1,4 @@
+<%@page import="logic.model.bean.ReviewBean"%>
 <%@page import="java.io.ByteArrayInputStream"%>
 <%@page import="org.apache.commons.io.IOUtils"%>
 <%@page import="java.util.List"%>
@@ -12,18 +13,22 @@
 <!DOCTYPE html>
 
 <%!
+	ViewMountainPathInfoController controller = new ViewMountainPathInfoController();
 	ArrayList<String> base64 = new ArrayList<>();
 	int currImgNum = -1;
 	boolean disablePrev = true;
 	boolean disableNext = true;
 %>
-
+<jsp:useBean id="review" scope="request" class="logic.model.bean.ReviewBean"/>
 <%
 	session.setAttribute("disablePrev", disablePrev);
 	session.setAttribute("disableNext", disableNext);
 
-	ViewMountainPathInfoController controller = (ViewMountainPathInfoController) session.getAttribute("controller");
+	if (session.getAttribute("viewInfoController") != null)
+		controller = (ViewMountainPathInfoController) session.getAttribute("viewInfoController");
 	MountainPathBean path = controller.getSelectedMountainPath();
+	review = controller.getOnePathReview();
+	List<ReviewBean> list = controller.getPathReview(path.getName());
 	
 	if (controller.getImageStreams() != null) {
 		if (base64.isEmpty()) {
@@ -55,6 +60,13 @@
 		disablePrev = false;
 		if (currImgNum == (base64.size() -1) )
 			disableNext = true;
+	}
+	if (request.getParameter("viewReviews") != null) {
+		%>
+		<jsp:forward page="viewReviews.jsp">
+			<jsp:param name="pathName" value="<%=path.getName()%>"/>
+		</jsp:forward>
+		<%
 	}
 	
 	session.setAttribute("disablePrev", disablePrev);
@@ -123,9 +135,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-sm">
-						
 							<br>
-							
 							<div class="d-flex justify-content-start align-items-center">
 								<div class="p-2 flex-item-icon">
 									<img src="Images/info.png" class="img-responsive icons">
@@ -133,7 +143,7 @@
   								<div class="p-2 flex-item-text pull-left text">About the mountan path</div>
 							</div>
 							
-							<br><br>
+							<br>
 							
 							<div class="container">
 								<div class="row">
@@ -164,6 +174,42 @@
 									<p class="green-text">Travel Time:&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=path.convertToText(path.getHours())%> : <%=path.convertToText(path.getMinutes())%></span></p>
 								</div>
 							</div>
+						
+							<br>
+						
+							<div class="d-flex justify-content-start align-items-center">
+								<div class="p-2 flex-item-icon">
+									<img src="Images/list.png" class="img-responsive icons">
+								</div>
+	 							<div class="p-2 flex-item-text pull-left text">Reviews</div>
+							</div>
+							
+							<% if (review != null) { %>
+							<div class="container">
+								<div class="row">
+									<p class="green-text">Author:&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=review.getAuthor() %></span></p>
+								</div>
+								<div class="row">
+									<p class="green-text">Vote:&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=review.getVote() %></span></p>
+								</div>
+								<div class="row">
+									<p class="green-text">Title:&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=review.getTitle() %></span></p>
+								</div>
+								<div class="row">
+									<p class="green-text">Comment:&nbsp;&nbsp;<span class="black-text"><%=review.getComment() %></span></p>
+								</div>
+								<div class="row">
+									<form class="form-inline" action="viewMountainPathInfo.jsp" method="post">
+										<button type="submit" name="viewReviews" value="viewReviews" class="btn btn-light-orange">View all reviews</button>
+									</form>
+								</div>
+							</div>
+							<%} else { %>
+							<div class="container">
+								<div class="row">Not available</div>
+							</div>
+							<% } %>
+							<br>
 						</div>
 						
 						<div class="col-sm">
@@ -230,7 +276,7 @@
 								</div>
   								<div class="p-2 flex-item-text pull-left text">Vote</div>
   								
-  								<%	if (path.getVote() != null) {
+  								<%	if (path.getVote() != 0) {
 	  									for(int i = 0; i < path.getVote(); i++) {
 	  									%>
 		  								<div class="p-2 flex-item-stars">
@@ -250,13 +296,14 @@
 							
 							<div class="container" style="padding-left: 5%;">
 								<div class="row">
-									<p class="green-text">Number of votes:&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=path.convertToText(path.getNumberOfVotes())%></span></p>
+									<p class="green-text">Number of votes:&nbsp;
+										<span class="black-text"><%=path.convertToText(path.getNumberOfVotes())%></span>
+									</p>
 								</div>
 							</div>
 						</div>
 						
 					</div>
-					
 					
 					
 				</div>
