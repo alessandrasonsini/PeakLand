@@ -183,12 +183,22 @@ public class ViewMountainPathInfoGraphicController extends GraphicController{
 		switch(selectedMountainPath.convertToText(selectedMountainPath.getVote())) {
 			case "5":
 				imageStar5.setVisible(true);
+				imageStar4.setVisible(true);
+				imageStar3.setVisible(true);
+				imageStar2.setVisible(true);
+				imageStar1.setVisible(true);
 			case "4":
 				imageStar4.setVisible(true);
+				imageStar3.setVisible(true);
+				imageStar2.setVisible(true);
+				imageStar1.setVisible(true);
 			case "3":
 				imageStar3.setVisible(true);
+				imageStar2.setVisible(true);
+				imageStar1.setVisible(true);
 			case "2":
 				imageStar2.setVisible(true);
+				imageStar1.setVisible(true);
 			case "1":
 				imageStar1.setVisible(true);
 				break;

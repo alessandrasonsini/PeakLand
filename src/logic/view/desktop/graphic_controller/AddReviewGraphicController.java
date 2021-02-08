@@ -36,7 +36,6 @@ public class AddReviewGraphicController extends GraphicController{
 	
 	public AddReviewGraphicController(Controller controller) {
 		super(controller);
-		System.out.println("dentro addReview grafico");
 	}
 
 	@Override

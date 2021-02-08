@@ -19,7 +19,7 @@ public class AddNewMountainPathController extends Controller {
 	private AddReviewController addReviewController;
 	
 	private static final int MAXIMAGES = 5;
-	private static final String directory = "Mountain path/";
+	private static final String DIRECTORY = "Mountain path/";
 	
 	private List<InputStream> pathImages;
 	
@@ -60,7 +60,7 @@ public class AddNewMountainPathController extends Controller {
 		// Invoca il metodo del dao per salvare il mountain path sul db e le immagini inserite
 		MountainPathDao mountainPathDao = new MountainPathDao();
 		mountainPathDao.saveNewMountainPathOnDB(newMountainPath);
-		mountainPathDao.uploadImage(this.pathImages, directory + newMountainPath.getName() + "/" + CurrentLoggedUsers.getInstance().getCurrentLoggedUser(sessionId).getUsername());
+		mountainPathDao.uploadImage(this.pathImages, DIRECTORY + newMountainPath.getName() + "/" + CurrentLoggedUsers.getInstance().getCurrentLoggedUser(sessionId).getUsername());
 	}
 	
 	public void setMountainPathImages(List<InputStream> images) throws TooManyImagesException {

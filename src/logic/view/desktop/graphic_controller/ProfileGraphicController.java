@@ -54,7 +54,7 @@ public class ProfileGraphicController extends GraphicController {
 	@FXML
 	TextArea txtDescription;
 	
-	private static final int max_chars = 200;
+	private static final int MAX_CHARS = 200;
 
 	private LoggedUserBean currentUser;
 	private List<TextInputControl> editableText; 
@@ -62,7 +62,7 @@ public class ProfileGraphicController extends GraphicController {
 	protected ProfileGraphicController(Controller controller) {
 		super(controller);
 		this.editableText = Arrays.asList(txtDescription,txtName,txtSurname);
-		txtDescription.setTextFormatter(new TextFormatter<String>(change -> change.getControlNewText().length() <= max_chars ? change : null));
+		txtDescription.setTextFormatter(new TextFormatter<String>(change -> change.getControlNewText().length() <= MAX_CHARS ? change : null));
 		this.currentUser = this.getProfileController().getCurrentUser(MainGraphicController.getInstance().getSessionId());
 		this.setupLayout();
 	}

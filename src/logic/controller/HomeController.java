@@ -14,7 +14,6 @@ import logic.model.bean.SimpleMountainPathBean;
 
 public class HomeController extends Controller {
 
-	private LoggedUser currentUser;
 	private MountainPathDao mountainPathDao;
 	
 	public HomeController() {
@@ -25,9 +24,8 @@ public class HomeController extends Controller {
 	/* COPIATO DA PROFILE CONTROLLER QUINDI CAPIRE COME FARE PER NON RIPETERLO */
 	// Prende l'utente corrente
 	public LoggedUserBean getCurrentUser(Integer id) {
-		this.currentUser = CurrentLoggedUsers.getInstance().getCurrentLoggedUser(id);
-		LoggedUserBean bean = new LoggedUserBeanFactory().getLoggedUserBean(this.currentUser);
-		return bean;
+		LoggedUser currentUser = CurrentLoggedUsers.getInstance().getCurrentLoggedUser(id);
+		return new LoggedUserBeanFactory().getLoggedUserBean(currentUser);
 	}
 	
 	

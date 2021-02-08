@@ -51,7 +51,6 @@ public class ViewMountainPathInfoController extends Controller {
 	
 	// Restituisce le info complete del mountain path selezionato
 	public void setSelectedMountainPath(String selectedPath) {
-		System.out.println("home controller   path name "+selectedPath);
 		MountainPath searchResult = searchController.searchMountainPathByName(selectedPath);
 		
 		if(searchResult != null) {
@@ -88,8 +87,7 @@ public class ViewMountainPathInfoController extends Controller {
 	public ReviewBean getOnePathReview() {
 		Review review = viewReviewController.getOneReview(this.selectedMountainPath.getName());
 		if (review != null) {
-			ReviewBean bean = new ReviewBeanFactory().getReviewBean(review);
-			return bean;
+			return new ReviewBeanFactory().getReviewBean(review);
 		}
 		else return null;
 	}

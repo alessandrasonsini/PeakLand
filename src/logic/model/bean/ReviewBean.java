@@ -1,6 +1,6 @@
 package logic.model.bean;
 
-public class ReviewBean extends SimpleMountainPathBean {
+public class ReviewBean extends ItemBean {
 	
 	private String pathName;
 	private Integer vote;

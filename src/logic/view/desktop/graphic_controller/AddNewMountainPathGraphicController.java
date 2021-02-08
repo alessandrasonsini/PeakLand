@@ -169,7 +169,6 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 	
 	@FXML
 	public void onAddReview(ActionEvent event) {
-		System.out.println("dentro onAddReview");
 		getAddNewMountainPathController().addReviewRequest();
 		this.executeAction(this.myController);
 	}

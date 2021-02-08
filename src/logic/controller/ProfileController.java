@@ -11,7 +11,7 @@ import logic.model.exception.SystemException;
 
 public class ProfileController extends Controller{
 
-	private static final String directory = "Logged user/";
+	private static final String DIRECTORY = "Logged user/";
 	
 	private LoggedUserDao loggedUserDao;
 	private Integer userId;
@@ -27,13 +27,13 @@ public class ProfileController extends Controller{
 		this.userId = id;
 		this.currentUser = CurrentLoggedUsers.getInstance().getCurrentLoggedUser(id);
 		LoggedUserBean bean = new LoggedUserBeanFactory().getLoggedUserBean(this.currentUser);
-		bean.setImageStream(loggedUserDao.getImage(directory + this.currentUser.getUsername() + ".jpeg"));
+		bean.setImageStream(loggedUserDao.getImage(DIRECTORY + this.currentUser.getUsername() + ".jpeg"));
 		return bean;
 	}
 	
 	public void setProfileImage(InputStream is) throws SystemException {
 		//Chiama il metodo del dao per salvare l'immagine inserita
-		loggedUserDao.updateUserImage(is, directory + currentUser.getUsername() +".jpeg");
+		loggedUserDao.updateUserImage(is, DIRECTORY + currentUser.getUsername() +".jpeg");
 	}
 	
 	public void updateUserInfo(LoggedUserBean userBean) throws DatabaseException {
