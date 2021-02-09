@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <AnchorPane BorderPane.alignment="CENTER">
          <children>
@@ -113,41 +113,41 @@
                                  <font>
                                     <Font size="24.0" />
                                  </font></Label>
-                              <ImageView fx:id="imageStar1" fitHeight="30.0" fitWidth="38.0" layoutX="589.0" layoutY="334.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.leftAnchor="620.0" AnchorPane.topAnchor="444.0">
+                              <ImageView fx:id="imageStar1" fitHeight="30.0" fitWidth="38.0" layoutX="589.0" layoutY="334.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="620.0" AnchorPane.topAnchor="444.0">
                                  <image>
-                                    <Image url="@../images/star.png" />
+                                    <Image url="@../images/emptystar.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fx:id="imageStar2" fitHeight="30.0" fitWidth="38.0" layoutX="617.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.leftAnchor="660.0" AnchorPane.topAnchor="444.0">
+                              <ImageView fx:id="imageStar2" fitHeight="30.0" fitWidth="38.0" layoutX="617.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="660.0" AnchorPane.topAnchor="444.0">
                                  <image>
-                                    <Image url="@../images/star.png" />
+                                    <Image url="@../images/emptystar.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fx:id="imageStar3" fitHeight="30.0" fitWidth="38.0" layoutX="640.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.leftAnchor="700.0" AnchorPane.topAnchor="444.0">
+                              <ImageView fx:id="imageStar3" fitHeight="30.0" fitWidth="38.0" layoutX="640.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="700.0" AnchorPane.topAnchor="444.0">
                                  <image>
-                                    <Image url="@../images/star.png" />
+                                    <Image url="@../images/emptystar.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fx:id="imageStar4" fitHeight="30.0" fitWidth="38.0" layoutX="677.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.leftAnchor="740.0" AnchorPane.topAnchor="444.0">
+                              <ImageView fx:id="imageStar4" fitHeight="30.0" fitWidth="38.0" layoutX="677.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="740.0" AnchorPane.topAnchor="444.0">
                                  <image>
-                                    <Image url="@../images/star.png" />
+                                    <Image url="@../images/emptystar.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fx:id="imageStar5" fitHeight="30.0" fitWidth="38.0" layoutX="705.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.leftAnchor="770.0" AnchorPane.topAnchor="444.0">
+                              <ImageView fx:id="imageStar5" fitHeight="30.0" fitWidth="38.0" layoutX="777.0" layoutY="444.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="777.0" AnchorPane.topAnchor="444.0">
                                  <image>
-                                    <Image url="@../images/star.png" />
+                                    <Image url="@../images/emptystar.png" />
                                  </image>
                               </ImageView>
                               <Label layoutX="562.0" layoutY="483.0" style="-fx-text-fill: #90D3AE#90D3AE;" text="Number of votes:" AnchorPane.leftAnchor="562.0" AnchorPane.topAnchor="483.0">
                               <font>
                                     <Font name="Maiandra GD" size="16.0" />
                                  </font></Label>
-                              <ImageView fitHeight="80.0" fitWidth="80.0" layoutX="490.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="490.0" AnchorPane.topAnchor="19.0">
+                              <ImageView fitHeight="80.0" fitWidth="80.0" layoutX="498.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="498.0" AnchorPane.topAnchor="19.0">
                                  <image>
                                     <Image url="@../images/google-maps.png" />
                                  </image>
                               </ImageView>
-                              <Label alignment="CENTER" layoutX="495.0" layoutY="90.0" prefHeight="38.0" prefWidth="73.0" text="View on Maps" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="495.0" AnchorPane.topAnchor="90.0">
+                              <Label alignment="CENTER" layoutX="503.0" layoutY="96.0" prefHeight="38.0" prefWidth="73.0" text="View on Maps" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="503.0" AnchorPane.topAnchor="96.0">
                                  <font>
                                     <Font name="Maiandra GD" size="12.0" />
                                  </font></Label>
@@ -156,16 +156,11 @@
                                     <Image url="@../images/apple-weather.png" />
                                  </image>
                               </ImageView>
-                              <Label alignment="CENTER" layoutX="597.0" layoutY="89.0" prefHeight="40.0" prefWidth="87.0" text="View weather forecast" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="597.0" AnchorPane.topAnchor="89.0">
+                              <Label alignment="CENTER" layoutX="597.0" layoutY="95.0" prefHeight="40.0" prefWidth="87.0" text="View weather forecast" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="597.0" AnchorPane.topAnchor="95.0">
                                  <font>
                                     <Font name="Maiandra GD" size="12.0" />
                                  </font></Label>
-                              <ImageView fitHeight="80.0" fitWidth="80.0" layoutX="705.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="705.0" AnchorPane.topAnchor="19.0">
-                                 <image>
-                                    <Image url="@../images/list.png" />
-                                 </image>
-                              </ImageView>
-                              <Label alignment="CENTER" layoutX="705.0" layoutY="95.0" prefHeight="17.0" prefWidth="87.0" text="View reviews" wrapText="true" AnchorPane.leftAnchor="705.0" AnchorPane.topAnchor="95.0">
+                              <Label alignment="CENTER" layoutX="699.0" layoutY="99.0" prefHeight="17.0" prefWidth="87.0" text="View reviews" wrapText="true" AnchorPane.leftAnchor="699.0" AnchorPane.topAnchor="99.0">
                               <font>
                                     <Font name="Maiandra GD" size="12.0" />
                                  </font></Label>
@@ -206,6 +201,15 @@
                                     <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../images/right-arrow.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button fx:id="btnViewReviews" layoutX="701.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onViewReviewsRequest" prefHeight="80.0" prefWidth="80.0" style="-fx-background-color: ffffff;" AnchorPane.leftAnchor="701.0" AnchorPane.topAnchor="19.0">
+                                 <graphic>
+                                    <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/list.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>

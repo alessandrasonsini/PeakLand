@@ -13,6 +13,7 @@ import logic.model.bean.factory.MountainPathBeanFactory;
 import logic.model.bean.factory.ReviewBeanFactory;
 import logic.model.bean.factory.SimpleMountainPathBeanFactory;
 import logic.model.dao.MountainPathDao;
+import logic.model.dao.ReviewDao;
 import logic.model.exception.SystemException;
 
 public class ViewMountainPathInfoController extends Controller {
@@ -20,7 +21,6 @@ public class ViewMountainPathInfoController extends Controller {
 	private MountainPathBean selectedMountainPath;
 	private SearchMountainPathController searchController;
 	private AssistedResearchController assistedResearchController;
-	private ViewReviewController viewReviewController;
 	private List<SimpleMountainPathBean> searchResults;
 
 	public ViewMountainPathInfoController() {
@@ -28,7 +28,6 @@ public class ViewMountainPathInfoController extends Controller {
 		// Prende l'istanza del controller che si occupa della search e che collabora nell'esecuzione del caso d'uso
 		this.searchController = new ControllerFactory().getSearchMountainPathController();
 		this.assistedResearchController = new ControllerFactory().getAssistedResearchController();
-		this.viewReviewController = new ControllerFactory().getViewReviewController();
 		this.searchResults = null;
 	}
 
@@ -73,23 +72,19 @@ public class ViewMountainPathInfoController extends Controller {
 		return this.selectedMountainPath;
 	}
 	
+	public void viewReviewsRequest() {
+		setNextPageId("View reviews");
+	}
+	
 	public List<ReviewBean> getPathReview(String pathName) {
 		List<ReviewBean> reviewBeanList = new ArrayList<>();
 		
-		List<Review> reviewList = viewReviewController.getReview(pathName);
+		List<Review> reviewList = new ReviewDao().getReviewFromDb(pathName);;
 		for (Review review : reviewList) {
 			reviewBeanList.add(new ReviewBeanFactory().getReviewBean(review));
 		}
 		
 		return reviewBeanList;
-	}
-	
-	public ReviewBean getOnePathReview() {
-		Review review = viewReviewController.getOneReview(this.selectedMountainPath.getName());
-		if (review != null) {
-			return new ReviewBeanFactory().getReviewBean(review);
-		}
-		else return null;
 	}
 	
 	public void onBackPressed() {
@@ -131,13 +126,18 @@ public class ViewMountainPathInfoController extends Controller {
 				this.nextPageId = "View info";
 				break;	
 			case "Back":
-				this.nextPageId = searchController.getNextPageId();
+				if(this.nextPageId.equals("View info"))
+					this.nextPageId = searchController.getNextPageId();
+				else this.nextPageId = "View info";
 				break;
 			case "Next assisted research":
 				this.nextPageId = assistedResearchController.getNextPageId();
 				break;
 			case "Done assisted research":
 				this.nextPageId = searchController.getNextPageId();
+				break;
+			case "View reviews":
+				this.nextPageId = "View reviews";
 				break;
 			default:
 				this.nextPageId = null;

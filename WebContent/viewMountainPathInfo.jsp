@@ -27,7 +27,6 @@
 	if (session.getAttribute("viewInfoController") != null)
 		controller = (ViewMountainPathInfoController) session.getAttribute("viewInfoController");
 	MountainPathBean path = controller.getSelectedMountainPath();
-	review = controller.getOnePathReview();
 	List<ReviewBean> list = controller.getPathReview(path.getName());
 	
 	if (controller.getImageStreams() != null) {

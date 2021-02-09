@@ -10,31 +10,31 @@ import logic.view.desktop.ShowableElement;
 public class SimpleMountainPathItem extends ShowableElement {
 	
 	@FXML
-	HBox itemBox;
+	private HBox itemBox;
 	
 	@FXML
-	ImageView image;
+	private ImageView image;
 	
 	@FXML
-	VBox vbInfo;
+	private VBox vbInfo;
 	
 	@FXML
-	Label txtName;
+	private Label txtName;
 	
 	@FXML
-	Label txtLocationRegion;
+	private Label txtLocationRegion;
 	
 	@FXML
-	Label txtLocationProvince;
+	private Label txtLocationProvince;
 	
 	@FXML
-	Label txtLocationCity;
+	private Label txtLocationCity;
 	
 	@FXML
-	Label txtDifficultyLevel;
+	private Label txtDifficultyLevel;
 	
 	@FXML
-	Label txtTravelTime;
+	private Label txtTravelTime;
 	
 	public SimpleMountainPathItem() {
 		super();

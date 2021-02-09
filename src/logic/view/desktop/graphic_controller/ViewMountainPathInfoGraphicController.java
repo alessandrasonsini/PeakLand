@@ -2,6 +2,7 @@ package logic.view.desktop.graphic_controller;
 
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -94,6 +95,8 @@ public class ViewMountainPathInfoGraphicController extends GraphicController{
 	@FXML
 	private Button btnNextImg;
 	
+	private List<ImageView> stars = Arrays.asList(imageStar1,imageStar2,imageStar3,imageStar4,imageStar5);
+	
 	private List<Image> selectedMountainPathImages;
 	private int currentImageNumber = -1;
 	
@@ -157,6 +160,12 @@ public class ViewMountainPathInfoGraphicController extends GraphicController{
 		this.executeAction(this.myController);
 	}
 	
+	@FXML
+	private void onViewReviewsRequest(ActionEvent event) {
+		getViewMountainPathInfoController().viewReviewsRequest();
+		this.executeAction(myController);
+	}
+	
 	public ViewMountainPathInfoController getViewMountainPathInfoController() {
 		return (ViewMountainPathInfoController) myController;
 	}
@@ -180,38 +189,22 @@ public class ViewMountainPathInfoGraphicController extends GraphicController{
 		lbTime.setText(selectedMountainPath.convertToText(selectedMountainPath.getHours()) + " : " + selectedMountainPath.convertToText(selectedMountainPath.getMinutes()));
 		lbVotesNumber.setText(selectedMountainPath.convertToText(selectedMountainPath.getNumberOfVotes()));
 		
-		switch(selectedMountainPath.convertToText(selectedMountainPath.getVote())) {
-			case "5":
-				imageStar5.setVisible(true);
-				imageStar4.setVisible(true);
-				imageStar3.setVisible(true);
-				imageStar2.setVisible(true);
-				imageStar1.setVisible(true);
-			case "4":
-				imageStar4.setVisible(true);
-				imageStar3.setVisible(true);
-				imageStar2.setVisible(true);
-				imageStar1.setVisible(true);
-			case "3":
-				imageStar3.setVisible(true);
-				imageStar2.setVisible(true);
-				imageStar1.setVisible(true);
-			case "2":
-				imageStar2.setVisible(true);
-				imageStar1.setVisible(true);
-			case "1":
-				imageStar1.setVisible(true);
-				break;
-			default:
-				lbVote.setText(selectedMountainPath.convertToText(selectedMountainPath.getVote()));
-				lbVote.setVisible(true);
-				break;		
+		if(selectedMountainPath.getVote() != 0) {
+			setVote(selectedMountainPath.getVote());
 		}
 		
 		if(!this.selectedMountainPathImages.isEmpty()) {
 			setupImage();
 		}
-		
-		
+	}
+	
+	private void setVote(Integer vote) {
+		int count = 1;
+		for(ImageView image : stars) {
+			count++;
+			image.setImage(new Image(this.getClass().getResourceAsStream("../graphic_element/images/star.png"),35,35,false,false));
+			if(count == vote)
+				break;
+		}
 	}
 }

@@ -114,7 +114,7 @@ public class SearchMountainPathGraphicController extends GraphicController {
 		}
 	}
 	
-	public ViewMountainPathInfoController getViewMountainPathInfoController() {
+	private ViewMountainPathInfoController getViewMountainPathInfoController() {
 		return (ViewMountainPathInfoController) myController;
 	}
 	

@@ -28,6 +28,9 @@ public class GraphicControllerFactory {
 			case "Add review":
 				newGraphicController = new AddReviewGraphicController(controller);
 				break;
+			case "View reviews":
+				newGraphicController = new ViewReviewGraphicController(controller);
+				break;
 			default: newGraphicController = null;
 		}
 		return newGraphicController;
