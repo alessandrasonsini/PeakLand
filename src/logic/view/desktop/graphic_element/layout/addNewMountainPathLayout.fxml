@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <AnchorPane>
          <children>
@@ -125,7 +125,7 @@
 		                             	<Font name="Maiandra GD" size="12.0" />
 		                        	</font></Label>
 	                              <Button fx:id="btnLoadPhoto" layoutX="274.0" layoutY="547.0" mnemonicParsing="false" onAction="#onLoadPhoto" text="Load file" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="520.0" />
-	                              <Button fx:id="btnSavePath" layoutX="97.0" layoutY="612.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#onSavePath" prefHeight="35.0" style="-fx-background-color: FBC9A8;" text="Save mountain path" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="620.0">
+	                              <Button fx:id="btnSavePath" layoutX="97.0" layoutY="612.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#onSavePath" prefHeight="35.0" style="-fx-background-color: FBC9A8;" text="Save mountain path" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="620.0">
 	                                 <font>
 	                                    <Font name="Maiandra GD" size="18.0" />
 	                                 </font></Button>
@@ -142,8 +142,11 @@
                                     <font>
 	                             		<Font name="Maiandra GD" size="12.0" />
 	                        	  </font></Label>
-                                    <Label layoutX="68.0" layoutY="579.0" text="Review" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="575.0" />
-                                    <Button fx:id="btnAddReview" layoutX="254.0" layoutY="570.0" mnemonicParsing="false" onAction="#onAddReview" text="Add review" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="575.0" />
+                                    <Button fx:id="btnAddReview" disable="true" layoutX="673.0" layoutY="382.0" mnemonicParsing="false" onAction="#onAddReview" style="-fx-background-color: FBC9A8;" text="Add review" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="620.0">
+                                       <font>
+                                          <Font name="Maiandra GD" size="18.0" />
+                                       </font>
+                                    </Button>
                            	</children>
                            </AnchorPane>
                            </children>

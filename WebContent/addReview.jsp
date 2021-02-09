@@ -57,11 +57,11 @@
 				<%
 				if (request.getParameter("addReviewBtn") != null) {
 					
-					review.setPathName(((String) session.getAttribute("name")));
+					//review.setPathName(((String) session.getAttribute("name")));
 					review.setVote(vote);
-					review.setAuthor(CurrentLoggedUsers.getInstance()
-							.getCurrentLoggedUser((Integer)session.getAttribute("sessionId")).getUsername());
-					controller.saveReview(review);
+					//review.setAuthor(CurrentLoggedUsers.getInstance()
+					//		.getCurrentLoggedUser((Integer)session.getAttribute("sessionId")).getUsername());
+					controller.saveReview(review,(Integer)session.getAttribute("sessionId"));
 					session.removeAttribute("name");
 					//vedere se metterlo qui o dopo l'alert
 					session.removeAttribute("vote");

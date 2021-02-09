@@ -124,6 +124,9 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 	@FXML
 	private AnchorPane panePathInfo;
 	
+	@FXML
+	private Button btnAddReview;
+	
 	private List<CheckBox> ground;
 	private List<CheckBox> landscape;
 
@@ -196,7 +199,9 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 		try {
 			getAddNewMountainPathController().saveNewMountainPath(newPathBean, MainGraphicController.getInstance().getSessionId());
 			// Mostra il messaggio di avvenuto salvataggio
-			showMessage("Add succeded", "The new mountain path is now on the system ", AlertType.INFORMATION);
+			showMessage("Add succeded", "The new mountain path is now on the system, you can add a review now ", AlertType.INFORMATION);
+			btnAddReview.setDisable(false);
+			btnSavePath.setDisable(true);
 		} catch (DatabaseException e) {
 			showDatabaseError();
 		} catch(SystemException e) {

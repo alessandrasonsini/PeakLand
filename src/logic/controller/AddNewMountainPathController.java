@@ -22,6 +22,7 @@ public class AddNewMountainPathController extends Controller {
 	private static final String DIRECTORY = "Mountain path/";
 	
 	private List<InputStream> pathImages;
+	private String newPathName;
 	
 	public AddNewMountainPathController() {
 		super();
@@ -36,7 +37,9 @@ public class AddNewMountainPathController extends Controller {
 		return (new ControllerFactory().getSearchMountainPathController().searchMountainPathByName(nameToSearch) == null);
 	}
 
-	public void saveReview(ReviewBean reviewBean) throws DatabaseException {
+	public void saveReview(ReviewBean reviewBean,Integer userId) throws DatabaseException {
+		reviewBean.setPathName(this.newPathName);
+		reviewBean.setAuthor(CurrentLoggedUsers.getInstance().getCurrentLoggedUser(userId).getUsername());
 		addReviewController.saveReview(reviewBean);
 	}
 
@@ -61,7 +64,10 @@ public class AddNewMountainPathController extends Controller {
 		MountainPathDao mountainPathDao = new MountainPathDao();
 		mountainPathDao.saveNewMountainPathOnDB(newMountainPath);
 		mountainPathDao.uploadImage(this.pathImages, DIRECTORY + newMountainPath.getName() + "/" + CurrentLoggedUsers.getInstance().getCurrentLoggedUser(sessionId).getUsername());
+	
+		this.newPathName = newMountainPath.getName();
 	}
+	
 	
 	public void setMountainPathImages(List<InputStream> images) throws TooManyImagesException {
 		if(images.size() > MAXIMAGES)
@@ -75,11 +81,26 @@ public class AddNewMountainPathController extends Controller {
 		setNextPageId("New review");
 	}
 	
+	public void onBackPressed() {
+		setNextPageId("Back");
+	}
+	
 	@Override
 	public void setNextPageId(String action) {
-		if(action.equals("init"))
-			this.nextPageId = "Add path";
-		else this.nextPageId = null;
+		switch(action){
+			case "init":
+				this.nextPageId = "Add path";
+				break;
+			case "New review":
+				this.nextPageId = "Add review";
+				break;
+			case "Back":
+				this.nextPageId = "Add path";
+				break;
+			default:
+				this.nextPageId = null;
+		}
+		
 	}
 
 }

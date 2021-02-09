@@ -1,29 +1,38 @@
 package logic.view.desktop.graphic_controller;
 
+
+import java.util.Arrays;
+import java.util.List;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import logic.controller.AddNewMountainPathController;
 import logic.controller.Controller;
+import logic.model.bean.ReviewBean;
+import logic.model.exception.DatabaseException;
 
 public class AddReviewGraphicController extends GraphicController{
 
 	@FXML
-	private ImageView imageEmptyStar1;
+	private Button btnVote1;
 	
 	@FXML
-	private ImageView imageEmptyStar2;
+	private Button btnVote2;
 	
 	@FXML
-	private ImageView imageEmptyStar3;
+	private Button btnVote3;
 	
 	@FXML
-	private ImageView imageEmptyStar4;
+	private Button btnVote4;
 	
 	@FXML
-	private ImageView imageEmptyStar5;
+	private Button btnVote5;
 	
 	@FXML
 	private TextArea txtReview;
@@ -34,10 +43,54 @@ public class AddReviewGraphicController extends GraphicController{
 	@FXML
 	private Button btnAddReview;
 	
+	@FXML
+	private Button back;
+	
+	private List<Button> btnVotes = Arrays.asList(btnVote1,btnVote2,btnVote3,btnVote4,btnVote5);
+	private Integer votes;
+	
 	public AddReviewGraphicController(Controller controller) {
 		super(controller);
 	}
-
+	
+	@FXML
+	public void onAddingVoteRequest(ActionEvent event) {
+		btnAddReview.setDisable(false);
+		txtReviewTitle.setDisable(false);
+		txtReview.setDisable(false);
+		int count = 0;
+		String filePath = "../graphic_element/images/star.png";
+		for(Button vote : btnVotes) {
+			count++;
+			vote.setGraphic(new ImageView(new Image(this.getClass().getResourceAsStream(filePath),35,35,false,false)));
+			if(vote == (Button)event.getSource()) {
+				filePath = "../graphic_element/images/emptystar.png";
+				this.votes = Integer.valueOf(count);
+			}	
+		}
+	}
+	
+	@FXML
+	public void onSaveReview(ActionEvent event) {
+		ReviewBean review = new ReviewBean();
+		review.setVote(this.votes);
+		review.setTitle(txtReviewTitle.getText());
+		review.setComment(txtReviewTitle.getText());
+		try {
+			getAddNewMountainPathController().saveReview(review, MainGraphicController.getInstance().getSessionId());
+			showMessage("Review added successfully", "Your review in on the system now", AlertType.INFORMATION);
+			btnAddReview.setDisable(true);
+		} catch (DatabaseException e) {
+			showDatabaseError();
+		}
+	}
+	
+	@FXML
+	public void onBackPressed(ActionEvent event) {
+		getAddNewMountainPathController().onBackPressed();
+		this.executeAction(this.myController);
+	}
+	
 	@Override
 	protected String getFXMLFileName() {
 		return "addReview";

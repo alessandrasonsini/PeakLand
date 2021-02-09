@@ -25,6 +25,9 @@ public class GraphicControllerFactory {
 			case "Profile":
 				newGraphicController = new ProfileGraphicController(controller);
 				break;	
+			case "Add review":
+				newGraphicController = new AddReviewGraphicController(controller);
+				break;
 			default: newGraphicController = null;
 		}
 		return newGraphicController;
