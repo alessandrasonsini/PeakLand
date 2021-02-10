@@ -9,10 +9,15 @@
 <%!
 	HomeController controller = new HomeController();
 	List<SimpleMountainPathBean> topTen;
-	List<SimpleMountainPathBean> topByFavorites;
+	String userName;
+	//List<SimpleMountainPathBean> topByFavorites;
 %>
 <%
-	if (session.getAttribute("sessionId") != null) {
+	topTen = controller.getClassification((Integer)session.getAttribute("sessionId"));
+	userName = controller.getCurrentUserName();
+	session.setAttribute("userName", userName);
+	
+	/*if (session.getAttribute("sessionId") != null) {
 		System.out.println("utente loooooggato");
 		topByFavorites = controller.getTopByFavorites();
 		user = controller.getCurrentUser((Integer) session.getAttribute("sessionId"));
@@ -21,7 +26,7 @@
 	else {
 		System.out.println("utente NON loggato");
 		topTen = controller.getTopTen();
-	}
+	}*/
 
 %>
 
@@ -44,7 +49,7 @@
 		<div class="row fill">
 			<div class="col-3 background-orange">
 				<%
-				if (session.getAttribute("user") == null) {
+				if (session.getAttribute("userName") == null) {
 					%>
 					<div class="container">
 						<div class="row mx-auto" style="padding-top: 25%; padding-left: 20%; padding-right: 20%">
@@ -61,7 +66,7 @@
 					%>
 					<div class="container">
 						<div class="row mx-auto" style="padding-top: 30%; padding-left: 20%; padding-right: 20%">
-							<div class="col" align="center" style="font-size: 160%;">Welcome back <%=user.getName()%>!</div>
+							<div class="col" align="center" style="font-size: 160%;">Welcome back <%=/*=user.getName()*/(String)session.getAttribute("userName")%>!</div>
 						</div>
 						<div class="row mx-auto" style="padding-top: 40%; padding-left: 2%; padding-right: 2%">
 							<div class="col" align="center" style="font-size: 150%;">
@@ -87,7 +92,11 @@
 										<div class="p-2 flex-item-icon">
 											<img src="Images/leaderboard.png" class="img-responsive icons">
 										</div>
+										<% if(session.getAttribute("userName") == null){ %>
 										<div class="p-2 flex-item-text pull-left text">Top ten on PeakLand</div>
+										<% } else { %>
+										<div class="p-2 flex-item-text pull-left text">Suggested for you based on your favourite paths</div>
+										<% } %>
 									</div>
 								</div>
 							</div>
@@ -158,88 +167,9 @@
 					%></form><%
 					topTen.clear();
 				}
-				else if (topByFavorites != null && !topByFavorites.isEmpty()) {
+				//else if (topByFavorites != null && !topByFavorites.isEmpty()) {
 					%>
-					<form class="form" action="home.jsp" method="post">
-						<div class="container" style="padding-top: 1%;">
-							<div class="row">
-								<div class="col-6">
-									<div class="d-flex justify-content-start align-items-center">
-										<div class="p-2 flex-item-icon">
-											<img src="Images/leaderboard.png" class="img-responsive icons">
-										</div>
-										<div class="p-2 flex-item-text pull-left text">Suggested for you based on your favourite paths</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<%
-						int index = 0;
-						for (SimpleMountainPathBean bean : topByFavorites) {
-							index++;
-							%>
-							<div class="container">
-							<button type="submit" class="btn" name="path" value="<%=bean.getName()%>" style="min-width: 100%;">
-								<div class="row w-100 card-view-simple-path">
-									<div class="row align-items-center">
-										<div class="d-flex justify-content-start align-items-center">
-											<div class="ml-auto w-100 p-2 bd-highlight">
-												<div class="path-name-font" align="left" style="padding-left: 5%;"><%=index%>.&nbsp;&nbsp;<%=bean.getName()%></div>
-											</div>
-											<div class="mr-auto p-2 bd-highlight" style="padding-left: 5%;">
-												<div class="d-flex justify-content-start align-items-center">
-													Vote: 
-													<%	if (bean.getVote() != 0) {
-						  									for(int i = 0; i < bean.getVote(); i++) {
-						  									%>
-							  								<div class="p-2 flex-item-stars-2">
-																<img src="Images/star.png" class="icon-star">
-															</div>
-															<%
-						  									}
-					  									}
-					  									else {
-					  										%>
-					  										<div class="p-2 black-text text-nowrap"><%=bean.convertToText(bean.getVote())%></div>
-					  										<%
-					  									}
-													%>
-												</div>
-											</div>
-											<div class="mr-auto p-3 bd-highlight text-nowrap">
-												<div>Number of votes: <%=bean.getNumberOfVotes()%></div>
-											</div>
-										</div>
-									</div>
-									<div class="row align-items-center" style="padding-left: 3%; padding-bottom: 1%;">
-										<div class="col-3 align-items-center">
-											<!-- inserire recupero immagine dal DB -->
-											<div class="d-flex justify-content-center align-items-center">
-												<div class="p-2 flex-item-search-photo">
-													<img src="Images/mountain_path.png" class="img-responsive photo">
-												</div>
-											</div>
-										</div>
-										<div class="col-4 align-middle" style="vertical-align: middle;" align="center">
-											<div class="row justify-content-center align-self-center">Location</div>
-											<div class="row justify-content-center"><%= bean.getRegion() %></div>
-											<div class="row justify-content-center"><%= bean.getProvince() %></div>
-											<div class="row justify-content-center"><%= bean.getCity() %></div>
-										</div>
-										<div class="col-4 align-middle" style="vertical-align: middle;" align="center">
-											<div class="row justify-content-center align-self-center">Difficulty level</div>
-											<div class="row justify-content-center align-self-center"><%= bean.getLevel() %></div>
-										</div>
-									</div>
-								</div>
-							</button>
-							</div>
-							<%
-						}
-					%></form><%
-					topByFavorites.clear();
-				}
-				%>
+					
 				<br>
 			</div>
 		</div>

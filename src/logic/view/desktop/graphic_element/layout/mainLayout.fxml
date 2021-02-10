@@ -47,7 +47,7 @@
       <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="47.0" prefWidth="1322.0" style="-fx-background-color: FBC9A8;">
          <children>
 
-            <Button contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: FBC9A8; -fx-border-color: F69155;" text="Home">
+            <Button fx:id="btnHome" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: FBC9A8; -fx-border-color: F69155;" text="Home" onAction="#buttonHandler">
                <font>
                   <Font name="Maiandra GD" size="24.0" />
                </font>

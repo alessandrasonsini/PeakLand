@@ -18,6 +18,9 @@ public class MainGraphicController extends GraphicController {
 	
 	@FXML
 	private Button btnProfile;
+	
+	@FXML
+	private Button btnHome;
 
 	@FXML
 	private BorderPane mainChild;
@@ -33,12 +36,21 @@ public class MainGraphicController extends GraphicController {
 
 	private MainGraphicController(Controller controller) {
 		super(controller);
+		
 	}
 
 	public static MainGraphicController getInstance() {
-		if (instance == null)
+		if (instance == null) {
 			instance = new MainGraphicController(new MainController());
+			instance.setup();
+		}
+			
 		return instance;
+	}
+	
+	private void setup() {
+		this.setPressed(btnHome);
+		this.executeAction(getMainController().onActionRequired("Home", this.sessionId));
 	}
 
 	@FXML
@@ -60,6 +72,9 @@ public class MainGraphicController extends GraphicController {
 				break;
 			case "btnProfile":
 				newActionId = "Profile";
+				break;
+			case "btnHome":
+				newActionId = "Home";
 				break;
 			default: 
 				newActionId = null;

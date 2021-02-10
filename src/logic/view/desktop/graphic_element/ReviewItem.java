@@ -56,11 +56,11 @@ public class ReviewItem extends ShowableElement{
 	
 	private void setStarImages(Integer vote) {
 		int count = 1;
-		for(ImageView image : starImages) {
-			count++;
+		for(ImageView image : this.starImages) {
 			image.setImage(new Image(this.getClass().getResourceAsStream("../graphic_element/images/star.png"),35,35,false,false));
 			if(count == vote)
 				break;
+			else count++;
 		}
 	}
 	

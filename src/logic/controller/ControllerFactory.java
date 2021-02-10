@@ -30,6 +30,9 @@ public class ControllerFactory {
 			case "Profile":
 				newController = new ProfileController();
 				break;
+			case "Home":
+				newController = new HomeController();
+				break;	
 			default: 
 				throw new SystemException();
 		}

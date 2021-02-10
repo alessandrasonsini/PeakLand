@@ -31,6 +31,9 @@ public class GraphicControllerFactory {
 			case "View reviews":
 				newGraphicController = new ViewReviewGraphicController(controller);
 				break;
+			case "Home":
+				newGraphicController = new HomeGraphicController(controller);
+				break;
 			default: newGraphicController = null;
 		}
 		return newGraphicController;

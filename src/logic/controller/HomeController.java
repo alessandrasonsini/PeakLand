@@ -6,8 +6,6 @@ import java.util.List;
 import logic.controller.utils.CurrentLoggedUsers;
 import logic.model.LoggedUser;
 import logic.model.MountainPath;
-import logic.model.bean.LoggedUserBean;
-import logic.model.bean.factory.LoggedUserBeanFactory;
 import logic.model.bean.factory.SimpleMountainPathBeanFactory;
 import logic.model.dao.MountainPathDao;
 import logic.model.bean.SimpleMountainPathBean;
@@ -15,36 +13,45 @@ import logic.model.bean.SimpleMountainPathBean;
 public class HomeController extends Controller {
 
 	private MountainPathDao mountainPathDao;
+	private String currentUserName;
 	
 	public HomeController() {
 		super();
 		this.mountainPathDao = new MountainPathDao();
 	}
 	
-	/* COPIATO DA PROFILE CONTROLLER QUINDI CAPIRE COME FARE PER NON RIPETERLO */
-	// Prende l'utente corrente
-	public LoggedUserBean getCurrentUser(Integer id) {
-		LoggedUser currentUser = CurrentLoggedUsers.getInstance().getCurrentLoggedUser(id);
-		return new LoggedUserBeanFactory().getLoggedUserBean(currentUser);
+	public String getCurrentUserName() {
+		return this.currentUserName;
 	}
 	
+	public List<SimpleMountainPathBean> getClassification(Integer userId){
+		if(userId != null) {
+			LoggedUser currentUser = CurrentLoggedUsers.getInstance().getCurrentLoggedUser(userId);
+			if(currentUser != null) {
+				this.currentUserName = currentUser.getName();
+				return getTopByFavorites();
+			}
+		}
+		return getTopTen();
+	}
 	
 	// Restituisce i 10 percorsi con voti più alti
-	public List<SimpleMountainPathBean> getTopTen() {
+	private List<SimpleMountainPathBean> getTopTen() {
 		List<SimpleMountainPathBean> topTenList = new ArrayList<>();
 		List<MountainPath> results = mountainPathDao.getPaths();
 		
-		results.sort(Comparator.comparing(MountainPath::getNumberOfVotes).thenComparing(MountainPath::getVote).reversed());
-		
+		results.sort(Comparator.comparing(MountainPath::getVote).thenComparing(MountainPath::getNumberOfVotes).reversed());
+		SimpleMountainPathBean bean;
 		for (int i = 0; i < 10; i++) {
-			topTenList.add(new SimpleMountainPathBeanFactory().getSimpleMountainPath(results.get(i)));
+			bean = new SimpleMountainPathBeanFactory().getSimpleMountainPath(results.get(i));
+			bean.setRankPosition(i+1);
+			topTenList.add(bean);
 		}
-		topTenList.sort(Comparator.comparing(SimpleMountainPathBean::getVote).reversed());
 		
 		return topTenList;
 	}
 	
-	public List<SimpleMountainPathBean> getTopByFavorites() {
+	private List<SimpleMountainPathBean> getTopByFavorites() {
 		List<SimpleMountainPathBean> topByFavoritesList = new ArrayList<>();
 		List<MountainPath> results = mountainPathDao.getPaths();
 		
@@ -58,7 +65,9 @@ public class HomeController extends Controller {
 	
 	@Override
 	public void setNextPageId(String action) {
-		
+		if(action.equals("init"))
+			this.nextPageId = "Home";
+		else this.nextPageId = null;
 	}
 
 }

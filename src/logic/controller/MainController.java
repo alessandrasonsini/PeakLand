@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class MainController extends Controller {
 	
-	private static final ArrayList<String> noLoginAction = new ArrayList<>(Arrays.asList("View info"));
+	private static final ArrayList<String> noLoginAction = new ArrayList<>(Arrays.asList("View info","Home"));
 	
 	public MainController(){
 		super();

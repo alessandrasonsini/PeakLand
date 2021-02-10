@@ -27,6 +27,8 @@ public class MountainPath {
 		this.travelTime = new Time();
 		this.landscape = new ArrayList<>();
 		this.ground = new ArrayList<>();
+		this.numberOfVotes = 0;
+		this.vote = 0;
 	}
 
 	public String getName() {
