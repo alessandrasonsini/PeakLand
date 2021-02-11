@@ -36,6 +36,7 @@ public abstract class Dao implements OnGetDataListener {
 	
 	private static final Object readLock = new Object(); 
 	private static final Object writeLock = new Object();
+	private static final String format = ".jpeg";
 	
 	private boolean readLockCondition = false;
 	private boolean writeLockCondition = false;
@@ -117,8 +118,8 @@ public abstract class Dao implements OnGetDataListener {
 	}
 	
 	public List<ByteArrayInputStream> getImagesStream(String pathName) {
-		String directory = this.getDirectory() + pathName;
-		Page<Blob> blobs = this.bucketReference.list(Storage.BlobListOption.prefix(directory));
+		String dir = this.getDirectory() + pathName;
+		Page<Blob> blobs = this.bucketReference.list(Storage.BlobListOption.prefix(dir));
 		List<ByteArrayInputStream> imageStreams = new ArrayList<>();
 		for(Blob blob : blobs.iterateAll()) {
 			imageStreams.add(new ByteArrayInputStream(blob.getContent(BlobSourceOption.generationMatch())));
@@ -127,15 +128,15 @@ public abstract class Dao implements OnGetDataListener {
 	}
 	
 	public void uploadImage(List<InputStream> images, String pathName, String userName) throws SystemException {
-		String directory = this.getDirectory() + pathName + "/" + userName; 
+		String dir = this.getDirectory() + pathName + "/" + userName; 
 		int imgNumber = images.size();
 		for(int i = 0; i < imgNumber; i++) {
-			this.bucketReference.create(directory + "/" + i + ".jpeg", images.get(i),Bucket.BlobWriteOption.doesNotExist());
+			this.bucketReference.create(dir + "/" + i + format, images.get(i),Bucket.BlobWriteOption.doesNotExist());
 		}
 	}
 	
 	public ByteArrayInputStream getImage(String userName) {
-		String fileName = this.getDirectory() + userName + ".jpeg";
+		String fileName = this.getDirectory() + userName + format;
 		Blob blob = this.storageRefence.get(this.bucketReference.getName(),fileName);
 		ByteArrayInputStream imageReturn = null;
 		if(blob != null)
@@ -144,12 +145,12 @@ public abstract class Dao implements OnGetDataListener {
 	}
 	
 	public void uploadImage(InputStream f, String userName) {
-		String fileName = this.getDirectory() + userName + ".jpeg";
+		String fileName = this.getDirectory() + userName + format;
 		this.bucketReference.create(fileName,f,Bucket.BlobWriteOption.doesNotExist());
 	}
 	
 	public void deleteImage(String userName) {
-		String fileName = this.getDirectory() + userName + ".jpeg";
+		String fileName = this.getDirectory() + userName + format;
 		this.storageRefence.delete(BlobId.of(this.bucketReference.getName(),fileName));
 	}
 	

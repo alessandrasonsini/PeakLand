@@ -55,7 +55,6 @@ public class MountainPathDao extends Dao {
 	
 	public List<MountainPath> searchMountainPathbyFilter(String filterName, String filterValue){
 		String dbFilterName = convertFieldName(filterName);
-		System.out.println("filtro: " + dbFilterName + "    filter value :" + filterValue);
 		Query query = this.dbReference.orderByChild(dbFilterName).equalTo(filterValue);
 		executeQuery(query);
 		return mountainPathResult;
