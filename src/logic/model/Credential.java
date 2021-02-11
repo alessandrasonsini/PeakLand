@@ -28,5 +28,18 @@ public class Credential {
 		this.password = password;
 	}
 	
+	public boolean verifyCredential(Credential credential) {
+		Boolean verified;
+		// Controlla se lo username esiste
+		if(credential != null) {
+			// Controlla se la password corrisponde
+			if(this.password.equals(credential.getPassword()))
+				verified = true;
+			else verified = false;
+		}
+		else verified = false;
+		
+		return verified;
+	}
 	
 }
