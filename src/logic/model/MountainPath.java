@@ -164,4 +164,9 @@ public class MountainPath {
 	public void setVote(Integer vote) {
 		this.vote = vote;
 	}
+	
+	public void updateVote(Integer newVote) {
+		this.numberOfVotes++;
+		this.vote = (this.vote*(this.numberOfVotes - 1) + newVote) / this.numberOfVotes;
+	}
 }
