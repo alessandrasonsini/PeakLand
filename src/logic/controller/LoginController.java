@@ -6,6 +6,7 @@ import logic.model.Credential;
 import logic.model.LoggedUser;
 import logic.model.dao.CredentialDao;
 import logic.model.dao.LoggedUserDao;
+import logic.model.enums.PageId;
 import logic.model.exception.DatabaseException;
 import logic.model.exception.InvalidCredentialException;
 import logic.model.exception.InvalidUsernameException;
@@ -73,7 +74,7 @@ public class LoginController extends Controller {
 	@Override
 	public void setNextPageId(String action) {
 		if(action.equals("init"))
-			this.nextPageId = "Login";
+			this.nextPageId = PageId.LOGIN;
 		else this.nextPageId = null;
 			
 	}

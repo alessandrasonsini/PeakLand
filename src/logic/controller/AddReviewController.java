@@ -5,6 +5,7 @@ import logic.model.MountainPath;
 import logic.model.Review;
 import logic.model.dao.MountainPathDao;
 import logic.model.dao.ReviewDao;
+import logic.model.enums.PageId;
 import logic.model.exception.DatabaseException;
 import logic.model.utils.ReviewConverter;
 
@@ -35,7 +36,7 @@ public class AddReviewController extends Controller {
 	@Override
 	public void setNextPageId(String action) {
 		if(action.equals("init"))
-			this.nextPageId = "Add path";
+			this.nextPageId = PageId.ADD_PATH;
 		else 
 			this.nextPageId = null;
 	}

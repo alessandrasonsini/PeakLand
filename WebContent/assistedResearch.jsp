@@ -8,28 +8,28 @@
 	String nextPageName = "";
 	
 	switch(controller.getNextPageId()) {
-		case "Search path": 
+		case SEARCH: 
 			nextPageName = "searchPath.jsp";
 			break;
-		case "Add path": 
+		case ADD_PATH: 
 			nextPageName = "addNewPath.jsp";
 			break;	
-		case "View info": 
+		case VIEW_INFO: 
 			nextPageName = "viewMountainPathInfo.jsp";
 			break;		
-		case "Login":
+		case LOGIN:
 			nextPageName = "login.jsp";
 			break;
-		case "Assisted research":
+		case ASSISTED_RESEARCH:
 			nextPageName = "assistedResearch.jsp";
 			break;
-		case "Profile":
+		case PROFILE:
 			nextPageName = "profile.jsp";
 			break;	
-		case "Add review":
+		case ADD_REVIEW:
 			nextPageName = "addReview.jsp";
 			break;
-		case "View reviews":
+		case VIEW_REVIEWS:
 			nextPageName = "viewReviews.jsp";
 			break;
 	}

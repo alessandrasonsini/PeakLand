@@ -8,6 +8,7 @@ import logic.model.LoggedUser;
 import logic.model.MountainPath;
 import logic.model.Sorter;
 import logic.model.dao.MountainPathDao;
+import logic.model.enums.PageId;
 import logic.model.utils.MountainPathConverter;
 
 public class HomeController extends Controller {
@@ -65,7 +66,7 @@ public class HomeController extends Controller {
 	@Override
 	public void setNextPageId(String action) {
 		if(action.equals("init"))
-			this.nextPageId = "Home";
+			this.nextPageId = PageId.HOME;
 		else this.nextPageId = null;
 	}
 

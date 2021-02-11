@@ -4,6 +4,7 @@ import java.util.List;
 import logic.model.MountainPath;
 import logic.model.StandardName;
 import logic.model.dao.MountainPathDao;
+import logic.model.enums.PageId;
 
 // MI STANNO VENENDO I DUBBI SU QUESTA CLASSE, E' VERAMENTE NECESSARIA?
 
@@ -30,7 +31,7 @@ public class SearchMountainPathController extends Controller {
 	@Override
 	public void setNextPageId(String action) {
 		if(action.equals("init"))
-			this.nextPageId = "Search path";
+			this.nextPageId = PageId.SEARCH;
 		else this.nextPageId = null;
 	}
 

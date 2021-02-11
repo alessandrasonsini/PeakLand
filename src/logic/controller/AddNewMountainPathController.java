@@ -10,6 +10,7 @@ import logic.controller.utils.CurrentLoggedUsers;
 import logic.model.MountainPath;
 import logic.model.StandardName;
 import logic.model.dao.MountainPathDao;
+import logic.model.enums.PageId;
 import logic.model.exception.DatabaseException;
 import logic.model.exception.SystemException;
 import logic.model.exception.TooManyImagesException;
@@ -75,13 +76,13 @@ public class AddNewMountainPathController extends Controller {
 	public void setNextPageId(String action) {
 		switch(action){
 			case "init":
-				this.nextPageId = "Add path";
+				this.nextPageId = PageId.ADD_PATH;
 				break;
 			case "New review":
-				this.nextPageId = "Add review";
+				this.nextPageId = this.addReviewController.getNextPageId();
 				break;
 			case "Back":
-				this.nextPageId = "Add path";
+				this.nextPageId = PageId.ADD_PATH;
 				break;
 			default:
 				this.nextPageId = null;

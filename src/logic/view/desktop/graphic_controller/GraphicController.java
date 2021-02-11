@@ -4,6 +4,7 @@ package logic.view.desktop.graphic_controller;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import logic.controller.Controller;
+import logic.model.enums.PageId;
 import logic.model.exception.SystemException;
 import logic.view.desktop.ShowableElement;
 
@@ -17,7 +18,7 @@ public abstract class GraphicController extends ShowableElement {
 		this.myController = controller;
 	}
 	
-	protected void executeAction(String action) {
+	protected void executeAction(PageId action) {
 		// Istanzia controller applicativo del prossimo caso d'uso da eseguire
 		Controller nextController;
 		try {

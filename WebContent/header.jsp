@@ -1,3 +1,5 @@
+<%@page import="com.google.api.Page"%>
+<%@page import="logic.model.enums.PageId"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List" %>
 <%@page import="logic.controller.MainController"%>
@@ -76,10 +78,10 @@
 		
 		<%
 		for (String action : actionList) {
-			if (request.getParameter(action) != null && request.getAttribute("new") == null) {
+			if (request.getParameter(action.toString()) != null && request.getAttribute("new") == null) {
 				session.setAttribute("btn", action);
-				nextPage = action;
-				nextAction = mainController.onActionRequired(nextPage, (Integer) session.getAttribute("sessionId"));
+				nextPage = action.toString();
+				nextAction = mainController.onActionRequired(PageId.valueOf(nextPage), (Integer) session.getAttribute("sessionId"));
 				request.setAttribute("new", false);
 				break;
 			}

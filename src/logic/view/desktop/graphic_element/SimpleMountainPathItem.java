@@ -44,24 +44,24 @@ public class SimpleMountainPathItem extends ShowableElement {
 	private Label lbVotes;
 	
 	@FXML
-	private ImageView imgVote1;
+	private ImageView imgStar1;
 	
 	@FXML
-	private ImageView imgVote2;
+	private ImageView imgStar2;
 	
 	@FXML
-	private ImageView imgVote3;
+	private ImageView imgStar3;
 	
 	@FXML
-	private ImageView imgVote4;
+	private ImageView imgStar4;
 	
 	@FXML
-	private ImageView imgVote5;
+	private ImageView imgStar5;
 	
 	@FXML
 	private Label lbRankPosition;
 	
-	private List<ImageView> starImages = Arrays.asList(imgVote1,imgVote2,imgVote3,imgVote4,imgVote5);
+	private List<ImageView> starImages = Arrays.asList(imgStar1,imgStar2,imgStar3,imgStar4,imgStar5);
 	
 	public SimpleMountainPathItem() {
 		super();

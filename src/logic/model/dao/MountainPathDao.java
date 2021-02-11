@@ -61,15 +61,6 @@ public class MountainPathDao extends Dao {
 		return mountainPathResult;
 	}
 	
-	private String convertFieldName(String name) {
-		String newName;
-		if(name.equals("city") || name.equals("region") || name.equals("province"))
-			newName = "location/" + name;
-		else if(name.equals("hours") || name.equals("minutes"))
-			newName = "travelTime/" + name;
-		else newName = name;
-		return newName;
-	}
 	
 	public List<MountainPath> searchMountainPathbyFilter(String filterName, Boolean filterValue){
 		Query query = this.dbReference.orderByChild(filterName).equalTo(filterValue);
@@ -99,6 +90,29 @@ public class MountainPathDao extends Dao {
 	private void executeQuery(Query query){
 		mountainPathResult.clear();
 		readData(query);
+	}
+	
+	private String convertFieldName(String name) {
+		String newName;
+		switch(name) {
+			case "cityLocation":
+				newName = "location/city";
+				break;
+			case "regionLocation":
+				newName = "location/region";
+				break;	
+			case "provinceLocation":
+				newName = "location/province";
+				break;	
+			case "hours":
+			case "minutes":
+				newName = "travelTime" + name;
+				break;
+			default:
+				newName = name;	
+		}
+		
+		return newName;
 	}
 	
 	@Override

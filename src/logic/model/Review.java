@@ -6,7 +6,7 @@ public class Review {
 	private Integer vote;
 	private String title;
 	private String comment;
-	private String author;
+	private String authorUsername;
 	
 	public Review() {
 		
@@ -45,11 +45,11 @@ public class Review {
 	}
 
 	public String getAuthor() {
-		return author;
+		return authorUsername;
 	}
 
 	public void setAuthor(String author) {
-		this.author = author;
+		this.authorUsername = author;
 	}
 	
 }

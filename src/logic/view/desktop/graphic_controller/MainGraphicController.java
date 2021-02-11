@@ -7,6 +7,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import logic.controller.Controller;
 import logic.controller.MainController;
+import logic.model.enums.PageId;
 
 
 public class MainGraphicController extends GraphicController {
@@ -61,20 +62,20 @@ public class MainGraphicController extends GraphicController {
 	}
 	
 	// Converte l'id dell'azione richiesta nell'interfaccia nell'id dell'azione che deve eseguire il sistema
-	private String convertAction(String actionId) {
-		String newActionId;
+	private PageId convertAction(String actionId) {
+		PageId newActionId;
 		switch(actionId) {
 			case "btnViewInfo":
-				newActionId = "View info";
+				newActionId = PageId.VIEW_INFO;
 				break;
 			case "btnAddPath":
-				newActionId = "Add path";
+				newActionId = PageId.ADD_PATH;
 				break;
 			case "btnProfile":
-				newActionId = "Profile";
+				newActionId = PageId.PROFILE;
 				break;
 			case "btnHome":
-				newActionId = "Home";
+				newActionId = PageId.HOME;
 				break;
 			default: 
 				newActionId = null;

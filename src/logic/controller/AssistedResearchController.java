@@ -9,6 +9,7 @@ import logic.bean.MountainPathBean;
 import logic.model.MountainPath;
 import logic.model.StandardName;
 import logic.model.dao.MountainPathDao;
+import logic.model.enums.PageId;
 import logic.model.exception.SystemException;
 
 public class AssistedResearchController extends Controller {
@@ -35,7 +36,6 @@ public class AssistedResearchController extends Controller {
 			}
 			else {
 				try {
-					System.out.println("   field value   " + wishPath.getFieldValue(f));
 					Object obj = wishPath.getFieldValue(f);
 					if (obj != null) {
 						
@@ -67,14 +67,12 @@ public class AssistedResearchController extends Controller {
 		List<MountainPath> returnValue;
 		if (type == String[].class) {
 			returnValue = searchFilterInAList((Object[]) obj, fieldName);
-			System.out.println("tutto okay if");
 		} else {
 			// Prende il metodo del mountainPathDao per effettuare la ricerca per filtro
 			Method m = mountainPathDao.getClass().getDeclaredMethod("searchMountainPathbyFilter",
 					new Class<?>[] { String.class, type });
 			// Invoca il metodo
 			returnValue = (List<MountainPath>) m.invoke(mountainPathDao, fieldName, obj);
-			System.out.println("tutto okay else");
 		}
 		return returnValue;
 
@@ -150,7 +148,7 @@ public class AssistedResearchController extends Controller {
 	@Override
 	public void setNextPageId(String action) {
 		if(action.equals("init"))
-			this.nextPageId = "Assisted research";
+			this.nextPageId = PageId.ASSISTED_RESEARCH;
 		else this.nextPageId = null;
 
 	}

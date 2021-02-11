@@ -7,31 +7,31 @@ public class GraphicControllerFactory {
 	public GraphicController getGraphicController(Controller controller) {
 		GraphicController newGraphicController;
 		switch(controller.getNextPageId()) {
-			case "Search path": 
+			case SEARCH: 
 				newGraphicController =  new SearchMountainPathGraphicController(controller);
 				break;
-			case "Add path": 
+			case ADD_PATH: 
 				newGraphicController =  new AddNewMountainPathGraphicController(controller);
 				break;	
-			case "View info": 
+			case VIEW_INFO: 
 				newGraphicController =  new ViewMountainPathInfoGraphicController(controller);			
 				break;		
-			case "Login":
+			case LOGIN:
 				newGraphicController = new LoginGraphicController(controller);
 				break;
-			case "Assisted research":
+			case ASSISTED_RESEARCH:
 				newGraphicController = new AssistedResearchGraphicController(controller);
 				break;
-			case "Profile":
+			case PROFILE:
 				newGraphicController = new ProfileGraphicController(controller);
 				break;	
-			case "Add review":
+			case ADD_REVIEW:
 				newGraphicController = new AddReviewGraphicController(controller);
 				break;
-			case "View reviews":
+			case VIEW_REVIEWS:
 				newGraphicController = new ViewReviewGraphicController(controller);
 				break;
-			case "Home":
+			case HOME:
 				newGraphicController = new HomeGraphicController(controller);
 				break;
 			default: newGraphicController = null;

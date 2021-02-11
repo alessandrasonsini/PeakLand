@@ -1,10 +1,11 @@
 package logic.controller;
 
+import logic.model.enums.PageId;
 import logic.model.exception.SystemException;
 
 public abstract class Controller {
 	
-	protected String nextPageId;
+	protected PageId nextPageId;
 	
 	protected Controller() {
 		setNextPageId("init");
@@ -13,7 +14,7 @@ public abstract class Controller {
 	
 	// Costruisce il prossimo controller da istanziare per eseguire l'azione
 	// chiamata
-	public Controller executeAction(String action) throws SystemException {
+	public Controller executeAction(PageId action) throws SystemException {
 		Controller nextController;
 		ControllerFactory controllerFactory = new ControllerFactory();
 
@@ -22,7 +23,7 @@ public abstract class Controller {
 		return nextController;
 	}
 
-	public String getNextPageId() {
+	public PageId getNextPageId() {
 		return this.nextPageId;
 	}
 	

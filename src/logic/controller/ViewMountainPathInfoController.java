@@ -11,6 +11,7 @@ import logic.model.Review;
 import logic.model.Sorter;
 import logic.model.dao.MountainPathDao;
 import logic.model.dao.ReviewDao;
+import logic.model.enums.PageId;
 import logic.model.exception.SystemException;
 import logic.model.utils.MountainPathConverter;
 import logic.model.utils.ReviewConverter;
@@ -64,7 +65,7 @@ public class ViewMountainPathInfoController extends Controller {
 	}
 	
 	public void viewReviewsRequest() {
-		setNextPageId("View reviews");
+		setNextPageId("View review");
 	}
 	
 	public List<ReviewBean> getPathReview(String pathName) {
@@ -106,15 +107,15 @@ public class ViewMountainPathInfoController extends Controller {
 	public void setNextPageId(String action) {
 		switch(action) {
 			case "init":
-				this.nextPageId = "Search path";
+				this.nextPageId = PageId.SEARCH;
 				break;
 			case "Item selected":
-				this.nextPageId = "View info";
+				this.nextPageId = PageId.VIEW_INFO;
 				break;	
 			case "Back":
-				if(this.nextPageId.equals("View info"))
+				if(this.nextPageId.equals(PageId.VIEW_INFO))
 					this.nextPageId = searchController.getNextPageId();
-				else this.nextPageId = "View info";
+				else this.nextPageId = PageId.VIEW_INFO;
 				break;
 			case "Next assisted research":
 				this.nextPageId = assistedResearchController.getNextPageId();
@@ -122,8 +123,8 @@ public class ViewMountainPathInfoController extends Controller {
 			case "Done assisted research":
 				this.nextPageId = searchController.getNextPageId();
 				break;
-			case "View reviews":
-				this.nextPageId = "View reviews";
+			case "View review":
+				this.nextPageId = PageId.VIEW_REVIEWS;
 				break;
 			default:
 				this.nextPageId = null;

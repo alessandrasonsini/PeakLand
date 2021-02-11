@@ -16,15 +16,6 @@
 	topTen = controller.getClassification((Integer)session.getAttribute("sessionId"));
 	userName = controller.getCurrentUserName();
 	session.setAttribute("userName", userName);
-	
-	/*if (session.getAttribute("sessionId") != null) {
-		topByFavorites = controller.getTopByFavorites();
-		user = controller.getCurrentUser((Integer) session.getAttribute("sessionId"));
-		session.setAttribute("user", user);
-	}
-	else {
-		topTen = controller.getTopTen();
-	}*/
 
 %>
 
@@ -164,7 +155,6 @@
 					%></form><%
 					topTen.clear();
 				}
-				//else if (topByFavorites != null && !topByFavorites.isEmpty()) {
 					%>
 					
 				<br>

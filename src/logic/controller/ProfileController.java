@@ -5,6 +5,7 @@ import logic.bean.LoggedUserBean;
 import logic.controller.utils.CurrentLoggedUsers;
 import logic.model.LoggedUser;
 import logic.model.dao.LoggedUserDao;
+import logic.model.enums.PageId;
 import logic.model.exception.DatabaseException;
 import logic.model.exception.SystemException;
 import logic.model.utils.LoggedUserConverter;
@@ -54,10 +55,10 @@ public class ProfileController extends Controller{
 	public void setNextPageId(String action) {
 		switch(action) {
 			case "init":
-				this.nextPageId = "Profile";
+				this.nextPageId = PageId.PROFILE;
 				break;
 			case "Log out":
-				this.nextPageId = "Login";
+				this.nextPageId = PageId.LOGIN;
 				break;
 			default:	
 				this.nextPageId = null;
