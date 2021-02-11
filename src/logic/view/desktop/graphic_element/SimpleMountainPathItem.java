@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import logic.bean.SimpleMountainPathBean;
 import logic.view.desktop.ShowableElement;
 
 public class SimpleMountainPathItem extends ShowableElement {
@@ -67,19 +68,21 @@ public class SimpleMountainPathItem extends ShowableElement {
 		super();
 	}
 	
-	public void setInfo(String name, String locationRegion, String locationProvince, 
-			String locationCity, String diffLevel, String travelTime, Integer vote, Integer numberOfVotes, Integer position) {
-        txtName.setText(name);
-        txtLocationRegion.setText(locationRegion);
-        txtLocationProvince.setText(locationProvince);
-        txtLocationCity.setText(locationCity);
-        txtDifficultyLevel.setText(diffLevel);
-        txtTravelTime.setText(travelTime);
-        lbVotes.setText(numberOfVotes.toString());
-        if(vote > 0)
-        	setStarVote(vote);
-        if(position != null)
-        	lbRankPosition.setText(position.toString() +")");
+	public void setInfo(SimpleMountainPathBean bean) {
+        txtName.setText(bean.convertToText(bean.getName()));
+        txtLocationRegion.setText(bean.convertToText(bean.getRegion()));
+        txtLocationProvince.setText(bean.convertToText(bean.getProvince()));
+        txtLocationCity.setText(bean.convertToText(bean.getCity()));
+        txtDifficultyLevel.setText(bean.convertToText(bean.getLevel()));
+        txtTravelTime.setText(bean.convertToText(bean.getHours() + ":" + bean.convertToText(bean.getMinutes())));
+        lbVotes.setText(bean.convertToText(bean.getNumberOfVotes()));
+        if(bean.getVote() > 0)
+        	setStarVote(bean.getVote());
+        if(bean.getRankPosition() != null)
+        	lbRankPosition.setText(bean.getRankPosition().toString() +")");
+        
+        if(bean.getImage() != null)
+        	imgPath.setImage(new Image(bean.getImage(),50,50,false,false));
     }
 
 	private void setStarVote(Integer vote) {

@@ -34,11 +34,9 @@ public class ViewMountainPathInfoController extends Controller {
 	// Richiama il metodo del controllore applicativo Search per
 	// effettuare la ricerca nel DB
 	public List<SimpleMountainPathBean> searchMountainPathByName(String name) {
+		
 		List<MountainPath> resultList = searchController.searchMountainPathByPartialName(name);
-		resultList = Sorter.sortByVote(resultList);
-		for(MountainPath path : resultList) {
-			this.searchResults.add(MountainPathConverter.getSimpleMountainPath(path));
-		}
+		createResultList(resultList);
 		return this.searchResults;
 	}
 	
@@ -92,15 +90,24 @@ public class ViewMountainPathInfoController extends Controller {
 	}
 	
 	public List<SimpleMountainPathBean> searchMountainPathByAssistedResearch(MountainPathBean wishPath) throws SystemException{		
-		this.searchResults = new ArrayList<>();
 		List<MountainPath> resultList;
 		resultList = this.assistedResearchController.searchMountainPathByFilters(wishPath);
-		resultList = Sorter.sortByVote(resultList);
-		for(MountainPath path : resultList) {
-			this.searchResults.add(MountainPathConverter.getSimpleMountainPath(path));
-		}
+
+		createResultList(resultList);
 		setNextPageId("Done assisted research");
 		return this.searchResults;
+	}
+	
+	private void createResultList(List<MountainPath> result){
+		this.searchResults = new ArrayList<>();
+		result = Sorter.sortByVote(result);
+		MountainPathDao dao = new MountainPathDao();
+		SimpleMountainPathBean bean;
+		for (MountainPath path : result) {
+			bean = MountainPathConverter.getSimpleMountainPath(path);
+			this.searchResults.add(bean);
+			bean.setImage(dao.getImage(bean.getName()));
+		}
 	}
 	
 	@Override

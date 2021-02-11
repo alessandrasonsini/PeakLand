@@ -117,8 +117,8 @@ public abstract class Dao implements OnGetDataListener {
 		return writeCompleted;
 	}
 	
-	public List<ByteArrayInputStream> getImagesStream(String pathName) {
-		String dir = this.getDirectory() + pathName;
+	public List<ByteArrayInputStream> getImagesStream(String dir) {
+		dir = this.directory + dir;
 		Page<Blob> blobs = this.bucketReference.list(Storage.BlobListOption.prefix(dir));
 		List<ByteArrayInputStream> imageStreams = new ArrayList<>();
 		for(Blob blob : blobs.iterateAll()) {
@@ -135,13 +135,19 @@ public abstract class Dao implements OnGetDataListener {
 		}
 	}
 	
-	public ByteArrayInputStream getImage(String userName) {
-		String fileName = this.getDirectory() + userName + FORMAT;
+	public ByteArrayInputStream getImage(String fileName) {
+		/*fileName = this.getDirectory() + fileName + FORMAT;
 		Blob blob = this.storageRefence.get(this.bucketReference.getName(),fileName);
 		ByteArrayInputStream imageReturn = null;
 		if(blob != null)
 			imageReturn = new ByteArrayInputStream(blob.getContent(BlobSourceOption.generationMatch()));
-		return imageReturn;
+		return imageReturn;*/
+		ByteArrayInputStream image = null;
+		List<ByteArrayInputStream> imagesList = getImagesStream(fileName);
+		
+		if(imagesList.size() > 0)
+			image = imagesList.get(0);
+		return image;
 	}
 	
 	public void uploadImage(InputStream f, String userName) {

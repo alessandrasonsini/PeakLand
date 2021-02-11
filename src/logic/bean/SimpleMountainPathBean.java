@@ -1,5 +1,6 @@
 package logic.bean;
 
+import java.io.ByteArrayInputStream;
 import java.lang.reflect.Field;
 
 import logic.model.exception.WrongInputException;
@@ -16,8 +17,17 @@ public class SimpleMountainPathBean extends ItemBean {
 	protected Integer vote;
 	protected Integer numberOfVotes;
 	protected Integer rankPosition; 
-	//private image
+	protected ByteArrayInputStream image;
 	
+	
+	public ByteArrayInputStream getImage() {
+		return image;
+	}
+
+	public void setImage(ByteArrayInputStream image) {
+		this.image = image;
+	}
+
 	public String getProvince() {
 		return province;
 	}
