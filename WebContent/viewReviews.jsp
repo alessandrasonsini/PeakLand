@@ -1,4 +1,4 @@
-<%@page import="logic.model.bean.ReviewBean"%>
+<%@page import="logic.bean.ReviewBean"%>
 <%@page import="logic.controller.ViewMountainPathInfoController"%>
 <%@ page language="java" session="true" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>

@@ -20,7 +20,7 @@
 %>
 
 <!-- dichiarazione e instanziazione di una CredentialBean !-->
-<jsp:useBean id="credential" scope="request" class="logic.model.bean.CredentialBean"/>
+<jsp:useBean id="credential" scope="request" class="logic.bean.CredentialBean"/>
 <!-- mappa attributi della bean sui campi del form -->
 <jsp:setProperty name="credential" property="*"/>
 

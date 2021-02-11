@@ -2,7 +2,7 @@
 <%@page import="java.io.ByteArrayInputStream"%>
 <%@page import="java.util.List" %>
 <%@page import="logic.controller.ViewMountainPathInfoController"%>
-<%@page import="logic.model.bean.SimpleMountainPathBean"%>
+<%@page import="logic.bean.SimpleMountainPathBean"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
@@ -10,6 +10,37 @@
 	List<SimpleMountainPathBean> beanList = new ArrayList<SimpleMountainPathBean>();
 	SimpleMountainPathBean selectedPath;
 	ViewMountainPathInfoController controller;
+	String nextPageName ="";
+	
+	private String getNextPageName() {
+		switch(controller.getNextPageId()) {
+			case "Search path": 
+				nextPageName = "searchPath.jsp";
+				break;
+			case "Add path": 
+				nextPageName = "addNewPath.jsp";
+				break;	
+			case "View info": 
+				nextPageName = "viewMountainPathInfo.jsp";
+				break;		
+			case "Login":
+				nextPageName = "login.jsp";
+				break;
+			case "Assisted research":
+				nextPageName = "assistedResearch.jsp";
+				break;
+			case "Profile":
+				nextPageName = "profile.jsp";
+				break;	
+			case "Add review":
+				nextPageName = "addReview.jsp";
+				break;
+			case "View reviews":
+				nextPageName = "viewReviews.jsp";
+				break;
+		}
+		return nextPageName;
+	}
 %>
 <%
 	if (request.getParameter("viewInfoController") != null) {
@@ -18,6 +49,12 @@
 	else {
 		controller = new ViewMountainPathInfoController();
 		session.setAttribute("viewInfoController", controller);
+	}
+
+
+	if (request.getParameter("path") != null) {
+		controller.setSelectedMountainPath(request.getParameter("path"));
+		%><jsp:forward page="<%=getNextPageName()%>"/><%
 	}
 %>
 
@@ -118,18 +155,6 @@
 				%>
 				</div>
 				</form>
-				
-				
-				<%
-				if (request.getParameter("path") != null) {
-					%><%=request.getParameter("path")%><%
-					controller.setSelectedMountainPath(request.getParameter("path"));
-					
-					%><jsp:forward page="viewMountainPathInfo.jsp"/><%
-				}
-				%>
-				
-				
 			</div>
 			
 		</div>

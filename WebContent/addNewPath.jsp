@@ -18,27 +18,56 @@
 
 <%!
 	AddNewMountainPathController controller = new AddNewMountainPathController();
+
 	boolean disable = true;
 	boolean disableAddReview = true;
+	String nextPageName = "";
 %>
-<jsp:useBean id="newPath" scope="request" class="logic.model.bean.MountainPathBean"/>
+<jsp:useBean id="newPath" scope="request" class="logic.bean.MountainPathBean"/>
 <jsp:setProperty name="newPath" property="*"/>
 <%
+	switch(controller.getNextPageId()) {
+		case "Search path": 
+			nextPageName = "searchPath.jsp";
+			break;
+		case "Add path": 
+			nextPageName = "addNewPath.jsp";
+			break;	
+		case "View info": 
+			nextPageName = "viewMountainPathInfo.jsp";
+			break;		
+		case "Login":
+			nextPageName = "login.jsp";
+			break;
+		case "Assisted research":
+			nextPageName = "assistedResearch.jsp";
+			break;
+		case "Profile":
+			nextPageName = "profile.jsp";
+			break;	
+		case "Add review":
+			nextPageName = "addReview.jsp";
+			break;
+		case "View reviews":
+			nextPageName = "viewReviews.jsp";
+			break;
+	}
+
 	session.setAttribute("addPathController", controller);
 	session.setAttribute("disable", disable);
 	if (session.getAttribute("disableAddReview") == null)
 			session.setAttribute("disableAddReview", disableAddReview);
 	else
 		disableAddReview = (boolean) session.getAttribute("disableAddReview");
-	
-	System.out.println("nome path dentro addnewpath " + (String) session.getAttribute("name"));
-%>
 
-<%
+
 	if (request.getParameter("addReview") != null) {
+		controller.addReviewRequest();
+		if (nextPageName != "") {
 		%>
-		<jsp:forward page="addReview.jsp"/>
+		<jsp:forward page="<%=nextPageName%>"/>
 		<% 
+		}
 	}
 %>
 

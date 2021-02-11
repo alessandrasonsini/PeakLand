@@ -1,10 +1,10 @@
-<%@page import="logic.model.bean.SimpleMountainPathBean"%>
+<%@page import="logic.bean.SimpleMountainPathBean"%>
 <%@page import="logic.controller.HomeController"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-<jsp:useBean id="user" scope="request" class="logic.model.bean.LoggedUserBean"/>
+<jsp:useBean id="user" scope="request" class="logic.bean.LoggedUserBean"/>
 
 <%!
 	HomeController controller = new HomeController();
@@ -18,13 +18,11 @@
 	session.setAttribute("userName", userName);
 	
 	/*if (session.getAttribute("sessionId") != null) {
-		System.out.println("utente loooooggato");
 		topByFavorites = controller.getTopByFavorites();
 		user = controller.getCurrentUser((Integer) session.getAttribute("sessionId"));
 		session.setAttribute("user", user);
 	}
 	else {
-		System.out.println("utente NON loggato");
 		topTen = controller.getTopTen();
 	}*/
 
@@ -82,7 +80,6 @@
 			<div class="col-9">
 				<%
 				if (topTen != null && !topTen.isEmpty()) {
-					System.out.println("top ten empty = "+!topTen.isEmpty());
 					%>
 					<form class="form" action="home.jsp" method="post">
 						<div class="container" style="padding-top: 1%;">

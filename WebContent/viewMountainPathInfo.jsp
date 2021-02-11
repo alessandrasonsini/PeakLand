@@ -1,4 +1,4 @@
-<%@page import="logic.model.bean.ReviewBean"%>
+<%@page import="logic.bean.ReviewBean"%>
 <%@page import="java.io.ByteArrayInputStream"%>
 <%@page import="org.apache.commons.io.IOUtils"%>
 <%@page import="java.util.List"%>
@@ -6,7 +6,7 @@
 <%@page import="java.util.Base64"%>
 <%@page import="java.util.Base64.Encoder"%>
 <%@page import="logic.model.MountainPath"%>
-<%@page import="logic.model.bean.MountainPathBean" %>
+<%@page import="logic.bean.MountainPathBean" %>
 <%@page import="logic.controller.ViewMountainPathInfoController"%>
 <%@ page language="java" session="true" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -18,8 +18,39 @@
 	int currImgNum = -1;
 	boolean disablePrev = true;
 	boolean disableNext = true;
+	String nextPageName;
+	
+	private String getNextPageName() {
+		switch(controller.getNextPageId()) {
+		case "Search path": 
+			nextPageName = "searchPath.jsp";
+			break;
+		case "Add path": 
+			nextPageName = "addNewPath.jsp";
+			break;	
+		case "View info": 
+			nextPageName = "viewMountainPathInfo.jsp";
+			break;		
+		case "Login":
+			nextPageName = "login.jsp";
+			break;
+		case "Assisted research":
+			nextPageName = "assistedResearch.jsp";
+			break;
+		case "Profile":
+			nextPageName = "profile.jsp";
+			break;	
+		case "Add review":
+			nextPageName = "addReview.jsp";
+			break;
+		case "View reviews":
+			nextPageName = "viewReviews.jsp";
+			break;
+		}
+		return nextPageName;
+	}
 %>
-<jsp:useBean id="review" scope="request" class="logic.model.bean.ReviewBean"/>
+<jsp:useBean id="review" scope="request" class="logic.bean.ReviewBean"/>
 <%
 	session.setAttribute("disablePrev", disablePrev);
 	session.setAttribute("disableNext", disableNext);
@@ -61,8 +92,9 @@
 			disableNext = true;
 	}
 	if (request.getParameter("viewReviews") != null) {
+		controller.viewReviewsRequest();
 		%>
-		<jsp:forward page="viewReviews.jsp">
+		<jsp:forward page="<%=getNextPageName()%>">
 			<jsp:param name="pathName" value="<%=path.getName()%>"/>
 		</jsp:forward>
 		<%
@@ -173,41 +205,6 @@
 									<p class="green-text">Travel Time:&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=path.convertToText(path.getHours())%> : <%=path.convertToText(path.getMinutes())%></span></p>
 								</div>
 							</div>
-						
-							<br>
-						
-							<div class="d-flex justify-content-start align-items-center">
-								<div class="p-2 flex-item-icon">
-									<img src="Images/list.png" class="img-responsive icons">
-								</div>
-	 							<div class="p-2 flex-item-text pull-left text">Reviews</div>
-							</div>
-							
-							<% if (review != null) { %>
-							<div class="container">
-								<div class="row">
-									<p class="green-text">Author:&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=review.getAuthor() %></span></p>
-								</div>
-								<div class="row">
-									<p class="green-text">Vote:&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=review.getVote() %></span></p>
-								</div>
-								<div class="row">
-									<p class="green-text">Title:&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=review.getTitle() %></span></p>
-								</div>
-								<div class="row">
-									<p class="green-text">Comment:&nbsp;&nbsp;<span class="black-text"><%=review.getComment() %></span></p>
-								</div>
-								<div class="row">
-									<form class="form-inline" action="viewMountainPathInfo.jsp" method="post">
-										<button type="submit" name="viewReviews" value="viewReviews" class="btn btn-light-orange">View all reviews</button>
-									</form>
-								</div>
-							</div>
-							<%} else { %>
-							<div class="container">
-								<div class="row">Not available</div>
-							</div>
-							<% } %>
 							<br>
 						</div>
 						
@@ -216,7 +213,8 @@
 							<br>
 							
 							<div class="container">
-								<div class="d-flex justify-content-between align-items-center">
+								<form class="form" action="viewMountainPathInfo.jsp" method="post">
+									<div class="d-flex justify-content-between align-items-center">
 										<div class="p-2 flex-item-link">
 											<img src="Images/google-maps.png" class="img-responsive">
 										</div>
@@ -224,20 +222,21 @@
 											<img src="Images/apple-weather.png" class="img-responsive">
 										</div>
 										<div class="p-2 flex-item-link">
-											<img src="Images/list.png" class="img-responsive">
+											<input type="image" name="viewReviews" value="viewReviews" src="Images/list.png" class="img-responsive">
 										</div>
-								</div>
-								<div class="row">
-									<div class="col-4">
-										<div class="black-text" style="text-align: center;">View path on Google Maps</div>
 									</div>
-									<div class="col-4">
-										<div class="black-text" style="text-align: center;">View weather forecast</div>
+									<div class="row">
+										<div class="col-4">
+											<div class="black-text" style="text-align: center;">View path on Google Maps</div>
+										</div>
+										<div class="col-4">
+											<div class="black-text" style="text-align: center;">View weather forecast</div>
+										</div>
+										<div class="col-4">
+											<div class="black-text" style="text-align: center;">View reviews</div>
+										</div>
 									</div>
-									<div class="col-4">
-										<div class="black-text" style="text-align: center;">View reviews</div>
-									</div>
-								</div>
+								</form>
 							</div>
 						
 							<br><br>

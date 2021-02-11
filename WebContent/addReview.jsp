@@ -9,9 +9,9 @@
 	Integer j = 1;
 	boolean disable = true;
 %>
-<jsp:useBean id="review" scope="request" class="logic.model.bean.ReviewBean"/>
+<jsp:useBean id="review" scope="request" class="logic.bean.ReviewBean"/>
 <jsp:setProperty name="review" property="*"/>
-<%		
+<%
 	AddNewMountainPathController controller = (AddNewMountainPathController) session.getAttribute("addPathController");
 
 	session.setAttribute("disable", disable);
@@ -65,6 +65,8 @@
 					session.removeAttribute("name");
 					//vedere se metterlo qui o dopo l'alert
 					session.removeAttribute("vote");
+					
+					
 					%>
 					<div class="container" style="padding-top: 3%;">
 						<div class="alert alert-success alert-dismissible fade show" role="alert">

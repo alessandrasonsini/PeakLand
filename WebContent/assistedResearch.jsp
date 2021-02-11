@@ -4,10 +4,39 @@
 
 <%
 	ViewMountainPathInfoController controller = (ViewMountainPathInfoController) session.getAttribute("viewInfoController");
+
+	String nextPageName = "";
+	
+	switch(controller.getNextPageId()) {
+		case "Search path": 
+			nextPageName = "searchPath.jsp";
+			break;
+		case "Add path": 
+			nextPageName = "addNewPath.jsp";
+			break;	
+		case "View info": 
+			nextPageName = "viewMountainPathInfo.jsp";
+			break;		
+		case "Login":
+			nextPageName = "login.jsp";
+			break;
+		case "Assisted research":
+			nextPageName = "assistedResearch.jsp";
+			break;
+		case "Profile":
+			nextPageName = "profile.jsp";
+			break;	
+		case "Add review":
+			nextPageName = "addReview.jsp";
+			break;
+		case "View reviews":
+			nextPageName = "viewReviews.jsp";
+			break;
+	}
 %>
 
 <!-- dichiarazione e instanziazione di una MountainPathBean !-->
-<jsp:useBean id="wishMountainPath" scope="request" class="logic.model.bean.MountainPathBean"/>
+<jsp:useBean id="wishMountainPath" scope="request" class="logic.bean.MountainPathBean"/>
 <!-- mappa attributi della bean sui campi del form -->
 <jsp:setProperty name="wishMountainPath" property="*"/>
 
@@ -162,7 +191,7 @@
 		if (request.getParameter("assResearch") != null) {
 			controller.searchMountainPathByAssistedResearch(wishMountainPath);
 			%>
-			<jsp:forward page="searchPath.jsp">
+			<jsp:forward page="<%=nextPageName%>">
 				<jsp:param name="controller" value="<%=controller%>" />
 			</jsp:forward>
 			<%

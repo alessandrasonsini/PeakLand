@@ -6,22 +6,49 @@
 <%@page import="java.util.Base64.Encoder"%>
 <%@page import="java.util.List"%>
 <%@page import="logic.controller.ProfileController"%>
-<%@page import="logic.model.bean.LoggedUserBean"%>
+<%@page import="logic.bean.LoggedUserBean"%>
 <%@ page language="java" session="true" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-<jsp:useBean id="user" scope="request" class="logic.model.bean.LoggedUserBean"/>
-<jsp:useBean id="currentUser" scope="session" class="logic.model.bean.LoggedUserBean"/>
+<jsp:useBean id="user" scope="request" class="logic.bean.LoggedUserBean"/>
+<jsp:useBean id="currentUser" scope="session" class="logic.bean.LoggedUserBean"/>
 <jsp:setProperty name="user" property="*"/>
 
-<%!
-	ProfileController controller = new ProfileController();
+<%!ProfileController controller = new ProfileController();
 	boolean disable = true;
 	String base64;
-%>
-
-
+	String nextPageName = "";
+	
+	private String getNextPageName() {
+		switch(controller.getNextPageId()) {
+			case "Search path": 
+				nextPageName = "searchPath.jsp";
+				break;
+			case "Add path": 
+				nextPageName = "addNewPath.jsp";
+				break;	
+			case "View info": 
+				nextPageName = "viewMountainPathInfo.jsp";
+				break;		
+			case "Login":
+				nextPageName = "login.jsp";
+				break;
+			case "Assisted research":
+				nextPageName = "assistedResearch.jsp";
+				break;
+			case "Profile":
+				nextPageName = "profile.jsp";
+				break;	
+			case "Add review":
+				nextPageName = "addReview.jsp";
+				break;
+			case "View reviews":
+				nextPageName = "viewReviews.jsp";
+				break;
+		}
+		return nextPageName;
+	}%>
 <%
 	session.setAttribute("profileController", controller);
 	
@@ -31,6 +58,9 @@
 	if (request.getParameter("logOut") != null) {
 		session.removeAttribute("sessionId");
 		controller.logOut();
+		%>
+		<jsp:forward page="<%=getNextPageName()%>"/>
+		<%
 	}
 	if (request.getParameter("edit") != null) {
 		disable = false;
