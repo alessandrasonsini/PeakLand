@@ -6,9 +6,9 @@ public class SimpleMountainPathBean extends ItemBean {
 	
 	protected String name;
 	protected String level;
-	protected String regionLocation;
-	protected String provinceLocation;
-	protected String cityLocation;
+	protected String region;
+	protected String province;
+	protected String city;
 	protected Integer hours;
 	protected Integer minutes;
 	protected Integer vote;
@@ -17,28 +17,14 @@ public class SimpleMountainPathBean extends ItemBean {
 	//private image
 	
 	
-	public String getRegion() {
-		return regionLocation;
-	}
-
-	public void setRegion(String region) {
-		this.regionLocation = region;
-	}
+	
 
 	public String getProvince() {
-		return provinceLocation;
+		return province;
 	}
 
 	public void setProvince(String province) {
-		this.provinceLocation = province;
-	}
-
-	public String getCity() {
-		return cityLocation;
-	}
-
-	public void setCity(String city) {
-		this.cityLocation = city;
+		this.province = province;
 	}
 
 	public String getName() {
@@ -65,6 +51,14 @@ public class SimpleMountainPathBean extends ItemBean {
 		this.hours = hours;
 	}
 
+	public String getRegion() {
+		return region;
+	}
+
+	public void setRegion(String region) {
+		this.region = region;
+	}
+	
 	public Integer getMinutes() {
 		return minutes;
 	}
@@ -91,6 +85,14 @@ public class SimpleMountainPathBean extends ItemBean {
 			return numberOfVotes;
 	}
 
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+	
 	public void setNumberOfVotes(Integer numberOfVotes) {
 		this.numberOfVotes = numberOfVotes;
 	}

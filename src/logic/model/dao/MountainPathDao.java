@@ -94,18 +94,14 @@ public class MountainPathDao extends Dao {
 	private String convertFieldName(String name) {
 		String newName;
 		switch(name) {
-			case "cityLocation":
-				newName = "location/city";
+			case "city":
+			case "province":
+			case "region":
+				newName = "location/" + name;
 				break;
-			case "regionLocation":
-				newName = "location/region";
-				break;	
-			case "provinceLocation":
-				newName = "location/province";
-				break;	
 			case "hours":
 			case "minutes":
-				newName = "travelTime" + name;
+				newName = "travelTime/" + name;
 				break;
 			default:
 				newName = name;	
