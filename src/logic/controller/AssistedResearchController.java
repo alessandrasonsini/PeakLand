@@ -5,9 +5,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-
+import logic.bean.MountainPathBean;
 import logic.model.MountainPath;
-import logic.model.bean.MountainPathBean;
+import logic.model.StandardName;
 import logic.model.dao.MountainPathDao;
 import logic.model.exception.SystemException;
 
@@ -21,27 +21,34 @@ public class AssistedResearchController extends Controller {
 		this.mountainPathDao = new MountainPathDao();
 	}
 
+	
 	public List<MountainPath> searchMountainPathByFilters(MountainPathBean wishPath) throws SystemException {
 		this.intersectionResult = null;
-		String fieldName;
+		//String fieldName;
 		List<MountainPath> firstResult = null;
 		// Chiama il metodo della bean che restituisce tutti i suoi Fields tramite la reflection
 		Field[] fields = wishPath.getFields();
 
 		for (Field f : fields) {
+			System.out.println("----- field ----- " + f.getName());
 			if(this.intersectionResult != null && this.intersectionResult.isEmpty()) {
 				// Se l'intersezione dei risultati ha già dato esito vuoto, interrompi il ciclo
 				break;
 			}
 			else {
 				try {
+					System.out.println("   field value   " + wishPath.getFieldValue(f));
 					Object obj = wishPath.getFieldValue(f);
 					if (obj != null) {
+						/*
 						// Coverte il nome del field
 						fieldName = convertFieldName(f.getName());
+						*/
 						// Prende il tipo del Field
 						Class<?> type = f.getType();
-						List<MountainPath> returnValue = searchMountainPathByFilter(obj,fieldName,type);
+						
+						//List<MountainPath> returnValue = searchMountainPathByFilter(obj,fieldName,type);
+						List<MountainPath> returnValue = searchMountainPathByFilter(obj, f.getName(), type);
 						getResultsNameIntersection(returnValue);
 						
 						// Salva una sola volta il risultato, perchè comunque dovendo operare con l'intersezione di tutti 
@@ -50,8 +57,23 @@ public class AssistedResearchController extends Controller {
 							firstResult = returnValue;
 						}
 					}
-				} catch (NoSuchMethodException | SecurityException | IllegalArgumentException | IllegalAccessException
-						| InvocationTargetException | SystemException e) {
+				} catch (NoSuchMethodException e) {
+					System.out.println(1);
+					throw new SystemException();
+				} catch (SecurityException e) {
+					System.out.println(2);
+					throw new SystemException();
+				} catch (IllegalArgumentException e) {
+					System.out.println(3);
+					throw new SystemException();
+				} catch (IllegalAccessException e) {
+					System.out.println(4);
+					throw new SystemException();
+				} catch (InvocationTargetException e) {
+					System.out.println(5);
+					throw new SystemException();
+				} catch (SystemException e) {
+					System.out.println(6);
 					throw new SystemException();
 				}
 			}
@@ -59,18 +81,21 @@ public class AssistedResearchController extends Controller {
 		}
 		return getMountainPathIntersection(firstResult);
 	}
+
 	
 	@SuppressWarnings("unchecked")
-	private List<MountainPath> searchMountainPathByFilter(Object obj, String fieldName, Class<?> type) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, SystemException{
+	private List<MountainPath> searchMountainPathByFilter(Object obj, String fieldName, Class<?> type) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, SystemException {
 		List<MountainPath> returnValue;
 		if (type == String[].class) {
 			returnValue = searchFilterInAList((Object[]) obj, fieldName);
+			System.out.println("tutto okay if");
 		} else {
 			// Prende il metodo del mountainPathDao per effettuare la ricerca per filtro
 			Method m = mountainPathDao.getClass().getDeclaredMethod("searchMountainPathbyFilter",
 					new Class<?>[] { String.class, type });
 			// Invoca il metodo
-			returnValue = (List<MountainPath>) m.invoke(mountainPathDao,fieldName,obj);
+			returnValue = (List<MountainPath>) m.invoke(mountainPathDao, fieldName, obj);
+			System.out.println("tutto okay else");
 		}
 		return returnValue;
 
@@ -101,7 +126,6 @@ public class AssistedResearchController extends Controller {
 						firstResult.remove(path);
 						break;
 					}
-						
 				}
 			}
 		}	
@@ -126,7 +150,7 @@ public class AssistedResearchController extends Controller {
 	
 	// Ritorna il numero di possibili valori per l'enum associato al filterName
 	private int getPossibilitiesSize(String filterName) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, SystemException {
-		String enumClassName = "logic.model.enums." + filterName.substring(0,1).toUpperCase() + filterName.substring(1) + "Enum";
+		String enumClassName = "logic.model.enums." + StandardName.standardizeName(filterName) + "Enum";
 		int size = 0;
 		try {
 			// Prende l'Enum associato ad enumClassName
@@ -142,17 +166,7 @@ public class AssistedResearchController extends Controller {
 		    }
 		return size;
 	}
-	// NON SO SE E' CORRETTO QUI O DEVE ANDARE NEL DAO
-	private String convertFieldName(String name) {
-		String newName;
-		if(name.equals("city") || name.equals("region") || name.equals("province"))
-			newName = "location/" + name;
-		else if(name.equals("hours") || name.equals("minutes"))
-			newName = "travelTime/" + name;
-		else newName = name;
-		
-		return newName;
-	}
+	
 
 	@Override
 	public void setNextPageId(String action) {
