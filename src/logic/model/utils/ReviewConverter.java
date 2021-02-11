@@ -4,6 +4,10 @@ import logic.bean.ReviewBean;
 import logic.model.Review;
 
 public class ReviewConverter {
+	
+	private ReviewConverter() {
+		// Costruttore privato per classe di utils con solo metodi statici
+	}
 
 	public static ReviewBean getReviewBean(Review review) {
 		ReviewBean bean = new ReviewBean();

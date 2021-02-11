@@ -6,6 +6,10 @@ import java.util.List;
 
 public class Sorter {
 	
+	private Sorter() {
+		// Costruttore privato per classe di utils con solo metodi statici
+	}
+	
 	public static List<MountainPath> sortByVoteAndNumber(List<MountainPath> pathList) {
 		pathList.sort(Comparator.comparing(MountainPath::getVote).thenComparing(MountainPath::getNumberOfVotes).reversed());
 		return pathList;

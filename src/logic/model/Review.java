@@ -2,38 +2,27 @@ package logic.model;
 
 public class Review {
 	
-	private String pathName;
+	private String mountainPathName;
 	private Integer vote;
 	private String title;
 	private String comment;
 	private String authorUsername;
 	
-	public Review() {
-		
-	}
 	
-	public String getPathName() {
-		return pathName;
-	}
-
-	public void setPathName(String pathName) {
-		this.pathName = pathName;
-	}
-
-	public Integer getVote() {
-		return vote;
-	}
-
-	public void setVote(Integer vote) {
-		this.vote = vote;
-	}
-
 	public String getTitle() {
 		return title;
 	}
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	
+	public String getPathName() {
+		return mountainPathName;
+	}
+
+	public void setPathName(String pathName) {
+		this.mountainPathName = pathName;
 	}
 
 	public String getComment() {
@@ -50,6 +39,13 @@ public class Review {
 
 	public void setAuthor(String author) {
 		this.authorUsername = author;
+	}
+	public Integer getVote() {
+		return vote;
+	}
+
+	public void setVote(Integer vote) {
+		this.vote = vote;
 	}
 	
 }

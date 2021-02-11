@@ -13,6 +13,10 @@ import logic.model.enums.GroundEnum;
 import logic.model.enums.LandscapeEnum;
 
 public class MountainPathConverter {
+	
+	private MountainPathConverter() {
+		// Costruttore privato per classe di utils con solo metodi statici
+	}
 
 	public static MountainPathBean getMountainPathBean(MountainPath path) {
 		MountainPathBean bean = new MountainPathBean();

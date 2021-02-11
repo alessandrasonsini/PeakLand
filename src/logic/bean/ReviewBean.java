@@ -2,7 +2,7 @@ package logic.bean;
 
 public class ReviewBean extends ItemBean {
 	
-	private String mountainPathName;
+	private String pathName;
 	private Integer vote;
 	private String title;
 	private String comment;
@@ -10,11 +10,11 @@ public class ReviewBean extends ItemBean {
 	
 	
 	public String getPathName() {
-		return mountainPathName;
+		return pathName;
 	}
 
 	public void setPathName(String pathName) {
-		this.mountainPathName = pathName;
+		this.pathName = pathName;
 	}
 
 	public Integer getVote() {

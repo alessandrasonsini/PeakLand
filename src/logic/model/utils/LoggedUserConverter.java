@@ -6,6 +6,10 @@ import logic.model.enums.UserLevel;
 
 public class LoggedUserConverter {
 	
+	private LoggedUserConverter() {
+		// Costruttore privato per classe di utils con solo metodi statici
+	}
+	
 	public static LoggedUserBean getLoggedUserBean(LoggedUser user) {
 		LoggedUserBean bean = new LoggedUserBean();
 		bean.setName(user.getName());
