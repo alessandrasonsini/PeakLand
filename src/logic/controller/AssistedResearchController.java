@@ -24,13 +24,11 @@ public class AssistedResearchController extends Controller {
 	
 	public List<MountainPath> searchMountainPathByFilters(MountainPathBean wishPath) throws SystemException {
 		this.intersectionResult = null;
-		//String fieldName;
 		List<MountainPath> firstResult = null;
 		// Chiama il metodo della bean che restituisce tutti i suoi Fields tramite la reflection
 		Field[] fields = wishPath.getFields();
 
 		for (Field f : fields) {
-			System.out.println("----- field ----- " + f.getName());
 			if(this.intersectionResult != null && this.intersectionResult.isEmpty()) {
 				// Se l'intersezione dei risultati ha già dato esito vuoto, interrompi il ciclo
 				break;
@@ -40,14 +38,10 @@ public class AssistedResearchController extends Controller {
 					System.out.println("   field value   " + wishPath.getFieldValue(f));
 					Object obj = wishPath.getFieldValue(f);
 					if (obj != null) {
-						/*
-						// Coverte il nome del field
-						fieldName = convertFieldName(f.getName());
-						*/
+						
 						// Prende il tipo del Field
 						Class<?> type = f.getType();
 						
-						//List<MountainPath> returnValue = searchMountainPathByFilter(obj,fieldName,type);
 						List<MountainPath> returnValue = searchMountainPathByFilter(obj, f.getName(), type);
 						getResultsNameIntersection(returnValue);
 						
@@ -57,25 +51,10 @@ public class AssistedResearchController extends Controller {
 							firstResult = returnValue;
 						}
 					}
-				} catch (NoSuchMethodException e) {
-					System.out.println(1);
+				} catch (NoSuchMethodException | SecurityException | IllegalArgumentException | IllegalAccessException |
+						InvocationTargetException | SystemException e) {
 					throw new SystemException();
-				} catch (SecurityException e) {
-					System.out.println(2);
-					throw new SystemException();
-				} catch (IllegalArgumentException e) {
-					System.out.println(3);
-					throw new SystemException();
-				} catch (IllegalAccessException e) {
-					System.out.println(4);
-					throw new SystemException();
-				} catch (InvocationTargetException e) {
-					System.out.println(5);
-					throw new SystemException();
-				} catch (SystemException e) {
-					System.out.println(6);
-					throw new SystemException();
-				}
+				} 
 			}
 			
 		}

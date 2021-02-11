@@ -21,6 +21,9 @@ public class LoggedUser {
 		this.level = UserLevel.SOFAMAN;
 		this.favouritesMountainPath = new ArrayList<>();
 		this.name = "";
+		this.surname = "";
+		this.description = "";
+		this.username = "";
 	}
 	
 	public LoggedUser(String username) {

@@ -1,11 +1,14 @@
 package logic.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import logic.bean.SimpleMountainPathBean;
 import logic.controller.utils.CurrentLoggedUsers;
 import logic.model.LoggedUser;
+import logic.model.MountainPath;
 import logic.model.Sorter;
 import logic.model.dao.MountainPathDao;
+import logic.model.utils.MountainPathConverter;
 
 public class HomeController extends Controller {
 
@@ -34,11 +37,29 @@ public class HomeController extends Controller {
 	
 	// Restituisce i 10 percorsi con voti più alti
 	private List<SimpleMountainPathBean> getTopTen() {
-		return Sorter.sortByVoteAndNumber(mountainPathDao.getPaths());
+		List<SimpleMountainPathBean> topTenList = new ArrayList<>();
+		SimpleMountainPathBean bean;
+		List<MountainPath> sorterResult = Sorter.sortByVoteAndNumber(mountainPathDao.getPaths());
+		for (int i = 0; i < 10; i++ ) {
+			bean = MountainPathConverter.getSimpleMountainPath(sorterResult.get(i));
+			bean.setRankPosition(i+1);
+			topTenList.add(bean);
+		}
+		
+		return topTenList;
 	}
 	
 	private List<SimpleMountainPathBean> getTopByFavorites() {
-		return Sorter.sortByFavorites(mountainPathDao.getPaths());
+		List<SimpleMountainPathBean> topByFavoritesList = new ArrayList<>();
+		SimpleMountainPathBean bean;
+		List<MountainPath> sorterResult = Sorter.sortByFavorites(mountainPathDao.getPaths());
+		for (int i = 0; i < 10; i++ ) {
+			bean = MountainPathConverter.getSimpleMountainPath(sorterResult.get(i));
+			bean.setRankPosition(i+1);
+			topByFavoritesList.add(bean);
+		}
+		
+		return topByFavoritesList;
 	}
 	
 	@Override

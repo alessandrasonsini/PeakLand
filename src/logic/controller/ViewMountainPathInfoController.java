@@ -34,7 +34,10 @@ public class ViewMountainPathInfoController extends Controller {
 	// effettuare la ricerca nel DB
 	public List<SimpleMountainPathBean> searchMountainPathByName(String name) {
 		List<MountainPath> resultList = searchController.searchMountainPathByPartialName(name);
-		this.searchResults = Sorter.sortByVote(resultList);
+		resultList = Sorter.sortByVote(resultList);
+		for(MountainPath path : resultList) {
+			this.searchResults.add(MountainPathConverter.getSimpleMountainPath(path));
+		}
 		return this.searchResults;
 	}
 	
@@ -91,6 +94,7 @@ public class ViewMountainPathInfoController extends Controller {
 		this.searchResults = new ArrayList<>();
 		List<MountainPath> resultList;
 		resultList = this.assistedResearchController.searchMountainPathByFilters(wishPath);
+		resultList = Sorter.sortByVote(resultList);
 		for(MountainPath path : resultList) {
 			this.searchResults.add(MountainPathConverter.getSimpleMountainPath(path));
 		}

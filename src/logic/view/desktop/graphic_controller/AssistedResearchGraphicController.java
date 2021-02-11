@@ -149,10 +149,11 @@ public class AssistedResearchGraphicController extends GraphicController{
 			if(box.isSelected())
 				selected.add(box.getText().toUpperCase());
 		}
-		if(selected.isEmpty())
-			return new String[0];
-		else
-			return Arrays.copyOf(selected.toArray(), selected.size(), String[].class);
+		String[] resultArray = Arrays.copyOf(selected.toArray(), selected.size(), String[].class);
+		if(resultArray.length == 0) {
+			resultArray = null;
+		}
+		return resultArray;
 	}
 	
 	public ViewMountainPathInfoController getViewMountainPathInfoController() {

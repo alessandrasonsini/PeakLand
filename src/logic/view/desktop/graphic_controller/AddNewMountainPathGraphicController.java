@@ -129,6 +129,8 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 	
 	private List<CheckBox> ground;
 	private List<CheckBox> landscape;
+	
+	private String name;
 
 	public AddNewMountainPathGraphicController(Controller controller) {
 		super(controller);
@@ -144,6 +146,8 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 		if(getAddNewMountainPathController().checkName(txtName.getText())){
 			// Permette l'inserimento delle altre info
 			panePathInfo.setDisable(false);
+			this.name = txtName.getText();
+			
 		}
 		else {
 			// Disabilita l'inserimento di altre info
@@ -180,7 +184,7 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 	public void onSavePath(ActionEvent event) {
 		// Inizializza la bean con tutti i campi inseriti
 		MountainPathBean newPathBean = new MountainPathBean();
-		newPathBean.setName(txtName.getText());
+		newPathBean.setName(this.name);
 		newPathBean.setAltitude(Integer.parseInt(txtAltitude.getText()));
 		newPathBean.setRegion(txtRegion.getText());
 		newPathBean.setProvince(txtProvince.getText());

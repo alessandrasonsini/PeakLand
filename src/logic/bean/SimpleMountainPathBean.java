@@ -13,11 +13,10 @@ public class SimpleMountainPathBean extends ItemBean {
 	protected Integer minutes;
 	protected Integer vote;
 	protected Integer numberOfVotes;
-	private Integer rankPosition; 
+	protected Integer rankPosition; 
 	//private image
 	
 	public SimpleMountainPathBean() {
-		this.rankPosition = 0;
 	}
 	
 	public String getRegion() {

@@ -78,7 +78,7 @@ public class SimpleMountainPathItem extends ShowableElement {
         lbVotes.setText(numberOfVotes.toString());
         if(vote > 0)
         	setStarVote(vote);
-        if(position>0)
+        if(position != null)
         	lbRankPosition.setText(position.toString() +")");
     }
 
