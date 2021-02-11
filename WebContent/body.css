@@ -30,6 +30,10 @@ html, body {
 	margin-top: 3%;
 }
 
+.card-view-simple-path-no-margin {
+	background-color: #CCE3C9;
+}
+
 .img-responsive {
 	display: inline-block;
 	margin-left: auto;
@@ -186,3 +190,7 @@ html, body {
     height: 80px;
     margin-left: 50%;
 } 
+
+.bold-text {
+	font-weight: bold;
+}

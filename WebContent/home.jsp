@@ -10,7 +10,6 @@
 	HomeController controller = new HomeController();
 	List<SimpleMountainPathBean> topTen;
 	String userName;
-	//List<SimpleMountainPathBean> topByFavorites;
 %>
 <%
 	topTen = controller.getClassification((Integer)session.getAttribute("sessionId"));
@@ -89,75 +88,81 @@
 								</div>
 							</div>
 						</div>
+						<div class="container">
 						<%
-						int index = 0;
 						for (SimpleMountainPathBean bean : topTen) {
-							index++;
 							%>
-							<div class="container">
 							<button type="submit" class="btn" name="path" value="<%=bean.getName()%>" style="min-width: 100%;">
-								<div class="row w-100 card-view-simple-path">
-									<div class="row align-items-center">
-										<div class="d-flex justify-content-start align-items-center">
-											<div class="ml-auto w-100 p-2 bd-highlight">
-												<div class="path-name-font" align="left" style="padding-left: 5%;"><%=index%>.&nbsp;&nbsp;<%=bean.getName()%></div>
-											</div>
-											<div class="mr-auto p-2 bd-highlight" style="padding-left: 5%;">
-												<div class="d-flex justify-content-start align-items-center">
-													Vote: 
-													<%	if (bean.getVote() != 0) {
-						  									for(int i = 0; i < bean.getVote(); i++) {
-						  									%>
-							  								<div class="p-2 flex-item-stars-2">
-																<img src="Images/star.png" class="icon-star">
-															</div>
-															<%
-						  									}
-					  									}
-					  									else {
-					  										%>
-					  										<div class="p-2 black-text text-nowrap"><%=bean.convertToText(bean.getVote())%></div>
-					  										<%
-					  									}
-													%>
-												</div>
-											</div>
-											<div class="mr-auto p-3 bd-highlight text-nowrap">
-												<div>Number of votes: <%=bean.getNumberOfVotes()%></div>
-											</div>
-										</div>
-									</div>
-									<div class="row align-items-center" style="padding-left: 3%; padding-bottom: 1%;">
-										<div class="col-3 align-items-center">
-											<!-- inserire recupero immagine dal DB -->
+								<div class="row card-view-simple-path-no-margin rounded">
+									<div class="col-3" style="padding-top: 2%;">
+										<!-- inserire recupero immagine dal DB -->
+										<div class="row-fill justify-content-center align-items-center">
 											<div class="d-flex justify-content-center align-items-center">
 												<div class="p-2 flex-item-search-photo">
 													<img src="Images/mountain_path.png" class="img-responsive photo">
 												</div>
 											</div>
 										</div>
-										<div class="col-4 align-middle" style="vertical-align: middle;" align="center">
-											<div class="row justify-content-center align-self-center">Location</div>
-											<div class="row justify-content-center"><%= bean.getRegion() %></div>
-											<div class="row justify-content-center"><%= bean.getProvince() %></div>
-											<div class="row justify-content-center"><%= bean.getCity() %></div>
+									</div>
+									<div class="col-9">
+										<div class="row justify-content-center" style="padding-bottom: 1%; padding-top:1%">
+											
+											<div class="d-flex justify-content-start align-items-center">
+											<div class="ml-auto w-100 p-2 bd-highlight">
+												<div class="path-name-font" align="left" style="padding-left: 5%;"><%=bean.getRankPosition()%>.  <%=bean.getName()%></div>
+											</div>
+											<div class="mr-auto p-2 bd-highlight" style="padding-left: 5%;">
+												<div class="d-flex justify-content-start align-items-center">
+													<div class="bold-text">Vote:</div>
+													<%	if (bean.getVote() != 0) {
+															for(int i = 0; i < bean.getVote(); i++) {
+															%>
+															<div class="p-2 flex-item-stars-2">
+															<img src="Images/star.png" class="icon-star">
+														</div>
+														<%
+															}
+														}
+														else {
+															%>
+															<div class="p-2 black-text text-nowrap"><%=bean.convertToText(bean.getVote())%></div>
+															<%
+														}
+													%>
+												</div>
+											</div>
+											<div class="p-3 bd-highlight text-nowrap">
+												<div class="bold-text">Num of votes:</div> <%=bean.getNumberOfVotes()%>
+											</div>
 										</div>
-										<div class="col-4 align-middle" style="vertical-align: middle;" align="center">
-											<div class="row justify-content-center align-self-center">Difficulty level</div>
-											<div class="row justify-content-center align-self-center"><%= bean.getLevel() %></div>
+										
+										
+										</div>
+										<div class="row" style="padding-bottom: 2%;">
+											<div class="col-4" align="center" style="padding-bottom: 1%;">
+												<div class="row justify-content-center bold-text">Location</div>
+												<div class="row justify-content-center"><%= bean.getRegion() %></div>
+												<div class="row justify-content-center"><%= bean.getProvince() %></div>
+												<div class="row justify-content-center"><%= bean.getCity() %></div>
+											</div>
+											<div class="col-4" align="center">
+												<div class="row justify-content-center bold-text">Difficulty level</div>
+												<div class="row justify-content-center"><%= bean.getLevel() %></div>
+											</div>
+											<div class="col-4" align="center">
+												<div class="row justify-content-center bold-text">Travel Time</div>
+												<div class="row justify-content-center"><%= bean.convertToText(bean.getHours()) %>:<%= bean.convertToText(bean.getMinutes()) %></div>
+											</div>
 										</div>
 									</div>
 								</div>
 							</button>
-							</div>
 							<%
 						}
-					%></form><%
+					%></div></form><%
 					topTen.clear();
 				}
-					%>
-					
-				<br>
+				%>
 			</div>
 		</div>
 		

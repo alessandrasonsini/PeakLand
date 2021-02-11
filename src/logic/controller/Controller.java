@@ -11,7 +11,6 @@ public abstract class Controller {
 		setNextPageId("init");
 	}
 	
-	
 	// Costruisce il prossimo controller da istanziare per eseguire l'azione
 	// chiamata
 	public Controller executeAction(PageId action) throws SystemException {

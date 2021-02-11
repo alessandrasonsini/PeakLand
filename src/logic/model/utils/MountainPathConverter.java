@@ -33,9 +33,8 @@ public class MountainPathConverter {
 		bean.setAltitude(path.getAltitude());
 		
 		String[] landscape = new String[path.getLandscape().size()];
-		for (int i = 0; i < path.getLandscape().size(); i++) {
+		for (int i = 0; i < path.getLandscape().size(); i++)
 			landscape[i] = path.getLandscape().get(i).toString();
-		}
 		bean.setLandscape(landscape);
 		
 		String[] ground = new String[path.getGround().size()];
@@ -71,29 +70,59 @@ public class MountainPathConverter {
 	public static MountainPath getMountainPath(MountainPathBean bean) {
 		MountainPath path = new MountainPath();
 		path.setName(bean.getName());
-		path.setAltitude(bean.getAltitude());
-		path.setLocation(new Location(bean.getRegion(), bean.getProvince(), bean.getCity()));
-		path.setLenght(bean.getLenght());
-		path.setLevel(DifficultyLevelEnum.valueOf(bean.getLevel()));
 		
-		List<LandscapeEnum> landscape = new ArrayList<>();
-		for (String str : bean.getLandscape()) {
-			landscape.add(LandscapeEnum.valueOf(str));
+		if (path.getAltitude() != null)
+			path.setAltitude(bean.getAltitude());
+		
+		Location loc = new Location();
+		if (bean.getRegion() != null)
+			loc.setRegion(bean.getRegion());
+		if (bean.getProvince() != null)
+			loc.setProvince(bean.getProvince());
+		if (bean.getCity() != null)
+			loc.setCity(bean.getCity());
+		path.setLocation(loc);
+		
+		if (bean.getLenght() != null)
+			path.setLenght(bean.getLenght());
+		
+		if (bean.getLevel() != null)
+			path.setLevel(DifficultyLevelEnum.valueOf(bean.getLevel()));
+		
+		if (bean.getLandscape() != null) {
+			List<LandscapeEnum> landscape = new ArrayList<>();
+			for (String str : bean.getLandscape()) {
+				landscape.add(LandscapeEnum.valueOf(str));
+			}
+			path.setLandscape(landscape);
 		}
-		path.setLandscape(landscape);
 		
-		List<GroundEnum> ground = new ArrayList<>();
-		for (String str : bean.getGround()) {
-			ground.add(GroundEnum.valueOf(str));
+		if (bean.getGround() != null) {
+			List<GroundEnum> ground = new ArrayList<>();
+			for (String str : bean.getGround()) {
+				ground.add(GroundEnum.valueOf(str));
+			}
+			path.setGround(ground);
 		}
-		path.setGround(ground);
 		
-		path.setCycleble(bean.isCycleble());
-		path.setHistoricalElements(bean.isHistoricalElements());
-		path.setFamilySuitable(bean.isFamilySuitable());
-		path.setTravelTime(new Time(bean.getHours(), bean.getMinutes()));
-		path.setNumberOfVotes(bean.getNumberOfVotes());
-		path.setVote(bean.getVote());
+		if (bean.isCycleble() != null)
+			path.setCycleble(bean.isCycleble());
+		if (bean.isHistoricalElements() != null)
+				path.setHistoricalElements(bean.isHistoricalElements());
+		if (bean.isFamilySuitable() != null)
+			path.setFamilySuitable(bean.isFamilySuitable());
+		
+		Time time = new Time();
+		if (bean.getMinutes() != null)
+			time.setMinutes(bean.getMinutes());
+		if (bean.getHours() != null)
+			time.setHours(bean.getHours());
+		path.setTravelTime(time);
+		
+		if (bean.getNumberOfVotes() != null)
+			path.setNumberOfVotes(bean.getNumberOfVotes());
+		if (bean.getVote() != null)
+			path.setVote(bean.getVote());
 		
 		return path;
 	}

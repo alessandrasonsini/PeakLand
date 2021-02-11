@@ -25,7 +25,7 @@ public class HomeController extends Controller {
 	public String getCurrentUserName() {
 		return this.currentUserName;
 	}
-	
+
 	public List<SimpleMountainPathBean> getClassification(Integer userId){
 		if(userId != null) {
 			LoggedUser currentUser = CurrentLoggedUsers.getInstance().getCurrentLoggedUser(userId);

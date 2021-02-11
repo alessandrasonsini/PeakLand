@@ -12,7 +12,7 @@ public class MainController extends Controller {
 	public MainController(){
 		super();
 	}
-	
+
 	// Controlla se è necessario che parta il login oppure no
 	public PageId onActionRequired(PageId actionId, Integer sessionId) {
 		PageId actionToExecute;

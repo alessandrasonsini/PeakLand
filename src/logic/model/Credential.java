@@ -1,5 +1,7 @@
 package logic.model;
 
+import logic.model.exception.EmptyMandatoryFieldsException;
+
 public class Credential {
 	private String username;
 	private String password;
@@ -28,18 +30,22 @@ public class Credential {
 		this.password = password;
 	}
 	
-	public boolean verifyCredential(Credential credential) {
+	public boolean verifyCredential(Credential credential) throws EmptyMandatoryFieldsException {
 		Boolean verified;
-		// Controlla se lo username esiste
-		if(credential != null) {
-			// Controlla se la password corrisponde
-			if(this.password.equals(credential.getPassword()))
-				verified = true;
+		try {
+			// Controlla se lo username esiste
+			if(credential != null) {
+				// Controlla se la password corrisponde
+				if(this.password.equals(credential.getPassword()))
+					verified = true;
+				else verified = false;
+			}
 			else verified = false;
+			
+			return verified;
+		} catch (Exception e) {
+			throw new EmptyMandatoryFieldsException();
 		}
-		else verified = false;
-		
-		return verified;
 	}
 	
 }

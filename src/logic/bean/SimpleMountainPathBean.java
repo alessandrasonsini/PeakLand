@@ -18,8 +18,7 @@ public class SimpleMountainPathBean extends ItemBean {
 	protected Integer numberOfVotes;
 	protected Integer rankPosition; 
 	protected ByteArrayInputStream image;
-	
-	
+
 	public ByteArrayInputStream getImage() {
 		return image;
 	}
@@ -89,7 +88,7 @@ public class SimpleMountainPathBean extends ItemBean {
 	public Integer getMinutes() {
 		return minutes;
 	}
-
+	
 	public void setMinutes(Integer minutes) {
 		this.minutes = minutes;
 	}

@@ -54,7 +54,7 @@ public class AddNewMountainPathController extends Controller {
 	public void saveNewMountainPath(MountainPathBean newPathBean, Integer sessionId) throws DatabaseException, SystemException {
 		// A partire dalla bean, prende l'entità mountain path da salvare
 		MountainPath newMountainPath = MountainPathConverter.getMountainPath(newPathBean);
-		
+	
 		// Invoca il metodo del dao per salvare il mountain path sul db e le immagini inserite
 		MountainPathDao mountainPathDao = new MountainPathDao();
 		mountainPathDao.saveNewMountainPathOnDB(newMountainPath);

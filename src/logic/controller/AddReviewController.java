@@ -19,7 +19,7 @@ public class AddReviewController extends Controller {
 		this.reviewDao = new ReviewDao();
 		this.mountainPathDao = new MountainPathDao();
 	}
-	
+
 	public void saveReview(ReviewBean reviewBean) throws DatabaseException {
 		Review review = ReviewConverter.getReview(reviewBean);
 		reviewDao.saveNewReviewOnDb(review);

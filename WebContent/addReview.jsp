@@ -1,5 +1,6 @@
 <%@page import="logic.controller.AddNewMountainPathController"%>
 <%@page import="logic.controller.utils.CurrentLoggedUsers"%>
+<%@page import="logic.model.exception.DatabaseException"%>
 <%@ page language="java" session="true" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -56,25 +57,31 @@
 				
 				<%
 				if (request.getParameter("addReviewBtn") != null) {
-					
-					//review.setPathName(((String) session.getAttribute("name")));
-					review.setVote(vote);
-					//review.setAuthor(CurrentLoggedUsers.getInstance()
-					//		.getCurrentLoggedUser((Integer)session.getAttribute("sessionId")).getUsername());
-					controller.saveReview(review,(Integer)session.getAttribute("sessionId"));
+					try {
+						review.setVote(vote);
+						controller.saveReview(review,(Integer)session.getAttribute("sessionId"));
+						%>
+						<div class="container" style="padding-top: 3%;">
+							<div class="alert alert-success alert-dismissible fade show" role="alert">
+								<strong>Review added successfully!</strong>
+							  	<a href="#" class="close" style="float: right;" data-dismiss="alert" aria-label="close">&times;</a>
+							</div>
+						</div>
+						<%
+					} catch(DatabaseException e) {
+						%>
+						<div class="container" style="padding-top: 3%;">
+							<div class="alert alert-danger alert-dismissible fade show" role="alert">
+								<strong>Database error</strong>Ops, there was an error connecting to database. Retry later
+							  	<a href="#" class="close" style="float: right;" data-dismiss="alert" aria-label="close">&times;</a>
+							</div>
+						</div>
+						<%
+					}
 					session.removeAttribute("name");
-					//vedere se metterlo qui o dopo l'alert
 					session.removeAttribute("vote");
 					
 					
-					%>
-					<div class="container" style="padding-top: 3%;">
-						<div class="alert alert-success alert-dismissible fade show" role="alert">
-							<strong>Review added successfully!</strong>
-						  	<a href="#" class="close" style="float: right;" data-dismiss="alert" aria-label="close">&times;</a>
-						</div>
-					</div>
-					<%
 					
 				}
 				%>

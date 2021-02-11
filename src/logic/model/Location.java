@@ -17,6 +17,7 @@ public class Location {
 		
 	}
 	
+	
 	public String getRegion() {
 		return region;
 	}

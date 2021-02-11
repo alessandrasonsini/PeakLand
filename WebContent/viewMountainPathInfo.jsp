@@ -18,36 +18,39 @@
 	int currImgNum = -1;
 	boolean disablePrev = true;
 	boolean disableNext = true;
-	String nextPageName;
+	String next;
 	
 	private String getNextPageName() {
 		switch(controller.getNextPageId()) {
 		case SEARCH: 
-			nextPageName = "searchPath.jsp";
+			next = "searchPath.jsp";
 			break;
 		case ADD_PATH: 
-			nextPageName = "addNewPath.jsp";
+			next = "addNewPath.jsp";
 			break;	
 		case VIEW_INFO: 
-			nextPageName = "viewMountainPathInfo.jsp";
+			next = "viewMountainPathInfo.jsp";
 			break;		
 		case LOGIN:
-			nextPageName = "login.jsp";
+			next = "login.jsp";
 			break;
 		case ASSISTED_RESEARCH:
-			nextPageName = "assistedResearch.jsp";
+			next = "assistedResearch.jsp";
 			break;
 		case PROFILE:
-			nextPageName = "profile.jsp";
+			next = "profile.jsp";
 			break;	
 		case ADD_REVIEW:
-			nextPageName = "addReview.jsp";
+			next = "addReview.jsp";
 			break;
 		case VIEW_REVIEWS:
-			nextPageName = "viewReviews.jsp";
+			next = "viewReviews.jsp";
+			break;
+		default:
+			next = "";
 			break;
 		}
-		return nextPageName;
+		return next;
 	}
 %>
 <jsp:useBean id="review" scope="request" class="logic.bean.ReviewBean"/>
@@ -134,20 +137,20 @@
 						</div>
 						<div class="row mx-auto" style="padding-top: 30%;">
 							<div class="col-5" align="center">
-								<%=path.getRegion()%>
+								<%=path.convertToText(path.getRegion())%>
 							</div>
 							<div class="col" align="center">-</div>
 							<div class="col-5" align="center">
-								<%=path.getProvince()%>
+								<%=path.convertToText(path.getProvince())%>
 							</div>
 						</div>
 						<div class="row mx-auto" style="padding-top: 5%;">
 							<div class="col" align="center">
-								<%=path.getCity()%>
+								<%=path.convertToText(path.getCity())%>
 							</div>
 						</div>
 						
-						<div class="d-flex justify-content-between align-items-center" style="padding-top: 15%;">
+						<div class="d-flex justify-content-center align-items-center" style="padding-top: 15%;">
 							<div class="p-2 flex-item-photos">
 								<% if (!base64.isEmpty()) { %>
 									<img src="data:image/png;base64,<%=base64.get(0)%>" class="img-responsive photo">
@@ -178,31 +181,33 @@
 							
 							<div class="container">
 								<div class="row">
-									<p class="green-text">Altitude:&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=path.convertToText(path.getAltitude()) %></span></p>
+									<p class="green-text">Altitude&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=path.convertToText(path.getAltitude()) %></span></p>
 								</div>
 								<div class="row">
-									<p class="green-text">Lenght:&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=path.convertToText(path.getLenght())%></span></p>
+									<p class="green-text">Lenght&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=path.convertToText(path.getLenght())%></span></p>
 								</div>
 								<div class="row">
 									<p class="green-text">Level&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=path.convertToText(path.getLevel())%></span></p>
 								</div>
 								<div class="row">
-									<p class="green-text">Landscape:&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=path.convertToText(path.getLandscape())%></span></p>
+									<p class="green-text">Landscape&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=path.convertToText(path.getLandscape())%></span></p>
 								</div>
 								<div class="row">
-									<p class="green-text">Ground:&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=path.convertToText(path.getGround())%></span></p>
+									<p class="green-text">Ground&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=path.convertToText(path.getGround())%></span></p>
 								</div>
 								<div class="row">
-									<p class="green-text">Cycleable:&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=path.convertToText(path.isCycleble())%></span></p>
+									<p class="green-text">Cycleable&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=path.convertToText(path.isCycleble())%></span></p>
 								</div>
 								<div class="row">
-									<p class="green-text">Presence of historical elements:&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=path.convertToText(path.isHistoricalElements())%></span></p>
+									<p class="green-text">Presence of historical elements&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=path.convertToText(path.isHistoricalElements())%></span></p>
 								</div>
 								<div class="row">
-									<p class="green-text">Family suitable:&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=path.convertToText(path.isFamilySuitable())%></span></p>
+									<p class="green-text">Family suitable&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=path.convertToText(path.isFamilySuitable())%></span></p>
 								</div>
 								<div class="row">
-									<p class="green-text">Travel Time:&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=path.convertToText(path.getHours())%> : <%=path.convertToText(path.getMinutes())%></span></p>
+									<p class="green-text">Travel Time&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text">
+										<%=path.convertToText(path.getHours())%> : <%=path.convertToText(path.getMinutes())%>
+									</span></p>
 								</div>
 							</div>
 							<br>
@@ -294,7 +299,7 @@
 							
 							<div class="container" style="padding-left: 5%;">
 								<div class="row">
-									<p class="green-text">Number of votes:&nbsp;
+									<p class="green-text">Number of votes&nbsp;
 										<span class="black-text"><%=path.convertToText(path.getNumberOfVotes())%></span>
 									</p>
 								</div>

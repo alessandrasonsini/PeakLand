@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <AnchorPane BorderPane.alignment="CENTER">
          <children>
@@ -193,7 +193,6 @@
                               <Label fx:id="lbHistElements" layoutX="272.0" layoutY="403.0" text="hist elements" AnchorPane.leftAnchor="272.0" AnchorPane.topAnchor="403.0" />
                               <Label fx:id="lbFam" layoutX="161.0" layoutY="452.0" text="family" AnchorPane.leftAnchor="161.0" AnchorPane.topAnchor="452.0" />
                               <Label fx:id="lbTime" alignment="CENTER" layoutX="138.0" layoutY="502.0" prefHeight="17.0" prefWidth="60.0" text="hours" AnchorPane.leftAnchor="138.0" AnchorPane.topAnchor="502.0" />
-                              <Label layoutX="168.0" layoutY="502.0" text=":" AnchorPane.leftAnchor="168.0" AnchorPane.topAnchor="502.0" />
                               <Label fx:id="lbVotesNumber" layoutX="698.0" layoutY="485.0" text="number" />
                               <Label fx:id="lbVote" layoutX="635.0" layoutY="456.0" />
                               <Button fx:id="btnNextImg" layoutX="766.0" layoutY="289.0" mnemonicParsing="false" onAction="#onChangeImage" style="-fx-background-color: #FFFFFF;" visible="false" AnchorPane.leftAnchor="780.0" AnchorPane.topAnchor="295.0">

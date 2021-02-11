@@ -1,19 +1,20 @@
-<%@page import="com.google.api.Page"%>
 <%@page import="logic.model.enums.PageId"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List" %>
 <%@page import="logic.controller.MainController"%>
+<%@page import="logic.controller.Controller"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
 <%!
 	MainController mainController = new MainController();
-	List<String> actionList = List.of("Home", "View info", "Add path", "Profile");
 	String pageName = "home.jsp";
-	String nextAction = "";
-	String nextPage = "";
-	String btn = "";
+	String nextPageName = "";
+	
+	PageId nextAction;
+	PageId nextPage;
+	PageId btn;
 %>
 <%
 	if (session.getAttribute("mainController") != null)
@@ -22,9 +23,9 @@
 		session.setAttribute("mainController", mainController);
 	
 	if (session.getAttribute("btn") == null) 
-		session.setAttribute("btn", "Home");
+		session.setAttribute("btn", PageId.HOME);
 	else 
-		btn = (String) session.getAttribute("btn");
+		btn = (PageId) session.getAttribute("btn");	
 %>
 
 
@@ -52,22 +53,30 @@
 			
 			<form class="form" action="header.jsp" method="post">
 				<div class="row background-orange justify-content-between">
-					<div class="col-9">
+					<div class="col-10">
 						<ul class="nav navbar background-orange">
 							<li>
-								<button type="submit" name="Home" value="Home" class="btn btn-primary btn-nav" ${ sessionScope.btn eq "Home"  ? 'style="background-color: #f69155"' : ''}>Home</button>
+								<button type="submit" name="HOME" value="HOME" class="btn btn-primary btn-nav" ${ sessionScope.btn eq PageId.HOME  ? 'style="background-color: #f69155"' : ''}>Home</button>
 							<li>
-								<button type="submit" name="View info" value="View info" class="btn btn-primary btn-nav" ${ sessionScope.btn eq "View info"  ? 'style="background-color: #f69155"' : ''}>Search path</button>
+								<button type="submit" name="VIEW_INFO" value="VIEW_INFO" class="btn btn-primary btn-nav" ${ sessionScope.btn eq PageId.VIEW_INFO  ? 'style="background-color: #f69155"' : ''}>Search path e view info</button>
 							<li>
-								<button type="submit" name="Add path" value="Add path" class="btn btn-primary btn-nav" ${ sessionScope.btn eq "Add path"  ? 'style="background-color: #f69155"' : ''}>Add new path</button>
+								<button type="submit" name="ADD_PATH" value="ADD_PATH" class="btn btn-primary btn-nav" ${ sessionScope.btn eq PageId.ADD_PATH  ? 'style="background-color: #f69155"' : ''}>Add new path</button>
+							<li>
+								<button class="btn btn-primary btn-nav" disabled>Schedule path visit</button>
+							<li>
+								<button class="btn btn-primary btn-nav" disabled>Manage favourites</button>
+							<li>
+								<button class="btn btn-primary btn-nav" disabled>Manage visited paths</button>
+							<li>
+								<button class="btn btn-primary btn-nav" disabled>Manage your business</button>
 							</li>
 						</ul>
 					</div>
 					<div class="col-2">
 						<ul class="nav navbar background-orange">
 							<li>
-								<button type="submit" name="Profile" value="Profile" class="btn btn-primary btn-nav" ${ sessionScope.btn eq "Profile"  ? 'style="background-color: #f69155"' : ''}>
-									<img src="Images/icons8-male-user-64.png" width="44%">
+								<button type="submit" name="PROFILE" value="PROFILE" class="btn btn-primary btn-nav" style="float: right;" ${ sessionScope.btn eq PageId.PROFILE  ? 'style="background-color: #f69155"' : ''}>
+									<img src="Images/icons8-male-user-64.png" style="max-height: 25%; max-width: 30%;">
 								</button>
 							<li>
 						</ul>
@@ -77,56 +86,63 @@
 		</div>
 		
 		<%
-		for (String action : actionList) {
+		for (PageId action : PageId.values()) {
 			if (request.getParameter(action.toString()) != null && request.getAttribute("new") == null) {
 				session.setAttribute("btn", action);
-				nextPage = action.toString();
-				nextAction = mainController.onActionRequired(PageId.valueOf(nextPage), (Integer) session.getAttribute("sessionId"));
+				nextPage = action;
+				nextAction = mainController.onActionRequired(action, (Integer) session.getAttribute("sessionId"));
 				request.setAttribute("new", false);
 				break;
 			}
 		}
+		
 			
-		if (!nextPage.equals("")) {
+		if (nextPage != null) {
 			switch(nextAction) {
-				case "Login":
+				case LOGIN:
 					pageName = "login.jsp";
 					break;
-				case "View info":
+				case VIEW_INFO:
 					pageName = "searchPath.jsp";
 					break;
-				case "Add path":
+				case ADD_PATH:
 					pageName = "addNewPath.jsp";
 					break;
-				case "Profile":
+				case PROFILE:
 					pageName = "profile.jsp";
 					break;
-				case "Home":
+				case HOME:
 					pageName = "home.jsp";
+					break;
+				default:
+					pageName = null;
 					break;
 			}
 		
 			switch(nextPage) {
-				case "Login":
-					nextPage = "login.jsp";
+				case LOGIN:
+					nextPageName = "login.jsp";
 					break;
-				case "View info":
-					nextPage = "searchPath.jsp";
+				case VIEW_INFO:
+					nextPageName = "searchPath.jsp";
 					break;
-				case "Add path":
-					nextPage = "addNewPath.jsp";
+				case ADD_PATH:
+					nextPageName = "addNewPath.jsp";
 					break;
-				case "Profile":
-					nextPage = "profile.jsp";
+				case PROFILE:
+					nextPageName = "profile.jsp";
 					break;
-				case "Home":
-					nextPage = "home.jsp";
+				case HOME:
+					nextPageName = "home.jsp";
+					break;
+				default:
+					nextPageName = "";
 					break;
 			}
 		
 			%>
 			<jsp:forward page="<%=pageName%>">
-				<jsp:param name="nextPageId" value="<%=nextPage%>"/>
+				<jsp:param name="nextPageId" value="<%=nextPageName%>"/>
 			</jsp:forward>
 			<%
 		}

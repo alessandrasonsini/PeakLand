@@ -1,3 +1,7 @@
+<%@page import="java.io.ByteArrayInputStream"%>
+<%@page import="org.apache.commons.io.IOUtils"%>
+<%@page import="java.util.Base64"%>
+<%@page import="java.util.Base64.Encoder"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.io.ByteArrayInputStream"%>
 <%@page import="java.util.List" %>
@@ -10,42 +14,44 @@
 	List<SimpleMountainPathBean> beanList = new ArrayList<SimpleMountainPathBean>();
 	SimpleMountainPathBean selectedPath;
 	ViewMountainPathInfoController controller;
-	String nextPageName ="";
+	String next = "";
 	
 	private String getNextPageName() {
 		switch(controller.getNextPageId()) {
 			case SEARCH: 
-				nextPageName = "searchPath.jsp";
+				next = "searchPath.jsp";
 				break;
 			case ADD_PATH: 
-				nextPageName = "addNewPath.jsp";
+				next = "addNewPath.jsp";
 				break;	
 			case VIEW_INFO: 
-				nextPageName = "viewMountainPathInfo.jsp";
+				next = "viewMountainPathInfo.jsp";
 				break;		
 			case LOGIN:
-				nextPageName = "login.jsp";
+				next = "login.jsp";
 				break;
 			case ASSISTED_RESEARCH:
-				nextPageName = "assistedResearch.jsp";
+				next = "assistedResearch.jsp";
 				break;
 			case PROFILE:
-				nextPageName = "profile.jsp";
+				next = "profile.jsp";
 				break;	
 			case ADD_REVIEW:
-				nextPageName = "addReview.jsp";
+				next = "addReview.jsp";
 				break;
 			case VIEW_REVIEWS:
-				nextPageName = "viewReviews.jsp";
+				next = "viewReviews.jsp";
+				break;
+			default:
+				next = "";
 				break;
 		}
-		return nextPageName;
+		return next;
 	}
 %>
 <%
-	if (request.getParameter("viewInfoController") != null) {
+	if (request.getParameter("controller") != null)
 		controller = (ViewMountainPathInfoController) session.getAttribute("viewInfoController");
-	}
 	else {
 		controller = new ViewMountainPathInfoController();
 		session.setAttribute("viewInfoController", controller);
@@ -76,7 +82,7 @@
 		<div class="row fill">
 			<div class="col-3 background-orange">
 				<!-- form to insert path name to search -->
-				<form class="form-inline search-form" action="searchPath.jsp" method="post">
+				<form class="form-inline search-form" id="myForm" action="searchPath.jsp" method="post">
 					<div class="d-flex">
 						<input type="text" class="form-control" name="pathName" placeholder="Search for a path...">
 						<button type="submit" class="btn"><img src="Images/icons8-search-52.png" width="50%"></button>
@@ -107,42 +113,89 @@
 					if (request.getParameter("pathName") != null) {
 						beanList.clear();
 						beanList.addAll(controller.searchMountainPathByName(request.getParameter("pathName")));
+						if (beanList.isEmpty()) {
+							%>
+							<div class="row justify-content-center" style="padding-top:10%">No matches found</div><%
+						}
 					}
 					else {
 						beanList.addAll(controller.getPreviousSearchResults());
 					}
 					
-					for(SimpleMountainPathBean bean : beanList)	{
+						for(SimpleMountainPathBean bean : beanList)	{
 						%>
 						<div class="container">
 							<button type="submit" class="btn" name="path" value="<%=bean.getName()%>" style="min-width: 100%;">
-								<div class="row card-view-simple-path">
-									<div class="col-3">
+								<div class="row card-view-simple-path rounded">
+									<div class="col-3 align-items-center">
 										<!-- inserire recupero immagine dal DB -->
-										<div class="d-flex justify-content-center align-items-center">
-											<div class="p-2 flex-item-search-photo">
-												<img src="Images/mountain_path.png" class="img-responsive photo">
+										<div class="row-fill justify-content-center align-items-center" style="min-height: 100%; display: flex; align-items: center;">
+											<div class="d-flex justify-content-center align-items-center">
+												<div class="p-2 flex-item-search-photo">
+													<%
+													ByteArrayInputStream stream = bean.getImage();
+													byte[] bytes = IOUtils.toByteArray(stream);
+													String base64 = Base64.getEncoder().encodeToString(bytes);
+													if (base64.isEmpty()) {
+													%>
+													<img src="Images/mountain_path.png" class="img-responsive photo">
+													<%
+													} else {%>
+														<img src="data:image/jpeg;base64,<%=base64%>" class="img-responsive photo">
+													<% } %>
+												</div>
 											</div>
 										</div>
 									</div>
 									<div class="col-9">
 										<div class="row justify-content-center" style="padding-bottom: 1%; padding-top:1%">
-											<span class="path-name-font"><%=bean.getName()%></span>
+											
+											<div class="d-flex justify-content-start align-items-center">
+											<div class="ml-auto w-100 p-2 bd-highlight">
+												<div class="path-name-font" align="left" style="padding-left: 5%;"><%=bean.getName()%></div>
+											</div>
+											<div class="mr-auto p-2 bd-highlight" style="padding-left: 5%;">
+												<div class="d-flex justify-content-start align-items-center">
+													<div class="bold-text">Vote:</div>
+													<%	if (bean.getVote() != 0) {
+						  									for(int i = 0; i < bean.getVote(); i++) {
+						  									%>
+							  								<div class="p-2 flex-item-stars-2">
+																<img src="Images/star.png" class="icon-star">
+															</div>
+															<%
+						  									}
+					  									}
+					  									else {
+					  										%>
+					  										<div class="p-2 black-text text-nowrap"><%=bean.convertToText(bean.getVote())%></div>
+					  										<%
+					  									}
+													%>
+												</div>
+											</div>
+											<div class="p-3 bd-highlight text-nowrap">
+												<div class="bold-text">Num of votes:</div> <%=bean.convertToText(bean.getNumberOfVotes())%>
+											</div>
 										</div>
-										<div class="row">
+										
+										
+										
+										</div>
+										<div class="row" style="padding-bottom: 2%;">
 											<div class="col-4" align="center" style="padding-bottom: 1%;">
-												<div class="row justify-content-center">Location</div>
-												<div class="row justify-content-center"><%= bean.getRegion() %></div>
-												<div class="row justify-content-center"><%= bean.getProvince() %></div>
-												<div class="row justify-content-center"><%= bean.getCity() %></div>
+												<div class="row justify-content-center bold-text">Location</div>
+												<div class="row justify-content-center"><%= bean.convertToText(bean.getRegion())%></div>
+												<div class="row justify-content-center"><%= bean.convertToText(bean.getProvince())%></div>
+												<div class="row justify-content-center"><%= bean.convertToText(bean.getCity())%></div>
 											</div>
 											<div class="col-4" align="center">
-												<div class="row justify-content-center">Difficulty level</div>
-												<div class="row justify-content-center"><%= bean.getLevel() %></div>
+												<div class="row justify-content-center bold-text">Difficulty level</div>
+												<div class="row justify-content-center"><%= bean.convertToText(bean.getLevel()) %></div>
 											</div>
 											<div class="col-4" align="center">
-												<div class="row justify-content-center">Travel Time</div>
-												<div class="row justify-content-center"><%= bean.getHours() %>:<%= bean.getMinutes() %></div>
+												<div class="row justify-content-center bold-text">Travel Time</div>
+												<div class="row justify-content-center"><%= bean.convertToText(bean.getHours()) %>:<%= bean.convertToText(bean.getMinutes()) %></div>
 											</div>
 										</div>
 									</div>
@@ -160,8 +213,8 @@
 		</div>
 		
 	
-	<!-- Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
 	</body>
 	
 </html>

@@ -19,7 +19,6 @@
 .navbar li {
     display: inline-block;
     vertical-align: top;
-    position: relative;
     margin-top: 0;
   	margin-bottom: 0;
 }

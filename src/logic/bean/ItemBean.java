@@ -10,9 +10,12 @@ public abstract class ItemBean {
 		String text = "";
 		
 		for (int i = 0; i < array.length; i++) {
-			text = text.concat(" " + array[i]);
+			if (!array[i].isEmpty())
+				text = text.concat(" " + array[i]);
 		}
 		
+		if (text.isEmpty())
+			return "Not available";
 		return text;
 	}
 	

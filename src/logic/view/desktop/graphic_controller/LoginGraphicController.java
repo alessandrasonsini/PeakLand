@@ -62,9 +62,9 @@ public class LoginGraphicController extends GraphicController {
 		}catch(EmptyMandatoryFieldsException e) {
 			this.displayEmptyFieldError();
 		}catch (InvalidUsernameException e) {
-			showError("Login error", "Credentials are not valid");
-		}catch (InvalidCredentialException e) {
 			showError("Sign in error", "Username not available");
+		}catch (InvalidCredentialException e) {
+			showError("Login error", "Credentials are not valid");
 		}catch(WrongInputException e) {
 			showError("Sign in error", "Password mismatch");
 		}catch(DatabaseException e) {

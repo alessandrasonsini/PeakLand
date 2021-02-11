@@ -7,11 +7,13 @@
 <%@page import="logic.model.enums.DifficultyLevelEnum" %>
 <%@page import="logic.model.enums.GroundEnum" %>
 <%@page import="logic.model.enums.LandscapeEnum" %>
-
-
+<%@page import="logic.model.exception.TooManyImagesException"%>
+<%@page import="logic.model.exception.DatabaseException"%>
+<%@page import="logic.model.exception.SystemException"%>
 <%@page import="org.apache.commons.fileupload.FileItem" %>
 <%@page import="org.apache.commons.fileupload.disk.DiskFileItemFactory" %>
 <%@page import="org.apache.commons.fileupload.servlet.ServletFileUpload" %>
+<%@page import="java.io.FileNotFoundException"%>
 
 <%@ page language="java" session="true" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -21,38 +23,44 @@
 
 	boolean disable = true;
 	boolean disableAddReview = true;
-	String nextPageName = "";
+	String next = "";
+	
+	private String getNextPageName() {
+		switch(controller.getNextPageId()) {
+		case SEARCH: 
+			next = "searchPath.jsp";
+			break;
+		case ADD_PATH: 
+			next = "addNewPath.jsp";
+			break;	
+		case VIEW_INFO: 
+			next = "viewMountainPathInfo.jsp";
+			break;		
+		case LOGIN:
+			next = "login.jsp";
+			break;
+		case ASSISTED_RESEARCH:
+			next = "assistedResearch.jsp";
+			break;
+		case PROFILE:
+			next = "profile.jsp";
+			break;	
+		case ADD_REVIEW:
+			next = "addReview.jsp";
+			break;
+		case VIEW_REVIEWS:
+			next = "viewReviews.jsp";
+			break;
+		default:
+			next = "";
+			break;
+		}
+		return next;
+	}
 %>
 <jsp:useBean id="newPath" scope="request" class="logic.bean.MountainPathBean"/>
 <jsp:setProperty name="newPath" property="*"/>
 <%
-	switch(controller.getNextPageId()) {
-		case SEARCH: 
-			nextPageName = "searchPath.jsp";
-			break;
-		case ADD_PATH: 
-			nextPageName = "addNewPath.jsp";
-			break;	
-		case VIEW_INFO: 
-			nextPageName = "viewMountainPathInfo.jsp";
-			break;		
-		case LOGIN:
-			nextPageName = "login.jsp";
-			break;
-		case ASSISTED_RESEARCH:
-			nextPageName = "assistedResearch.jsp";
-			break;
-		case PROFILE:
-			nextPageName = "profile.jsp";
-			break;	
-		case ADD_REVIEW:
-			nextPageName = "addReview.jsp";
-			break;
-		case VIEW_REVIEWS:
-			nextPageName = "viewReviews.jsp";
-			break;
-	}
-
 	session.setAttribute("addPathController", controller);
 	session.setAttribute("disable", disable);
 	if (session.getAttribute("disableAddReview") == null)
@@ -65,7 +73,7 @@
 		controller.addReviewRequest();
 		if (nextPageName != "") {
 		%>
-		<jsp:forward page="<%=nextPageName%>"/>
+		<jsp:forward page="<%=getNextPageName()%>"/>
 		<% 
 		}
 	}
@@ -130,28 +138,65 @@
 					
 					for (Part part : partList) {
 						if (part.getName().equals("pathPhoto") ) {
-							System.out.println("filename   "+part.getSubmittedFileName());
 							if (part.getSubmittedFileName() != "") {
 								try {
 							    	InputStream fileContent = part.getInputStream();
 							    	streamList.add(fileContent);
 								} catch(Exception e) {
-									e.printStackTrace();
+									%>
+									<div class="container" style="padding-top: 3%;">
+										<div class="alert alert-danger alert-dismissible fade show" role="alert">
+											<strong>System error</strong>Ops, there was an error uploading the photos. Retry later.
+										  	<a href="#" class="close" style="float: right;" data-dismiss="alert" aria-label="close">&times;</a>
+										</div>
+									</div>
+									<%
 								}
 							}
 						}
 					}
-					controller.setMountainPathImages(streamList);
-				    controller.saveNewMountainPath(newPath, (Integer)session.getAttribute("sessionId"));
-					
-					%>
-					<div class="container" style="padding-top: 3%;">
-						<div class="alert alert-success alert-dismissible fade show" role="alert">
-							<strong>New path added successfully!</strong> Now you can add a review.
-						  	<a href="#" class="close" style="float: right;" data-dismiss="alert" aria-label="close">&times;</a>
+					try {
+						controller.setMountainPathImages(streamList);
+					} catch (TooManyImagesException e) {
+						%>
+						<div class="container" style="padding-top: 3%;">
+							<div class="alert alert-danger alert-dismissible fade show" role="alert">
+								<strong>Load error</strong>Too many images selected.
+							  	<a href="#" class="close" style="float: right;" data-dismiss="alert" aria-label="close">&times;</a>
+							</div>
 						</div>
-					</div>
-					<%
+						<%
+					}
+					try {
+				    	controller.saveNewMountainPath(newPath, (Integer)session.getAttribute("sessionId"));
+				    	%>
+						<div class="container" style="padding-top: 3%;">
+							<div class="alert alert-success alert-dismissible fade show" role="alert">
+								<strong>New path added successfully!</strong> Now you can add a review.
+							  	<a href="#" class="close" style="float: right;" data-dismiss="alert" aria-label="close">&times;</a>
+							</div>
+						</div>
+						<%
+					} catch (DatabaseException e) {
+						%>
+						<div class="container" style="padding-top: 3%;">
+							<div class="alert alert-danger alert-dismissible fade show" role="alert">
+								<strong>Database error</strong>Ops, there was an error connecting to database. Retry later
+							  	<a href="#" class="close" style="float: right;" data-dismiss="alert" aria-label="close">&times;</a>
+							</div>
+						</div>
+						<%
+					} catch(SystemException e) {
+						%>
+						<div class="container" style="padding-top: 3%;">
+							<div class="alert alert-danger alert-dismissible fade show" role="alert">
+								<strong>System error</strong>Ops, there was a system error. Retry later.
+							  	<a href="#" class="close" style="float: right;" data-dismiss="alert" aria-label="close">&times;</a>
+							</div>
+						</div>
+						<%
+					}
+					
 					disableAddReview = false;
 					session.setAttribute("disableAddReview", disableAddReview);
 				}
@@ -161,7 +206,7 @@
 				<div class="container" style="padding-top: 3%">
 					<form class="form-inline" action="addNewPath.jsp" method="post">
 						<div class="row mx-auto" style="padding-bottom: 3%;">
-							<div class="col-3 black-text">Mountain path name</div>
+							<div class="col-3 green-text">Mountain path name</div>
 							<div class="col-3"><input type="text" class="form-control" name="name" value=${ sessionScope.name eq null  ? '' : sessionScope.name}></div>
 							<div class="col-2"><button type="submit" class="btn btn-light">Verify</button></div>
 						</div>
@@ -172,22 +217,22 @@
 						<input type='hidden' name='name' id='name' value="${sessionScope.name}"/>
 					
 						<div class="row mx-auto" style="padding-bottom: 3%;">
-							<div class="col-3 black-text">Altitude</div>
+							<div class="col-3 green-text">Altitude</div>
 							<div class="col-3"><input type="text" class="form-control" name="altitude" placeholder="in meters" ${ sessionScope.disable eq true  ? 'disabled' : ''}></div>
 						</div>
 						<div class="row mx-auto" style="padding-bottom: 3%;">
-							<div class="col-3 black-text">Location</div>
+							<div class="col-3 green-text">Location</div>
 							<div class="col-3"><input type="text" class="form-control" name="region" placeholder="Region" ${ sessionScope.disable eq true  ? 'disabled' : ''}></div>
 							<div class="col-3"><input type="text" class="form-control" name="province" placeholder="Province" ${ sessionScope.disable eq true  ? 'disabled' : ''}></div>
 							<div class="col-3"><input type="text" class="form-control" name="city" placeholder="City" ${ sessionScope.disable eq true  ? 'disabled' : ''}></div>
 						</div>
 						<div class="row mx-auto" style="padding-bottom: 3%;">
-							<div class="col-3 black-text">Lenght</div>
+							<div class="col-3 green-text">Lenght</div>
 							<div class="col-3"><input type="text" class="form-control" name="lenght" placeholder="in kilometers" ${ sessionScope.disable eq true  ? 'disabled' : ''}></div>
 						</div>
 						<div class="row mx-auto" style="padding-bottom: 3%;">
 							<div class="d-flex">
-								<div class="col-3 black-text">Difficulty level</div>
+								<div class="col-3 green-text">Difficulty level</div>
 								<div class="form-check form-check-inline">
 									<input name="level" type="radio" id="T" value="T" ${ sessionScope.disable eq true  ? 'disabled' : ''}>
 							    	<label>T</label>
@@ -208,7 +253,7 @@
 						</div>
 						<div class="row mx-auto" style="padding-bottom: 3%;">
 							<div class="d-flex">
-								<div class="col-3 black-text">Type of lanscape</div>
+								<div class="col-3 green-text">Type of lanscape</div>
 								<div class="form-check form-check-inline">
 									<input name="landscape" type="checkbox" id="MOUNTAIN" value="MOUNTAIN" ${ sessionScope.disable eq true  ? 'disabled' : ''}>
 							    	<label>Mountain</label>
@@ -225,7 +270,7 @@
 						</div>
 						<div class="row mx-auto" style="padding-bottom: 3%;">
 							<div class="d-flex">
-								<div class="col-3 black-text">Type of ground</div>
+								<div class="col-3 green-text">Type of ground</div>
 								<div class="form-check form-check-inline">
 									<input name="ground" type="checkbox" id="ROCK" value="ROCK" ${ sessionScope.disable eq true  ? 'disabled' : ''}>
 							    	<label>Rock</label>
@@ -242,7 +287,7 @@
 						</div>
 						<div class="row mx-auto" style="padding-bottom: 3%;">
 							<div class="d-flex">
-								<div class="col-3 black-text">Cycle path</div>
+								<div class="col-3 green-text">Cycle path</div>
 								<div class="form-check form-check-inline">
 									<input name="cycleble" type="radio" id="true" value="true" ${ sessionScope.disable eq true  ? 'disabled' : ''}>
 							    	<label>Yes</label>
@@ -255,7 +300,7 @@
 						</div>
 						<div class="row mx-auto" style="padding-bottom: 3%;">
 							<div class="d-flex">
-								<div class="col-3 black-text">Presence of historycal elements</div>
+								<div class="col-3 green-text">Presence of historycal elements</div>
 								<div class="form-check form-check-inline">
 									<input name="historicalElements" type="radio" id="true" value="true" ${ sessionScope.disable eq true  ? 'disabled' : ''}>
 							    	<label>Yes</label>
@@ -268,7 +313,7 @@
 						</div>
 						<div class="row mx-auto" style="padding-bottom: 3%;">
 							<div class="d-flex">
-								<div class="col-3 black-text">Family suitable</div>
+								<div class="col-3 green-text">Family suitable</div>
 								<div class="form-check form-check-inline">
 									<input name="familySuitable" type="radio" id="true" value="true" ${ sessionScope.disable eq true  ? 'disabled' : ''}>
 							    	<label>Yes</label>
@@ -280,13 +325,13 @@
 							</div>
 						</div>
 						<div class="row mx-auto" style="padding-bottom: 3%;">
-							<div class="col-3 black-text">Travel time</div>
+							<div class="col-3 green-text">Travel time</div>
 							<div class="col-3"><input type="text" class="form-control" name="hours" placeholder="hours" ${ sessionScope.disable eq true  ? 'disabled' : ''}></div>
 							<div class="col-3"><input type="text" class="form-control" name="minutes" placeholder="minutes" ${ sessionScope.disable eq true  ? 'disabled' : ''}></div>
 						</div>
 						<div class="row mx-auto" style="padding-bottom: 3%;">
 							<div class="d-flex">
-								<div class="col-3 black-text">Image of the path</div>
+								<div class="col-3 green-text">Image of the path</div>
 								<input type="file" name="pathPhoto" value="pathPhoto" multiple="multiple"/>
 							</div>
 						</div>

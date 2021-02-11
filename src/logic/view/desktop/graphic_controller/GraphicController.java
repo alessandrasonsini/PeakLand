@@ -44,7 +44,7 @@ public abstract class GraphicController extends ShowableElement {
 
 		alert.showAndWait();
 	}
-	
+
 	// Metodo che mostra all'utente l'errore che si è verificato
 	protected void showError(String header, String message) {
 		showMessage(header, message, AlertType.ERROR);

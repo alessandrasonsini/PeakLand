@@ -98,7 +98,7 @@ public class AssistedResearchGraphicController extends GraphicController{
 		ground = new ArrayList<>(Arrays.asList(ckBoxGrassFilter,ckBoxRockFilter,ckBoxWoodFilter));
 		landscape = new ArrayList<>(Arrays.asList(ckBoxMountainFilter,ckBoxSeaFilter,ckBoxLakeFilter));
 	}
-	
+
 	@FXML
 	private void onBackPressed(ActionEvent event) {
 		getViewMountainPathInfoController().onBackPressed();
@@ -135,7 +135,6 @@ public class AssistedResearchGraphicController extends GraphicController{
 			getViewMountainPathInfoController().searchMountainPathByAssistedResearch(wishMountainPath);
 			this.executeAction(this.myController);
 		} catch (SystemException e) {
-			e.printStackTrace();
 			showSystemError();
 		}
 		

@@ -80,7 +80,6 @@ public class ProfileGraphicController extends GraphicController {
 		
 		btnEdit.setDisable(true);
 		btnSave.setDisable(false);
-			
 	}
 	
 	@FXML

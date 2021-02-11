@@ -31,7 +31,7 @@ public class LoginController extends Controller {
 	public Integer loginAction(CredentialBean credentialBean) throws WrongInputException {
 		Credential credential = new Credential(credentialBean.getUsername(),credentialBean.getPassword());
 		Credential dBcredential = credentialDao.getCredentialFromDb(credential.getUsername());
-		
+	
 		// Verificare le credenziali
 		if(!credential.verifyCredential(dBcredential)) {
 			// Le credenziali non corrispondono, comunicare l'errore

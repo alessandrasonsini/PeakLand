@@ -69,7 +69,7 @@ public class AddReviewGraphicController extends GraphicController{
 			}	
 		}
 	}
-	
+
 	@FXML
 	public void onSaveReview(ActionEvent event) {
 		ReviewBean review = new ReviewBean();

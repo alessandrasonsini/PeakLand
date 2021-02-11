@@ -28,7 +28,7 @@ public class ViewMountainPathInfoController extends Controller {
 		// Prende l'istanza del controller che si occupa della search e che collabora nell'esecuzione del caso d'uso
 		this.searchController = new ControllerFactory().getSearchMountainPathController();
 		this.assistedResearchController = new ControllerFactory().getAssistedResearchController();
-		this.searchResults = null;
+		this.searchResults = new ArrayList<>();
 	}
 
 	// Richiama il metodo del controllore applicativo Search per
@@ -89,7 +89,7 @@ public class ViewMountainPathInfoController extends Controller {
 		setNextPageId("Next assisted research");
 	}
 	
-	public List<SimpleMountainPathBean> searchMountainPathByAssistedResearch(MountainPathBean wishPath) throws SystemException{		
+	public List<SimpleMountainPathBean> searchMountainPathByAssistedResearch(MountainPathBean wishPath) throws SystemException {
 		List<MountainPath> resultList;
 		resultList = this.assistedResearchController.searchMountainPathByFilters(wishPath);
 

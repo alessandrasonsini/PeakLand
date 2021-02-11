@@ -1,38 +1,49 @@
+<%@page import="logic.bean.SimpleMountainPathBean"%>
 <%@page import="logic.controller.ViewMountainPathInfoController"%>
+<%@page import="logic.model.exception.SystemException"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-<%
-	ViewMountainPathInfoController controller = (ViewMountainPathInfoController) session.getAttribute("viewInfoController");
+<%!
+	ViewMountainPathInfoController controller;
+	String next = "";
 
-	String nextPageName = "";
-	
-	switch(controller.getNextPageId()) {
+	private String getNextPageName() {
+		switch(controller.getNextPageId()) {
 		case SEARCH: 
-			nextPageName = "searchPath.jsp";
+			next = "searchPath.jsp";
 			break;
 		case ADD_PATH: 
-			nextPageName = "addNewPath.jsp";
+			next = "addNewPath.jsp";
 			break;	
 		case VIEW_INFO: 
-			nextPageName = "viewMountainPathInfo.jsp";
+			next = "viewMountainPathInfo.jsp";
 			break;		
 		case LOGIN:
-			nextPageName = "login.jsp";
+			next = "login.jsp";
 			break;
 		case ASSISTED_RESEARCH:
-			nextPageName = "assistedResearch.jsp";
+			next = "assistedResearch.jsp";
 			break;
 		case PROFILE:
-			nextPageName = "profile.jsp";
+			next = "profile.jsp";
 			break;	
 		case ADD_REVIEW:
-			nextPageName = "addReview.jsp";
+			next = "addReview.jsp";
 			break;
 		case VIEW_REVIEWS:
-			nextPageName = "viewReviews.jsp";
+			next = "viewReviews.jsp";
 			break;
+		default:
+			next = "";
+			break;
+		}
+		return next;
 	}
+%>
+
+<%
+	controller = (ViewMountainPathInfoController) session.getAttribute("viewInfoController");
 %>
 
 <!-- dichiarazione e instanziazione di una MountainPathBean !-->
@@ -69,6 +80,29 @@
 			
 			<div class="col-9">
 				<div class="container" style="padding-top: 3%">
+					<%
+					if (request.getParameter("assResearch") != null) {
+						try {
+							List<SimpleMountainPathBean> results = controller.searchMountainPathByAssistedResearch(wishMountainPath);
+						%>
+						<jsp:forward page="<%=getNextPageName()%>">
+							<jsp:param name="controller" value="<%=controller%>"/>
+							<jsp:param name="assistedResearchResults" value="<%=results%>"/>
+						</jsp:forward>
+						<%
+						} catch (SystemException e) {
+							%>
+							<div class="container" style="padding-top: 3%;">
+								<div class="alert alert-danger alert-dismissible fade show" role="alert">
+									<strong>System error</strong>Ops, there was a system error. Retry later.
+								  	<a href="#" class="close" style="float: right;" data-dismiss="alert" aria-label="close">&times;</a>
+								</div>
+							</div>
+							<%
+						}
+					}	
+					%>
+				
 					<form class="form-inline" action="assistedResearch.jsp" method="post">
 						<div class="row mx-auto" style="padding-bottom: 3%;">
 							<div class="col-3 black-text">Location</div>
@@ -183,21 +217,12 @@
 						
 					</form>
 				</div>
+				
 			</div>
 		
 		</div>
-		
-		<%
-		if (request.getParameter("assResearch") != null) {
-			controller.searchMountainPathByAssistedResearch(wishMountainPath);
-			%>
-			<jsp:forward page="<%=nextPageName%>">
-				<jsp:param name="controller" value="<%=controller%>" />
-			</jsp:forward>
-			<%
-		}
-  				
-		%>
-		
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+	
 	</body>
 </html>
