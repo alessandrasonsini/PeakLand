@@ -40,7 +40,6 @@ public class CredentialDao extends Dao{
 	@Override
 	public void onReadSuccess(DataSnapshot dataSnapshot) {
 		credentialResults.clear();
-		// TROVARE UN MODO DECENTE PER FARE STA COSA
 		if(dataSnapshot.exists()) {
 			for (DataSnapshot snapshot : dataSnapshot.getChildren()) { 
 				credentialResults.add(snapshot.getValue(Credential.class));
@@ -51,6 +50,11 @@ public class CredentialDao extends Dao{
 	@Override
 	protected String getChild() {
 		return "Credential";
+	}
+
+	@Override
+	protected String getDirectory() {
+		return this.directory;
 	}
 	
 }

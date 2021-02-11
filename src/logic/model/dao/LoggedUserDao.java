@@ -22,6 +22,7 @@ public class LoggedUserDao extends Dao{
 	public LoggedUserDao() {
 		super();
 		this.loggedUserResults = new ArrayList<>();
+		this.directory = "Logged user/";
 	}
 	
 	public LoggedUser getLoggedUserInfoFromDb(String id) {
@@ -42,13 +43,13 @@ public class LoggedUserDao extends Dao{
 	}
 
 	
-	public void updateUserImage(InputStream imageStream, String fileName) {
+	public void updateUserImage(InputStream imageStream, String name) {
 		// Controlla se è già presenta una foto del profilo dell'utente
-		if(getImage(fileName) != null) {
+		if(getImage(name) != null) {
 			// se è presente la cancella
-			deleteImage(fileName);
+			deleteImage(name);
 		}
-		uploadImage(imageStream, fileName);
+		uploadImage(imageStream, name);
 	}
 
 	
@@ -70,4 +71,11 @@ public class LoggedUserDao extends Dao{
 	protected String getChild() {
 		return "Logged User";
 	}
+
+	@Override
+	protected String getDirectory() {
+		return this.directory;
+	}
+	
+	
 }

@@ -18,8 +18,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
 import logic.model.exception.SystemException;
+
 
 
 public abstract class Dao implements OnGetDataListener {
@@ -30,6 +30,7 @@ public abstract class Dao implements OnGetDataListener {
 	protected DatabaseReference dbReference;
 	private Bucket bucketReference;
 	private Storage storageRefence;
+	protected String directory;
 	
 	private boolean writeCompleted;
 	
@@ -44,6 +45,7 @@ public abstract class Dao implements OnGetDataListener {
 		this.dbReference = this.dbConnection.getDatabaseReference().child(this.getChild());
 		this.bucketReference = this.dbConnection.getBucketReference();
 		this.storageRefence = this.dbConnection.getStorageReference();
+		this.directory = "";
 	}
 	
 	protected DatabaseReference getSpecificReference() {
@@ -114,7 +116,8 @@ public abstract class Dao implements OnGetDataListener {
 		return writeCompleted;
 	}
 	
-	public List<ByteArrayInputStream> getImagesStream(String directory) {
+	public List<ByteArrayInputStream> getImagesStream(String pathName) {
+		String directory = this.getDirectory() + pathName;
 		Page<Blob> blobs = this.bucketReference.list(Storage.BlobListOption.prefix(directory));
 		List<ByteArrayInputStream> imageStreams = new ArrayList<>();
 		for(Blob blob : blobs.iterateAll()) {
@@ -123,14 +126,16 @@ public abstract class Dao implements OnGetDataListener {
 		return imageStreams;
 	}
 	
-	public void uploadImage(List<InputStream> images, String directory) throws SystemException {
+	public void uploadImage(List<InputStream> images, String pathName, String userName) throws SystemException {
+		String directory = this.getDirectory() + pathName + "/" + userName; 
 		int imgNumber = images.size();
 		for(int i = 0; i < imgNumber; i++) {
 			this.bucketReference.create(directory + "/" + i + ".jpeg", images.get(i),Bucket.BlobWriteOption.doesNotExist());
 		}
 	}
 	
-	public ByteArrayInputStream getImage(String fileName) {
+	public ByteArrayInputStream getImage(String userName) {
+		String fileName = this.getDirectory() + userName + ".jpeg";
 		Blob blob = this.storageRefence.get(this.bucketReference.getName(),fileName);
 		ByteArrayInputStream imageReturn = null;
 		if(blob != null)
@@ -138,12 +143,14 @@ public abstract class Dao implements OnGetDataListener {
 		return imageReturn;
 	}
 	
-	public void uploadImage(InputStream f, String fileName) {
+	public void uploadImage(InputStream f, String userName) {
+		String fileName = this.getDirectory() + userName + ".jpeg";
 		this.bucketReference.create(fileName,f,Bucket.BlobWriteOption.doesNotExist());
 	}
 	
-	public void deleteImage(String fileToDelete) {
-		this.storageRefence.delete(BlobId.of(this.bucketReference.getName(),fileToDelete));
+	public void deleteImage(String userName) {
+		String fileName = this.getDirectory() + userName + ".jpeg";
+		this.storageRefence.delete(BlobId.of(this.bucketReference.getName(),fileName));
 	}
 	
 	@Override
@@ -151,4 +158,5 @@ public abstract class Dao implements OnGetDataListener {
 	
 	protected abstract String getChild(); 
 	
+	protected abstract String getDirectory();
 }
