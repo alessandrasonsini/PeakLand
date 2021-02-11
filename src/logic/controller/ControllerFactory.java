@@ -40,8 +40,6 @@ public class ControllerFactory {
 		return newController;
 	}
 	
-	
-	// NON SO SE QUESTI METODI HANNO SENSO
 	public SearchMountainPathController getSearchMountainPathController() {
 		return new SearchMountainPathController();
 	}

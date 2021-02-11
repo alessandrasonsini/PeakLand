@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class MainController extends Controller {
 	
-	private static final ArrayList<String> noLoginAction = new ArrayList<>(Arrays.asList("View info","Home"));
+	private static final ArrayList<String> noLoginAction = new ArrayList<>(Arrays.asList("View info", "Home"));
 	
 	public MainController(){
 		super();
@@ -22,12 +22,11 @@ public class MainController extends Controller {
 			actionToExecute = actionId;
 		}
 		return actionToExecute;
-
 	}
 
 	@Override
 	public void setNextPageId(String action) {
-
+		this.nextPageId = "Home";
 	}
 	
 

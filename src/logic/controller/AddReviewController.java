@@ -1,12 +1,12 @@
 package logic.controller;
 
-import java.util.List;
+import logic.bean.ReviewBean;
 import logic.model.MountainPath;
 import logic.model.Review;
-import logic.model.bean.ReviewBean;
 import logic.model.dao.MountainPathDao;
 import logic.model.dao.ReviewDao;
 import logic.model.exception.DatabaseException;
+import logic.model.utils.ReviewConverter;
 
 public class AddReviewController extends Controller {
 
@@ -20,34 +20,15 @@ public class AddReviewController extends Controller {
 	}
 	
 	public void saveReview(ReviewBean reviewBean) throws DatabaseException {
-		Review newReview = new Review();
-		
-		newReview.setPathName(reviewBean.getPathName());
-		newReview.setVote(reviewBean.getVote());
-		newReview.setTitle(reviewBean.getTitle());
-		newReview.setComment(reviewBean.getComment());
-		newReview.setAuthor(reviewBean.getAuthor());
-		
-		reviewDao.saveNewReviewOnDb(newReview);
-		
-		updateMountainPathVote(newReview.getPathName());
+		Review review = ReviewConverter.getReview(reviewBean);
+		reviewDao.saveNewReviewOnDb(review);
+		updateMountainPathVote(review.getPathName(), review.getVote());
 	}
 	
-	private void updateMountainPathVote(String pathName) {
+	private void updateMountainPathVote(String pathName, Integer vote) {
 		MountainPath path = mountainPathDao.searchMountainPathByName(pathName);
-		List<Review> reviewList = reviewDao.getReviewFromDb(pathName);
+		path.updateVote(vote);
 		
-		if (path.getNumberOfVotes() != null)
-			path.setNumberOfVotes(path.getNumberOfVotes() + 1);
-		else
-			path.setNumberOfVotes(1);
-		
-		Integer sum = 0;
-		for (Review review : reviewList) {
-			sum += review.getVote();
-		}
-	
-		path.setVote(sum / path.getNumberOfVotes());
 		mountainPathDao.updateMountainPath(path);
 	}
 	

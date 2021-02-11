@@ -1,5 +1,6 @@
 package logic.controller;
 
+import logic.model.exception.SystemException;
 
 public abstract class Controller {
 	
@@ -9,19 +10,14 @@ public abstract class Controller {
 		setNextPageId("init");
 	}
 	
+	
 	// Costruisce il prossimo controller da istanziare per eseguire l'azione
 	// chiamata
-	public Controller executeAction(String action) {
+	public Controller executeAction(String action) throws SystemException {
 		Controller nextController;
 		ControllerFactory controllerFactory = new ControllerFactory();
 
-		try {
-			nextController = controllerFactory.getController(action);
-		} catch (Exception e) {
-			// Gestione pagina di errore
-			
-			nextController = new ErrorController();
-		}
+		nextController = controllerFactory.getController(action);
 		
 		return nextController;
 	}

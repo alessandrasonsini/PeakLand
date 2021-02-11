@@ -1,18 +1,16 @@
 package logic.controller;
 
 import java.io.InputStream;
+import logic.bean.LoggedUserBean;
 import logic.controller.utils.CurrentLoggedUsers;
 import logic.model.LoggedUser;
-import logic.model.bean.LoggedUserBean;
-import logic.model.bean.factory.LoggedUserBeanFactory;
 import logic.model.dao.LoggedUserDao;
 import logic.model.exception.DatabaseException;
 import logic.model.exception.SystemException;
+import logic.model.utils.LoggedUserConverter;
 
 public class ProfileController extends Controller{
 
-	private static final String DIRECTORY = "Logged user/";
-	
 	private LoggedUserDao loggedUserDao;
 	private Integer userId;
 	private LoggedUser currentUser;
@@ -26,21 +24,19 @@ public class ProfileController extends Controller{
 	public LoggedUserBean getCurrentUser(Integer id) {
 		this.userId = id;
 		this.currentUser = CurrentLoggedUsers.getInstance().getCurrentLoggedUser(id);
-		LoggedUserBean bean = new LoggedUserBeanFactory().getLoggedUserBean(this.currentUser);
-		bean.setImageStream(loggedUserDao.getImage(DIRECTORY + this.currentUser.getUsername() + ".jpeg"));
+		LoggedUserBean bean = LoggedUserConverter.getLoggedUserBean(this.currentUser);
+		bean.setImageStream(loggedUserDao.getImage(this.currentUser.getUsername()));
 		return bean;
 	}
 	
 	public void setProfileImage(InputStream is) throws SystemException {
 		//Chiama il metodo del dao per salvare l'immagine inserita
-		loggedUserDao.updateUserImage(is, DIRECTORY + currentUser.getUsername() +".jpeg");
+		loggedUserDao.updateUserImage(is, currentUser.getUsername());
 	}
 	
+	
 	public void updateUserInfo(LoggedUserBean userBean) throws DatabaseException {
-		this.currentUser.setName(userBean.getName());
-		this.currentUser.setSurname(userBean.getSurname());
-		this.currentUser.setDescription(userBean.getDescription());
-		
+		this.currentUser = LoggedUserConverter.getLoggedUser(userBean);
 		this.updateOnDb();
 	}
 	

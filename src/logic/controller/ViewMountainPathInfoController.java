@@ -2,19 +2,18 @@ package logic.controller;
 
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
+import logic.bean.MountainPathBean;
+import logic.bean.ReviewBean;
+import logic.bean.SimpleMountainPathBean;
 import logic.model.MountainPath;
 import logic.model.Review;
-import logic.model.bean.MountainPathBean;
-import logic.model.bean.ReviewBean;
-import logic.model.bean.SimpleMountainPathBean;
-import logic.model.bean.factory.MountainPathBeanFactory;
-import logic.model.bean.factory.ReviewBeanFactory;
-import logic.model.bean.factory.SimpleMountainPathBeanFactory;
+import logic.model.Sorter;
 import logic.model.dao.MountainPathDao;
 import logic.model.dao.ReviewDao;
 import logic.model.exception.SystemException;
+import logic.model.utils.MountainPathConverter;
+import logic.model.utils.ReviewConverter;
 
 public class ViewMountainPathInfoController extends Controller {
 	
@@ -34,17 +33,8 @@ public class ViewMountainPathInfoController extends Controller {
 	// Richiama il metodo del controllore applicativo Search per
 	// effettuare la ricerca nel DB
 	public List<SimpleMountainPathBean> searchMountainPathByName(String name) {
-		this.searchResults = new ArrayList<>();
-		
 		List<MountainPath> resultList = searchController.searchMountainPathByPartialName(name);
-		
-		SimpleMountainPathBeanFactory beanFactory = new SimpleMountainPathBeanFactory();
-		
-		// Converte le entity in bean per poterle passare al controllore grafico
-		for(MountainPath path : resultList) {
-				this.searchResults.add(beanFactory.getSimpleMountainPath(path));
-		}
-		sortResultsByVote(this.searchResults);
+		this.searchResults = Sorter.sortByVote(resultList);
 		return this.searchResults;
 	}
 	
@@ -53,19 +43,17 @@ public class ViewMountainPathInfoController extends Controller {
 		MountainPath searchResult = searchController.searchMountainPathByName(selectedPath);
 		
 		if(searchResult != null) {
-			// Converte la entity in bean e la memorizza, per poterla poi passare alla view che si occupa di visualizzare
-			// tutte le info del path
-			this.selectedMountainPath = new MountainPathBeanFactory().getMountainPathBean(searchResult);
-		
+			// Converte la entity in bean e la memorizza, per poterla poi passare
+			// alla view che si occupa di visualizzare tutte le info del path
+			this.selectedMountainPath = MountainPathConverter.getMountainPathBean(searchResult);
 		}
 		else this.selectedMountainPath = null;
 	
-		// Aggiorno il nextPageId
 		setNextPageId("Item selected");
 	}
 	
 	public List<ByteArrayInputStream> getImageStreams(){
-		return new MountainPathDao().getImagesStream("Mountain path/" + this.selectedMountainPath.getName());
+		return new MountainPathDao().getImagesStream(this.selectedMountainPath.getName());
 	}
 	
 	public MountainPathBean getSelectedMountainPath() {
@@ -79,9 +67,9 @@ public class ViewMountainPathInfoController extends Controller {
 	public List<ReviewBean> getPathReview(String pathName) {
 		List<ReviewBean> reviewBeanList = new ArrayList<>();
 		
-		List<Review> reviewList = new ReviewDao().getReviewFromDb(pathName);;
+		List<Review> reviewList = new ReviewDao().getReviewFromDb(pathName);
 		for (Review review : reviewList) {
-			reviewBeanList.add(new ReviewBeanFactory().getReviewBean(review));
+			reviewBeanList.add(ReviewConverter.getReviewBean(review));
 		}
 		
 		return reviewBeanList;
@@ -95,12 +83,6 @@ public class ViewMountainPathInfoController extends Controller {
 		return this.searchResults;
 	}
 	
-	private List<SimpleMountainPathBean> sortResultsByVote(List<SimpleMountainPathBean> results){
-		results.sort(Comparator.comparing(SimpleMountainPathBean::getVote).reversed());
-		
-		return results;
-	}
-	
 	public void assistedResearchRequest() {
 		setNextPageId("Next assisted research");
 	}
@@ -110,7 +92,7 @@ public class ViewMountainPathInfoController extends Controller {
 		List<MountainPath> resultList;
 		resultList = this.assistedResearchController.searchMountainPathByFilters(wishPath);
 		for(MountainPath path : resultList) {
-			this.searchResults.add(new SimpleMountainPathBeanFactory().getSimpleMountainPath(path));
+			this.searchResults.add(MountainPathConverter.getSimpleMountainPath(path));
 		}
 		setNextPageId("Done assisted research");
 		return this.searchResults;

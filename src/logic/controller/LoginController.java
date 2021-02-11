@@ -1,9 +1,9 @@
 package logic.controller;
 
+import logic.bean.CredentialBean;
 import logic.controller.utils.CurrentLoggedUsers;
 import logic.model.Credential;
 import logic.model.LoggedUser;
-import logic.model.bean.CredentialBean;
 import logic.model.dao.CredentialDao;
 import logic.model.dao.LoggedUserDao;
 import logic.model.exception.DatabaseException;
@@ -26,11 +26,13 @@ public class LoginController extends Controller {
 	public static boolean isLogged(Integer sessionId) {
 		return CurrentLoggedUsers.getInstance().isCurrentlyLogged(sessionId);
 	} 
-		
+	
 	public Integer loginAction(CredentialBean credentialBean) throws WrongInputException {
 		Credential credential = new Credential(credentialBean.getUsername(),credentialBean.getPassword());
+		Credential dBcredential = credentialDao.getCredentialFromDb(credential.getUsername());
+		
 		// Verificare le credenziali
-		if(!verifyCredential(credential)) {
+		if(!credential.verifyCredential(dBcredential)) {
 			// Le credenziali non corrispondono, comunicare l'errore
 			throw new InvalidCredentialException();
 		}
@@ -66,21 +68,7 @@ public class LoginController extends Controller {
 		else throw new WrongInputException();
 	}
 	
-	// Controlla che le credenziali inserite siano corrette recuperando dal db tramite la dao le credenziali associate allo username
-	public boolean verifyCredential(Credential insertedCred) {
-		Boolean verified;
-		Credential credential = credentialDao.getCredentialFromDb(insertedCred.getUsername());
-		// Controlla se lo username esiste
-		if(credential != null) {
-			// Controlla se la password corrisponde
-			if(insertedCred.getPassword().equals(credential.getPassword()))
-				verified = true;
-			else verified = false;
-		}
-		else verified = false;
-		
-		return verified;
-	}
+	
 	
 	@Override
 	public void setNextPageId(String action) {
