@@ -18,12 +18,12 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
+import logic.bean.LoggedUserBean;
 import logic.controller.Controller;
 import logic.controller.ProfileController;
-import logic.model.bean.LoggedUserBean;
-import logic.model.bean.factory.LoggedUserBeanFactory;
 import logic.model.exception.DatabaseException;
 import logic.model.exception.SystemException;
+import logic.model.utils.LoggedUserConverter;
 
 public class ProfileGraphicController extends GraphicController {
 	
@@ -82,7 +82,7 @@ public class ProfileGraphicController extends GraphicController {
 	
 	@FXML
 	public void onSaveModification(ActionEvent event) {
-		LoggedUserBean userBean = new LoggedUserBeanFactory().getLoggedUserBean(txtName.getText(),txtSurname.getText(),txtDescription.getText());
+		LoggedUserBean userBean = LoggedUserConverter.getLoggedUserBean(txtName.getText(),txtSurname.getText(),txtDescription.getText());
 		try {
 			this.getProfileController().updateUserInfo(userBean);
 		} catch (DatabaseException e) {

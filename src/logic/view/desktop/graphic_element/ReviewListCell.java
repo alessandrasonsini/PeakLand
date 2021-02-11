@@ -1,7 +1,7 @@
 package logic.view.desktop.graphic_element;
 
 import javafx.scene.control.ListCell;
-import logic.model.bean.ReviewBean;
+import logic.bean.ReviewBean;
 
 public class ReviewListCell extends ListCell<ReviewBean> {
 	@Override

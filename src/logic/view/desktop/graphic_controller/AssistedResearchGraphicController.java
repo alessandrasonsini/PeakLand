@@ -1,8 +1,8 @@
 package logic.view.desktop.graphic_controller;
 
+import logic.bean.MountainPathBean;
 import logic.controller.Controller;
 import logic.controller.ViewMountainPathInfoController;
-import logic.model.bean.MountainPathBean;
 import logic.model.exception.SystemException;
 
 import java.util.ArrayList;
@@ -135,6 +135,7 @@ public class AssistedResearchGraphicController extends GraphicController{
 			getViewMountainPathInfoController().searchMountainPathByAssistedResearch(wishMountainPath);
 			this.executeAction(this.myController);
 		} catch (SystemException e) {
+			e.printStackTrace();
 			showSystemError();
 		}
 		
@@ -142,9 +143,9 @@ public class AssistedResearchGraphicController extends GraphicController{
 	
 	// HO DOVUTO MODIFICARE IL RITORNO IN CASO DI LISTA VUOTA CAUSA SONARCLOUD 
 	// QUIDNI RIVEDERE LA CREAZIONE DELLA BEAN
-	private String[] checkSelectedBox(List<CheckBox> checkBoxs) {
+	private String[] checkSelectedBox(List<CheckBox> checkBoxes) {
 		List<String> selected = new ArrayList<>();
-		for(CheckBox box : checkBoxs) {
+		for(CheckBox box : checkBoxes) {
 			if(box.isSelected())
 				selected.add(box.getText().toUpperCase());
 		}

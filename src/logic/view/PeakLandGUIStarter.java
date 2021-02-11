@@ -1,4 +1,4 @@
-package logic.controller;
+package logic.view;
 
 import logic.view.desktop.PeakLandApplication;
 

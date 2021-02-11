@@ -11,9 +11,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.util.Callback;
+import logic.bean.ReviewBean;
 import logic.controller.Controller;
 import logic.controller.ViewMountainPathInfoController;
-import logic.model.bean.ReviewBean;
 import logic.view.desktop.graphic_element.ReviewListCell;
 
 public class ViewReviewGraphicController extends GraphicController {

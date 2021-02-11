@@ -9,9 +9,9 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
+import logic.bean.SimpleMountainPathBean;
 import logic.controller.Controller;
 import logic.controller.HomeController;
-import logic.model.bean.SimpleMountainPathBean;
 import logic.view.desktop.graphic_element.SimpleMountainPathListCell;
 
 public class HomeGraphicController extends GraphicController {

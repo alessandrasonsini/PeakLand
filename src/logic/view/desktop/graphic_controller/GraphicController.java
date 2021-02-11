@@ -4,6 +4,7 @@ package logic.view.desktop.graphic_controller;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import logic.controller.Controller;
+import logic.model.exception.SystemException;
 import logic.view.desktop.ShowableElement;
 
 public abstract class GraphicController extends ShowableElement {
@@ -18,9 +19,13 @@ public abstract class GraphicController extends ShowableElement {
 	
 	protected void executeAction(String action) {
 		// Istanzia controller applicativo del prossimo caso d'uso da eseguire
-		Controller nextController = myController.executeAction(action);
-		
-		executeAction(nextController);
+		Controller nextController;
+		try {
+			nextController = myController.executeAction(action);
+			executeAction(nextController);
+		} catch (SystemException e) {
+			showSystemError();
+		}
 	}
 	
 	public void executeAction(Controller appController) {

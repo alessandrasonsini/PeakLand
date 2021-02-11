@@ -50,7 +50,7 @@ public class MainGraphicController extends GraphicController {
 	
 	private void setup() {
 		this.setPressed(btnHome);
-		this.executeAction(getMainController().onActionRequired("Home", this.sessionId));
+		this.executeAction(getMainController().getNextPageId());
 	}
 
 	@FXML

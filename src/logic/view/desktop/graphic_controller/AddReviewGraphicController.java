@@ -12,9 +12,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import logic.bean.ReviewBean;
 import logic.controller.AddNewMountainPathController;
 import logic.controller.Controller;
-import logic.model.bean.ReviewBean;
 import logic.model.exception.DatabaseException;
 
 public class AddReviewGraphicController extends GraphicController{

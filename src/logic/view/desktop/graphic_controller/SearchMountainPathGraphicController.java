@@ -15,9 +15,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
+import logic.bean.SimpleMountainPathBean;
 import logic.controller.Controller;
 import logic.controller.ViewMountainPathInfoController;
-import logic.model.bean.SimpleMountainPathBean;
 import logic.view.desktop.graphic_element.SimpleMountainPathListCell;
 
 public class SearchMountainPathGraphicController extends GraphicController {

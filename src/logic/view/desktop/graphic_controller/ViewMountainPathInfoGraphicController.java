@@ -12,9 +12,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import logic.bean.MountainPathBean;
 import logic.controller.Controller;
 import logic.controller.ViewMountainPathInfoController;
-import logic.model.bean.MountainPathBean;
 
 public class ViewMountainPathInfoGraphicController extends GraphicController{
 	
