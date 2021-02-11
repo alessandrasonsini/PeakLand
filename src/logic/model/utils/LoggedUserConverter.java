@@ -16,6 +16,7 @@ public class LoggedUserConverter {
 		bean.setSurname(user.getSurname());
 		bean.setLevel(user.getLevel().toString().toLowerCase());
 		bean.setDescription(user.getDescription());
+		bean.setPeakCoin(user.getPeakCoin());
 		
 		return bean;
 	}

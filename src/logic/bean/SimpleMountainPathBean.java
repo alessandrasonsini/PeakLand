@@ -2,6 +2,8 @@ package logic.bean;
 
 import java.lang.reflect.Field;
 
+import logic.model.exception.WrongInputException;
+
 public class SimpleMountainPathBean extends ItemBean {
 	
 	protected String name;
@@ -16,9 +18,6 @@ public class SimpleMountainPathBean extends ItemBean {
 	protected Integer rankPosition; 
 	//private image
 	
-	
-	
-
 	public String getProvince() {
 		return province;
 	}
@@ -57,6 +56,24 @@ public class SimpleMountainPathBean extends ItemBean {
 
 	public void setRegion(String region) {
 		this.region = region;
+	}
+	
+	public void setMinutes(String minutes) throws WrongInputException {
+		try {
+			Integer min = Integer.parseInt(minutes);
+			if(min < 0 || min > 59) throw new WrongInputException();
+			this.minutes = min;
+		}catch(NumberFormatException e) {
+			throw new WrongInputException();
+		}
+	}
+	
+	public void setHours(String hours) throws WrongInputException {
+		try {
+			this.minutes = Integer.parseInt(hours);
+		}catch(NumberFormatException e) {
+			throw new WrongInputException();
+		}
 	}
 	
 	public Integer getMinutes() {

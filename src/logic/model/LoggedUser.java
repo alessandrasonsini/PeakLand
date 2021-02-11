@@ -15,6 +15,7 @@ public class LoggedUser {
 	private String surname;
 	private String description;
 	private UserLevel level;
+	private Integer peakCoin;
 	private List<String> favouritesMountainPath;
 	
 	public LoggedUser() {
@@ -24,11 +25,35 @@ public class LoggedUser {
 		this.surname = "";
 		this.description = "";
 		this.username = "";
+		this.peakCoin = 0;
 	}
 	
 	public LoggedUser(String username) {
 		this();
 		this.username = username;
+	}
+	
+	public Integer getPeakCoin() {
+		return peakCoin;
+	}
+	
+	public void setPeakCoin(int num) {
+		this.peakCoin = num;
+	}
+	
+	public void addPeakCoin() {
+		peakCoin++;
+		this.levelUp();
+	}
+	
+	private void levelUp() {
+		if(this.peakCoin < 6)
+			this.level = UserLevel.SOFAMAN;
+		else if(this.peakCoin < 16)
+			this.level = UserLevel.BOYSCOUT;
+		else if(this.peakCoin < 31)
+			this.level = UserLevel.EXPLORER;
+		else this.level = UserLevel.RANGER;
 	}
 	
 	public String getUsername() {

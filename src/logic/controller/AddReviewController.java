@@ -36,7 +36,7 @@ public class AddReviewController extends Controller {
 	@Override
 	public void setNextPageId(String action) {
 		if(action.equals("init"))
-			this.nextPageId = PageId.ADD_PATH;
+			this.nextPageId = PageId.ADD_REVIEW;
 		else 
 			this.nextPageId = null;
 	}

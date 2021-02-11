@@ -52,6 +52,9 @@ public class ProfileGraphicController extends GraphicController {
 	Button btnSave;
 	
 	@FXML
+	Label lbPeakCoin;
+	
+	@FXML
 	TextArea txtDescription;
 	
 	private static final int MAX_CHARS = 200;
@@ -129,6 +132,7 @@ public class ProfileGraphicController extends GraphicController {
 			imgProfile.setImage(new Image(currentUser.getImageStream()));
 		if(currentUser.getDescription() != null)
 			txtDescription.setText(currentUser.getDescription());
+		lbPeakCoin.setText(currentUser.getPeakCoin().toString());
 		
 	}
 	

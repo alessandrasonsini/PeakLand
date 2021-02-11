@@ -43,7 +43,7 @@ public class ProfileController extends Controller{
 	
 	
 	private void updateOnDb() throws DatabaseException {
-		loggedUserDao.saveNewLoggedUserOnDb(currentUser);
+		loggedUserDao.saveLoggedUserOnDb(currentUser);
 	}
 	
 	public void logOut() {

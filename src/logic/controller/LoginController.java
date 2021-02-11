@@ -57,7 +57,7 @@ public class LoginController extends Controller {
 				
 				// Setta l'istanza del nuovo utente creato
 				LoggedUser currLoggedUser = new LoggedUser(credential.getUsername());
-				loggedUserDao.saveNewLoggedUserOnDb(currLoggedUser);
+				loggedUserDao.saveLoggedUserOnDb(currLoggedUser);
 				
 				return CurrentLoggedUsers.getInstance().addCurrentLoggedUser(currLoggedUser);
 			}

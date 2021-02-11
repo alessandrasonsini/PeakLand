@@ -64,7 +64,7 @@
                         <Font name="Maiandra GD" size="16.0" />
                      </font>
                   </Button>
-                  <Label layoutX="87.0" layoutY="229.0" text="Level:">
+                  <Label layoutX="87.0" layoutY="229.0" text="Level:" AnchorPane.topAnchor="229.0">
                      <font>
                         <Font name="Maiandra GD" size="18.0" />
                      </font>
@@ -84,12 +84,22 @@
                         <Font name="Maiandra GD" size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="584.0" layoutY="84.0" text="About me:">
+                  <Label layoutX="584.0" layoutY="84.0" text="About me:" AnchorPane.leftAnchor="584.0">
                      <font>
                         <Font name="Maiandra GD" size="18.0" />
                      </font>
                   </Label>
                   <TextArea fx:id="txtDescription" editable="false" layoutX="674.0" layoutY="78.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="114.0" prefWidth="238.0" promptText="About me" style="resize: none" wrapText="true" />
+                  <Label layoutX="584.0" layoutY="252.0" text="PeakCoin:" AnchorPane.leftAnchor="584.0" AnchorPane.topAnchor="229.0">
+                     <font>
+                        <Font name="Maiandra GD" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbPeakCoin" layoutX="674.0" layoutY="232.0" text="Label" AnchorPane.topAnchor="229.0">
+                     <font>
+                        <Font name="Maiandra GD" size="18.0" />
+                     </font>
+                  </Label>
                </children></AnchorPane>
          </children>
       </HBox>

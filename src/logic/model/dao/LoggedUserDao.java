@@ -31,7 +31,7 @@ public class LoggedUserDao extends Dao{
 		return loggedUserResults.size()>0 ? loggedUserResults.get(0): null;
 	}
 	
-	public void saveNewLoggedUserOnDb(LoggedUser user) throws DatabaseException {
+	public void saveLoggedUserOnDb(LoggedUser user) throws DatabaseException {
 		Map<String, Object> users = new HashMap<>();
 		// Inserimento di ID (costituito dallo username) e dei dati dello user
 		users.put(user.getUsername(), (Object)user);

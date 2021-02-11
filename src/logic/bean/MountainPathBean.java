@@ -4,6 +4,8 @@ import java.lang.reflect.Field;
 
 import org.apache.commons.lang3.ArrayUtils;
 
+import logic.model.exception.WrongInputException;
+
 public class MountainPathBean extends SimpleMountainPathBean {
 	
 	private Integer altitude;
@@ -21,6 +23,22 @@ public class MountainPathBean extends SimpleMountainPathBean {
 
 	public void setLenght(Integer lenght) {
 		this.lenght = lenght;
+	}
+	
+	public void setLenght(String lenght) throws WrongInputException {
+		try {
+			this.lenght = Integer.parseInt(lenght);
+		}catch(NumberFormatException e) {
+			throw new WrongInputException();
+		}
+	}
+	
+	public void setAltitude(String altitude) throws WrongInputException {
+		try {
+			this.altitude = Integer.parseInt(altitude);
+		}catch(NumberFormatException e) {
+			throw new WrongInputException();
+		}
 	}
 	
 	public Integer getAltitude() {

@@ -7,8 +7,10 @@ import java.util.List;
 import logic.bean.MountainPathBean;
 import logic.bean.ReviewBean;
 import logic.controller.utils.CurrentLoggedUsers;
+import logic.model.LoggedUser;
 import logic.model.MountainPath;
 import logic.model.StandardName;
+import logic.model.dao.LoggedUserDao;
 import logic.model.dao.MountainPathDao;
 import logic.model.enums.PageId;
 import logic.model.exception.DatabaseException;
@@ -41,8 +43,12 @@ public class AddNewMountainPathController extends Controller {
 
 	public void saveReview(ReviewBean reviewBean,Integer userId) throws DatabaseException {
 		reviewBean.setPathName(this.newPathName);
-		reviewBean.setAuthor(CurrentLoggedUsers.getInstance().getCurrentLoggedUser(userId).getUsername());
+		
+		LoggedUser author = CurrentLoggedUsers.getInstance().getCurrentLoggedUser(userId);
+		reviewBean.setAuthor(author.getUsername());
 		addReviewController.saveReview(reviewBean);
+		this.updateUserPeakCoin(author);
+		
 	}
 
 	public void saveNewMountainPath(MountainPathBean newPathBean, Integer sessionId) throws DatabaseException, SystemException {
@@ -52,9 +58,18 @@ public class AddNewMountainPathController extends Controller {
 		// Invoca il metodo del dao per salvare il mountain path sul db e le immagini inserite
 		MountainPathDao mountainPathDao = new MountainPathDao();
 		mountainPathDao.saveNewMountainPathOnDB(newMountainPath);
-		mountainPathDao.uploadImage(this.pathImages, newMountainPath.getName(), CurrentLoggedUsers.getInstance().getCurrentLoggedUser(sessionId).getUsername());
+		
+		LoggedUser author = CurrentLoggedUsers.getInstance().getCurrentLoggedUser(sessionId);
+		mountainPathDao.uploadImage(this.pathImages, newMountainPath.getName(), author.getUsername());
 	
 		this.newPathName = newMountainPath.getName();
+		this.updateUserPeakCoin(author);
+	}
+	
+	private void updateUserPeakCoin(LoggedUser author) throws DatabaseException {
+		// Aggiorna il numero di PeakCoin dell'utente e il suo stato sul db
+		author.addPeakCoin();
+		new LoggedUserDao().saveLoggedUserOnDb(author);
 	}
 	
 	public void setMountainPathImages(List<InputStream> images) throws TooManyImagesException {

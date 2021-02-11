@@ -78,7 +78,7 @@ public class AddReviewGraphicController extends GraphicController{
 		review.setComment(txtReviewTitle.getText());
 		try {
 			getAddNewMountainPathController().saveReview(review, MainGraphicController.getInstance().getSessionId());
-			showMessage("Review added successfully", "Your review in on the system now", AlertType.INFORMATION);
+			showMessage("Review added successfully", "You gain one peakCoin!", AlertType.INFORMATION);
 			btnAddReview.setDisable(true);
 		} catch (DatabaseException e) {
 			showDatabaseError();

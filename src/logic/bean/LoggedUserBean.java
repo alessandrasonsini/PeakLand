@@ -9,6 +9,7 @@ public class LoggedUserBean extends ItemBean {
 	private String level;
 	private ByteArrayInputStream imageStream;
 	private String description;
+	private Integer peakCoin;
 	
 	public String getDescription() {
 		return description;
@@ -41,6 +42,14 @@ public class LoggedUserBean extends ItemBean {
 	
 	public ByteArrayInputStream getImageStream() {
 		return this.imageStream;
+	}
+	
+	public Integer getPeakCoin() {
+		return this.peakCoin;
+	}
+	
+	public void setPeakCoin(Integer num) {
+		this.peakCoin = num;
 	}
 	
 	

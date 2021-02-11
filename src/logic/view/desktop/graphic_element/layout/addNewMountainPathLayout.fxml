@@ -51,7 +51,7 @@
 	                              <font>
 		                             <Font name="Maiandra GD" size="12.0" />
 		                        	</font></Label>
-		                      <TextField fx:id="txtName" layoutX="189.0" layoutY="47.0" onAction="#onNameEntered" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="45.0" />  	
+		                      <TextField fx:id="txtName" layoutX="189.0" layoutY="47.0" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="45.0" />  	
 		                      <AnchorPane fx:id="panePathInfo" layoutY="-4.0" prefHeight="789.0" prefWidth="1000.0" style="-fx-background-color: #FFFFFF;" AnchorPane.topAnchor="75.0">
 		                      	<children>   	
 	                              <TextField fx:id="txtAltitude" layoutX="189.0" layoutY="98.0" promptText="in meters" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="20.0" />
@@ -149,6 +149,11 @@
                                     </Button>
                            	</children>
                            </AnchorPane>
+                              <Button fx:id="btnVerifyName" layoutX="448.0" layoutY="45.0" mnemonicParsing="false" onAction="#onNameEntered" style="-fx-background-color: FBC9A8;" text="Verify name" AnchorPane.topAnchor="45.0">
+                                 <font>
+                                    <Font name="Maiandra GD" size="14.0" />
+                                 </font>
+                              </Button>
                            </children>
                         </AnchorPane>
                      </content>

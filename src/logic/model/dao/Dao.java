@@ -36,7 +36,7 @@ public abstract class Dao implements OnGetDataListener {
 	
 	private static final Object readLock = new Object(); 
 	private static final Object writeLock = new Object();
-	private static final String format = ".jpeg";
+	private static final String FORMAT = ".jpeg";
 	
 	private boolean readLockCondition = false;
 	private boolean writeLockCondition = false;
@@ -131,12 +131,12 @@ public abstract class Dao implements OnGetDataListener {
 		String dir = this.getDirectory() + pathName + "/" + userName; 
 		int imgNumber = images.size();
 		for(int i = 0; i < imgNumber; i++) {
-			this.bucketReference.create(dir + "/" + i + format, images.get(i),Bucket.BlobWriteOption.doesNotExist());
+			this.bucketReference.create(dir + "/" + i + FORMAT, images.get(i),Bucket.BlobWriteOption.doesNotExist());
 		}
 	}
 	
 	public ByteArrayInputStream getImage(String userName) {
-		String fileName = this.getDirectory() + userName + format;
+		String fileName = this.getDirectory() + userName + FORMAT;
 		Blob blob = this.storageRefence.get(this.bucketReference.getName(),fileName);
 		ByteArrayInputStream imageReturn = null;
 		if(blob != null)
@@ -145,12 +145,12 @@ public abstract class Dao implements OnGetDataListener {
 	}
 	
 	public void uploadImage(InputStream f, String userName) {
-		String fileName = this.getDirectory() + userName + format;
+		String fileName = this.getDirectory() + userName + FORMAT;
 		this.bucketReference.create(fileName,f,Bucket.BlobWriteOption.doesNotExist());
 	}
 	
 	public void deleteImage(String userName) {
-		String fileName = this.getDirectory() + userName + format;
+		String fileName = this.getDirectory() + userName + FORMAT;
 		this.storageRefence.delete(BlobId.of(this.bucketReference.getName(),fileName));
 	}
 	

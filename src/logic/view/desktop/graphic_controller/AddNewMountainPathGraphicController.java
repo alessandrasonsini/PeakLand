@@ -25,6 +25,7 @@ import logic.controller.Controller;
 import logic.model.exception.DatabaseException;
 import logic.model.exception.SystemException;
 import logic.model.exception.TooManyImagesException;
+import logic.model.exception.WrongInputException;
 
 public class AddNewMountainPathGraphicController extends GraphicController {
 	
@@ -127,6 +128,9 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 	@FXML
 	private Button btnAddReview;
 	
+	@FXML
+	private Button btnVerifyName;
+	
 	private List<CheckBox> ground;
 	private List<CheckBox> landscape;
 	
@@ -146,6 +150,7 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 		if(getAddNewMountainPathController().checkName(txtName.getText())){
 			// Permette l'inserimento delle altre info
 			panePathInfo.setDisable(false);
+			btnVerifyName.setDisable(true);
 			this.name = txtName.getText();
 			
 		}
@@ -184,33 +189,40 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 	public void onSavePath(ActionEvent event) {
 		// Inizializza la bean con tutti i campi inseriti
 		MountainPathBean newPathBean = new MountainPathBean();
-		newPathBean.setName(this.name);
-		newPathBean.setAltitude(Integer.parseInt(txtAltitude.getText()));
-		newPathBean.setRegion(txtRegion.getText());
-		newPathBean.setProvince(txtProvince.getText());
-		newPathBean.setCity(txtCity.getText());
-		newPathBean.setLenght(Integer.parseInt(txtLenght.getText()));
-		newPathBean.setLevel(((RadioButton) levelGroup.getSelectedToggle()).getText().toUpperCase());
-		newPathBean.setLandscape(checkSelectedBox(landscape));
-		newPathBean.setGround(checkSelectedBox(ground));
-		newPathBean.setCycleble(( (RadioButton) cycleGroup.getSelectedToggle()).getText().equals("Yes"));
-		newPathBean.setHistoricalElements(( (RadioButton) histGroup.getSelectedToggle()).getText().equals("Yes"));
-		newPathBean.setFamilySuitable(( (RadioButton) famGroup.getSelectedToggle()).getText().equals("Yes"));
-		newPathBean.setHours(Integer.parseInt(txtHours.getText()));
-		newPathBean.setMinutes(Integer.parseInt(txtMinutes.getText()));
 		
-		// Chiama il metodo del controller applicativo per il salvataggio del nuovo mountain path
 		try {
+			newPathBean.setLenght(txtLenght.getText());
+			newPathBean.setAltitude(txtAltitude.getText());
+			newPathBean.setHours(txtHours.getText());
+			newPathBean.setMinutes(txtMinutes.getText());
+			newPathBean.setName(this.name);
+			
+			newPathBean.setRegion(txtRegion.getText());
+			newPathBean.setProvince(txtProvince.getText());
+			newPathBean.setCity(txtCity.getText());
+			
+			newPathBean.setLevel(((RadioButton) levelGroup.getSelectedToggle()).getText().toUpperCase());
+			newPathBean.setLandscape(checkSelectedBox(landscape));
+			newPathBean.setGround(checkSelectedBox(ground));
+			newPathBean.setCycleble(( (RadioButton) cycleGroup.getSelectedToggle()).getText().equals("Yes"));
+			newPathBean.setHistoricalElements(( (RadioButton) histGroup.getSelectedToggle()).getText().equals("Yes"));
+			newPathBean.setFamilySuitable(( (RadioButton) famGroup.getSelectedToggle()).getText().equals("Yes"));
+			
+			// Chiama il metodo del controller applicativo per il salvataggio del nuovo mountain path
 			getAddNewMountainPathController().saveNewMountainPath(newPathBean, MainGraphicController.getInstance().getSessionId());
 			// Mostra il messaggio di avvenuto salvataggio
-			showMessage("Add succeded", "The new mountain path is now on the system, you can add a review now ", AlertType.INFORMATION);
+			showMessage("Mountain path added succesfully", "You gain one peakCoin! You can add a review now ", AlertType.INFORMATION);
 			btnAddReview.setDisable(false);
 			btnSavePath.setDisable(true);
+			
+		} catch(WrongInputException e) {
+			showError("Wrong input", "You inserted a text instead of a number");
 		} catch (DatabaseException e) {
 			showDatabaseError();
 		} catch(SystemException e) {
 			showSystemError();
 		}
+		
 		
 	}
 	
