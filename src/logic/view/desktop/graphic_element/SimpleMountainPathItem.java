@@ -63,9 +63,11 @@ public class SimpleMountainPathItem extends ShowableElement {
 	private Label lbRankPosition;
 	
 	private List<ImageView> starImages = Arrays.asList(imgStar1,imgStar2,imgStar3,imgStar4,imgStar5);
+	//private Image pathImage;
 	
 	public SimpleMountainPathItem() {
 		super();
+		//this.pathImage = new Image(this.getClass().getResourceAsStream("../graphic_element/images/mountain_path.png"),150,150,true,false);
 	}
 	
 	public void setInfo(SimpleMountainPathBean bean) {
@@ -81,8 +83,10 @@ public class SimpleMountainPathItem extends ShowableElement {
         if(bean.getRankPosition() != null)
         	lbRankPosition.setText(bean.getRankPosition().toString() +")");
         
-        if(bean.getImage() != null)
-        	imgPath.setImage(new Image(bean.getImage(),50,50,false,false));
+        if(bean.getImage() != null) {
+        	imgPath.setImage(new Image(bean.getImage(),150,150,true,false));
+        }
+        	
     }
 
 	private void setStarVote(Integer vote) {
@@ -98,6 +102,7 @@ public class SimpleMountainPathItem extends ShowableElement {
     public HBox getBox() {
         return itemBox;
     }
+    
 
 	@Override
 	protected String getFXMLFileName() {

@@ -105,8 +105,9 @@ public class ViewMountainPathInfoController extends Controller {
 		SimpleMountainPathBean bean;
 		for (MountainPath path : result) {
 			bean = MountainPathConverter.getSimpleMountainPath(path);
-			this.searchResults.add(bean);
 			bean.setImage(dao.getImage(bean.getName()));
+			this.searchResults.add(bean);
+			
 		}
 	}
 	

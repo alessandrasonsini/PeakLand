@@ -20,7 +20,7 @@
             <Font name="Maiandra GD" size="28.0" />
          </font>
       </Label>
-      <ImageView fx:id="imgPath" fitHeight="116.0" fitWidth="142.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgPath" fitHeight="116.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
          <HBox.margin>
             <Insets left="20.0" />
          </HBox.margin>

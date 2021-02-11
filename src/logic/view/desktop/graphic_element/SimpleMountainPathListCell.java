@@ -12,6 +12,7 @@ public class SimpleMountainPathListCell extends ListCell<SimpleMountainPathBean>
 			SimpleMountainPathItem newItem = new SimpleMountainPathItem();
 			newItem.setInfo(itemBean);
 			setGraphic(newItem.getBox());
+			
 		}
 	}
 }

@@ -84,14 +84,15 @@ public class SearchMountainPathGraphicController extends GraphicController {
 			// Recupera i risultati della precedente ricerca
 			newSearchResults = getViewMountainPathInfoController().getPreviousSearchResults();
 		}
+		ObservableList<SimpleMountainPathBean> beanList = FXCollections.observableArrayList();
 		if(newSearchResults != null && newSearchResults.isEmpty())
 			lbNoResults.setText("No matches found for the inserted name");
 		else if(newSearchResults != null) {
 			// Costruisco l'observable list da passare alla funzione che si occupa di rimpire la list view
-			ObservableList<SimpleMountainPathBean> beanList = FXCollections.observableArrayList();
 			beanList.addAll(newSearchResults);
-			fillListView(beanList);
+			
 		}
+		fillListView(beanList);
 		
 	}
 	

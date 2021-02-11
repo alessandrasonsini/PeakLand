@@ -136,16 +136,10 @@ public abstract class Dao implements OnGetDataListener {
 	}
 	
 	public ByteArrayInputStream getImage(String fileName) {
-		/*fileName = this.getDirectory() + fileName + FORMAT;
-		Blob blob = this.storageRefence.get(this.bucketReference.getName(),fileName);
-		ByteArrayInputStream imageReturn = null;
-		if(blob != null)
-			imageReturn = new ByteArrayInputStream(blob.getContent(BlobSourceOption.generationMatch()));
-		return imageReturn;*/
 		ByteArrayInputStream image = null;
 		List<ByteArrayInputStream> imagesList = getImagesStream(fileName);
 		
-		if(imagesList.size() > 0)
+		if(!imagesList.isEmpty())
 			image = imagesList.get(0);
 		return image;
 	}
