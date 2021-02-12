@@ -3,7 +3,9 @@ package logic.bean;
 /**
  * Classe che rappresenta la generica bean
  */
-public abstract class ItemBean {
+public class ItemBean {
+	
+	protected ItemBean() {}
 	
 	// Converte l'array di stringhe in un'unica stringa
 	public String convertToText(String[] array) {

@@ -85,7 +85,8 @@ public class MountainPath {
 	
 	public void setLandscapeFromString(String[] landscape) {
 		for (String str : landscape) {
-			this.landscape.add(LandscapeEnum.valueOf(str));
+			if (!str.isEmpty())
+				this.landscape.add(LandscapeEnum.valueOf(str));
 		}
 	}
 	
@@ -99,7 +100,8 @@ public class MountainPath {
 	
 	public void setGroundFromString(String[] ground) {
 		for (String str : ground) {
-			this.ground.add(GroundEnum.valueOf(str));
+			if (!str.isEmpty())
+				this.ground.add(GroundEnum.valueOf(str));
 		}
 	}
 	
