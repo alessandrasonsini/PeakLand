@@ -1,9 +1,7 @@
 package test;
 
 import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
-
 import logic.model.Credential;
 import logic.model.exception.EmptyMandatoryFieldsException;
 
@@ -23,5 +21,13 @@ public class TestCredential {
 		Credential second = new Credential("test","test");
 		boolean result = first.verifyCredential(second); 
 		assertEquals(false, result);
+	}
+	
+	@Test(expected = EmptyMandatoryFieldsException.class)
+	public void testVerifyCredentialException() throws EmptyMandatoryFieldsException {
+		Credential first = new Credential();
+		Credential second = new Credential("test", "test");
+		
+		first.verifyCredential(second);
 	}
 }

@@ -39,6 +39,7 @@ public class LoggedUser {
 	
 	public void setPeakCoin(int num) {
 		this.peakCoin = num;
+		this.levelUp();
 	}
 	
 	public void addPeakCoin() {
