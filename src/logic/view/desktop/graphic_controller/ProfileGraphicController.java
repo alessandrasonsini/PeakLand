@@ -124,17 +124,14 @@ public class ProfileGraphicController extends GraphicController {
 	}
 	
 	private void setupLayout() {
-		if(currentUser.getName()!= null)
-			txtName.setText(currentUser.getName());
-		if(currentUser.getSurname()!= null)
-			txtSurname.setText(currentUser.getSurname());
-		lbLevel.setText(currentUser.getLevel());
+		txtName.setText(currentUser.getNameAsText());
+		txtSurname.setText(currentUser.getSurnameAsText());
+		txtDescription.setText(currentUser.getDescriptionAsText());
+		lbPeakCoin.setText(currentUser.getPeakCoinAsText());
+		lbLevel.setText(currentUser.getLevelAsText());
 		if(currentUser.getImageStream() != null)
 			imgProfile.setImage(new Image(currentUser.getImageStream()));
-		if(currentUser.getDescription() != null)
-			txtDescription.setText(currentUser.getDescription());
-		lbPeakCoin.setText(currentUser.getPeakCoin().toString());
-		
+
 	}
 	
 	private ProfileController getProfileController() {

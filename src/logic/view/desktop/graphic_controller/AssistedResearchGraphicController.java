@@ -140,8 +140,6 @@ public class AssistedResearchGraphicController extends GraphicController{
 		
 	}
 	
-	// HO DOVUTO MODIFICARE IL RITORNO IN CASO DI LISTA VUOTA CAUSA SONARCLOUD 
-	// QUIDNI RIVEDERE LA CREAZIONE DELLA BEAN
 	private String[] checkSelectedBox(List<CheckBox> checkBoxes) {
 		List<String> selected = new ArrayList<>();
 		for(CheckBox box : checkBoxes) {

@@ -162,14 +162,14 @@
 					  									}
 					  									else {
 					  										%>
-					  										<div class="p-2 black-text text-nowrap"><%=bean.convertToText(bean.getVote())%></div>
+					  										<div class="p-2 black-text text-nowrap"><%=bean.getVoteAsText()%></div>
 					  										<%
 					  									}
 													%>
 												</div>
 											</div>
 											<div class="p-3 bd-highlight text-nowrap">
-												<div class="bold-text">Num of votes:</div> <%=bean.convertToText(bean.getNumberOfVotes())%>
+												<div class="bold-text">Num of votes:</div> <%=bean.getNumberOfVotesAsText()%>
 											</div>
 										</div>
 										
@@ -179,17 +179,17 @@
 										<div class="row" style="padding-bottom: 2%;">
 											<div class="col-4" align="center" style="padding-bottom: 1%;">
 												<div class="row justify-content-center bold-text">Location</div>
-												<div class="row justify-content-center"><%= bean.convertToText(bean.getRegion())%></div>
-												<div class="row justify-content-center"><%= bean.convertToText(bean.getProvince())%></div>
-												<div class="row justify-content-center"><%= bean.convertToText(bean.getCity())%></div>
+												<div class="row justify-content-center"><%= bean.getRegionAsText()%></div>
+												<div class="row justify-content-center"><%= bean.getProvinceAsText()%></div>
+												<div class="row justify-content-center"><%= bean.getCityAsText()%></div>
 											</div>
 											<div class="col-4" align="center">
 												<div class="row justify-content-center bold-text">Difficulty level</div>
-												<div class="row justify-content-center"><%= bean.convertToText(bean.getLevel()) %></div>
+												<div class="row justify-content-center"><%= bean.getLevelAsText() %></div>
 											</div>
 											<div class="col-4" align="center">
 												<div class="row justify-content-center bold-text">Travel Time</div>
-												<div class="row justify-content-center"><%= bean.convertToText(bean.getHours()) %>:<%= bean.convertToText(bean.getMinutes()) %></div>
+												<div class="row justify-content-center"><%= bean.getHoursAsText() %>:<%= bean.getMinutesAsText() %></div>
 											</div>
 										</div>
 									</div>

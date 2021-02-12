@@ -69,13 +69,13 @@ public class SimpleMountainPathItem extends ShowableElement {
 	}
 	
 	public void setInfo(SimpleMountainPathBean bean) {
-        txtName.setText(bean.convertToText(bean.getName()));
-        txtLocationRegion.setText(bean.convertToText(bean.getRegion()));
-        txtLocationProvince.setText(bean.convertToText(bean.getProvince()));
-        txtLocationCity.setText(bean.convertToText(bean.getCity()));
-        txtDifficultyLevel.setText(bean.convertToText(bean.getLevel()));
-        txtTravelTime.setText(bean.convertToText(bean.getHours() + ":" + bean.convertToText(bean.getMinutes())));
-        lbVotes.setText(bean.convertToText(bean.getNumberOfVotes()));
+        txtName.setText(bean.getNameAsText());
+        txtLocationRegion.setText(bean.getRegionAsText());
+        txtLocationProvince.setText(bean.getProvinceAsText());
+        txtLocationCity.setText(bean.getCity());
+        txtDifficultyLevel.setText(bean.getLevelAsText());
+        txtTravelTime.setText(bean.getHoursAsText() + ":" + bean.getMinutesAsText());
+        lbVotes.setText(bean.getNumberOfVotesAsText());
         if(bean.getVote() > 0)
         	setStarVote(bean.getVote());
         if(bean.getRankPosition() != null)

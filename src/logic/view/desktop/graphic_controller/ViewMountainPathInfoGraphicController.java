@@ -174,20 +174,20 @@ public class ViewMountainPathInfoGraphicController extends GraphicController{
 	// che ha ricevuto in input dal controllore applicativo
 	private void setupLayout(MountainPathBean selectedMountainPath) {
 		// NON SO SE INSERIRE QUI CONTROLLO SE BEAN E' NULL O SOPRA
-		lbName.setText(selectedMountainPath.convertToText(selectedMountainPath.getName()));
-		lbRegion.setText(selectedMountainPath.convertToText(selectedMountainPath.getRegion()));
-		lbProvince.setText(selectedMountainPath.convertToText(selectedMountainPath.getProvince()));
-		lbCity.setText(selectedMountainPath.convertToText(selectedMountainPath.getCity()));
-		lbAltitude.setText(selectedMountainPath.convertToText(selectedMountainPath.getAltitude()));
-		lbLenght.setText(selectedMountainPath.convertToText(selectedMountainPath.getLenght()));
-		lbLevel.setText(selectedMountainPath.convertToText(selectedMountainPath.getLevel()));
-		lbLandscape.setText(selectedMountainPath.convertToText(selectedMountainPath.getLandscape()));
-		lbGround.setText(selectedMountainPath.convertToText(selectedMountainPath.getGround()));
-		lbCycleable.setText(selectedMountainPath.convertToText(selectedMountainPath.isCycleble()));
-		lbHistElements.setText(selectedMountainPath.convertToText(selectedMountainPath.isHistoricalElements()));
-		lbFam.setText(selectedMountainPath.convertToText(selectedMountainPath.isFamilySuitable()));
-		lbTime.setText(selectedMountainPath.convertToText(selectedMountainPath.getHours()) + " : " + selectedMountainPath.convertToText(selectedMountainPath.getMinutes()));
-		lbVotesNumber.setText(selectedMountainPath.convertToText(selectedMountainPath.getNumberOfVotes()));
+		lbName.setText(selectedMountainPath.getNameAsText());
+		lbRegion.setText(selectedMountainPath.getRegionAsText());
+		lbProvince.setText(selectedMountainPath.getProvinceAsText());
+		lbCity.setText(selectedMountainPath.getCityAsText());
+		lbAltitude.setText(selectedMountainPath.getAltitudeAsText());
+		lbLenght.setText(selectedMountainPath.getLenghtAsText());
+		lbLevel.setText(selectedMountainPath.getLevelAsText());
+		lbLandscape.setText(selectedMountainPath.getLandscapeAsText());
+		lbGround.setText(selectedMountainPath.getGroundAsText());
+		lbCycleable.setText(selectedMountainPath.getCyclableAsText());
+		lbHistElements.setText(selectedMountainPath.getHistoricalElementsAsText());
+		lbFam.setText(selectedMountainPath.getFamilySuitableAsText());
+		lbTime.setText(selectedMountainPath.getHoursAsText() + " : " + selectedMountainPath.getMinutesAsText());
+		lbVotesNumber.setText(selectedMountainPath.getNumberOfVotesAsText());
 		
 		if(selectedMountainPath.getVote() != 0) {
 			setVote(selectedMountainPath.getVote());

@@ -19,6 +19,10 @@ public class MountainPathBean extends SimpleMountainPathBean {
 	public Integer getLenght() {
 		return lenght;
 	}
+	
+	public String getLenghtAsText() {
+		return convertToText(this.lenght);
+	}
 
 	public void setLenght(Integer lenght) {
 		this.lenght = lenght;
@@ -44,12 +48,20 @@ public class MountainPathBean extends SimpleMountainPathBean {
 		return altitude;
 	}
 	
+	public String getAltitudeAsText() {
+		return convertToText(this.altitude);
+	}
+	
 	public void setAltitude(Integer altitude) {
 		this.altitude = altitude;
 	}
 	
 	public String[] getLandscape() {
 		return landscape;
+	}
+	
+	public String getLandscapeAsText() {
+		return convertToText(this.landscape);
 	}
 
 	public void setLandscape(String[] landscape) {
@@ -58,6 +70,10 @@ public class MountainPathBean extends SimpleMountainPathBean {
 
 	public String[] getGround() {
 		return ground;
+	}
+	
+	public String getGroundAsText() {
+		return convertToText(this.ground);
 	}
 
 	public void setGround(String[] ground) {
@@ -68,6 +84,10 @@ public class MountainPathBean extends SimpleMountainPathBean {
 		return cycleble;
 	}
 	
+	public String getCyclableAsText() {
+		return convertToText(this.cycleble);
+	}
+	
 	public void setCycleble(Boolean cycleble) {
 		this.cycleble = cycleble;
 	}
@@ -76,12 +96,20 @@ public class MountainPathBean extends SimpleMountainPathBean {
 		return historicalElements;
 	}
 	
+	public String getHistoricalElementsAsText() {
+		return convertToText(this.historicalElements);
+	}
+	
 	public void setHistoricalElements(Boolean historicalElements) {
 		this.historicalElements = historicalElements;
 	}
 	
 	public Boolean isFamilySuitable() {
 		return familySuitable;
+	}
+	
+	public String getFamilySuitableAsText() {
+		return convertToText(this.familySuitable);
 	}
 	
 	public void setFamilySuitable(Boolean familySuitable) {

@@ -2,7 +2,7 @@ package logic.bean;
 
 import logic.model.exception.EmptyMandatoryFieldsException;
 
-public class CredentialBean {
+public class CredentialBean extends ItemBean{
 	
 	private String username;
 	private String password;

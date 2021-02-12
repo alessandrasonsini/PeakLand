@@ -14,11 +14,19 @@ public class LoggedUserBean extends ItemBean {
 	public String getDescription() {
 		return description;
 	}
+	
+	public String getDescriptionAsText() {
+		return convertToText(this.description);
+	}
 	public void setDescription(String description) {
 		this.description = description;
 	}
 	public String getName() {
 		return name;
+	}
+	
+	public String getNameAsText() {
+		return convertToText(this.name);
 	}
 	public void setName(String name) {
 		this.name = name;
@@ -26,12 +34,22 @@ public class LoggedUserBean extends ItemBean {
 	public String getSurname() {
 		return surname;
 	}
+	
+	public String getSurnameAsText() {
+		return convertToText(this.surname);
+	}
+	
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
 	public String getLevel() {
 		return level;
 	}
+	
+	public String getLevelAsText() {
+		return convertToText(this.level);
+	}
+	
 	public void setLevel(String level) {
 		this.level = level;
 	}
@@ -46,6 +64,10 @@ public class LoggedUserBean extends ItemBean {
 	
 	public Integer getPeakCoin() {
 		return this.peakCoin;
+	}
+	
+	public String getPeakCoinAsText() {
+		return convertToText(this.peakCoin);
 	}
 	
 	public void setPeakCoin(Integer num) {

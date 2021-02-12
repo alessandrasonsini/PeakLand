@@ -11,7 +11,7 @@ public class ReviewBean extends ItemBean {
 	public String getPathName() {
 		return pathName;
 	}
-
+	
 	public void setPathName(String pathName) {
 		this.pathName = pathName;
 	}
@@ -27,13 +27,21 @@ public class ReviewBean extends ItemBean {
 	public String getTitle() {
 		return title;
 	}
-
+	
+	public String getTitleAsText() {
+		return convertToText(this.title);
+	}
+	
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
 	public String getComment() {
 		return comment;
+	}
+	
+	public String getCommentAsText() {
+		return convertToText(this.comment);
 	}
 
 	public void setComment(String comment) {

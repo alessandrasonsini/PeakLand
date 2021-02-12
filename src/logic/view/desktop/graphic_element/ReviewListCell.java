@@ -9,7 +9,7 @@ public class ReviewListCell extends ListCell<ReviewBean> {
 		super.updateItem(itemBean, empty);
 		if(itemBean != null) {
 			ReviewItem item = new ReviewItem();
-			item.setInfo(itemBean.getVote(), itemBean.convertToText(itemBean.getAuthor()), itemBean.convertToText(itemBean.getComment()), itemBean.convertToText(itemBean.getTitle()));
+			item.setInfo(itemBean);
 			setGraphic(item.getBox());
 		}
 	}

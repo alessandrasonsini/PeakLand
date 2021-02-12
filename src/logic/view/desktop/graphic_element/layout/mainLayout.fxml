@@ -46,8 +46,8 @@
       </BorderPane>
       <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="47.0" prefWidth="1322.0" style="-fx-background-color: FBC9A8;">
          <children>
-
-            <Button fx:id="btnHome" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: FBC9A8; -fx-border-color: F69155;" text="Home" onAction="#buttonHandler">
+			
+            <Button fx:id="btnHome" contentDisplay="CENTER" minWidth="-Infinity" mnemonicParsing="false" onAction="#buttonHandler" prefHeight="47.0" prefWidth="100.0" style="-fx-background-color: FBC9A8; -fx-border-color: F69155;" text="Home">
                <font>
                   <Font name="Maiandra GD" size="24.0" />
                </font>
@@ -55,19 +55,43 @@
                   <Insets top="1.0" />
                </opaqueInsets>
             </Button>
-            <Button fx:id="btnViewInfo" contentDisplay="CENTER" minHeight="45.0" minWidth="160.0" mnemonicParsing="false" onAction="#buttonHandler" style="-fx-background-color: FBC9A8; -fx-border-color: F69155;" text="View path info" wrapText="true">
+            <Button fx:id="btnViewInfo" contentDisplay="CENTER" minHeight="45.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#buttonHandler" prefHeight="160.0" prefWidth="190.0" style="-fx-background-color: FBC9A8; -fx-border-color: F69155;" text="View path info" wrapText="true">
                <font>
                   <Font name="Maiandra GD" size="24.0" />
                </font>
             </Button>
-            <Button fx:id="btnAddPath" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buttonHandler" style="-fx-background-color: FBC9A8; -fx-border-color: F69155;" text="Add new path">
+            <Button fx:id="btnAddPath" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#buttonHandler" prefWidth="185.0" style="-fx-background-color: FBC9A8; -fx-border-color: F69155;" text="Add new path">
                <font>
                   <Font name="Maiandra GD" size="24.0" />
                </font>
+            </Button>
+            <Button contentDisplay="CENTER" disable="true" minWidth="-Infinity" mnemonicParsing="false" prefWidth="230.0" style="-fx-background-color: FBC9A8; -fx-border-color: F69155;" text="Schedule path visit">
+               <font>
+                  <Font name="Maiandra GD" size="24.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets top="1.0" />
+               </opaqueInsets>
+            </Button>
+            <Button contentDisplay="CENTER" disable="true" minWidth="-Infinity" mnemonicParsing="false" prefWidth="260.0" style="-fx-background-color: FBC9A8; -fx-border-color: F69155;" text="Manage visited paths">
+               <font>
+                  <Font name="Maiandra GD" size="24.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets top="1.0" />
+               </opaqueInsets>
+            </Button>
+            <Button contentDisplay="CENTER" disable="true" minWidth="-Infinity" mnemonicParsing="false" prefWidth="270.0" style="-fx-background-color: FBC9A8; -fx-border-color: F69155;" text="Manage your business">
+               <font>
+                  <Font name="Maiandra GD" size="24.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets top="1.0" />
+               </opaqueInsets>
             </Button>
             <Button fx:id="btnProfile" minHeight="-Infinity" mnemonicParsing="false" onAction="#buttonHandler" prefHeight="45.0" prefWidth="52.0" style="-fx-background-color: FBC9A8;">
                <HBox.margin>
-                  <Insets left="800.0" />
+                  <Insets left="50.0" />
                </HBox.margin>
                <graphic>
                   <ImageView fitHeight="38.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">

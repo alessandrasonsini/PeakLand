@@ -9,6 +9,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import logic.bean.ReviewBean;
 import logic.view.desktop.ShowableElement;
 
 public class ReviewItem extends ShowableElement{
@@ -46,12 +47,12 @@ public class ReviewItem extends ShowableElement{
         return itemBox;
     }
 	
-	public void setInfo(Integer vote, String author, String comment, String title) {
-		lbAuthor.setText(author);
-		txtComment.setText(comment);
-		lbTitle.setText(title);
-		if(vote > 0)
-			setStarImages(vote);
+	public void setInfo(ReviewBean bean) {
+		lbAuthor.setText(bean.getAuthor());
+		txtComment.setText(bean.getCommentAsText());
+		lbTitle.setText(bean.getCommentAsText());
+		if(bean.getVote() > 0)
+			setStarImages(bean.getVote());
 	}
 	
 	private void setStarImages(Integer vote) {

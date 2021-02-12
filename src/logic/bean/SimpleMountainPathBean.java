@@ -30,6 +30,10 @@ public class SimpleMountainPathBean extends ItemBean {
 	public String getProvince() {
 		return province;
 	}
+	
+	public String getProvinceAsText() {
+		return convertToText(this.province);
+	}
 
 	public void setProvince(String province) {
 		this.province = province;
@@ -37,6 +41,10 @@ public class SimpleMountainPathBean extends ItemBean {
 
 	public String getName() {
 		return name;
+	}
+	
+	public String getNameAsText() {
+		return convertToText(this.name);
 	}
 
 	public void setName(String name) {
@@ -46,6 +54,10 @@ public class SimpleMountainPathBean extends ItemBean {
 	public String getLevel() {
 		return level;
 	}
+	
+	public String getLevelAsText() {
+		return convertToText(this.level);
+	}
 
 	public void setLevel(String level) {
 		this.level = level;
@@ -54,6 +66,10 @@ public class SimpleMountainPathBean extends ItemBean {
 	public Integer getHours() {
 		return hours;
 	}
+	
+	public String getHoursAsText() {
+		return convertToText(this.hours);
+	}
 
 	public void setHours(Integer hours) {
 		this.hours = hours;
@@ -61,6 +77,10 @@ public class SimpleMountainPathBean extends ItemBean {
 
 	public String getRegion() {
 		return region;
+	}
+	
+	public String getRegionAsText() {
+		return convertToText(this.region);
 	}
 
 	public void setRegion(String region) {
@@ -89,10 +109,18 @@ public class SimpleMountainPathBean extends ItemBean {
 		return minutes;
 	}
 	
+	public String getMinutesAsText() {
+		return convertToText(this.minutes);
+	}
+	
 	public void setMinutes(Integer minutes) {
 		this.minutes = minutes;
 	}
-
+	
+	public String getVoteAsText() {
+		return convertToText(getVote());
+	}
+	
 	public Integer getVote() {
 		if (vote == null)
 			return 0;
@@ -110,9 +138,17 @@ public class SimpleMountainPathBean extends ItemBean {
 		else
 			return numberOfVotes;
 	}
-
+	
+	public String getNumberOfVotesAsText() {
+		return convertToText(this.getNumberOfVotes());
+	}
+	
 	public String getCity() {
 		return city;
+	}
+	
+	public String getCityAsText() {
+		return convertToText(this.city);
 	}
 
 	public void setCity(String city) {

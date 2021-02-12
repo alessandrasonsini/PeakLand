@@ -135,16 +135,16 @@
 						</div>
 						<div class="row mx-auto" style="padding-top: 30%;">
 							<div class="col-5" align="center">
-								<%=path.convertToText(path.getRegion())%>
+								<%=path.getRegionAsText()%>
 							</div>
 							<div class="col" align="center">-</div>
 							<div class="col-5" align="center">
-								<%=path.convertToText(path.getProvince())%>
+								<%=path.getProvinceAsText()%>
 							</div>
 						</div>
 						<div class="row mx-auto" style="padding-top: 5%;">
 							<div class="col" align="center">
-								<%=path.convertToText(path.getCity())%>
+								<%=path.getCityAsText()%>
 							</div>
 						</div>
 						
@@ -172,39 +172,39 @@
 								<div class="p-2 flex-item-icon">
 									<img src="Images/info.png" class="img-responsive icons">
 								</div>
-  								<div class="p-2 flex-item-text pull-left text">About the mountan path</div>
+  								<div class="p-2 flex-item-text pull-left text">About the mountain path</div>
 							</div>
 							
 							<br>
 							
 							<div class="container">
 								<div class="row">
-									<p class="green-text">Altitude&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=path.convertToText(path.getAltitude()) %></span></p>
+									<p class="green-text">Altitude&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=path.getAltitudeAsText() %></span></p>
 								</div>
 								<div class="row">
-									<p class="green-text">Lenght&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=path.convertToText(path.getLenght())%></span></p>
+									<p class="green-text">Lenght&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=path.getLenghtAsText()%></span></p>
 								</div>
 								<div class="row">
-									<p class="green-text">Level&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=path.convertToText(path.getLevel())%></span></p>
+									<p class="green-text">Level&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=path.getLevelAsText()%></span></p>
 								</div>
 								<div class="row">
-									<p class="green-text">Landscape&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=path.convertToText(path.getLandscape())%></span></p>
+									<p class="green-text">Landscape&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=path.getLandscapeAsText()%></span></p>
 								</div>
 								<div class="row">
-									<p class="green-text">Ground&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=path.convertToText(path.getGround())%></span></p>
+									<p class="green-text">Ground&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=path.getGroundAsText()%></span></p>
 								</div>
 								<div class="row">
-									<p class="green-text">Cycleable&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=path.convertToText(path.isCycleble())%></span></p>
+									<p class="green-text">Cycleable&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=path.getCyclableAsText()%></span></p>
 								</div>
 								<div class="row">
-									<p class="green-text">Presence of historical elements&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=path.convertToText(path.isHistoricalElements())%></span></p>
+									<p class="green-text">Presence of historical elements&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=path.getHistoricalElementsAsText()%></span></p>
 								</div>
 								<div class="row">
-									<p class="green-text">Family suitable&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=path.convertToText(path.isFamilySuitable())%></span></p>
+									<p class="green-text">Family suitable&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text"><%=path.getFamilySuitableAsText()%></span></p>
 								</div>
 								<div class="row">
 									<p class="green-text">Travel Time&nbsp;&nbsp;&nbsp;&nbsp;<span class="black-text">
-										<%=path.convertToText(path.getHours())%> : <%=path.convertToText(path.getMinutes())%>
+										<%=path.getHoursAsText()%> : <%=path.getMinutesAsText()%>
 									</span></p>
 								</div>
 							</div>
@@ -288,7 +288,7 @@
   									}
   									else {
   										%>
-  										<div class="p-2 black-text"><%=path.convertToText(path.getVote())%></div>
+  										<div class="p-2 black-text"><%=path.getVoteAsText()%></div>
   										<%
   									}
 								%>
@@ -298,7 +298,7 @@
 							<div class="container" style="padding-left: 5%;">
 								<div class="row">
 									<p class="green-text">Number of votes&nbsp;
-										<span class="black-text"><%=path.convertToText(path.getNumberOfVotes())%></span>
+										<span class="black-text"><%=path.getNumberOfVotesAsText()%></span>
 									</p>
 								</div>
 							</div>
