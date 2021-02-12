@@ -1,16 +1,11 @@
 package logic.model.utils;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import logic.bean.MountainPathBean;
 import logic.bean.SimpleMountainPathBean;
 import logic.model.Location;
 import logic.model.MountainPath;
 import logic.model.Time;
 import logic.model.enums.DifficultyLevelEnum;
-import logic.model.enums.GroundEnum;
-import logic.model.enums.LandscapeEnum;
 
 public class MountainPathConverter {
 	
@@ -90,21 +85,11 @@ public class MountainPathConverter {
 		if (bean.getLevel() != null)
 			path.setLevel(DifficultyLevelEnum.valueOf(bean.getLevel()));
 		
-		if (bean.getLandscape() != null) {
-			List<LandscapeEnum> landscape = new ArrayList<>();
-			for (String str : bean.getLandscape()) {
-				landscape.add(LandscapeEnum.valueOf(str));
-			}
-			path.setLandscape(landscape);
-		}
+		if (bean.getLandscape() != null)
+			path.setLandscapeFromString(bean.getLandscape());
 		
-		if (bean.getGround() != null) {
-			List<GroundEnum> ground = new ArrayList<>();
-			for (String str : bean.getGround()) {
-				ground.add(GroundEnum.valueOf(str));
-			}
-			path.setGround(ground);
-		}
+		if (bean.getGround() != null)
+			path.setGroundFromString(bean.getGround());
 		
 		if (bean.isCycleble() != null)
 			path.setCycleble(bean.isCycleble());
