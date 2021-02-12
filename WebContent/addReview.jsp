@@ -13,7 +13,7 @@
 <jsp:useBean id="review" scope="request" class="logic.bean.ReviewBean"/>
 <jsp:setProperty name="review" property="*"/>
 <%
-	AddNewMountainPathController controller = (AddNewMountainPathController) session.getAttribute("addPathController");
+	AddNewMountainPathController addPathController = (AddNewMountainPathController) session.getAttribute("controller");
 
 	session.setAttribute("disable", disable);
 	
@@ -59,7 +59,7 @@
 				if (request.getParameter("addReviewBtn") != null) {
 					try {
 						review.setVote(vote);
-						controller.saveReview(review,(Integer)session.getAttribute("sessionId"));
+						addPathController.saveReview(review,(Integer)session.getAttribute("sessionId"));
 						%>
 						<div class="container" style="padding-top: 3%;">
 							<div class="alert alert-success alert-dismissible fade show" role="alert">

@@ -3,16 +3,19 @@
 <%@page import="java.util.List" %>
 <%@page import="logic.controller.MainController"%>
 <%@page import="logic.controller.Controller"%>
+<%@page import="logic.model.exception.SystemException"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
 <%!
 	MainController mainController = new MainController();
+	Controller controller;
+
 	String pageName = "home.jsp";
 	String nextPageName = "";
 	
-	PageId nextAction;
+	PageId nextAction = PageId.HOME;
 	PageId nextPage;
 	PageId btn;
 %>
@@ -26,6 +29,14 @@
 		session.setAttribute("btn", PageId.HOME);
 	else 
 		btn = (PageId) session.getAttribute("btn");	
+	
+	if (session.getAttribute("controller") == null) {
+		controller = mainController.executeAction(mainController.getNextPageId());
+		session.setAttribute("controller", controller);
+	}
+	else {
+		controller = (Controller) session.getAttribute("controller");
+	}
 %>
 
 
@@ -91,6 +102,7 @@
 				session.setAttribute("btn", action);
 				nextPage = action;
 				nextAction = mainController.onActionRequired(action, (Integer) session.getAttribute("sessionId"));
+				session.setAttribute("controller", controller.executeAction(nextAction));
 				request.setAttribute("new", false);
 				break;
 			}
@@ -143,6 +155,7 @@
 			%>
 			<jsp:forward page="<%=pageName%>">
 				<jsp:param name="nextPageId" value="<%=nextPageName%>"/>
+				<jsp:param name="nextPage" value="<%=nextPage%>"/>
 			</jsp:forward>
 			<%
 		}

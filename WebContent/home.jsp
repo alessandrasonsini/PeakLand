@@ -6,19 +6,6 @@
 
 <jsp:useBean id="user" scope="request" class="logic.bean.LoggedUserBean"/>
 
-<%!
-	HomeController controller = new HomeController();
-	List<SimpleMountainPathBean> topTen;
-	String userName;
-%>
-<%
-	topTen = controller.getClassification((Integer)session.getAttribute("sessionId"));
-	userName = controller.getCurrentUserName();
-	session.setAttribute("userName", userName);
-
-%>
-
-
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,7 +19,17 @@
     	<!-- import our CSS for body of the page -->
     	<link rel="stylesheet" href="body.css" type="text/css"/>
 	</head>
-	
+	<%!
+		HomeController homeController;
+		List<SimpleMountainPathBean> topTen;
+		String userName;
+	%>
+	<%
+		homeController = (HomeController) session.getAttribute("controller");
+		topTen = homeController.getClassification((Integer)session.getAttribute("sessionId"));
+		userName = homeController.getCurrentUserName();
+		session.setAttribute("userName", userName);
+	%>
 	<body>
 		<div class="row fill">
 			<div class="col-3 background-orange">
@@ -109,7 +106,7 @@
 											
 											<div class="d-flex justify-content-start align-items-center">
 											<div class="ml-auto w-100 p-2 bd-highlight">
-												<div class="path-name-font" align="left" style="padding-left: 5%;"><%=bean.getRankPosition()%>.  <%=bean.getName()%></div>
+												<div class="path-name-font" align="left" style="padding-left: 5%;"><%=bean.convertToText(bean.getRankPosition())%>.  <%=bean.getName()%></div>
 											</div>
 											<div class="mr-auto p-2 bd-highlight" style="padding-left: 5%;">
 												<div class="d-flex justify-content-start align-items-center">
@@ -132,7 +129,7 @@
 												</div>
 											</div>
 											<div class="p-3 bd-highlight text-nowrap">
-												<div class="bold-text">Num of votes:</div> <%=bean.getNumberOfVotes()%>
+												<div class="bold-text">Num of votes:</div> <%=bean.convertToText(bean.getNumberOfVotes())%>
 											</div>
 										</div>
 										
@@ -141,13 +138,13 @@
 										<div class="row" style="padding-bottom: 2%;">
 											<div class="col-4" align="center" style="padding-bottom: 1%;">
 												<div class="row justify-content-center bold-text">Location</div>
-												<div class="row justify-content-center"><%= bean.getRegion() %></div>
-												<div class="row justify-content-center"><%= bean.getProvince() %></div>
-												<div class="row justify-content-center"><%= bean.getCity() %></div>
+												<div class="row justify-content-center"><%= bean.convertToText(bean.getRegion()) %></div>
+												<div class="row justify-content-center"><%= bean.convertToText(bean.getProvince()) %></div>
+												<div class="row justify-content-center"><%= bean.convertToText(bean.getCity()) %></div>
 											</div>
 											<div class="col-4" align="center">
 												<div class="row justify-content-center bold-text">Difficulty level</div>
-												<div class="row justify-content-center"><%= bean.getLevel() %></div>
+												<div class="row justify-content-center"><%= bean.convertToText(bean.getLevel()) %></div>
 											</div>
 											<div class="col-4" align="center">
 												<div class="row justify-content-center bold-text">Travel Time</div>

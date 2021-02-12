@@ -8,6 +8,7 @@
 <%@page import="logic.model.enums.GroundEnum" %>
 <%@page import="logic.model.enums.LandscapeEnum" %>
 <%@page import="logic.model.exception.TooManyImagesException"%>
+<%@page import="logic.model.exception.WrongInputException"%>
 <%@page import="logic.model.exception.DatabaseException"%>
 <%@page import="logic.model.exception.SystemException"%>
 <%@page import="org.apache.commons.fileupload.FileItem" %>
@@ -18,8 +19,74 @@
 <%@ page language="java" session="true" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-<%!
-	AddNewMountainPathController controller = new AddNewMountainPathController();
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="UTF-8">
+		
+		<!-- Bootstrap CSS -->
+    	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+		
+		<%@ include file="header.jsp" %>
+		
+		<!-- import our CSS for body of the page -->
+    	<link rel="stylesheet" href="body.css" type="text/css"/>
+    	
+    	<script>
+			function myFunction() {
+			  var res = "";
+			  res = res + Number.isInteger(123) + ": 123<br>";
+			  res = res + Number.isInteger(-123) + ": -123<br>";
+			  res = res + Number.isInteger(5-2) + ": 5-2<br>";
+			  res = res + Number.isFinite(0) + ": 0<br>";
+			  res = res + Number.isInteger(0.5) + ": 0.5<br>";
+			  res = res + Number.isInteger('123') + ": '123'<br>";
+			  res = res + Number.isInteger(false) + ": false<br>";
+			  res = res + Number.isInteger(Infinity) + ": Infinity<br>";
+			  res = res + Number.isInteger(-Infinity) + ": -Infinity<br>";
+			  res = res + Number.isInteger(0 / 0) + ": 0 / 0<br>";
+			
+			  document.getElementById("demo").innerHTML = res;
+			}
+			
+			function validateForm() {
+			  var input = document.forms["infoForm"]["minutes"].value;
+			  if (input != "") {
+				  if (!Number.isInteger(input) || input < 0 || input > 59) {
+					  alert("Minutes field must be an integer between 0 and 59.");
+			    	  return false;
+				  }
+			  }
+			  var input = document.forms["infoForm"]["hours"].value;
+			  if (input != "") {
+				  if (!Number.isInteger(input)) {
+					  alert("Hours field must be an integer.");
+			    	  return false;
+				  }
+			  }
+			  var input = document.forms["infoForm"]["lenght"].value;
+			  if (input != "") {
+				  if (!Number.isInteger(input)) {
+					  alert("Lenght field must be an integer.");
+			    	  return false;
+				  }
+			  }
+			  var input = document.forms["infoForm"]["altitude"].value;
+			  if (input != "") {
+				  if (!Number.isInteger(input)) {
+					  alert("Altitude field must be an integer.");
+			    	  return false;
+				  }
+			  }
+			}
+		</script>
+		
+		
+    	
+	</head>
+	
+	<%!
+	AddNewMountainPathController addPathController;
 
 	boolean disable = true;
 	boolean disableAddReview = true;
@@ -61,7 +128,7 @@
 <jsp:useBean id="newPath" scope="request" class="logic.bean.MountainPathBean"/>
 <jsp:setProperty name="newPath" property="*"/>
 <%
-	session.setAttribute("addPathController", controller);
+	addPathController = (AddNewMountainPathController) session.getAttribute("controller");
 	session.setAttribute("disable", disable);
 	if (session.getAttribute("disableAddReview") == null)
 			session.setAttribute("disableAddReview", disableAddReview);
@@ -70,7 +137,7 @@
 
 
 	if (request.getParameter("addReview") != null) {
-		controller.addReviewRequest();
+		addPathController.addReviewRequest();
 		if (nextPageName != "") {
 		%>
 		<jsp:forward page="<%=getNextPageName()%>"/>
@@ -78,21 +145,7 @@
 		}
 	}
 %>
-
-<html>
-	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta charset="UTF-8">
-		
-		<!-- Bootstrap CSS -->
-    	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
-		
-		<%@ include file="header.jsp" %>
-		
-		<!-- import our CSS for body of the page -->
-    	<link rel="stylesheet" href="body.css" type="text/css"/>
-    	
-	</head>
+	
 	<body>
 		<div class="row fill">
 			<div class="col-3 background-orange">
@@ -112,10 +165,12 @@
 			<div class="col-9">
 				<%
 				if (request.getParameter("name") != null) {
-					if (controller.checkName(request.getParameter("name"))) {
+					System.out.println("nome  " + request.getParameter("name"));
+					if (addPathController.checkName(request.getParameter("name"))) {
 						disable = false;
 						session.setAttribute("disable", disable);
-						session.setAttribute("name", request.getParameter("name"));
+						session.setAttribute("name", (String)request.getParameter("name"));
+						System.out.println("nome in sessione  " + session.getAttribute("name"));
 					}
 					else {
 						disable = true;
@@ -156,7 +211,7 @@
 						}
 					}
 					try {
-						controller.setMountainPathImages(streamList);
+						addPathController.setMountainPathImages(streamList);
 					} catch (TooManyImagesException e) {
 						%>
 						<div class="container" style="padding-top: 3%;">
@@ -168,7 +223,7 @@
 						<%
 					}
 					try {
-				    	controller.saveNewMountainPath(newPath, (Integer)session.getAttribute("sessionId"));
+						addPathController.saveNewMountainPath(newPath, (Integer)session.getAttribute("sessionId"));
 				    	%>
 						<div class="container" style="padding-top: 3%;">
 							<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -207,12 +262,12 @@
 					<form class="form-inline" action="addNewPath.jsp" method="post">
 						<div class="row mx-auto" style="padding-bottom: 3%;">
 							<div class="col-3 green-text">Mountain path name</div>
-							<div class="col-3"><input type="text" class="form-control" name="name" value=${ sessionScope.name eq null  ? '' : sessionScope.name}></div>
+							<div class="col-3"><input type="text" class="form-control" name="name" value="${ sessionScope.name eq null  ? '' : sessionScope.name}"></div>
 							<div class="col-2"><button type="submit" class="btn btn-light">Verify</button></div>
 						</div>
 					</form>
 					
-					<form class="form-inline" action="addNewPath.jsp" method="post"  enctype="multipart/form-data">
+					<form class="form-inline" name="infoForm" onsubmit="return validateForm()" action="addNewPath.jsp" method="post"  enctype="multipart/form-data">
 					
 						<input type='hidden' name='name' id='name' value="${sessionScope.name}"/>
 					

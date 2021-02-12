@@ -4,8 +4,28 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-<%!
-	ViewMountainPathInfoController controller;
+<!-- dichiarazione e instanziazione di una MountainPathBean !-->
+<jsp:useBean id="wishMountainPath" scope="request" class="logic.bean.MountainPathBean"/>
+<!-- mappa attributi della bean sui campi del form -->
+<jsp:setProperty name="wishMountainPath" property="*"/>
+
+
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="UTF-8">
+		
+		<!-- Bootstrap CSS -->
+    	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+    	
+		<%@ include file="header.jsp" %>
+		
+    	<!-- import our CSS for body of the page -->
+    	<link rel="stylesheet" href="body.css" type="text/css"/>
+	</head>
+	
+	<%!
+	ViewMountainPathInfoController viewInfoController;
 	String next = "";
 
 	private String getNextPageName() {
@@ -41,30 +61,9 @@
 		return next;
 	}
 %>
-
 <%
-	controller = (ViewMountainPathInfoController) session.getAttribute("viewInfoController");
+	viewInfoController = (ViewMountainPathInfoController) session.getAttribute("controller");
 %>
-
-<!-- dichiarazione e instanziazione di una MountainPathBean !-->
-<jsp:useBean id="wishMountainPath" scope="request" class="logic.bean.MountainPathBean"/>
-<!-- mappa attributi della bean sui campi del form -->
-<jsp:setProperty name="wishMountainPath" property="*"/>
-
-
-<html>
-	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta charset="UTF-8">
-		
-		<!-- Bootstrap CSS -->
-    	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
-    	
-		<%@ include file="header.jsp" %>
-		
-    	<!-- import our CSS for body of the page -->
-    	<link rel="stylesheet" href="body.css" type="text/css"/>
-	</head>
 	
 	<body>
 		<div class="row fill">
@@ -83,7 +82,7 @@
 					<%
 					if (request.getParameter("assResearch") != null) {
 						try {
-							List<SimpleMountainPathBean> results = controller.searchMountainPathByAssistedResearch(wishMountainPath);
+							List<SimpleMountainPathBean> results = viewInfoController.searchMountainPathByAssistedResearch(wishMountainPath);
 						%>
 						<jsp:forward page="<%=getNextPageName()%>">
 							<jsp:param name="controller" value="<%=controller%>"/>

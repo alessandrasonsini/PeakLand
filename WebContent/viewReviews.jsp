@@ -4,24 +4,6 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-<%!
-	String pathName;
-	ViewMountainPathInfoController controller;
-	List<ReviewBean> reviewList;
-%>
-
-<%
-	controller = (ViewMountainPathInfoController) session.getAttribute("viewInfoController");
-
-	if (request.getParameter("pathName") != null) {
-		pathName = (String) request.getParameter("pathName");
-		session.setAttribute("pathName", pathName);
-	}
-	
-	reviewList = controller.getPathReview(pathName);
-	System.out.println("sizee viewreview jsp  "+reviewList.size());
-%>
-
 <html>
 	
 	<head>
@@ -36,6 +18,22 @@
     	<!-- import our CSS for body of the page -->
     	<link rel="stylesheet" href="body.css" type="text/css"/>
 	</head>
+	
+<%!
+	String pathName;
+	ViewMountainPathInfoController viewInfoController;
+	List<ReviewBean> reviewList;
+%>
+<%
+	viewInfoController = (ViewMountainPathInfoController) session.getAttribute("controller");
+
+	if (request.getParameter("pathName") != null) {
+		pathName = (String) request.getParameter("pathName");
+		session.setAttribute("pathName", pathName);
+	}
+	
+	reviewList = viewInfoController.getPathReview(pathName);
+%>
 	
 	<body>
 		<div class="row fill">

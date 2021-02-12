@@ -8,7 +8,6 @@ public class ControllerFactory {
 	// Ritorna il controller relativo al tipo richiesto
 	public Controller getController(PageId type) throws SystemException	 {
 		Controller newController;
-		
 		switch(type) {
 			case VIEW_INFO: 
 				newController = new ViewMountainPathInfoController();

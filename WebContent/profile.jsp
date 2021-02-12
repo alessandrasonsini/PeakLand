@@ -17,7 +17,7 @@
 <jsp:useBean id="currentUser" scope="session" class="logic.bean.LoggedUserBean"/>
 <jsp:setProperty name="user" property="*"/>
 
-<%!ProfileController controller = new ProfileController();
+<%!ProfileController profileController;
 	boolean disable = true;
 	String base64;
 	String next = "";
@@ -56,14 +56,16 @@
 	}
 %>
 <%
-	session.setAttribute("profileController", controller);
+	profileController = (ProfileController) session.getAttribute("controller");
 	
-	currentUser = controller.getCurrentUser((Integer) session.getAttribute("sessionId"));
+	currentUser = profileController.getCurrentUser((Integer) session.getAttribute("sessionId"));
 	session.setAttribute("currentUser", currentUser);
 	
 	if (request.getParameter("logOut") != null) {
 		session.removeAttribute("sessionId");
-		controller.logOut();
+		profileController.logOut();
+		session.setAttribute("controller", controller.executeAction(controller.getNextPageId()));
+
 		%>
 		<jsp:forward page="<%=getNextPageName()%>"/>
 		<%
@@ -135,16 +137,24 @@
 				<div class="container" style="padding-top: 2%;">
 					<form class="form-inline" action="profile.jsp" method="post">
 						<div class="d-flex flex-row justify-content-start align-items-center">
+							<div class="p-2">
+								<button type="submit" name="edit" value="edit" class="btn btn-dark-orange" ${ sessionScope.disable eq false  ? 'disabled' : ''}>
+									<img src="Images/edit.png" width="100%">
+								</button>
+							</div>
+							<div class="p-2">
+								<button type="submit" name="save" value="save" class="btn btn-dark-orange" ${ sessionScope.disable eq true  ? 'disabled' : ''}>Save</button>
+							</div>
 						<%
 						if (request.getParameter("save") != null) {
 							try {
-								controller.updateUserInfo(user);
+								profileController.updateUserInfo(user);
 								disable = true;
 							} catch (DatabaseException e) {
 								%>
 								<div class="container" style="padding-top: 3%;">
 									<div class="alert alert-danger alert-dismissible fade show" role="alert">
-										<strong>Database error</strong>Ops, there was an error connecting to database. Retry later
+										<strong>Database error</strong> Ops, there was an error connecting to database. Retry later
 									  	<a href="#" class="close" style="float: right;" data-dismiss="alert" aria-label="close">&times;</a>
 									</div>
 								</div>
@@ -157,7 +167,7 @@
 							if (filePart != null) {
 								try {
 									InputStream fileContent = filePart.getInputStream();
-									controller.setProfileImage(fileContent);
+									profileController.setProfileImage(fileContent);
 								} catch (SystemException e) {
 									%>
 									<div class="container" style="padding-top: 3%;">
@@ -171,17 +181,9 @@
 							}
 						}
 						%>
-							<div class="p-2">
-								<button type="submit" name="edit" value="edit" class="btn btn-dark-orange" ${ sessionScope.disable eq false  ? 'disabled' : ''}>
-									<img src="Images/edit.png" width="100%">
-								</button>
-							</div>
-							<div class="p-2">
-								<button type="submit" name="save" value="save" class="btn btn-dark-orange" ${ sessionScope.disable eq true  ? 'disabled' : ''}>Save</button>
-							</div>
 						</div>
 						<br>
-						<div class="row">
+						<div class="row" style="background-color: red;">
 							<div class="col-6" style="padding-right: 3%;">
 								<div class="row mx-auto" style="padding-bottom: 3%;">
 									<div class="col-5 green-text">Name</div>

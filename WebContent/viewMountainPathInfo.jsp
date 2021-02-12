@@ -12,8 +12,22 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-<%!
-	ViewMountainPathInfoController controller = new ViewMountainPathInfoController();
+<html>
+
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="UTF-8">
+		
+		<!-- Bootstrap CSS -->
+    	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+    	
+		<%@ include file="header.jsp" %>
+    	
+    	<!-- import our CSS for body of the page -->
+    	<link rel="stylesheet" href="body.css" type="text/css"/>
+	</head>
+	<%!
+	ViewMountainPathInfoController viewInfoController;
 	ArrayList<String> base64 = new ArrayList<>();
 	int currImgNum = -1;
 	boolean disablePrev = true;
@@ -58,14 +72,13 @@
 	session.setAttribute("disablePrev", disablePrev);
 	session.setAttribute("disableNext", disableNext);
 
-	if (session.getAttribute("viewInfoController") != null)
-		controller = (ViewMountainPathInfoController) session.getAttribute("viewInfoController");
-	MountainPathBean path = controller.getSelectedMountainPath();
-	List<ReviewBean> list = controller.getPathReview(path.getName());
+	viewInfoController = (ViewMountainPathInfoController) session.getAttribute("controller");
+	MountainPathBean path = viewInfoController.getSelectedMountainPath();
+	List<ReviewBean> list = viewInfoController.getPathReview(path.getName());
 	
-	if (controller.getImageStreams() != null) {
+	if (viewInfoController.getImageStreams() != null) {
 		if (base64.isEmpty()) {
-			List<ByteArrayInputStream> streams = controller.getImageStreams();
+			List<ByteArrayInputStream> streams = viewInfoController.getImageStreams();
 			for(ByteArrayInputStream stream : streams) {
 				byte[] bytes = IOUtils.toByteArray(stream);
 				base64.add(Base64.getEncoder().encodeToString(bytes));
@@ -95,7 +108,7 @@
 			disableNext = true;
 	}
 	if (request.getParameter("viewReviews") != null) {
-		controller.viewReviewsRequest();
+		viewInfoController.viewReviewsRequest();
 		%>
 		<jsp:forward page="<%=getNextPageName()%>">
 			<jsp:param name="pathName" value="<%=path.getName()%>"/>
@@ -107,21 +120,6 @@
 	session.setAttribute("disableNext", disableNext);
 	session.setAttribute("currImgNum", currImgNum);
 %>
-
-<html>
-
-	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta charset="UTF-8">
-		
-		<!-- Bootstrap CSS -->
-    	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
-    	
-		<%@ include file="header.jsp" %>
-    	
-    	<!-- import our CSS for body of the page -->
-    	<link rel="stylesheet" href="body.css" type="text/css"/>
-	</head>
 	
 	<body>
 		<div class="row fill">

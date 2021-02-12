@@ -10,13 +10,33 @@
 <!DOCTYPE html>
 
 <%!
-	LoginController controller = new LoginController();
+	LoginController loginController;
 	Integer id;
+	
+	public PageId getNextPage(String page) {
+		switch (page) {
+			case "VIEW_INFO": 
+				return PageId.VIEW_INFO;
+			case "ADD_PATH": 
+				return PageId.ADD_PATH;
+			case "LOGIN":
+				return PageId.LOGIN;
+			case "PROFILE":
+				return PageId.PROFILE;
+			case "HOME":
+				return PageId.HOME;
+			default: 
+				return null;
+		}
+	}
 %>
 <%
-	session.setAttribute("loginController", controller);
+	loginController = (LoginController) session.getAttribute("controller");
 	if (request.getParameter("nextPageId") != null)
 		session.setAttribute("nextPageId", request.getParameter("nextPageId"));
+	if (request.getParameter("nextPage") != null) {
+		session.setAttribute("nextPage", request.getParameter("nextPage"));
+	}
 %>
 
 <!-- dichiarazione e instanziazione di una CredentialBean !-->
@@ -55,22 +75,24 @@
 		<%
 		try {
 			if (request.getParameter("login") != null) {
-				id = controller.loginAction(credential);
+				id = loginController.loginAction(credential);
 				session.setAttribute("sessionId", id);
+				controller = loginController.executeAction(getNextPage((String)session.getAttribute("nextPage")));
+				session.setAttribute("controller", controller);
 				%>
 				<jsp:forward page='<%=(String) session.getAttribute("nextPageId")%>'/>
 				<%
 			}
 			else if (request.getParameter("signin") != null) {
-				id = controller.signInAction(credential);
+				id = loginController.signInAction(credential);
 				session.setAttribute("sessionId", id);
+				controller = loginController.executeAction(getNextPage((String)session.getAttribute("nextPage")));
+				session.setAttribute("controller", controller);
 				%>
 				<jsp:forward page='<%=(String) session.getAttribute("nextPageId")%>'/>
 				<%
 			}
 		}catch(EmptyMandatoryFieldsException e) {
-			System.out.println("dento catch 1 ");
-			
 			if (request.getParameter("login") != null) {
 			%>
 			<div class="container" style="padding-top: 3%;">
@@ -110,7 +132,6 @@
 			</div>
 			<%
 		}catch(WrongInputException e) {
-			System.out.println("dento catch 4 ");
 			%>
 			<div class="container" style="padding-top: 3%;">
 				<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -120,7 +141,6 @@
 			</div>
 			<%
 		}catch(DatabaseException e) {
-			System.out.println("dento catch 5 ");
 			%>
 			<div class="container" style="padding-top: 3%;">
 				<div class="alert alert-danger alert-dismissible fade show" role="alert">

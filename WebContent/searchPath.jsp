@@ -10,10 +10,24 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-<%!
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="UTF-8">
+		
+		<!-- Bootstrap CSS -->
+    	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+    	
+		<%@ include file="header.jsp" %>
+		
+    	<!-- import our CSS for body of the page -->
+    	<link rel="stylesheet" href="body.css" type="text/css"/>
+	</head>
+	
+	<%!
 	List<SimpleMountainPathBean> beanList = new ArrayList<SimpleMountainPathBean>();
 	SimpleMountainPathBean selectedPath;
-	ViewMountainPathInfoController controller;
+	ViewMountainPathInfoController viewInfoController;
 	String next = "";
 	
 	private String getNextPageName() {
@@ -50,34 +64,14 @@
 	}
 %>
 <%
-	if (request.getParameter("controller") != null)
-		controller = (ViewMountainPathInfoController) session.getAttribute("viewInfoController");
-	else {
-		controller = new ViewMountainPathInfoController();
-		session.setAttribute("viewInfoController", controller);
-	}
-
-
+	viewInfoController = (ViewMountainPathInfoController) session.getAttribute("controller");
+	
 	if (request.getParameter("path") != null) {
-		controller.setSelectedMountainPath(request.getParameter("path"));
+		viewInfoController.setSelectedMountainPath(request.getParameter("path"));
 		%><jsp:forward page="<%=getNextPageName()%>"/><%
 	}
 %>
-
-
-<html>
-	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta charset="UTF-8">
-		
-		<!-- Bootstrap CSS -->
-    	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
-    	
-		<%@ include file="header.jsp" %>
-		
-    	<!-- import our CSS for body of the page -->
-    	<link rel="stylesheet" href="body.css" type="text/css"/>
-	</head>
+	
 	<body>
 		<div class="row fill">
 			<div class="col-3 background-orange">
@@ -108,18 +102,18 @@
 				<div class="container">
 				
 				<%
-				if ((request.getParameter("pathName") != null) || (controller.getPreviousSearchResults() != null) ) {
+				if ((request.getParameter("pathName") != null) || (viewInfoController.getPreviousSearchResults() != null) ) {
 					
 					if (request.getParameter("pathName") != null) {
 						beanList.clear();
-						beanList.addAll(controller.searchMountainPathByName(request.getParameter("pathName")));
+						beanList.addAll(viewInfoController.searchMountainPathByName(request.getParameter("pathName")));
 						if (beanList.isEmpty()) {
 							%>
 							<div class="row justify-content-center" style="padding-top:10%">No matches found</div><%
 						}
 					}
 					else {
-						beanList.addAll(controller.getPreviousSearchResults());
+						beanList.addAll(viewInfoController.getPreviousSearchResults());
 					}
 					
 						for(SimpleMountainPathBean bean : beanList)	{

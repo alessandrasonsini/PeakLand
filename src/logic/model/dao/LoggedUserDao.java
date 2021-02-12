@@ -41,7 +41,6 @@ public class LoggedUserDao extends Dao{
 			throw new DatabaseException();
 		}
 	}
-
 	
 	public void updateUserImage(InputStream imageStream, String name) {
 		// Controlla se è già presenta una foto del profilo dell'utente
