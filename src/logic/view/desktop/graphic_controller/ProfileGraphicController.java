@@ -15,6 +15,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -84,9 +85,10 @@ public class ProfileGraphicController extends GraphicController {
 	
 	@FXML
 	public void onSaveModification(ActionEvent event) {
-		LoggedUserBean userBean = LoggedUserConverter.getLoggedUserBean(txtName.getText(),txtSurname.getText(),txtDescription.getText());
+		LoggedUserBean userBean = LoggedUserConverter.getLoggedUserBean(txtName.getText(),txtSurname.getText(),txtDescription.getText(),lbLevel.getText());
 		try {
 			this.getProfileController().updateUserInfo(userBean);
+			showMessage("Update succeded", "Your dates was updated successfully", AlertType.INFORMATION);
 		} catch (DatabaseException e) {
 			showDatabaseError();
 		}

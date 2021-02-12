@@ -37,7 +37,9 @@ public class ProfileController extends Controller{
 	
 	
 	public void updateUserInfo(LoggedUserBean userBean) throws DatabaseException {
-		this.currentUser = LoggedUserConverter.getLoggedUser(userBean);
+		this.currentUser.setName(userBean.getName());
+		this.currentUser.setSurname(userBean.getSurname());
+		this.currentUser.setDescription(userBean.getDescription());
 		this.updateOnDb();
 	}
 	

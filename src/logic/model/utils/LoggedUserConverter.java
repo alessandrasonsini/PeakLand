@@ -21,11 +21,12 @@ public class LoggedUserConverter {
 		return bean;
 	}
 	
-	public static LoggedUserBean getLoggedUserBean(String name, String surname, String description) {
+	public static LoggedUserBean getLoggedUserBean(String name, String surname, String description, String level) {
 		LoggedUserBean bean = new LoggedUserBean();
 		bean.setName(name);
 		bean.setSurname(surname);
 		bean.setDescription(description);
+		bean.setLevel(level);
 		
 		return bean;
 	}
@@ -34,7 +35,7 @@ public class LoggedUserConverter {
 		LoggedUser user = new LoggedUser();
 		user.setName(bean.getName());
 		user.setSurname(bean.getSurname());
-		user.setLevel(UserLevel.valueOf(bean.getLevel()));
+		user.setLevel(UserLevel.valueOf(bean.getLevel().toUpperCase()));
 		user.setDescription(bean.getDescription());
 		
 		return user;
