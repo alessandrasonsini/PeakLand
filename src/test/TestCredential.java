@@ -10,7 +10,7 @@ import logic.model.exception.EmptyMandatoryFieldsException;
 public class TestCredential {
 	
 	@Test
-	public void TestVerifyCredentialTrue() throws EmptyMandatoryFieldsException {
+	public void testVerifyCredentialTrue() throws EmptyMandatoryFieldsException {
 		Credential first = new Credential("test","test");
 		Credential second = new Credential("test","test");
 		boolean result = first.verifyCredential(second); 
@@ -18,7 +18,7 @@ public class TestCredential {
 	}
 	
 	@Test
-	public void TestVerifyCredentialFalse() throws EmptyMandatoryFieldsException {
+	public void testVerifyCredentialFalse() throws EmptyMandatoryFieldsException {
 		Credential first = new Credential("test","tset");
 		Credential second = new Credential("test","test");
 		boolean result = first.verifyCredential(second); 

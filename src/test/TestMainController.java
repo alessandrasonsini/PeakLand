@@ -10,13 +10,13 @@ import logic.model.enums.PageId;
 public class TestMainController {
 
 	@Test
-	public void TestOnActionRequiredViewInfoWithoutLogin() {
+	public void testOnActionRequiredViewInfoWithoutLogin() {
 		PageId result = new MainController().onActionRequired(PageId.VIEW_INFO, null);
 		assertEquals(PageId.VIEW_INFO, result);
 	}
 	
 	@Test
-	public void TestOnActionRequiredAddPathWithoutLogin() {
+	public void testOnActionRequiredAddPathWithoutLogin() {
 		PageId result = new MainController().onActionRequired(PageId.ADD_PATH, null);
 		assertEquals(PageId.LOGIN, result);
 	}
