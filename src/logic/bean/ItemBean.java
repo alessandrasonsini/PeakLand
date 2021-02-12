@@ -11,7 +11,7 @@ public abstract class ItemBean {
 		
 		for (int i = 0; i < array.length; i++) {
 			if (!array[i].isEmpty())
-				text = text.concat(" " + array[i]);
+				text = text.concat(array[i] + " ");
 		}
 		
 		if (text.isEmpty())

@@ -8,7 +8,6 @@ public class ReviewBean extends ItemBean {
 	private String comment;
 	private String author;
 	
-	
 	public String getPathName() {
 		return pathName;
 	}
@@ -48,6 +47,4 @@ public class ReviewBean extends ItemBean {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-	
-	
 }

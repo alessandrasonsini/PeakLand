@@ -20,8 +20,6 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import logic.model.exception.SystemException;
 
-
-
 public abstract class Dao implements OnGetDataListener {
 	
 	private static final Logger LOGGER = Logger.getLogger(Dao.class.getName());
@@ -55,7 +53,6 @@ public abstract class Dao implements OnGetDataListener {
 	
 	// Effettua la query sul db e sulla risposta asincrona richiama il metodo onSuccess implementato
 	// nelle classi dao figlie
-
 	public void readData(Query query) {
 		query.addListenerForSingleValueEvent(new ValueEventListener() {
 	        @Override
