@@ -32,8 +32,16 @@ public class TestAssistedResearchSelenium {
         // Click on the search button 
 		driver.findElement(By.name("VIEW_INFO")).click(); 
 		
+		// Wait until "E" radio button is available
+		WebDriverWait waitResearch = new WebDriverWait(driver, 60);
+		waitResearch.until(ExpectedConditions.presenceOfElementLocated(By.id("assistedResearch")));
+				
 		// AssistedResearch button click 
-		driver.findElement(By.xpath("/html/body/div[2]/div[1]/div/div[2]/div/a")).click();
+		driver.findElement(By.id("assistedResearch")).click();
+		
+		// Wait until "E" radio button is available
+		WebDriverWait waitE = new WebDriverWait(driver, 60);
+		waitE.until(ExpectedConditions.presenceOfElementLocated(By.id("E")));
 		
 		// Click on radio button Difficulty Level "E"
 		driver.findElement(By.id("E")).click();
@@ -43,7 +51,7 @@ public class TestAssistedResearchSelenium {
 		
 		// Wait until container in which results are shown is available
 		WebDriverWait wait = new WebDriverWait(driver, 60);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("resultsContainer")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("difficultyLevel")));
 		
 		// Get all div of results with id = "difficultyLevel"
 		List<WebElement> resultList = driver.findElements(By.id("difficultyLevel"));

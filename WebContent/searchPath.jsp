@@ -90,7 +90,7 @@
 					</div>
 					<div class="row mx-auto" style="padding-top: 5%;">
 						<div class="col" align="center">
-							<a class="btn btn-ass-research" href="assistedResearch.jsp" role="button">Assisted research</a>
+							<a class="btn btn-ass-research" id="assistedResearch" href="assistedResearch.jsp" role="button">Assisted research</a>
 						</div>
 					</div>
 				</div>

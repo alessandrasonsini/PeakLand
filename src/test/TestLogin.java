@@ -28,6 +28,10 @@ public class TestLogin {
 		// Click on the profile button 
 		driver.findElement(By.name("PROFILE")).click(); 
 		
+		// Wait until textbox in which user name is shown is available
+		WebDriverWait waitLoginButton = new WebDriverWait(driver, 60);
+		waitLoginButton.until(ExpectedConditions.presenceOfElementLocated(By.id("login")));
+		
 		// Insert username and password and click to login
 		driver.findElement(By.id("username")).sendKeys("test");
 		driver.findElement(By.id("password")).sendKeys("test");
