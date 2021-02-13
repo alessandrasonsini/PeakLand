@@ -60,7 +60,6 @@ public class ProfileGraphicController extends GraphicController {
 	
 	private static final int MAX_CHARS = 200;
 
-	private LoggedUserBean currentUser;
 	private List<TextInputControl> editableText; 
 	
 	protected ProfileGraphicController(Controller controller) {
@@ -122,7 +121,7 @@ public class ProfileGraphicController extends GraphicController {
 	@Override
 	protected void setupLayout() {
 		this.editableText = Arrays.asList(txtDescription,txtName,txtSurname);
-		this.currentUser = this.getProfileController().getCurrentUser(MainGraphicController.getInstance().getSessionId());
+		LoggedUserBean currentUser = this.getProfileController().getCurrentUser(MainGraphicController.getInstance().getSessionId());
 	
 		txtDescription.setTextFormatter(new TextFormatter<String>(change -> change.getControlNewText().length() <= MAX_CHARS ? change : null));
 		txtName.setText(currentUser.getNameAsText());

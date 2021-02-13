@@ -46,7 +46,7 @@ public class AddReviewGraphicController extends GraphicController{
 	@FXML
 	private Button back;
 	
-	private List<Button> btnVotes;;
+	private List<Button> btnVotes;
 	private Integer votes;
 	
 	public AddReviewGraphicController(Controller controller) {
