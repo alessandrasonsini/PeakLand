@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;  
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;  
 
@@ -17,7 +17,8 @@ public class TestLogin {
 	public void testLoginName() {
 		
 		// Instantiate a SafariDriver class
-		WebDriver driver = new SafariDriver();
+		System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
 		
 		// Maximize browser window size
 		driver.manage().window().maximize();

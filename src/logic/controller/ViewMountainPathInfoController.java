@@ -100,11 +100,9 @@ public class ViewMountainPathInfoController extends Controller {
 	private void createResultList(List<MountainPath> result){
 		this.searchResults = new ArrayList<>();
 		result = Sorter.sortByVote(result);
-		MountainPathDao dao = new MountainPathDao();
 		SimpleMountainPathBean bean;
 		for (MountainPath path : result) {
 			bean = MountainPathConverter.getSimpleMountainPath(path);
-			bean.setImage(dao.getImage(bean.getName()));
 			this.searchResults.add(bean);
 			
 		}

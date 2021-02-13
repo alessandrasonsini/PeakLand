@@ -50,12 +50,10 @@ public class HomeController extends Controller {
 	
 	private List<SimpleMountainPathBean> createTopTenList(List<MountainPath> topTenList) {
 		List<SimpleMountainPathBean> beanList = new ArrayList<>();
-		MountainPathDao dao = new MountainPathDao();
 		SimpleMountainPathBean bean;
 		for (int i = 0; i < 10; i++ ) {
 			bean = MountainPathConverter.getSimpleMountainPath(topTenList.get(i));
 			bean.setRankPosition(i+1);
-			bean.setImage(dao.getImage(bean.getName()));
 			beanList.add(bean);
 			
 		}

@@ -18,9 +18,6 @@ public class SimpleMountainPathItem extends ShowableElement {
 	private HBox itemBox;
 	
 	@FXML
-	private ImageView imgPath;
-	
-	@FXML
 	private VBox vbInfo;
 	
 	@FXML
@@ -80,10 +77,6 @@ public class SimpleMountainPathItem extends ShowableElement {
         	setStarVote(bean.getVote());
         if(bean.getRankPosition() != null)
         	lbRankPosition.setText(bean.getRankPosition().toString() +")");
-        
-        if(bean.getImage() != null) {
-        	imgPath.setImage(new Image(bean.getImage(),150,150,true,false));
-        }
         	
     }
 

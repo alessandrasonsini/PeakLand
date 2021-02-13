@@ -105,7 +105,7 @@
 					<form class="form-inline" action="assistedResearch.jsp" method="post">
 						<div class="row mx-auto" style="padding-bottom: 3%;">
 							<div class="col-3 black-text">Location</div>
-							<div class="col-3"><input type="text" class="form-control" name="region" placeholder="Region"></div>
+							<div class="col-3"><input type="text" class="form-control" id="region" name="region" placeholder="Region"></div>
 							<div class="col-3"><input type="text" class="form-control" name="province" placeholder="Province"></div>
 							<div class="col-3"><input type="text" class="form-control" name="city" placeholder="City"></div>
 						</div>

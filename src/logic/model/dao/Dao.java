@@ -20,7 +20,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import logic.model.exception.SystemException;
 
-public abstract class Dao implements OnGetDataListener {
+public abstract class Dao{
 	
 	private static final Logger LOGGER = Logger.getLogger(Dao.class.getName());
 	
@@ -124,8 +124,8 @@ public abstract class Dao implements OnGetDataListener {
 		return imageStreams;
 	}
 	
-	public void uploadImage(List<InputStream> images, String pathName, String userName) throws SystemException {
-		String dir = this.getDirectory() + pathName + "/" + userName; 
+	public void uploadImage(List<InputStream> images, String fileName, String userName) throws SystemException {
+		String dir = this.getDirectory() + fileName + "/" + userName; 
 		int imgNumber = images.size();
 		for(int i = 0; i < imgNumber; i++) {
 			this.bucketReference.create(dir + "/" + i + FORMAT, images.get(i),Bucket.BlobWriteOption.doesNotExist());
@@ -141,17 +141,16 @@ public abstract class Dao implements OnGetDataListener {
 		return image;
 	}
 	
-	public void uploadImage(InputStream f, String userName) {
-		String fileName = this.getDirectory() + userName + FORMAT;
+	public void uploadImage(InputStream f, String fileName) {
+		fileName = this.getDirectory() + fileName + FORMAT;
 		this.bucketReference.create(fileName,f,Bucket.BlobWriteOption.doesNotExist());
 	}
 	
-	public void deleteImage(String userName) {
-		String fileName = this.getDirectory() + userName + FORMAT;
+	public void deleteImage(String fileName) {
+		fileName = this.getDirectory() + fileName + FORMAT;
 		this.storageRefence.delete(BlobId.of(this.bucketReference.getName(),fileName));
 	}
 	
-	@Override
 	public abstract void onReadSuccess(DataSnapshot dataSnapshot);
 	
 	protected abstract String getChild(); 

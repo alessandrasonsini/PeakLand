@@ -86,7 +86,7 @@
 				
 				<!-- text and assisted research button -->
 				<div class="container">
-					<div class="row mx-auto" style="padding-top: 55%; padding-left: 5%; padding-right: 5%">
+					<div class="row mx-auto" style="padding-top: 30%; padding-left: 5%; padding-right: 5%">
 						<div class="col" align="center">If you don't know what to look for we will help you!</div>
 					</div>
 					<div class="row mx-auto" style="padding-top: 5%;">

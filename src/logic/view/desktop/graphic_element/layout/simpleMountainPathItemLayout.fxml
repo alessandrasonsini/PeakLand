@@ -20,17 +20,9 @@
             <Font name="Maiandra GD" size="28.0" />
          </font>
       </Label>
-      <ImageView fx:id="imgPath" fitHeight="116.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-         <HBox.margin>
-            <Insets left="20.0" />
-         </HBox.margin>
-         <image>
-            <Image url="@../images/mountain_path.png" />
-         </image>
-      </ImageView>
       <VBox fx:id="vbInfo" prefHeight="169.0" prefWidth="700.0">
          <children>
-            <Label fx:id="txtName" alignment="CENTER" contentDisplay="CENTER" prefHeight="29.0" prefWidth="527.0" text="Label" textFill="#080808">
+            <Label fx:id="txtName" contentDisplay="CENTER" prefHeight="29.0" prefWidth="527.0" text="Label" textFill="#080808">
                <font>
                   <Font name="Maiandra GD" size="24.0" />
                </font>

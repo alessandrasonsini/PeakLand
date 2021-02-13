@@ -4,6 +4,7 @@ import logic.bean.MountainPathBean;
 import logic.bean.SimpleMountainPathBean;
 import logic.model.Location;
 import logic.model.MountainPath;
+import logic.model.StandardName;
 import logic.model.Time;
 import logic.model.enums.DifficultyLevelEnum;
 
@@ -73,11 +74,11 @@ public class MountainPathConverter {
 		
 		Location loc = new Location();
 		if (bean.getRegion() != null)
-			loc.setRegion(bean.getRegion());
+			loc.setRegion(StandardName.standardizeName(bean.getRegion()));
 		if (bean.getProvince() != null)
-			loc.setProvince(bean.getProvince());
+			loc.setProvince(StandardName.standardizeName(bean.getProvince()));
 		if (bean.getCity() != null)
-			loc.setCity(bean.getCity());
+			loc.setCity(StandardName.standardizeName(bean.getCity()));
 		path.setLocation(loc);
 		
 		if (bean.getLenght() != null)

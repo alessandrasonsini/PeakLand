@@ -1,6 +1,5 @@
 package logic.bean;
 
-import java.io.ByteArrayInputStream;
 import java.lang.reflect.Field;
 
 import logic.model.exception.WrongInputException;
@@ -17,15 +16,6 @@ public class SimpleMountainPathBean extends ItemBean {
 	protected Integer vote;
 	protected Integer numberOfVotes;
 	protected Integer rankPosition; 
-	protected ByteArrayInputStream image;
-
-	public ByteArrayInputStream getImage() {
-		return image;
-	}
-
-	public void setImage(ByteArrayInputStream image) {
-		this.image = image;
-	}
 
 	public String getProvince() {
 		return province;
@@ -68,7 +58,7 @@ public class SimpleMountainPathBean extends ItemBean {
 	}
 	
 	public String getHoursAsText() {
-		return convertToText(this.hours);
+		return convertToTextWithUnitOfMeasure(this.hours,"h");
 	}
 
 	public void setHours(Integer hours) {
@@ -110,7 +100,7 @@ public class SimpleMountainPathBean extends ItemBean {
 	}
 	
 	public String getMinutesAsText() {
-		return convertToText(this.minutes);
+		return convertToTextWithUnitOfMeasure(this.minutes,"m");
 	}
 	
 	public void setMinutes(Integer minutes) {

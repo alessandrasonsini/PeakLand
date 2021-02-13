@@ -21,7 +21,7 @@ public class MountainPathBean extends SimpleMountainPathBean {
 	}
 	
 	public String getLenghtAsText() {
-		return convertToText(this.lenght);
+		return convertToTextWithUnitOfMeasure(this.lenght, "km");
 	}
 
 	public void setLenght(Integer lenght) {
@@ -49,7 +49,7 @@ public class MountainPathBean extends SimpleMountainPathBean {
 	}
 	
 	public String getAltitudeAsText() {
-		return convertToText(this.altitude);
+		return convertToTextWithUnitOfMeasure(this.altitude, "m");
 	}
 	
 	public void setAltitude(Integer altitude) {
