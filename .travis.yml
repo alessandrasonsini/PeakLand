@@ -8,5 +8,5 @@ addons:
     token: 5902fbc08c17a4f42eb0a8c90556f83d9f27ebef
 
 script:
-- mvn -X clean install sonar:sonar -Pcoverage -Dsonar.alessandrasonsini_PeakLand=alessandrasonsini
+- mvn -X clean install org.jacoco:jacoco-maven-plugin:prepare-agent verify sonar:sonar
 - sonar-scanner
