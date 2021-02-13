@@ -118,6 +118,12 @@
 		</jsp:forward>
 		<%
 	}
+	if (request.getParameter("back") != null) {
+		viewInfoController.onBackPressed();
+		%>
+		<jsp:forward page="<%=getNextPageName()%>"/>
+		<%
+	}
 	
 	session.setAttribute("disablePrev", disablePrev);
 	session.setAttribute("disableNext", disableNext);
@@ -125,17 +131,20 @@
 	
 	<body>
 		<div class="row fill">
-			<div class="col-3 background-orange">			
+			<div class="col-3 background-orange">
+				<form class="form" action="viewMountainPathInfo.jsp" method="post">
+					<button type="submit" name="back" class="btn justify-content-start align-items-center" style="display: flex; justify-content: flex-start;"><img src="Images/back.png" width="35%"></button>
+				</form>	
 				<%
 				if (path != null) {
 					%>
 					<div class="container">
-						<div class="row mx-auto" style="padding-top: 30%; padding-left: 5%; padding-right: 5%">
-							<div class="col" align="center">
+						<div class="row mx-auto" style="padding-top: 6%;">
+							<div class="col-xs-1 center-block" align="center">
 								<span class="path-name-font"><%=path.getName()%></span>
 							</div>
 						</div>
-						<div class="row mx-auto" style="padding-top: 30%;">
+						<div class="row mx-auto" style="padding-top: 15%;">
 							<div class="col-5" align="center">
 								<%=path.getRegionAsText()%>
 							</div>
@@ -226,8 +235,8 @@
 										<div class="p-2 flex-item-link">
 											<img src="Images/apple-weather.png" class="img-responsive">
 										</div>
-										<div class="p-2 flex-item-link">
-											<input type="image" name="viewReviews" value="viewReviews" src="Images/list.png" class="img-responsive">
+										<div class="p-2" style="max-width: 30%; max-height: 30%;">
+											<button type="submit" class="btn" name="viewReviews" value="viewReviews"><img src="Images/list.png" class="img-responsive flex-item-link"></button>
 										</div>
 									</div>
 									<div class="row">

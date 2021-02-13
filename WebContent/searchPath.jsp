@@ -80,7 +80,7 @@
 				<form class="form-inline search-form" id="myForm" action="searchPath.jsp" method="post">
 					<div class="d-flex">
 						<input type="text" class="form-control" name="pathName" placeholder="Search for a path...">
-						<button type="submit" class="btn"><img src="Images/icons8-search-52.png" width="50%"></button>
+						<button type="submit" class="btn btn-dark-orange"><img src="Images/icons8-search-52.png" width="50%"></button>
 					</div>
 				</form>
 				
@@ -126,75 +126,54 @@
 						<div class="container">
 							<button type="submit" class="btn" name="path" value="<%=bean.getName()%>" style="min-width: 100%;">
 								<div class="row card-view-simple-path rounded">
-									<div class="col-3 align-items-center">
-										<!-- inserire recupero immagine dal DB -->
-										<div class="row-fill justify-content-center align-items-center" style="min-height: 100%; display: flex; align-items: center;">
-											<div class="d-flex justify-content-center align-items-center">
-												<div class="p-2 flex-item-search-photo">
-													<%
-													ByteArrayInputStream stream = bean.getImage();
-													byte[] bytes = IOUtils.toByteArray(stream);
-													String base64 = Base64.getEncoder().encodeToString(bytes);
-													if (base64.isEmpty()) {
-													%>
-													<img src="Images/mountain_path.png" class="img-responsive photo">
-													<%
-													} else {%>
-														<img src="data:image/jpeg;base64,<%=base64%>" class="img-responsive photo">
-													<% } %>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-9">
-										<div class="row justify-content-center" style="padding-bottom: 1%; padding-top:1%">
-											
+									<div class="col align-items-center">
+										<div class="row justify-content-center" style="padding-bottom: 1%; padding-top:1%">		
 											<div class="d-flex justify-content-start align-items-center">
 											<div class="ml-auto w-100 p-2 bd-highlight">
-												<div class="path-name-font" align="left" style="padding-left: 5%;"><%=bean.getName()%></div>
+												<div class="path-name-font" id="pathNameCardView" align="left" style="padding-left: 5%;"><%=bean.getName()%></div>
 											</div>
 											<div class="mr-auto p-2 bd-highlight" style="padding-left: 5%;">
 												<div class="d-flex justify-content-start align-items-center">
-													<div class="bold-text">Vote:</div>
-													<%	if (bean.getVote() != 0) {
-						  									for(int i = 0; i < bean.getVote(); i++) {
-						  									%>
-							  								<div class="p-2 flex-item-stars-2">
-																<img src="Images/star.png" class="icon-star">
-															</div>
-															<%
-						  									}
+													<%
+					  									for(int i = 0; i < bean.getVote(); i++) {
+					  									%>
+						  								<div class="p-2 flex-item-stars-2">
+															<img src="Images/star.png" class="icon-star">
+														</div>
+														<%
 					  									}
-					  									else {
-					  										%>
-					  										<div class="p-2 black-text text-nowrap"><%=bean.getVoteAsText()%></div>
-					  										<%
+														for(int i = bean.getVote(); i < 5; i++) {
+					  									%>
+						  								<div class="p-2 flex-item-stars-2">
+															<img src="Images/emptystar.png" class="icon-star">
+														</div>
+														<%
 					  									}
 													%>
 												</div>
 											</div>
-											<div class="p-3 bd-highlight text-nowrap">
-												<div class="bold-text">Num of votes:</div> <%=bean.getNumberOfVotesAsText()%>
-											</div>
+
 										</div>
-										
-										
 										
 										</div>
 										<div class="row" style="padding-bottom: 2%;">
-											<div class="col-4" align="center" style="padding-bottom: 1%;">
+											<div class="col-3" align="center" style="padding-bottom: 1%;">
 												<div class="row justify-content-center bold-text">Location</div>
 												<div class="row justify-content-center"><%= bean.getRegionAsText()%></div>
 												<div class="row justify-content-center"><%= bean.getProvinceAsText()%></div>
 												<div class="row justify-content-center"><%= bean.getCityAsText()%></div>
 											</div>
-											<div class="col-4" align="center">
+											<div class="col-3" align="center">
 												<div class="row justify-content-center bold-text">Difficulty level</div>
 												<div class="row justify-content-center" id="difficultyLevel"><%= bean.getLevelAsText() %></div>
 											</div>
-											<div class="col-4" align="center">
+											<div class="col-3" align="center">
 												<div class="row justify-content-center bold-text">Travel Time</div>
 												<div class="row justify-content-center"><%= bean.getHoursAsText() %>:<%= bean.getMinutesAsText() %></div>
+											</div>
+											<div class="col-3" align="center">
+												<div class="row justify-content-center bold-text">Number of votes</div>
+												<div class="row justify-content-center"><%= bean.getNumberOfVotesAsText() %></div>
 											</div>
 										</div>
 									</div>

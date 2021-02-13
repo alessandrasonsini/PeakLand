@@ -122,7 +122,8 @@ public class ViewMountainPathInfoController extends Controller {
 			case "Back":
 				if(this.nextPageId.equals(PageId.VIEW_INFO))
 					this.nextPageId = searchController.getNextPageId();
-				else this.nextPageId = PageId.SEARCH;
+				else
+					this.nextPageId = PageId.VIEW_INFO;
 				break;
 			case "Next assisted research":
 				this.nextPageId = assistedResearchController.getNextPageId();

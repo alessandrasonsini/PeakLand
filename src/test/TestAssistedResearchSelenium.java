@@ -15,7 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class TestAssistedResearchSelenium {
 
 	// Before to run test, turn on Tomcat server
-	
+
 	@Test
 	public void testAssistedResearchByLevel() {
 		boolean levelAsExpected = true;
@@ -27,7 +27,7 @@ public class TestAssistedResearchSelenium {
 		driver.manage().window().maximize();
 
         // Launch localhost  
-		driver.navigate().to("http://localhost:8080/PeakLand_/home.jsp");  
+		driver.navigate().to("http://localhost:8080/PeakLand_/index.jsp");  
             
         // Click on the search button 
 		driver.findElement(By.name("VIEW_INFO")).click(); 

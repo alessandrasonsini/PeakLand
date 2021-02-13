@@ -23,6 +23,39 @@
 	String pathName;
 	ViewMountainPathInfoController viewInfoController;
 	List<ReviewBean> reviewList;
+	String next;
+	private String getNextPageName() {
+		switch(viewInfoController.getNextPageId()) {
+		case SEARCH: 
+			next = "searchPath.jsp";
+			break;
+		case ADD_PATH: 
+			next = "addNewPath.jsp";
+			break;	
+		case VIEW_INFO: 
+			next = "viewMountainPathInfo.jsp";
+			break;		
+		case LOGIN:
+			next = "login.jsp";
+			break;
+		case ASSISTED_RESEARCH:
+			next = "assistedResearch.jsp";
+			break;
+		case PROFILE:
+			next = "profile.jsp";
+			break;	
+		case ADD_REVIEW:
+			next = "addReview.jsp";
+			break;
+		case VIEW_REVIEWS:
+			next = "viewReviews.jsp";
+			break;
+		default:
+			next = "";
+			break;
+		}
+		return next;
+	}
 %>
 <%
 	viewInfoController = (ViewMountainPathInfoController) session.getAttribute("controller");
@@ -31,6 +64,12 @@
 		pathName = (String) request.getParameter("pathName");
 		session.setAttribute("pathName", pathName);
 	}
+	if (request.getParameter("backInfo") != null) {
+		viewInfoController.onBackPressed();
+		%>
+		<jsp:forward page="<%=getNextPageName()%>"/>
+		<%
+	}
 	
 	reviewList = viewInfoController.getPathReview(pathName);
 %>
@@ -38,6 +77,9 @@
 	<body>
 		<div class="row fill">
 			<div class="col-3 background-orange">
+				<form class="form" action="viewReviews.jsp" method="post">
+					<button type="submit" name="backInfo" class="btn justify-content-start align-items-center" style="display: flex; justify-content: flex-start;"><img src="Images/back.png" width="35%"></button>
+				</form>
 				<div class="container">
 					<div class="row mx-auto" style="padding-top: 45%; padding-left: 5%; padding-right: 5%">
 						<div class="col" align="center">
