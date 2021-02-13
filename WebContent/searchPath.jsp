@@ -70,6 +70,7 @@
 		viewInfoController.setSelectedMountainPath(request.getParameter("path"));
 		%><jsp:forward page="<%=getNextPageName()%>"/><%
 	}
+	
 %>
 	
 	<body>
@@ -90,7 +91,11 @@
 					</div>
 					<div class="row mx-auto" style="padding-top: 5%;">
 						<div class="col" align="center">
-							<a class="btn btn-ass-research" id="assistedResearch" href="assistedResearch.jsp" role="button">Assisted research</a>
+							<form id="assistedResearchForm" action="assistedResearch.jsp" method="post">
+								<button type="submit" class="btn btn-ass-research" id="assistedResearch">
+									Assisted research
+								</button>
+							</form>
 						</div>
 					</div>
 				</div>
