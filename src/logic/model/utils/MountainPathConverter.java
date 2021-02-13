@@ -17,17 +17,18 @@ public class MountainPathConverter {
 	public static MountainPathBean getMountainPathBean(MountainPath path) {
 		MountainPathBean bean = new MountainPathBean();
 		
-		bean.setName(path.getName());
 		bean.setRegion(path.getLocation().getRegion());
-		bean.setProvince(path.getLocation().getProvince());
+		bean.setName(path.getName());
 		bean.setCity(path.getLocation().getCity());
-		if (path.getLevel() != null)
-			bean.setLevel(path.getLevel().toString());
+		bean.setProvince(path.getLocation().getProvince());
+		bean.setAltitude(path.getAltitude());
 		bean.setHours((path.getTravelTime().getHours()));
 		bean.setMinutes((path.getTravelTime().getMinutes()));
 		bean.setVote(path.getVote());
 		bean.setNumberOfVotes(path.getNumberOfVotes());
-		bean.setAltitude(path.getAltitude());
+		
+		if (path.getLevel() != null)
+			bean.setLevel(path.getLevel().toString());
 		
 		String[] landscape = new String[path.getLandscape().size()];
 		for (int i = 0; i < path.getLandscape().size(); i++)
