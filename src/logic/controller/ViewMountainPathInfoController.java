@@ -34,12 +34,11 @@ public class ViewMountainPathInfoController extends Controller {
 	// Richiama il metodo del controllore applicativo Search per
 	// effettuare la ricerca nel DB
 	public List<SimpleMountainPathBean> searchMountainPathByName(String name) {
-
 		List<MountainPath> resultList = searchController.searchMountainPathByPartialName(name);
 		createResultList(resultList);
 		return this.searchResults;
 	}
-	
+
 	// Restituisce le info complete del mountain path selezionato
 	public void setSelectedMountainPath(String selectedPath) {
 		MountainPath searchResult = searchController.searchMountainPathByName(selectedPath);

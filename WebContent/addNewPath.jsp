@@ -33,22 +33,6 @@
     	<link rel="stylesheet" href="body.css" type="text/css"/>
     	
     	<script>
-			function myFunction() {
-			  var res = "";
-			  res = res + Number.isInteger(123) + ": 123<br>";
-			  res = res + Number.isInteger(-123) + ": -123<br>";
-			  res = res + Number.isInteger(5-2) + ": 5-2<br>";
-			  res = res + Number.isFinite(0) + ": 0<br>";
-			  res = res + Number.isInteger(0.5) + ": 0.5<br>";
-			  res = res + Number.isInteger('123') + ": '123'<br>";
-			  res = res + Number.isInteger(false) + ": false<br>";
-			  res = res + Number.isInteger(Infinity) + ": Infinity<br>";
-			  res = res + Number.isInteger(-Infinity) + ": -Infinity<br>";
-			  res = res + Number.isInteger(0 / 0) + ": 0 / 0<br>";
-			
-			  document.getElementById("demo").innerHTML = res;
-			}
-			
 			function validateForm() {
 			  var input = document.forms["infoForm"]["minutes"].value;
 			  if (input != "") {
@@ -80,9 +64,6 @@
 			  }
 			}
 		</script>
-		
-		
-    	
 	</head>
 	
 	<%!
@@ -165,12 +146,10 @@
 			<div class="col-9">
 				<%
 				if (request.getParameter("name") != null) {
-					System.out.println("nome  " + request.getParameter("name"));
 					if (addPathController.checkName(request.getParameter("name"))) {
 						disable = false;
 						session.setAttribute("disable", disable);
 						session.setAttribute("name", (String)request.getParameter("name"));
-						System.out.println("nome in sessione  " + session.getAttribute("name"));
 					}
 					else {
 						disable = true;
