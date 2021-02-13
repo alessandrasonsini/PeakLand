@@ -8,5 +8,5 @@ addons:
     token: 5902fbc08c17a4f42eb0a8c90556f83d9f27ebef
 
 script:
-- mvn -X clean install org.jacoco:jacoco-maven-plugin:prepare-agent package org.jacoco:jacoco-maven-plugin:report
+- mvn -X clean install -Pcoverage 
 - sonar-scanner
