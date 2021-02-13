@@ -99,7 +99,7 @@
 			<div class="col-9">
 			<!-- search results -->
 				<form class="form" action="searchPath.jsp" method="post">
-				<div class="container">
+				<div class="container" id="resultsContainer">
 				
 				<%
 				if ((request.getParameter("pathName") != null) || (viewInfoController.getPreviousSearchResults() != null) ) {
@@ -115,7 +115,7 @@
 					else {
 						beanList.addAll(viewInfoController.getPreviousSearchResults());
 					}
-					
+								
 						for(SimpleMountainPathBean bean : beanList)	{
 						%>
 						<div class="container">
@@ -185,7 +185,7 @@
 											</div>
 											<div class="col-4" align="center">
 												<div class="row justify-content-center bold-text">Difficulty level</div>
-												<div class="row justify-content-center"><%= bean.getLevelAsText() %></div>
+												<div class="row justify-content-center" id="difficultyLevel"><%= bean.getLevelAsText() %></div>
 											</div>
 											<div class="col-4" align="center">
 												<div class="row justify-content-center bold-text">Travel Time</div>

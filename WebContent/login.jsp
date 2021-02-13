@@ -156,10 +156,10 @@
 					<div class="container">
 						<div class="d-flex flex-column justify-content-center align-items-center">
 							<div class="p-2" style="padding-bottom: 3%;">
-								<input type="text" class="form-control" name="username" value="" placeholder="Username">
+								<input type="text" class="form-control" id="username" name="username" value="" placeholder="Username">
 							</div>
 							<div class="p-2" style="padding-bottom: 3%;">
-								<input type="password" class="form-control" name="password" value="" placeholder="Password">
+								<input type="password" class="form-control" id="password" name="password" value="" placeholder="Password">
 							</div>
 						</div>
 					</div>
@@ -167,7 +167,7 @@
 					<div class="container">
 						<div class="row justify-content-center align-items-center">
 							<div class="col-3">
-								<button type="submit" name="login" value="login" class="btn btn-light-orange">Login</button>
+								<button type="submit" id="login" name="login" value="login" class="btn btn-light-orange">Login</button>
 							</div>
 							<div class="col-1">
 								<div class="vertical"></div>
@@ -175,7 +175,7 @@
 							<div class="col-3">
 								<div class="row justify-content-center" style="padding-bottom:3%;">
 									<div class="col-10">
-										<input type="text" class="form-control" name="confirmPassword"  placeholder="Confirm your password">
+										<input type="password" class="form-control" name="confirmPassword"  placeholder="Confirm your password">
 									</div>
 								</div>
 								<button type="submit" name="signin" value="signin" class="btn btn-light-orange">Sign in</button>

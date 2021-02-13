@@ -32,8 +32,7 @@ public class ItemBean {
 			text = DEFAULT;
 		}
 		else {
-			text = genericObject.toString().replace("[", "").replace("]", "").replace("true", "yes").replace("false", "no");
-					
+			text = genericObject.toString().replace("true", "yes").replace("false", "no");
 		}
 		return text;
 	}

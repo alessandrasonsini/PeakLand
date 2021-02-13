@@ -183,18 +183,18 @@
 						%>
 						</div>
 						<br>
-						<div class="row" style="background-color: red;">
+						<div class="row">
 							<div class="col-6" style="padding-right: 3%;">
 								<div class="row mx-auto" style="padding-bottom: 3%;">
 									<div class="col-5 green-text">Name</div>
 									<div class="col-7">
-										<input type="text" class="form-control" name="name" placeholder="Name" value="${sessionScope.currentUser.name}" ${ sessionScope.disable eq true  ? 'disabled' : ''}>
+										<input type="text" class="form-control" id="name" name="name" placeholder="Name" value="${sessionScope.currentUser.name}" ${ sessionScope.disable eq true  ? 'disabled' : ''}>
 									</div>
 								</div>
 								<div class="row mx-auto" style="padding-bottom: 3%;">
 									<div class="col-5 green-text">Surname</div>
 									<div class="col-7">
-										<input type="text" class="form-control" name="surname" placeholder="Surname" value="${sessionScope.currentUser.surname}"  ${ sessionScope.disable eq true  ? 'disabled' : ''}>
+										<input type="text" class="form-control" id="surname" name="surname" placeholder="Surname" value="${sessionScope.currentUser.surname}"  ${ sessionScope.disable eq true  ? 'disabled' : ''}>
 									</div>
 								</div>
 								<div class="row mx-auto" style="padding-bottom: 3%;">
