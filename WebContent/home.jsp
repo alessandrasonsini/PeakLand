@@ -26,6 +26,7 @@
 	%>
 	<%
 		homeController = (HomeController) session.getAttribute("controller");
+		session.removeAttribute("controller");
 		topTen = homeController.getClassification((Integer)session.getAttribute("sessionId"));
 		userName = homeController.getCurrentUserName();
 		session.setAttribute("userName", userName);

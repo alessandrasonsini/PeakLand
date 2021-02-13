@@ -75,8 +75,6 @@
 							<li>
 								<button class="btn btn-primary btn-nav" disabled>Schedule path visit</button>
 							<li>
-								<button class="btn btn-primary btn-nav" disabled>Manage favourites</button>
-							<li>
 								<button class="btn btn-primary btn-nav" disabled>Manage visited paths</button>
 							<li>
 								<button class="btn btn-primary btn-nav" disabled>Manage your business</button>

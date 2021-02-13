@@ -87,6 +87,7 @@
 			if (base64.size() > 1)
 				disableNext = false;
 			currImgNum++;
+			session.setAttribute("currImgNum", currImgNum);
 		}
 	}
 	
@@ -99,6 +100,7 @@
 			disableNext = false;
 		else
 			disableNext = true;
+		session.setAttribute("currImgNum", currImgNum);
 	}
 	if (request.getParameter("next") != null) {
 		currImgNum = (int) session.getAttribute("currImgNum");
@@ -106,6 +108,7 @@
 		disablePrev = false;
 		if (currImgNum == (base64.size() -1) )
 			disableNext = true;
+		session.setAttribute("currImgNum", currImgNum);
 	}
 	if (request.getParameter("viewReviews") != null) {
 		viewInfoController.viewReviewsRequest();
@@ -118,7 +121,6 @@
 	
 	session.setAttribute("disablePrev", disablePrev);
 	session.setAttribute("disableNext", disableNext);
-	session.setAttribute("currImgNum", currImgNum);
 %>
 	
 	<body>

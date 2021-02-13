@@ -13,10 +13,6 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-<jsp:useBean id="user" scope="request" class="logic.bean.LoggedUserBean"/>
-<jsp:useBean id="currentUser" scope="session" class="logic.bean.LoggedUserBean"/>
-<jsp:setProperty name="user" property="*"/>
-
 <%!ProfileController profileController;
 	boolean disable = true;
 	String base64;
@@ -55,6 +51,10 @@
 		return next;
 	}
 %>
+<jsp:useBean id="user" scope="request" class="logic.bean.LoggedUserBean"/>
+<jsp:useBean id="currentUser" scope="session" class="logic.bean.LoggedUserBean"/>
+<jsp:setProperty name="user" property="*"/>
+
 <%
 	profileController = (ProfileController) session.getAttribute("controller");
 	
@@ -135,21 +135,16 @@
 			
 			<div class="col-9">
 				<div class="container" style="padding-top: 2%;">
-					<form class="form-inline" action="profile.jsp" method="post">
-						<div class="d-flex flex-row justify-content-start align-items-center">
-							<div class="p-2">
-								<button type="submit" name="edit" value="edit" class="btn btn-dark-orange" ${ sessionScope.disable eq false  ? 'disabled' : ''}>
-									<img src="Images/edit.png" width="100%">
-								</button>
-							</div>
-							<div class="p-2">
-								<button type="submit" name="save" value="save" class="btn btn-dark-orange" ${ sessionScope.disable eq true  ? 'disabled' : ''}>Save</button>
-							</div>
+					<form class="form-inline" action="profile.jsp" method="post">	
 						<%
 						if (request.getParameter("save") != null) {
 							try {
 								profileController.updateUserInfo(user);
+								
+								currentUser = user;
+								session.setAttribute("currentUser", currentUser);
 								disable = true;
+								session.setAttribute("disable", disable);
 							} catch (DatabaseException e) {
 								%>
 								<div class="container" style="padding-top: 3%;">
@@ -181,6 +176,15 @@
 							}
 						}
 						%>
+						<div class="d-flex flex-row justify-content-start align-items-center">
+							<div class="p-2">
+								<button type="submit" name="edit" value="edit" class="btn btn-dark-orange" ${ sessionScope.disable eq false  ? 'disabled' : ''}>
+									<img src="Images/edit.png" width="100%">
+								</button>
+							</div>
+							<div class="p-2">
+								<button type="submit" name="save" value="save" class="btn btn-dark-orange" ${ sessionScope.disable eq true  ? 'disabled' : ''}>Save</button>
+							</div>
 						</div>
 						<br>
 						<div class="row">
@@ -200,7 +204,7 @@
 								<div class="row mx-auto" style="padding-bottom: 3%;">
 									<div class="col-5 green-text">About me</div>
 									<div class="col-7">
-										<textarea maxlength="200" rows="5" cols="25" name="description" placeholder="About me" ${ sessionScope.disable eq true  ? 'disabled' : ''}>
+										<textarea maxlength="200" rows="5" cols="25" name="description" placeholder="Write a description here..." ${ sessionScope.disable eq true  ? 'disabled' : ''}>
 											${sessionScope.currentUser.description}
 										</textarea>
 									</div>
