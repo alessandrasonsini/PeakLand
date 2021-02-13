@@ -30,10 +30,10 @@ public class HomeGraphicController extends GraphicController {
 
 	public HomeGraphicController(Controller controller) {
 		super(controller);
-		this.setupLayout();
 	}
 	
-	private void setupLayout() {
+	@Override
+	protected void setupLayout() {
 		List<SimpleMountainPathBean> classificationList = getHomeController().getClassification(MainGraphicController.getInstance().getSessionId());
 		this.setWelcomeText();
 		

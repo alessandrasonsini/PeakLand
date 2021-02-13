@@ -65,10 +65,6 @@ public class ProfileGraphicController extends GraphicController {
 	
 	protected ProfileGraphicController(Controller controller) {
 		super(controller);
-		this.editableText = Arrays.asList(txtDescription,txtName,txtSurname);
-		txtDescription.setTextFormatter(new TextFormatter<String>(change -> change.getControlNewText().length() <= MAX_CHARS ? change : null));
-		this.currentUser = this.getProfileController().getCurrentUser(MainGraphicController.getInstance().getSessionId());
-		this.setupLayout();
 	}
 	
 	//Abilita le text field per poter modificare gli elementi
@@ -123,7 +119,12 @@ public class ProfileGraphicController extends GraphicController {
 		executeAction(this.myController);
 	}
 	
-	private void setupLayout() {
+	@Override
+	protected void setupLayout() {
+		this.editableText = Arrays.asList(txtDescription,txtName,txtSurname);
+		this.currentUser = this.getProfileController().getCurrentUser(MainGraphicController.getInstance().getSessionId());
+	
+		txtDescription.setTextFormatter(new TextFormatter<String>(change -> change.getControlNewText().length() <= MAX_CHARS ? change : null));
 		txtName.setText(currentUser.getNameAsText());
 		txtSurname.setText(currentUser.getSurnameAsText());
 		txtDescription.setText(currentUser.getDescriptionAsText());

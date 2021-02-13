@@ -41,7 +41,6 @@ public class SearchMountainPathGraphicController extends GraphicController {
 
 	public SearchMountainPathGraphicController(Controller controller) {
 		super(controller);
-		setupLayout(null);
 	}
 	
 	@FXML 
@@ -79,21 +78,29 @@ public class SearchMountainPathGraphicController extends GraphicController {
 	
 	// Fa il setup dell'FXML con i dati salvati nella sessione
 	// qualora l'utente avesse precedentemente effettuato una ricerca
-	private void setupLayout(List<SimpleMountainPathBean> newSearchResults) {
+	@Override
+	protected void setupLayout() {
+		// Recupera i risultati della precedente ricerca
+		List<SimpleMountainPathBean> newSearchResults = getViewMountainPathInfoController().getPreviousSearchResults();
 		if(newSearchResults == null) {
-			// Recupera i risultati della precedente ricerca
-			newSearchResults = getViewMountainPathInfoController().getPreviousSearchResults();
+			lbNoResults.setText("");
 		}
-		ObservableList<SimpleMountainPathBean> beanList = FXCollections.observableArrayList();
-		if(newSearchResults != null && newSearchResults.isEmpty())
+		else setupLayout(newSearchResults);
+		
+		
+	}
+	
+	private void setupLayout(List<SimpleMountainPathBean> newSearchResult) {
+		if(newSearchResult.isEmpty())
 			lbNoResults.setText("No matches found for the inserted name");
-		else if(newSearchResults != null) {
+		else if(newSearchResult != null) {
 			// Costruisco l'observable list da passare alla funzione che si occupa di rimpire la list view
-			beanList.addAll(newSearchResults);
+			ObservableList<SimpleMountainPathBean> beanList = FXCollections.observableArrayList();
+			beanList.addAll(newSearchResult);
+			fillListView(beanList);
 			
 		}
-		fillListView(beanList);
-		
+
 	}
 	
 	@Override

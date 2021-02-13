@@ -138,10 +138,15 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 
 	public AddNewMountainPathGraphicController(Controller controller) {
 		super(controller);
-		panePathInfo.setDisable(true);
+	}
+	
+	@Override
+	protected void setupLayout() {
 		ground = new ArrayList<>(Arrays.asList(ckBoxGrass,ckBoxRock,ckBoxWood));
 		landscape = new ArrayList<>(Arrays.asList(ckBoxMountain,ckBoxSea,ckBoxLake));
+		panePathInfo.setDisable(true);
 		lbLoad.setText("");
+		
 	}
 
 	@FXML 

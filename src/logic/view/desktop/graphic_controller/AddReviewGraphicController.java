@@ -46,11 +46,20 @@ public class AddReviewGraphicController extends GraphicController{
 	@FXML
 	private Button back;
 	
-	private List<Button> btnVotes = Arrays.asList(btnVote1,btnVote2,btnVote3,btnVote4,btnVote5);
+	private List<Button> btnVotes;;
 	private Integer votes;
 	
 	public AddReviewGraphicController(Controller controller) {
 		super(controller);
+	}
+	
+	@Override
+	protected void setupLayout() {
+		this.btnVotes = Arrays.asList(btnVote1,btnVote2,btnVote3,btnVote4,btnVote5);
+		btnAddReview.setDisable(true);
+		txtReviewTitle.setDisable(true);
+		txtReview.setDisable(true);
+		
 	}
 	
 	@FXML

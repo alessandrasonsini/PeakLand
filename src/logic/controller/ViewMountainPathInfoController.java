@@ -28,13 +28,13 @@ public class ViewMountainPathInfoController extends Controller {
 		// Prende l'istanza del controller che si occupa della search e che collabora nell'esecuzione del caso d'uso
 		this.searchController = new ControllerFactory().getSearchMountainPathController();
 		this.assistedResearchController = new ControllerFactory().getAssistedResearchController();
-		this.searchResults = new ArrayList<>();
+
 	}
 
 	// Richiama il metodo del controllore applicativo Search per
 	// effettuare la ricerca nel DB
 	public List<SimpleMountainPathBean> searchMountainPathByName(String name) {
-		
+
 		List<MountainPath> resultList = searchController.searchMountainPathByPartialName(name);
 		createResultList(resultList);
 		return this.searchResults;

@@ -39,6 +39,11 @@ public class MainGraphicController extends GraphicController {
 		super(controller);
 		
 	}
+	
+	@Override
+	protected void setupLayout() {
+		// Questo metodo è vuoto perchè attualmente non ci sono oggetti grafici di cui fare il setup
+	}
 
 	public static MainGraphicController getInstance() {
 		if (instance == null) {

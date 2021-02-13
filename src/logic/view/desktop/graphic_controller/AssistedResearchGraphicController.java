@@ -95,6 +95,10 @@ public class AssistedResearchGraphicController extends GraphicController{
 	
 	protected AssistedResearchGraphicController(Controller controller) {
 		super(controller);
+	}
+	
+	@Override
+	protected void setupLayout() {
 		ground = new ArrayList<>(Arrays.asList(ckBoxGrassFilter,ckBoxRockFilter,ckBoxWoodFilter));
 		landscape = new ArrayList<>(Arrays.asList(ckBoxMountainFilter,ckBoxSeaFilter,ckBoxLakeFilter));
 	}

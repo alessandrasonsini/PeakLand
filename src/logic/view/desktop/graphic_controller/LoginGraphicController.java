@@ -39,6 +39,11 @@ public class LoginGraphicController extends GraphicController {
 	
 	protected LoginGraphicController(Controller controller) {
 		super(controller);
+		
+	}
+	
+	@Override
+	protected void setupLayout() {
 		this.mandatoryFields = new ArrayList<>(Arrays.asList(txtUsername, txtPassword));
 	}
 	

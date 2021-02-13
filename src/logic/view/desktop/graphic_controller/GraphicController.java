@@ -16,7 +16,10 @@ public abstract class GraphicController extends ShowableElement {
 	protected GraphicController(Controller controller) {
 		super();
 		this.myController = controller;
+		this.setupLayout();
 	}
+	
+	protected abstract void setupLayout(); 
 	
 	protected void executeAction(PageId action) {
 		// Istanzia controller applicativo del prossimo caso d'uso da eseguire

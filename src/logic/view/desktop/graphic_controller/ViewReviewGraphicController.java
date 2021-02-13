@@ -32,7 +32,6 @@ public class ViewReviewGraphicController extends GraphicController {
 	
 	protected ViewReviewGraphicController(Controller controller) {
 		super(controller);
-		setupLayout();
 	}
 	
 	@FXML
@@ -41,7 +40,8 @@ public class ViewReviewGraphicController extends GraphicController {
 		this.executeAction(this.myController);
 	}
 	
-	private void setupLayout() {
+	@Override
+	protected void setupLayout() {
 		String pathName = getViewMountainPathInfoController().getSelectedMountainPath().getName();
 		lbPathName.setText(pathName);
 		List<ReviewBean> reviewList = getViewMountainPathInfoController().getPathReview(pathName);
