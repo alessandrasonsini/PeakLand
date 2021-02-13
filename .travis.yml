@@ -9,4 +9,5 @@ addons:
 
 script:
 - mvn -X clean install org.jacoco:jacoco-maven-plugin:prepare-agent verify sonar:sonar
+- mvn cobertura:cobertura coveralls:report
 - sonar-scanner
