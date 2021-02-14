@@ -69,7 +69,7 @@ public class AssistedResearchController extends Controller {
 			returnValue = searchFilterInAList((Object[]) obj, fieldName);
 		} else {
 			// Prende il metodo del mountainPathDao per effettuare la ricerca per filtro
-			Method m = mountainPathDao.getClass().getDeclaredMethod("searchMountainPathbyFilter",
+			Method m = this.mountainPathDao.getClass().getDeclaredMethod("searchMountainPathbyFilter",
 					new Class<?>[] { String.class, type });
 			// Invoca il metodo
 			returnValue = (List<MountainPath>) m.invoke(mountainPathDao, fieldName, obj);

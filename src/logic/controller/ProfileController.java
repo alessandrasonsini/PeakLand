@@ -26,13 +26,13 @@ public class ProfileController extends Controller{
 		this.userId = id;
 		this.currentUser = CurrentLoggedUsers.getInstance().getCurrentLoggedUser(id);
 		LoggedUserBean bean = LoggedUserConverter.getLoggedUserBean(this.currentUser);
-		bean.setImageStream(loggedUserDao.getImage(this.currentUser.getUsername()));
+		bean.setImageStream(this.loggedUserDao.getImage(this.currentUser.getUsername()));
 		return bean;
 	}
 	
 	public void setProfileImage(InputStream is) throws SystemException {
 		//Chiama il metodo del dao per salvare l'immagine inserita
-		loggedUserDao.updateUserImage(is, currentUser.getUsername());
+		this.loggedUserDao.updateUserImage(is, currentUser.getUsername());
 	}
 	
 	
@@ -45,7 +45,7 @@ public class ProfileController extends Controller{
 	
 	
 	private void updateOnDb() throws DatabaseException {
-		loggedUserDao.saveLoggedUserOnDb(currentUser);
+		this.loggedUserDao.saveLoggedUserOnDb(currentUser);
 	}
 	
 	public void logOut() {

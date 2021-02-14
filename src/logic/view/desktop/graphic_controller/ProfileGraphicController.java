@@ -115,7 +115,7 @@ public class ProfileGraphicController extends GraphicController {
 	@FXML
 	public void onLogOutRequest(ActionEvent event) {
 		this.getProfileController().logOut();
-		executeAction(this.myController);
+		this.executeAction(getProfileController().getNextPageId());
 	}
 	
 	@Override

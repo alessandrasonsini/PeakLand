@@ -64,12 +64,12 @@
                         <Font name="Maiandra GD" size="16.0" />
                      </font>
                   </Button>
-                  <Label layoutX="87.0" layoutY="229.0" text="Level:" AnchorPane.topAnchor="229.0">
+                  <Label layoutX="609.0" layoutY="83.0" text="Level:" AnchorPane.topAnchor="83.0">
                      <font>
                         <Font name="Maiandra GD" size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lbLevel" layoutX="171.0" layoutY="229.0" prefHeight="23.0" prefWidth="193.0">
+                  <Label fx:id="lbLevel" layoutX="678.0" layoutY="84.0" prefHeight="23.0" prefWidth="193.0" AnchorPane.topAnchor="83.0">
                      <font>
                         <Font name="Maiandra GD" size="18.0" />
                      </font>
@@ -79,27 +79,37 @@
                         <Font name="Maiandra GD" size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="87.0" layoutY="160.0" text="Surname:">
+                  <Label layoutX="85.0" layoutY="160.0" text="Surname:">
                      <font>
                         <Font name="Maiandra GD" size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="584.0" layoutY="84.0" text="About me:" AnchorPane.leftAnchor="584.0">
+                  <Label layoutX="82.0" layoutY="241.0" text="About me:" AnchorPane.leftAnchor="82.0">
                      <font>
                         <Font name="Maiandra GD" size="18.0" />
                      </font>
                   </Label>
-                  <TextArea fx:id="txtDescription" editable="false" layoutX="674.0" layoutY="78.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="114.0" prefWidth="238.0" promptText="About me" style="resize: none" wrapText="true" />
-                  <Label layoutX="584.0" layoutY="252.0" text="PeakCoin:" AnchorPane.leftAnchor="584.0" AnchorPane.topAnchor="229.0">
+                  <TextArea fx:id="txtDescription" editable="false" layoutX="172.0" layoutY="241.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="114.0" prefWidth="261.0" promptText="About me" style="resize: none" wrapText="true" />
+                  <Label layoutX="609.0" layoutY="161.0" text="PeakCoin:" AnchorPane.leftAnchor="609.0" AnchorPane.topAnchor="161.0">
                      <font>
                         <Font name="Maiandra GD" size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lbPeakCoin" layoutX="674.0" layoutY="232.0" text="Label" AnchorPane.topAnchor="229.0">
+                  <Label fx:id="lbPeakCoin" layoutX="703.0" layoutY="161.0" text="Label" AnchorPane.topAnchor="161.0">
                      <font>
                         <Font name="Maiandra GD" size="18.0" />
                      </font>
                   </Label>
+                  <ImageView fitHeight="150.0" fitWidth="60.0" layoutX="540.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/level.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="150.0" fitWidth="70.0" layoutX="535.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/coin.png" />
+                     </image>
+                  </ImageView>
                </children></AnchorPane>
          </children>
       </HBox>

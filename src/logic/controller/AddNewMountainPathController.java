@@ -26,19 +26,21 @@ public class AddNewMountainPathController extends Controller {
 	
 	private List<InputStream> pathImages;
 	private String newPathName;
+	private MountainPathDao mountainPathDao;
+	private LoggedUserDao loggedUserDao;
 	
 	public AddNewMountainPathController() {
 		super();
 		this.addReviewController = new ControllerFactory().getAddReviewController();
-		pathImages = new ArrayList<>();
+		this.pathImages = new ArrayList<>();
+		this.mountainPathDao = new MountainPathDao();
+		this.loggedUserDao = new LoggedUserDao();
 	}
 
 	// Controlla se il nome inserito è già esistente sul db
 	public boolean checkName(String name) {
 		// Chiama il metodo relativo del controller di search per controllare se il nome è già esistente
-		return (new ControllerFactory()
-				.getSearchMountainPathController()
-				.searchMountainPathByName(StandardName.standardizeName(name)) == null);
+		return (this.mountainPathDao.searchMountainPathByName(StandardName.standardizeName(name)) == null);
 	}
 
 	public void saveReview(ReviewBean reviewBean,Integer userId) throws DatabaseException {
@@ -56,11 +58,10 @@ public class AddNewMountainPathController extends Controller {
 		MountainPath newMountainPath = MountainPathConverter.getMountainPath(newPathBean);
 	
 		// Invoca il metodo del dao per salvare il mountain path sul db e le immagini inserite
-		MountainPathDao mountainPathDao = new MountainPathDao();
-		mountainPathDao.saveNewMountainPathOnDB(newMountainPath);
+		this.mountainPathDao.saveNewMountainPathOnDB(newMountainPath);
 		
 		LoggedUser author = CurrentLoggedUsers.getInstance().getCurrentLoggedUser(sessionId);
-		mountainPathDao.uploadImage(this.pathImages, newMountainPath.getName(), author.getUsername());
+		this.mountainPathDao.uploadImage(this.pathImages, newMountainPath.getName(), author.getUsername());
 	
 		this.newPathName = newMountainPath.getName();
 		this.updateUserPeakCoin(author);
@@ -69,7 +70,7 @@ public class AddNewMountainPathController extends Controller {
 	private void updateUserPeakCoin(LoggedUser author) throws DatabaseException {
 		// Aggiorna il numero di PeakCoin dell'utente e il suo stato sul db
 		author.addPeakCoin();
-		new LoggedUserDao().saveLoggedUserOnDb(author);
+		this.loggedUserDao.saveLoggedUserOnDb(author);
 	}
 	
 	public void setMountainPathImages(List<InputStream> images) throws TooManyImagesException {

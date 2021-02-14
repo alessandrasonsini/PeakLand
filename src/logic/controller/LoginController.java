@@ -30,7 +30,7 @@ public class LoginController extends Controller {
 	
 	public Integer loginAction(CredentialBean credentialBean) throws WrongInputException {
 		Credential credential = new Credential(credentialBean.getUsername(),credentialBean.getPassword());
-		Credential dBcredential = credentialDao.getCredentialFromDb(credential.getUsername());
+		Credential dBcredential = this.credentialDao.getCredentialFromDb(credential.getUsername());
 	
 		// Verificare le credenziali
 		if(!credential.verifyCredential(dBcredential)) {
@@ -39,7 +39,7 @@ public class LoginController extends Controller {
 		}
 		else {
 			// Recupera le informazioni dell'utente che si è loggato
-			LoggedUser currLoggedUser = loggedUserDao.getLoggedUserInfoFromDb(credential.getUsername());
+			LoggedUser currLoggedUser = this.loggedUserDao.getLoggedUserInfoFromDb(credential.getUsername());
 			
 			// Aggiunge la coppia sessionId - LoggedUser alla lista degli utenti correntemente loggati
 			return CurrentLoggedUsers.getInstance().addCurrentLoggedUser(currLoggedUser);

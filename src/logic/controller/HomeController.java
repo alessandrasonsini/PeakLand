@@ -39,12 +39,12 @@ public class HomeController extends Controller {
 	
 	// Restituisce i 10 percorsi con voti più alti
 	private List<SimpleMountainPathBean> getTopTen() {
-		List<MountainPath> sorterResult = Sorter.sortByVoteAndNumber(mountainPathDao.getPaths());
+		List<MountainPath> sorterResult = Sorter.sortByVoteAndNumber(this.mountainPathDao.getPaths());
 		return createTopTenList(sorterResult);
 	}
 	
 	private List<SimpleMountainPathBean> getTopByFavorites() {
-		List<MountainPath> sorterResult = Sorter.sortByFavorites(mountainPathDao.getPaths());
+		List<MountainPath> sorterResult = Sorter.sortByFavorites(this.mountainPathDao.getPaths());
 		return createTopTenList(sorterResult);
 	}
 	

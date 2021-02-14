@@ -22,7 +22,7 @@ public class AddReviewController extends Controller {
 
 	public void saveReview(ReviewBean reviewBean) throws DatabaseException {
 		Review review = ReviewConverter.getReview(reviewBean);
-		reviewDao.saveNewReviewOnDb(review);
+		this.reviewDao.saveNewReviewOnDb(review);
 		updateMountainPathVote(review.getPathName(), review.getVote());
 	}
 	
@@ -30,7 +30,7 @@ public class AddReviewController extends Controller {
 		MountainPath path = mountainPathDao.searchMountainPathByName(pathName);
 		path.updateVote(vote);
 		
-		mountainPathDao.updateMountainPath(path);
+		this.mountainPathDao.updateMountainPath(path);
 	}
 	
 	@Override
