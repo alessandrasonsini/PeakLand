@@ -206,12 +206,26 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 			newPathBean.setProvince(txtProvince.getText());
 			newPathBean.setCity(txtCity.getText());
 			
-			newPathBean.setLevel(((RadioButton) levelGroup.getSelectedToggle()).getText().toUpperCase());
+			RadioButton radioButton;
+			radioButton = (RadioButton) levelGroup.getSelectedToggle();
+			if(radioButton != null)
+				newPathBean.setLevel(radioButton.getText().toUpperCase());
 			newPathBean.setLandscape(checkSelectedBox(landscape));
 			newPathBean.setGround(checkSelectedBox(ground));
-			newPathBean.setCycleble(( (RadioButton) cycleGroup.getSelectedToggle()).getText().equals("Yes"));
-			newPathBean.setHistoricalElements(( (RadioButton) histGroup.getSelectedToggle()).getText().equals("Yes"));
-			newPathBean.setFamilySuitable(( (RadioButton) famGroup.getSelectedToggle()).getText().equals("Yes"));
+			
+			radioButton = (RadioButton) cycleGroup.getSelectedToggle();
+			if(radioButton != null)
+				newPathBean.setCycleble(radioButton.getText().equals("yes"));
+			radioButton = (RadioButton) histGroup.getSelectedToggle();
+			if(radioButton != null)
+				newPathBean.setHistoricalElements(radioButton.getText().equals("yes"));
+			radioButton = (RadioButton) famGroup.getSelectedToggle();
+			if(radioButton != null)
+				newPathBean.setFamilySuitable(radioButton.getText().equals("yes"));
+			
+			//newPathBean.setCycleble(( (RadioButton) cycleGroup.getSelectedToggle()).getText().equals("Yes"));
+			//newPathBean.setHistoricalElements(( (RadioButton) histGroup.getSelectedToggle()).getText().equals("Yes"));
+			//newPathBean.setFamilySuitable(( (RadioButton) famGroup.getSelectedToggle()).getText().equals("Yes"));
 			
 			// Chiama il metodo del controller applicativo per il salvataggio del nuovo mountain path
 			getAddNewMountainPathController().saveNewMountainPath(newPathBean, MainGraphicController.getInstance().getSessionId());
