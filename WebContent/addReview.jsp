@@ -59,7 +59,7 @@
 				if (request.getParameter("addReviewBtn") != null) {
 					try {
 						review.setVote(vote);
-						addPathController.saveReview(review,(Integer)session.getAttribute("sessionId"));
+						addPathController.saveReview(review);
 						%>
 						<div class="container" style="padding-top: 3%;">
 							<div class="alert alert-success alert-dismissible fade show" role="alert">

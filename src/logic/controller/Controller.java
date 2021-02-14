@@ -26,6 +26,6 @@ public abstract class Controller {
 		return this.nextPageId;
 	}
 	
-	public abstract void setNextPageId(String action);
+	protected abstract void setNextPageId(String action);
 	
 }

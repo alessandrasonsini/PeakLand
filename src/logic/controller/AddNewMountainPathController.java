@@ -28,6 +28,7 @@ public class AddNewMountainPathController extends Controller {
 	private String newPathName;
 	private MountainPathDao mountainPathDao;
 	private LoggedUserDao loggedUserDao;
+	private LoggedUser author;
 	
 	public AddNewMountainPathController() {
 		super();
@@ -43,33 +44,32 @@ public class AddNewMountainPathController extends Controller {
 		return (this.mountainPathDao.searchMountainPathByName(StandardName.standardizeName(name)) == null);
 	}
 
-	public void saveReview(ReviewBean reviewBean,Integer userId) throws DatabaseException {
+	public void saveReview(ReviewBean reviewBean) throws DatabaseException {
 		reviewBean.setPathName(this.newPathName);
-		
-		LoggedUser author = CurrentLoggedUsers.getInstance().getCurrentLoggedUser(userId);
-		reviewBean.setAuthor(author.getUsername());
+	
+		reviewBean.setAuthor(this.author.getUsername());
 		addReviewController.saveReview(reviewBean);
-		this.updateUserPeakCoin(author);
+		this.updateUserPeakCoin();
 		
 	}
 
-	public void saveNewMountainPath(MountainPathBean newPathBean, Integer sessionId) throws DatabaseException, SystemException {
+	public void saveNewMountainPath(MountainPathBean newPathBean, Integer userId) throws DatabaseException, SystemException {
 		// A partire dalla bean, prende l'entità mountain path da salvare
 		MountainPath newMountainPath = MountainPathConverter.getMountainPath(newPathBean);
 	
 		// Invoca il metodo del dao per salvare il mountain path sul db e le immagini inserite
 		this.mountainPathDao.saveNewMountainPathOnDB(newMountainPath);
 		
-		LoggedUser author = CurrentLoggedUsers.getInstance().getCurrentLoggedUser(sessionId);
-		this.mountainPathDao.uploadImage(this.pathImages, newMountainPath.getName(), author.getUsername());
+		this.author = CurrentLoggedUsers.getInstance().getCurrentLoggedUser(userId);
+		this.mountainPathDao.uploadImages(this.pathImages, newMountainPath.getName(), this.author.getUsername());
 	
 		this.newPathName = newMountainPath.getName();
-		this.updateUserPeakCoin(author);
+		this.updateUserPeakCoin();
 	}
 	
-	private void updateUserPeakCoin(LoggedUser author) throws DatabaseException {
+	private void updateUserPeakCoin() throws DatabaseException {
 		// Aggiorna il numero di PeakCoin dell'utente e il suo stato sul db
-		author.addPeakCoin();
+		this.author.addPeakCoin();
 		this.loggedUserDao.saveLoggedUserOnDb(author);
 	}
 	
