@@ -23,11 +23,6 @@
     	<!-- import our CSS for body of the page -->
     	<link rel="stylesheet" href="body.css" type="text/css"/>
     	
-    	<script type="text/javascript">
-    	function submitForm() {
-    		document.getElementById("assResearch").submit();
-    	}
-    	</script>
 	</head>
 	
 	<%!
@@ -81,11 +76,6 @@
 						</div>
 					</div>
 					
-					<form class="form-inline" onclick="submitForm()" action="assistedResearch.jsp" method="post" style="padding-top: 5%;">
-						<div class="container" style="text-align: center;">
-							<button type="submit" name="assResearchSubmit" value="assResearchSubmit" class="btn btn-dark-orange">Search</button>
-						</div>
-					</form>
 						
 				</div>
 			</div>
@@ -93,7 +83,7 @@
 			<div class="col-9">
 				<div class="container" style="padding-top: 3%">
 					<%
-					if (request.getParameter("assResearchSubmit") != null) {
+					if (request.getParameter("assRes") != null) {
 						try {
 							List<SimpleMountainPathBean> results = viewInfoController.searchMountainPathByAssistedResearch(wishMountainPath);
 						%>
@@ -115,7 +105,7 @@
 					}	
 					%>
 				
-					<form class="form-inline" id="assResearch" action="assistedResearch.jsp" method="post">
+					<form class="form-inline" action="assistedResearch.jsp" method="post">
 						<div class="row mx-auto" style="padding-bottom: 3%;">
 							<div class="col-3 black-text">Location</div>
 							<div class="col-3"><input type="text" class="form-control" id="region" name="region" placeholder="Region"></div>
@@ -222,7 +212,9 @@
 								</div>
 							</div>
 						</div>
-						
+						<div class="container" style="text-align: center; padding-top: 5%;">
+							<button type="submit" id="assRes" name="assRes" class="btn btn-light-orange">Search</button>
+						</div>
 					</form>
 				</div>
 				
