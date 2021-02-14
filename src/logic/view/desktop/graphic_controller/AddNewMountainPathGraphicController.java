@@ -223,10 +223,6 @@ public class AddNewMountainPathGraphicController extends GraphicController {
 			if(radioButton != null)
 				newPathBean.setFamilySuitable(radioButton.getText().equals("yes"));
 			
-			//newPathBean.setCycleble(( (RadioButton) cycleGroup.getSelectedToggle()).getText().equals("Yes"));
-			//newPathBean.setHistoricalElements(( (RadioButton) histGroup.getSelectedToggle()).getText().equals("Yes"));
-			//newPathBean.setFamilySuitable(( (RadioButton) famGroup.getSelectedToggle()).getText().equals("Yes"));
-			
 			// Chiama il metodo del controller applicativo per il salvataggio del nuovo mountain path
 			getAddNewMountainPathController().saveNewMountainPath(newPathBean, MainGraphicController.getInstance().getSessionId());
 			// Mostra il messaggio di avvenuto salvataggio

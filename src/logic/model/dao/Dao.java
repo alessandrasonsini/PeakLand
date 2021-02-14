@@ -124,7 +124,7 @@ public abstract class Dao{
 		return imageStreams;
 	}
 	
-	public void uploadImage(List<InputStream> images, String fileName, String userName) throws SystemException {
+	public void uploadImages(List<InputStream> images, String fileName, String userName) throws SystemException {
 		String dir = this.getDirectory() + fileName + "/" + userName; 
 		int imgNumber = images.size();
 		for(int i = 0; i < imgNumber; i++) {
