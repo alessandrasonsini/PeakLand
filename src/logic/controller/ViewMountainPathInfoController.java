@@ -23,11 +23,13 @@ public class ViewMountainPathInfoController extends Controller {
 	private AssistedResearchController assistedResearchController;
 	private List<SimpleMountainPathBean> searchResults;
 	private MountainPathDao mountainPathDao;
+	private ReviewDao reviewDao;
 
 	public ViewMountainPathInfoController() {
 		super();
 		// Prende l'istanza del controller che si occupa della search e che collabora nell'esecuzione del caso d'uso
 		this.mountainPathDao = new MountainPathDao();
+		this.reviewDao = new ReviewDao();
 		this.assistedResearchController = new ControllerFactory().getAssistedResearchController();
 
 	}
@@ -69,7 +71,7 @@ public class ViewMountainPathInfoController extends Controller {
 	public List<ReviewBean> getPathReview(String pathName) {
 		List<ReviewBean> reviewBeanList = new ArrayList<>();
 		
-		List<Review> reviewList = new ReviewDao().getReviewFromDb(pathName);
+		List<Review> reviewList = this.reviewDao.getReviewFromDb(pathName);
 		for (Review review : reviewList) {
 			reviewBeanList.add(ReviewConverter.getReviewBean(review));
 		}

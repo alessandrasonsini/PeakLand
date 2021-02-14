@@ -23,7 +23,7 @@ public class TestAssistedResearchSelenium {
 	public void testAssistedResearchByLevel() throws InterruptedException {
 		boolean levelAsExpected = true;
         
-		// Instantiate a SafariDriver class   
+		// Instantiate a ChromeDriver class   
 		System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
 		

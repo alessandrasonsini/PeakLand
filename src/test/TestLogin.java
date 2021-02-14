@@ -16,7 +16,7 @@ public class TestLogin {
 	@Test
 	public void testLoginName() {
 		
-		// Instantiate a SafariDriver class
+		// Instantiate a ChromeDriver class
 		System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
 		
