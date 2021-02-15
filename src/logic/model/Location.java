@@ -3,9 +3,9 @@ package logic.model;
 
 public class Location {
 	
-	String region;
-	String province;
-	String city;
+	private String region;
+	private String province;
+	private String city;
 	
 	public Location(String region, String province, String city) {
 		this.region = region;

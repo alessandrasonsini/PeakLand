@@ -38,7 +38,6 @@ public abstract class GraphicController extends ShowableElement {
 		GraphicControllerFactory factory = new GraphicControllerFactory();
 		// Costruisce il prossimo graphic controller da eseguire in base alla action
 		GraphicController nextGraphicController = factory.getGraphicController(appController);
-		//MainGraphicController.getInstance().switchPage(nextGraphicController.getRootPane());
 		switchPage(nextGraphicController.getRootPane());
 	}
 	

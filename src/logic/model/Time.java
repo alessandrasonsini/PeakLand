@@ -3,8 +3,8 @@ package logic.model;
 
 public class Time{
 	
-	Integer hours;
-	Integer minutes;
+	private Integer hours;
+	private Integer minutes;
 	
 	public Time(Integer hours, Integer minutes) {
 		super();

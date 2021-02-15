@@ -31,6 +31,10 @@ public class ControllerFactory {
 		return newController;
 	}
 	
+	public MainController getMainController() {
+		return new MainController();
+	}
+	
 	public LoginController getLoginController() {
 		return new LoginController();		
 	}

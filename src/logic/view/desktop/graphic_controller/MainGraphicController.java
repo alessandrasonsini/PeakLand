@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import logic.controller.Controller;
+import logic.controller.ControllerFactory;
 import logic.controller.MainController;
 import logic.model.enums.PageId;
 
@@ -47,7 +48,7 @@ public class MainGraphicController extends GraphicController {
 
 	public static MainGraphicController getInstance() {
 		if (instance == null) {
-			instance = new MainGraphicController(new MainController());
+			instance = new MainGraphicController(new ControllerFactory().getMainController());
 			instance.setup();
 		}
 			
