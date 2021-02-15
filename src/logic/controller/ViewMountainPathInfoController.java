@@ -31,9 +31,8 @@ public class ViewMountainPathInfoController extends Controller {
 		this.mountainPathDao = new MountainPathDao();
 		this.reviewDao = new ReviewDao();
 		this.assistedResearchController = new ControllerFactory().getAssistedResearchController();
-
 	}
-
+	
 	// Richiama il metodo del controllore applicativo Search per
 	// effettuare la ricerca nel DB
 	public List<SimpleMountainPathBean> searchMountainPathByName(String name) {

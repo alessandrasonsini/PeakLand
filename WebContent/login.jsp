@@ -182,23 +182,6 @@
 							</div>
 						</div>
 					</div>
-					<div class="container">
-						<div class="d-flex flex-column justify-content-center align-items-center">
-							<div class="p-2" style="padding-bottom: 3%;">or</div>
-							<div class="p-2" style="padding-bottom: 3%;">
-								<img src="Images/google-plus.png" width="15%">
-								<button type="submit" name="google" value="google" class="btn btn-danger">
-									Login with Google
-								</button>
-							</div>
-							<div class="p-2">
-								<img src="Images/facebook-new.png" width="15%">
-								<button type="submit" name="fb" value="fb" class="btn btn-primary">
-									Login with Facebook
-								</button>
-							</div>
-						</div>
-					</div>
 					</form>
 			</div>
 		</div>

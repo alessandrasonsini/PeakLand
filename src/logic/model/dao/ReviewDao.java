@@ -39,12 +39,6 @@ public class ReviewDao extends Dao {
 		return reviewResult;
 	}
 	
-	public Review getOneReviewFromDb(String pathName) {
-		Query query = this.dbReference.child(pathName).orderByChild("pathName").equalTo(pathName);
-		readData(query);
-		return reviewResult.size() > 0 ? reviewResult.get(0) : null;
-	}
-	
 	@Override
 	public void onReadSuccess(DataSnapshot dataSnapshot) {
 		reviewResult.clear();

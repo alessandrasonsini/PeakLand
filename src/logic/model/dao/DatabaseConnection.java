@@ -54,7 +54,7 @@ public class DatabaseConnection {
 		return this.storageReference;
 	}
 	
-	public void initializeConnection() {
+	private void initializeConnection() {
 		
 		try (InputStream serviceAccount = this.getClass().getClassLoader().getResourceAsStream("peakland-54c42-firebase-adminsdk-cihqn-dace282633.json")) {
 			FirebaseOptions options = FirebaseOptions.builder()
