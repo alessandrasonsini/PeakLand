@@ -93,7 +93,8 @@ public class MainGraphicController extends GraphicController {
 	protected String getFXMLFileName() {
 		return "mainLayout";
 	}
-
+	
+	@Override
 	public void switchPage(Pane paneToSwitch) {
 		mainChild.setCenter(paneToSwitch);
 	}
@@ -120,4 +121,5 @@ public class MainGraphicController extends GraphicController {
 	private MainController getMainController() {
 		return (MainController)myController;
 	}
+
 }

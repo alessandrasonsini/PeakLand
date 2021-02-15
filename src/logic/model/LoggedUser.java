@@ -1,9 +1,6 @@
 package logic.model;
 
-import java.util.ArrayList;
-import java.util.List;
 import logic.model.enums.UserLevel;
-
 
 public class LoggedUser {
 	/**
@@ -16,11 +13,9 @@ public class LoggedUser {
 	private String description;
 	private UserLevel level;
 	private Integer peakCoin;
-	private List<String> favouritesMountainPath;
 	
 	public LoggedUser() {
 		this.level = UserLevel.SOFAMAN;
-		this.favouritesMountainPath = new ArrayList<>();
 		this.name = "";
 		this.surname = "";
 		this.description = "";
@@ -75,15 +70,7 @@ public class LoggedUser {
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
-	public List<String> getFavouritesMountainPath() {
-		return favouritesMountainPath;
-	}
-	public void setFavouritesMountainPath(List<String> favouritesMountainPath) {
-		this.favouritesMountainPath = favouritesMountainPath;
-	}
-	public void addToFavourites(String newPath) {
-		this.favouritesMountainPath.add(newPath);
-	}
+	
 	public String getDescription() {
 		return description;
 	}

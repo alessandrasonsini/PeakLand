@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import logic.bean.ReviewBean;
 import logic.controller.AddNewMountainPathController;
 import logic.controller.Controller;
@@ -107,6 +108,12 @@ public class AddReviewGraphicController extends GraphicController{
 	
 	public AddNewMountainPathController getAddNewMountainPathController() {
 		return (AddNewMountainPathController) myController;
+	}
+	
+	@Override
+	public void switchPage(Pane paneToSwitch) {
+		MainGraphicController.getInstance().switchPage(paneToSwitch);
+		
 	}
 	
 	

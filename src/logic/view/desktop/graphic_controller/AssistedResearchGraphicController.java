@@ -15,6 +15,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.Pane;
 
 public class AssistedResearchGraphicController extends GraphicController{
 	
@@ -164,6 +165,12 @@ public class AssistedResearchGraphicController extends GraphicController{
 	@Override
 	protected String getFXMLFileName() {
 		return "assistedResearchLayout";
+	}
+	
+	@Override
+	public void switchPage(Pane paneToSwitch) {
+		MainGraphicController.getInstance().switchPage(paneToSwitch);
+		
 	}
 	
 }

@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
 import logic.bean.SimpleMountainPathBean;
@@ -67,13 +68,19 @@ public class HomeGraphicController extends GraphicController {
 	}
 	
 	// Metodo che si occupa del riempimento della list view
-		private void fillListView(ObservableList<SimpleMountainPathBean> list) {
-			listViewClassification.setItems(list);
-			listViewClassification.setCellFactory(new Callback<ListView<SimpleMountainPathBean>, ListCell<SimpleMountainPathBean>>() {
-	            @Override
-	            public ListCell<SimpleMountainPathBean> call(ListView<SimpleMountainPathBean> listViewMountainPath) {
-	                return new SimpleMountainPathListCell();
-	            }
-	        });
-		}
+	private void fillListView(ObservableList<SimpleMountainPathBean> list) {
+		listViewClassification.setItems(list);
+		listViewClassification.setCellFactory(new Callback<ListView<SimpleMountainPathBean>, ListCell<SimpleMountainPathBean>>() {
+            @Override
+            public ListCell<SimpleMountainPathBean> call(ListView<SimpleMountainPathBean> listViewMountainPath) {
+                return new SimpleMountainPathListCell();
+            }
+        });
+	}
+	
+	@Override
+	public void switchPage(Pane paneToSwitch) {
+		MainGraphicController.getInstance().switchPage(paneToSwitch);
+		
+	}
 }

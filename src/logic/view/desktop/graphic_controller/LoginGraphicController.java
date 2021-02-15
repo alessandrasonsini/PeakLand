@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import logic.bean.CredentialBean;
 import logic.controller.Controller;
 import logic.controller.LoginController;
@@ -90,6 +91,12 @@ public class LoginGraphicController extends GraphicController {
 	
 	private LoginController getLoginController() {
 		return (LoginController)myController;
+	}
+	
+	@Override
+	public void switchPage(Pane paneToSwitch) {
+		MainGraphicController.getInstance().switchPage(paneToSwitch);
+		
 	}
 	
 	

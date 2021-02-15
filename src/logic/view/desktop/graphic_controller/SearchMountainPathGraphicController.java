@@ -14,6 +14,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.util.Callback;
 import logic.bean.SimpleMountainPathBean;
 import logic.controller.Controller;
@@ -124,6 +125,12 @@ public class SearchMountainPathGraphicController extends GraphicController {
 	
 	private ViewMountainPathInfoController getViewMountainPathInfoController() {
 		return (ViewMountainPathInfoController) myController;
+	}
+	
+	@Override
+	public void switchPage(Pane paneToSwitch) {
+		MainGraphicController.getInstance().switchPage(paneToSwitch);
+		
 	}
 	
 }

@@ -3,6 +3,7 @@ package logic.view.desktop.graphic_controller;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.Pane;
 import logic.controller.Controller;
 import logic.model.enums.PageId;
 import logic.model.exception.SystemException;
@@ -20,6 +21,7 @@ public abstract class GraphicController extends ShowableElement {
 	}
 	
 	protected abstract void setupLayout(); 
+	public abstract void switchPage(Pane paneToSwitch);
 	
 	protected void executeAction(PageId action) {
 		// Istanzia controller applicativo del prossimo caso d'uso da eseguire
@@ -36,7 +38,8 @@ public abstract class GraphicController extends ShowableElement {
 		GraphicControllerFactory factory = new GraphicControllerFactory();
 		// Costruisce il prossimo graphic controller da eseguire in base alla action
 		GraphicController nextGraphicController = factory.getGraphicController(appController);
-		MainGraphicController.getInstance().switchPage(nextGraphicController.getRootPane());
+		//MainGraphicController.getInstance().switchPage(nextGraphicController.getRootPane());
+		switchPage(nextGraphicController.getRootPane());
 	}
 	
 	// Metodo che mostra all'utente un messaggio
