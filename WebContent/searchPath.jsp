@@ -118,6 +118,7 @@
 						}
 					}
 					else {
+						beanList.clear();
 						beanList.addAll(viewInfoController.getPreviousSearchResults());
 					}
 								
