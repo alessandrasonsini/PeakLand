@@ -24,8 +24,8 @@ public class TestMountainPathBean {
 	@Test
 	public void testGetAltitudeAsText() {
 		MountainPathBean bean = new MountainPathBean();
-		bean.setAltitude(12);
-		assertEquals("12", bean.getAltitudeAsText());
+		bean.setAltitude(1200);
+		assertEquals("1200 m", bean.getAltitudeAsText());
 	}
 
 }

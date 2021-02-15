@@ -80,7 +80,7 @@
 				<form class="form-inline search-form" id="myForm" action="searchPath.jsp" method="post">
 					<div class="d-flex">
 						<input type="text" class="form-control" name="pathName" placeholder="Search for a path...">
-						<button type="submit" class="btn btn-dark-orange"><img src="Images/icons8-search-52.png" width="50%"></button>
+						<button type="submit" name="btnSearchPath" class="btn btn-dark-orange"><img src="Images/icons8-search-52.png" width="50%"></button>
 					</div>
 				</form>
 				

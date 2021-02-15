@@ -39,7 +39,7 @@ public class ItemBean {
 	
 	protected String convertToTextWithUnitOfMeasure(Object genObject, String unitOfMeasure) {
 		String text = convertToText(genObject);
-		if(genObject != DEFAULT)
+		if(!text.equals(DEFAULT))
 			text = text + " " + unitOfMeasure;
 		return text;
 	}
