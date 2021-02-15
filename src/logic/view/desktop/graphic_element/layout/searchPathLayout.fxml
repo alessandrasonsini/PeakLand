@@ -21,11 +21,15 @@
                   <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="322.0" style="-fx-background-color: fbc9a8;">
                      <children>
                         <TextField fx:id="txtSearch" layoutX="65.0" layoutY="186.0" maxHeight="15.0" onAction="#onSearchRequest" promptText="Search for a path..." AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="108.0" AnchorPane.topAnchor="186.0" />
-                        <ImageView fx:id="imgSearch" fitHeight="25.0" fitWidth="25.0" layoutX="234.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="63.0">
-                           <image>
-                              <Image url="@../images/icons8-search-52.png" />
-                           </image>
-                        </ImageView>
+                        <Button fx:id="btnSearch" layoutX="222.0" layoutY="182.0" mnemonicParsing="false" onAction="#onSearchRequest" style="-fx-background-color: F69155;">
+                           <graphic>
+                              <ImageView fx:id="imgSearch" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/icons8-search-52.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
                         <TextField editable="false" layoutX="34.0" layoutY="296.0" prefHeight="28.0" prefWidth="256.0" style="-fx-background-color: FBC9A8;" text="Se non sai cosa cercare ti aiutiamo noi!">
                            <font>
                               <Font name="Maiandra GD" size="14.0" />

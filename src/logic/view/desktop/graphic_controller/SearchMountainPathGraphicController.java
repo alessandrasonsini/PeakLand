@@ -29,6 +29,9 @@ public class SearchMountainPathGraphicController extends GraphicController {
 	private TextField txtSearch;
 	
 	@FXML
+	private Button btnSearch;
+	
+	@FXML
 	private Label lbNoResults;
 	
 	@FXML 

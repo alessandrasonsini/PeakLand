@@ -2,8 +2,8 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -30,31 +30,16 @@
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="1000.0">
                <children>
-                  <TextField fx:id="txtUsername" layoutX="400.0" layoutY="50.0" prefWidth="200.0" promptText="Username" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0" />
-                  <PasswordField fx:id="txtPassword" layoutX="400.0" layoutY="100.0" prefWidth="200.0" promptText="Password" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0" />
-                  <Button fx:id="btnLogin" layoutX="400.0" layoutY="201.0" mnemonicParsing="false" onAction="#onActionRequest" style="-fx-background-color: FBC9A8;" text="Login" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="532.0">
+                  <TextField fx:id="txtUsername" layoutX="400.0" layoutY="50.0" prefWidth="200.0" promptText="Username" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="150.0" />
+                  <PasswordField fx:id="txtPassword" layoutX="400.0" layoutY="100.0" prefWidth="200.0" promptText="Password" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="200.0" />
+                  <Button fx:id="btnLogin" layoutX="400.0" layoutY="201.0" mnemonicParsing="false" onAction="#onActionRequest" style="-fx-background-color: FBC9A8;" text="Login" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="532.0" AnchorPane.topAnchor="300.0">
                      <font>
                         <Font name="Maiandra GD" size="18.0" />
                      </font>
                   </Button>
-                  <Button layoutX="400.0" layoutY="318.0" mnemonicParsing="false" prefWidth="200.0" style="-fx-background-color: DB4A39;" text="Login with Google" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0">
-                     <font>
-                        <Font name="Maiandra GD" size="18.0" />
-                     </font>
-                  </Button>
-                  <Button layoutX="400.0" layoutY="382.0" mnemonicParsing="false" style="-fx-background-color: #4169E1;" text="Login with Facebook" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0">
-                     <font>
-                        <Font name="Maiandra GD" size="18.0" />
-                     </font>
-                  </Button>
-                  <Label layoutX="492.0" layoutY="273.0" text="or" AnchorPane.leftAnchor="492.0" AnchorPane.rightAnchor="490.0">
-                     <font>
-                        <Font name="Maiandra GD" size="18.0" />
-                     </font>
-                  </Label>
-                  <Line endX="-5.0" endY="33.0" layoutX="505.0" layoutY="227.0" startX="-5.0" startY="-75.0" AnchorPane.leftAnchor="499.5" AnchorPane.rightAnchor="499.5" />
-                  <PasswordField fx:id="txtConfirmPassword" layoutX="524.0" layoutY="164.0" minWidth="-Infinity" prefWidth="200.0" promptText="Confirm your password" />
-                  <Button fx:id="btnSignIn" layoutX="524.0" layoutY="201.0" mnemonicParsing="false" onAction="#onActionRequest" style="-fx-background-color: FBC9A8;" text="Sign in">
+                  <Line endX="-5.0" endY="33.0" layoutX="505.0" layoutY="227.0" startX="-5.0" startY="-106.5" AnchorPane.leftAnchor="499.5" AnchorPane.rightAnchor="499.5" AnchorPane.topAnchor="245.0" />
+                  <PasswordField fx:id="txtConfirmPassword" layoutX="524.0" layoutY="164.0" minWidth="-Infinity" prefWidth="200.0" promptText="Confirm your password" AnchorPane.topAnchor="260.0" />
+                  <Button fx:id="btnSignIn" layoutX="524.0" layoutY="201.0" mnemonicParsing="false" onAction="#onActionRequest" style="-fx-background-color: FBC9A8;" text="Sign in" AnchorPane.topAnchor="300.0">
                      <font>
                         <Font name="Maiandra GD" size="18.0" />
                      </font>
