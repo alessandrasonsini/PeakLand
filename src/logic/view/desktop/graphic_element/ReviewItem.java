@@ -50,7 +50,7 @@ public class ReviewItem extends ShowableElement{
 	public void setInfo(ReviewBean bean) {
 		lbAuthor.setText(bean.getAuthor());
 		txtComment.setText(bean.getCommentAsText());
-		lbTitle.setText(bean.getCommentAsText());
+		lbTitle.setText(bean.getTitle());
 		if(bean.getVote() > 0)
 			setStarImages(bean.getVote());
 	}

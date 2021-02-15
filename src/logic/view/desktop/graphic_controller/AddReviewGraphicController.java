@@ -85,7 +85,7 @@ public class AddReviewGraphicController extends GraphicController{
 		ReviewBean review = new ReviewBean();
 		review.setVote(this.votes);
 		review.setTitle(txtReviewTitle.getText());
-		review.setComment(txtReviewTitle.getText());
+		review.setComment(txtReview.getText());
 		try {
 			getAddNewMountainPathController().saveReview(review);
 			showMessage("Review added successfully", "You gain one peakCoin!", AlertType.INFORMATION);
