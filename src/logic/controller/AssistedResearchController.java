@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 import logic.bean.MountainPathBean;
 import logic.model.MountainPath;
-import logic.model.StandardName;
 import logic.model.dao.MountainPathDao;
 import logic.model.enums.PageId;
 import logic.model.exception.SystemException;
+import logic.model.utils.StandardName;
 
 public class AssistedResearchController extends Controller {
 

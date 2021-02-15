@@ -10,8 +10,8 @@ import java.util.logging.Logger;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.Query;
 import logic.model.MountainPath;
-import logic.model.StandardName;
 import logic.model.exception.DatabaseException;
+import logic.model.utils.StandardName;
 
 public class MountainPathDao extends Dao {
 	

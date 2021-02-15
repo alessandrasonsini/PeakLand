@@ -8,14 +8,14 @@ import logic.bean.ReviewBean;
 import logic.bean.SimpleMountainPathBean;
 import logic.model.MountainPath;
 import logic.model.Review;
-import logic.model.Sorter;
-import logic.model.StandardName;
 import logic.model.dao.MountainPathDao;
 import logic.model.dao.ReviewDao;
 import logic.model.enums.PageId;
 import logic.model.exception.SystemException;
 import logic.model.utils.MountainPathConverter;
 import logic.model.utils.ReviewConverter;
+import logic.model.utils.Sorter;
+import logic.model.utils.StandardName;
 
 public class ViewMountainPathInfoController extends Controller {
 	

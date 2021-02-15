@@ -1,8 +1,10 @@
-package logic.model;
+package logic.model.utils;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+
+import logic.model.MountainPath;
 
 public class Sorter {
 	

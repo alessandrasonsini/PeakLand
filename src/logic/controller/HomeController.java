@@ -7,10 +7,10 @@ import logic.bean.SimpleMountainPathBean;
 import logic.controller.utils.CurrentLoggedUsers;
 import logic.model.LoggedUser;
 import logic.model.MountainPath;
-import logic.model.Sorter;
 import logic.model.dao.MountainPathDao;
 import logic.model.enums.PageId;
 import logic.model.utils.MountainPathConverter;
+import logic.model.utils.Sorter;
 
 public class HomeController extends Controller {
 

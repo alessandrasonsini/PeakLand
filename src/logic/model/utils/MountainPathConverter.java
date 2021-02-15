@@ -4,7 +4,6 @@ import logic.bean.MountainPathBean;
 import logic.bean.SimpleMountainPathBean;
 import logic.model.Location;
 import logic.model.MountainPath;
-import logic.model.StandardName;
 import logic.model.Time;
 import logic.model.enums.DifficultyLevelEnum;
 

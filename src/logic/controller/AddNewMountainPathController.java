@@ -9,7 +9,6 @@ import logic.bean.ReviewBean;
 import logic.controller.utils.CurrentLoggedUsers;
 import logic.model.LoggedUser;
 import logic.model.MountainPath;
-import logic.model.StandardName;
 import logic.model.dao.LoggedUserDao;
 import logic.model.dao.MountainPathDao;
 import logic.model.enums.PageId;
@@ -17,6 +16,7 @@ import logic.model.exception.DatabaseException;
 import logic.model.exception.SystemException;
 import logic.model.exception.TooManyImagesException;
 import logic.model.utils.MountainPathConverter;
+import logic.model.utils.StandardName;
 
 public class AddNewMountainPathController extends Controller {
 	
