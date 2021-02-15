@@ -36,28 +36,28 @@
 			function validateForm() {
 			  var input = document.forms["infoForm"]["minutes"].value;
 			  if (input != "") {
-				  if (!Number.isInteger(input) || input < 0 || input > 59) {
+				  if (!Number.isInteger(+input) || (+input) < 0 || (+input) > 59) {
 					  alert("Minutes field must be an integer between 0 and 59.");
 			    	  return false;
 				  }
 			  }
 			  var input = document.forms["infoForm"]["hours"].value;
 			  if (input != "") {
-				  if (!Number.isInteger(input)) {
+				  if (!Number.isInteger(+input)) {
 					  alert("Hours field must be an integer.");
 			    	  return false;
 				  }
 			  }
 			  var input = document.forms["infoForm"]["lenght"].value;
 			  if (input != "") {
-				  if (!Number.isInteger(input)) {
+				  if (!Number.isInteger(+input)) {
 					  alert("Lenght field must be an integer.");
 			    	  return false;
 				  }
 			  }
 			  var input = document.forms["infoForm"]["altitude"].value;
 			  if (input != "") {
-				  if (!Number.isInteger(input)) {
+				  if (!Number.isInteger(+input)) {
 					  alert("Altitude field must be an integer.");
 			    	  return false;
 				  }
@@ -246,13 +246,13 @@
 						</div>
 					</form>
 					
-					<form class="form-inline" name="infoForm" onsubmit="return validateForm()" action="addNewPath.jsp" method="post"  enctype="multipart/form-data">
+					<form class="form-inline" name="infoForm" id="infoForm" onsubmit="return validateForm()" action="addNewPath.jsp" method="post"  enctype="multipart/form-data">
 					
 						<input type='hidden' name='name' id='name' value="${sessionScope.name}"/>
 					
 						<div class="row mx-auto" style="padding-bottom: 3%;">
 							<div class="col-3 green-text">Altitude</div>
-							<div class="col-3"><input type="text" class="form-control" name="altitude" placeholder="in meters" ${ sessionScope.disable eq true  ? 'disabled' : ''}></div>
+							<div class="col-3"><input type="number" class="form-control" name="altitude" placeholder="in meters" ${ sessionScope.disable eq true  ? 'disabled' : ''}></div>
 						</div>
 						<div class="row mx-auto" style="padding-bottom: 3%;">
 							<div class="col-3 green-text">Location</div>
@@ -262,7 +262,7 @@
 						</div>
 						<div class="row mx-auto" style="padding-bottom: 3%;">
 							<div class="col-3 green-text">Lenght</div>
-							<div class="col-3"><input type="text" class="form-control" name="lenght" placeholder="in kilometers" ${ sessionScope.disable eq true  ? 'disabled' : ''}></div>
+							<div class="col-3"><input type="number" class="form-control" name="lenght" placeholder="in kilometers" ${ sessionScope.disable eq true  ? 'disabled' : ''}></div>
 						</div>
 						<div class="row mx-auto" style="padding-bottom: 3%;">
 							<div class="d-flex">
@@ -360,8 +360,8 @@
 						</div>
 						<div class="row mx-auto" style="padding-bottom: 3%;">
 							<div class="col-3 green-text">Travel time</div>
-							<div class="col-3"><input type="text" class="form-control" name="hours" placeholder="hours" ${ sessionScope.disable eq true  ? 'disabled' : ''}></div>
-							<div class="col-3"><input type="text" class="form-control" name="minutes" placeholder="minutes" ${ sessionScope.disable eq true  ? 'disabled' : ''}></div>
+							<div class="col-3"><input type="number" class="form-control" name="hours" placeholder="hours" ${ sessionScope.disable eq true  ? 'disabled' : ''}></div>
+							<div class="col-3"><input type="number" class="form-control" name="minutes" placeholder="minutes" ${ sessionScope.disable eq true  ? 'disabled' : ''}></div>
 						</div>
 						<div class="row mx-auto" style="padding-bottom: 3%;">
 							<div class="d-flex">
